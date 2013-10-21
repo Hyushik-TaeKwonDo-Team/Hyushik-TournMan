@@ -4,7 +4,8 @@ using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
-using Hyushik_TournMan_Web.Models;
+using Hyushik_TournMan_Common.Models;
+using Hyushik_TournMan_DAL.Contexts;
 
 namespace Hyushik_TournMan_Web.Filters
 {

@@ -189,7 +189,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +317,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hyushik_TournMan_Common\Hyushik_TournMan_Common.csproj">
+      <Project>{524774b8-7f01-4cce-b162-3fcd068db626}</Project>
+      <Name>Hyushik_TournMan_Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hyushik_TournMan_DAL\Hyushik_TournMan_DAL.csproj">
+      <Project>{e778ed68-c08d-44b6-8910-cd82019d207f}</Project>
+      <Name>Hyushik_TournMan_DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

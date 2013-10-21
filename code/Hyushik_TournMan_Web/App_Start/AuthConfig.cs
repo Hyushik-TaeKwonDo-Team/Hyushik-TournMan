@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Web.WebPages.OAuth;
-using Hyushik_TournMan_Web.Models;
+using Hyushik_TournMan_Common.Models;
 
 namespace Hyushik_TournMan_Web
 {

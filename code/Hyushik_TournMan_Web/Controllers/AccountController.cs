@@ -9,7 +9,8 @@ using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using Hyushik_TournMan_Web.Filters;
-using Hyushik_TournMan_Web.Models;
+using Hyushik_TournMan_Common.Models;
+using Hyushik_TournMan_DAL.Contexts;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
