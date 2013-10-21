@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Web.WebPages.OAuth;
-using Hyushik_TournMan.Models;
+using Hyushik_TournMan_Web.Models;
 
-namespace Hyushik_TournMan
+namespace Hyushik_TournMan_Web
 {
     public static class AuthConfig
     {

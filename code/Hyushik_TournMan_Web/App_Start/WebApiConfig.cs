@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace Hyushik_TournMan
+namespace Hyushik_TournMan_Web
 {
     public static class WebApiConfig
     {

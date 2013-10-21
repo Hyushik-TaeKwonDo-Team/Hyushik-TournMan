@@ -8,10 +8,10 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using Hyushik_TournMan.Filters;
-using Hyushik_TournMan.Models;
+using Hyushik_TournMan_Web.Filters;
+using Hyushik_TournMan_Web.Models;
 
-namespace Hyushik_TournMan.Controllers
+namespace Hyushik_TournMan_Web.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]

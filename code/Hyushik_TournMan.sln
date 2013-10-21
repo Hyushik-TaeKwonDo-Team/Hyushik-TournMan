@@ -27,11 +27,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyushik_TournMan_BLL", "Hyu
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyushik_TournMan_Common", "Hyushik_TournMan_Common\Hyushik_TournMan_Common.csproj", "{524774B8-7F01-4CCE-B162-3FCD068DB626}"
-	ProjectSection(ProjectDependencies) = postProject
-		{E778ED68-C08D-44B6-8910-CD82019D207F} = {E778ED68-C08D-44B6-8910-CD82019D207F}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyushik_TournMan_DAL", "Hyushik_TournMan_DAL\Hyushik_TournMan_DAL.csproj", "{E778ED68-C08D-44B6-8910-CD82019D207F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{524774B8-7F01-4CCE-B162-3FCD068DB626} = {524774B8-7F01-4CCE-B162-3FCD068DB626}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

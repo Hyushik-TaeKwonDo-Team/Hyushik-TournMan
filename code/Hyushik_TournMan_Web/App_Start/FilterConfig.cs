@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Hyushik_TournMan
+namespace Hyushik_TournMan_Web
 {
     public class FilterConfig
     {

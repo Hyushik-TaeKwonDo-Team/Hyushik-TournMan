@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
 
-namespace Hyushik_TournMan.Models
+namespace Hyushik_TournMan_Web.Models
 {
     public class UsersContext : DbContext
     {

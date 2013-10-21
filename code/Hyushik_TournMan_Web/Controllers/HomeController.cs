@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Hyushik_TournMan.Controllers
+namespace Hyushik_TournMan_Web.Controllers
 {
     public class HomeController : Controller
     {
