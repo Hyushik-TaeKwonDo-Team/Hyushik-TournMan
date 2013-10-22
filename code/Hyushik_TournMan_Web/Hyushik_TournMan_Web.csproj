@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hyushik_TournMan</RootNamespace>
-    <AssemblyName>Hyushik_TournMan</AssemblyName>
+    <RootNamespace>Hyushik_TournMan_Web</RootNamespace>
+    <AssemblyName>Hyushik_TournMan_Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -184,6 +184,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -299,6 +300,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Admin\_importCSV.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -319,6 +322,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Hyushik_TournMan_BLL\Hyushik_TournMan_BLL.csproj">
+      <Project>{28dc2bb5-4ec8-4d9b-9c4a-7f50c5f0e585}</Project>
+      <Name>Hyushik_TournMan_BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hyushik_TournMan_Common\Hyushik_TournMan_Common.csproj">
       <Project>{524774b8-7f01-4cce-b162-3fcd068db626}</Project>
       <Name>Hyushik_TournMan_Common</Name>
