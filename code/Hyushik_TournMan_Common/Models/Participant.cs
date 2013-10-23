@@ -39,5 +39,6 @@ namespace Hyushik_TournMan_Common.Models
         public bool Forms { get; set; }
         public bool PointSparring { get; set; }
         public bool OlympicSparring { get; set; }
+
     }
 }

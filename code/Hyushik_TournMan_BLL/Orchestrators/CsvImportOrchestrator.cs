@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
 using Hyushik_TournMan_Common.Models;
+using Hyushik_TournMan_Common.Constants;
 using Hyushik_TournMan_DAL.Contexts;
 using CsvHelper;
 using System.IO;
@@ -50,6 +51,11 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             var participant = new Participant();
             participant.Name = row[0];
 
+
+            for (int j = Constants.CSV.PRE_BOARD_SIZE_COLUMN_COUNT; j < headers.Count(); j++)
+            {
+                //TODO
+            }
             //TODO
 
             return participant;
