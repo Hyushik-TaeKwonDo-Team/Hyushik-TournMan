@@ -15,5 +15,6 @@ namespace Hyushik_TournMan_DAL.Contexts
         }
 
         public DbSet<Participant> Participants { get; set; }
+        public DbSet<ParticipantBoardSizeCount> ParticipantBoardSizeCounts { get; set; }
     }
 }
