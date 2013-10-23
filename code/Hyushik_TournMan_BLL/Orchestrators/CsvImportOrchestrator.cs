@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
+using Hyushik_TournMan_Common.Models;
+using Hyushik_TournMan_DAL.Contexts;
 using CsvHelper;
 using System.IO;
 
@@ -11,13 +13,18 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 {
     public class CsvImportOrchestrator : ICsvImportOrchestrator
     {
-        public void importParticipantCsvFile(Stream fileStream){
+        private TournManContext tournManContext = new TournManContext();
+
+        public void importParticipantCsvFile(Stream fileStream)
+        {
+
+            var tournManContext = new TournManContext();
 
             ICsvParser csvParser = new CsvParser(new StreamReader(fileStream));
             CsvReader csvReader = new CsvReader(csvParser);
             string[] headers = { };
-            List<string[]> rows = new List<string[]>();
             string[] row;
+
             while (csvReader.Read())
             {
                 // Gets Headers if they exist
@@ -30,10 +37,22 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 {
                     row[j] = csvReader.GetField(j);
                 }
-                rows.Add(row);
+                tournManContext.Participants.Add(
+                    MakeParticipantFromCSVLine(headers, row)
+                    );
             }
 
+            tournManContext.SaveChanges();
         }
 
+        private Participant MakeParticipantFromCSVLine(string[] headers, string[] row)
+        {
+            var participant = new Participant();
+            participant.Name = row[0];
+
+            //TODO
+
+            return participant;
+        }
     }
 }
