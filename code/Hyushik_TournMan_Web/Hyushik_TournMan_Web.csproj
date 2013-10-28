@@ -267,6 +267,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
@@ -304,16 +305,20 @@
     <Content Include="Web.config.template" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Web.Dev.config">
       <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Web.Local.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -384,7 +389,7 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>REM Auto-update target database via EF5
-"$(TargetDir)migrate.exe" Hyushik_TournMan_DAL.dll /startUpConfigurationFile:$(ProjectDir)Web.config /verbose</PostBuildEvent>
+"$(TargetDir)migrate.exe" Hyushik_TournMan_DAL.dll /startUpConfigurationFile:Web.config /verbose</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>REM copy migrate.exe to correct location
