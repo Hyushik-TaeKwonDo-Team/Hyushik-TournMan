@@ -384,6 +384,6 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>REM Auto-update target database via EF5
-$(SolutionDir)\packages\EntityFramework.5.0.0\tools\migrate.exe Hyushik_TournMan_DAL.dll /StartUpDirectory:$(TargetDir) /startUpConfigurationFile:$(ProjectDir)\Web.config /verbose</PostBuildEvent>
+$(SolutionDir)packages\EntityFramework.5.0.0\tools\migrate.exe Hyushik_TournMan_DAL.dll /StartUpDirectory:$(TargetDir) /startUpConfigurationFile:$(ProjectDir)Web.config /verbose</PostBuildEvent>
   </PropertyGroup>
 </Project>
