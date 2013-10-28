@@ -384,6 +384,10 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>REM Auto-update target database via EF5
-"$(SolutionDir)packages\EntityFramework.5.0.0\tools\migrate.exe" Hyushik_TournMan_DAL.dll /StartUpDirectory:$(TargetDir) /startUpConfigurationFile:$(ProjectDir)Web.config /verbose</PostBuildEvent>
+"$(TargetDir)migrate.exe" Hyushik_TournMan_DAL.dll /StartUpDirectory:$(TargetDir) /startUpConfigurationFile:$(ProjectDir)Web.config /verbose</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>REM copy migrate.exe to correct location
+echo f | xcopy /Q /Y "$(SolutionDir)packages\EntityFramework.5.0.0\tools\migrate.exe" "$(TargetDir)migrate.exe"</PreBuildEvent>
   </PropertyGroup>
 </Project>
