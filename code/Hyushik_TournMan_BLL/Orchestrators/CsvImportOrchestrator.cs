@@ -48,17 +48,47 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 
         private Participant MakeParticipantFromCSVLine(string[] headers, string[] row)
         {
+            int i = 0;
             var participant = new Participant();
-            participant.Name = row[0];
+            participant.Name = row[i++];
+            participant.Email = row[i++];
+            participant.Address = row[i++];
+            participant.City = row[i++];
+            participant.State = row[i++];
+            participant.Zip = row[i++];
+            participant.Phone = row[i++];
+            participant.Gender = row[i++];
 
+            participant.InstructorName = row[i++];
+            participant.SchoolName = row[i++];
+            participant.SchoolAddress = row[i++];
+            participant.SchoolCity = row[i++];
+            participant.SchoolState = row[i++];
+            participant.SchoolZip = row[i++];
+            participant.SchoolPhone = row[i++];
+            participant.SchoolEmail = row[i++];
 
-            for (int j = Constants.CSV.PRE_BOARD_SIZE_COLUMN_COUNT; j < headers.Count(); j++)
+            participant.Rank = row[i++];
+            participant.Age = row[i++];
+            participant.Weight = row[i++];
+            participant.Weapons = convertCSVBoolStringToBool(row[i++]);
+            participant.Breaking = convertCSVBoolStringToBool(row[i++]);
+            participant.Forms = convertCSVBoolStringToBool(row[i++]);
+            participant.PointSparring = convertCSVBoolStringToBool(row[i++]);
+            participant.OlympicSparring = convertCSVBoolStringToBool(row[i++]);
+
+            for (int j = i; j < headers.Count(); j++)
             {
                 //TODO
             }
-            //TODO
 
             return participant;
         }
+        
+
+        private bool convertCSVBoolStringToBool(string input){
+            return Constants.CSV.YES_STRING==input ? true : false ;
+        }
+
     }
 }
