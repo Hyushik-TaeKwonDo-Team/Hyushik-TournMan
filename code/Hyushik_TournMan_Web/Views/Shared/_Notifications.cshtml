@@ -1,11 +1,12 @@
-﻿
+﻿@using Hyushik_TournMan_Web.Classes.Constants
+
 <div>
-    @if (TempData["CHANGE_ME_TODO"] != null)
+    @if (TempData[WebConstants.Parameters.NOTIFICATIONS] != null)
     {
-        IDictionary<string, string> notifications = (Dictionary<string, string>) TempData["CHANGE_ME_TODO"];
+        IDictionary<string, string> notifications = (Dictionary<string, string>)TempData[WebConstants.Parameters.NOTIFICATIONS];
         foreach(var message in notifications.Keys)
          {
-            <div class="@notifications[message]">
+            <div class="notification @notifications[message]">
                 @message
             </div>
          }

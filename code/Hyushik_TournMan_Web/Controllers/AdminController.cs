@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
 using Hyushik_TournMan_BLL.Orchestrators;
 using Hyushik_TournMan_Common.Results;
+using Hyushik_TournMan_Web.Classes.Constants;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
@@ -44,16 +45,16 @@ namespace Hyushik_TournMan_Web.Controllers
             var resultMessages = new Dictionary<string, string>();
             string notificationClass = String.Empty;
             if (result.WasSuccessful){
-                notificationClass = "success";
+                notificationClass = WebConstants.CssClasses.Notifications.SUCCESS;
             }else if(!result.WasSuccessful){
-                notificationClass = "failure"; 
+                notificationClass = WebConstants.CssClasses.Notifications.ERROR;
             }
 
             resultMessages[result.Message] = notificationClass;
 
-            TempData["CHANGE_ME_TODO"] = resultMessages;
+            TempData[WebConstants.Parameters.NOTIFICATIONS] = resultMessages;
             // redirect back to the index action to show the form once again
-            return RedirectToAction("Index", resultMessages);
+            return RedirectToAction("Index");
         }
 
     }
