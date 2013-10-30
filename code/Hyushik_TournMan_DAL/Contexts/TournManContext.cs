@@ -9,12 +9,14 @@ namespace Hyushik_TournMan_DAL.Contexts
 {
     public class TournManContext : DbContext
     {
+        
         public TournManContext()
             : base("HyushikDB")
         {
         }
 
         public DbSet<Participant> Participants { get; set; }
-        public DbSet<ParticipantBoardSizeCount> ParticipantBoardSizeCounts { get; set; }
+        public DbSet<BoardSizeCount> ParticipantBoardSizeCount { get; set; }
+
     }
 }

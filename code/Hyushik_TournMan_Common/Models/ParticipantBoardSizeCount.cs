@@ -7,13 +7,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hyushik_TournMan_Common.Models
 {
-    public class ParticipantBoardSizeCount
+    public class BoardSizeCount
     {
-        [Key]
+        [Key, Column(Order=0) ]
         public string BoardSize { get; set; }
-        [Key]
-        public virtual Participant Participant { get; set; }
-
+        [Key, Column(Order=1)]
+        public long ParticipantId { get; set; }
         public int Count { get; set; }
     }
 }

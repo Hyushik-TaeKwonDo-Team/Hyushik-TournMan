@@ -9,6 +9,8 @@ using Hyushik_TournMan_Common.Constants;
 using Hyushik_TournMan_DAL.Contexts;
 using CsvHelper;
 using System.IO;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace Hyushik_TournMan_BLL.Orchestrators
 {
@@ -38,11 +40,10 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 {
                     row[j] = csvReader.GetField(j);
                 }
-                tournManContext.Participants.Add(
-                    MakeParticipantFromCSVLine(headers, row)
-                    );
-            }
+                var part = MakeParticipantFromCSVLine(headers, row);
+                tournManContext.Participants.Add( part );
 
+            }
             tournManContext.SaveChanges();
         }
 
@@ -77,9 +78,13 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             participant.PointSparring = convertCSVBoolStringToBool(row[i++]);
             participant.OlympicSparring = convertCSVBoolStringToBool(row[i++]);
 
+            BoardSizeCount boardCount;
             for (int j = i; j < headers.Count(); j++)
             {
-                //TODO
+                boardCount = new BoardSizeCount();
+                boardCount.BoardSize = headers[j];
+                boardCount.Count = Int32.Parse(row[j]);
+                participant.BoardSizeCounts.Add(boardCount);
             }
 
             return participant;
@@ -87,7 +92,18 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         
 
         private bool convertCSVBoolStringToBool(string input){
-            return Constants.CSV.YES_STRING==input ? true : false ;
+            if (Constants.CSV.YES_STRING == input)
+            {
+                return true;
+            }
+            else if (Constants.CSV.NO_STRING == input)
+            {
+                return false;
+            }
+            else
+            {
+                throw new Exception("Invalid input for Yes/No string: "+input);
+            }
         }
 
     }

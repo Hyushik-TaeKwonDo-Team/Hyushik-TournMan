@@ -10,6 +10,7 @@ namespace Hyushik_TournMan_DAL.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(Hyushik_TournMan_DAL.Contexts.TournManContext context)
