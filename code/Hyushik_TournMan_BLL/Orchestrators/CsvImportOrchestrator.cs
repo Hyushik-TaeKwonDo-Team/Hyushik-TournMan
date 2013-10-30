@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
 using Hyushik_TournMan_Common.Models;
+using Hyushik_TournMan_Common.Results;
 using Hyushik_TournMan_Common.Constants;
 using Hyushik_TournMan_DAL.Contexts;
 using CsvHelper;
@@ -18,33 +19,48 @@ namespace Hyushik_TournMan_BLL.Orchestrators
     {
         private TournManContext tournManContext = new TournManContext();
 
-        public void importParticipantCsvFile(Stream fileStream)
+        public OperationResult importParticipantCsvFile(Stream fileStream)
         {
 
             var tournManContext = new TournManContext();
-
-            ICsvParser csvParser = new CsvParser(new StreamReader(fileStream));
-            CsvReader csvReader = new CsvReader(csvParser);
-            string[] headers = { };
-            string[] row;
-
-            while (csvReader.Read())
+            try
             {
-                // Gets Headers if they exist
-                if (!headers.Any())
-                {
-                    headers = csvReader.FieldHeaders;
-                }
-                row = new string[headers.Count()];
-                for (int j = 0; j < headers.Count(); j++)
-                {
-                    row[j] = csvReader.GetField(j);
-                }
-                var part = MakeParticipantFromCSVLine(headers, row);
-                tournManContext.Participants.Add( part );
+                ICsvParser csvParser = new CsvParser(new StreamReader(fileStream));
+                CsvReader csvReader = new CsvReader(csvParser);
+                string[] headers = { };
+                string[] row;
 
+                while (csvReader.Read())
+                {
+                    // Gets Headers if they exist
+                    if (!headers.Any())
+                    {
+                        headers = csvReader.FieldHeaders;
+                    }
+                    row = new string[headers.Count()];
+                    for (int j = 0; j < headers.Count(); j++)
+                    {
+                        row[j] = csvReader.GetField(j);
+                    }
+                    var part = MakeParticipantFromCSVLine(headers, row);
+                    tournManContext.Participants.Add(part);
+
+                }
+                tournManContext.SaveChanges();
             }
-            tournManContext.SaveChanges();
+            catch (Exception ex)
+            {
+                return new OperationResult()
+                            {
+                                WasSuccessful = false,
+                                Message=ex.Message
+                            };
+            }
+            return new OperationResult()
+            {
+                WasSuccessful = false,
+                Message = "Sucessful"
+            };
         }
 
         private Participant MakeParticipantFromCSVLine(string[] headers, string[] row)

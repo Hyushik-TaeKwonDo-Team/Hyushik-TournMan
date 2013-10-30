@@ -1,0 +1,14 @@
+﻿
+<div>
+    @if (TempData["CHANGE_ME_TODO"] != null)
+    {
+        IDictionary<string, string> notifications = (Dictionary<string, string>) TempData["CHANGE_ME_TODO"];
+        foreach(var message in notifications.Keys)
+         {
+            <div class="@notifications[message]">
+                @message
+            </div>
+         }
+    }
+</div>
+

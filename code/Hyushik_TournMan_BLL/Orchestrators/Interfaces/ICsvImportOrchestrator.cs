@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hyushik_TournMan_Common.Results;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 {
     public interface ICsvImportOrchestrator
     {
-        void importParticipantCsvFile(Stream fileStream);
+        OperationResult importParticipantCsvFile(Stream fileStream);
     }
 }

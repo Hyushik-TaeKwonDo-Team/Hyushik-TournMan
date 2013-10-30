@@ -3,7 +3,11 @@
 }
 
 <h2>Admin Panel</h2>
-
 <div>
-    @Html.Partial("_importCSV");
+    <div>
+        @Html.Partial("../Shared/_Notifications")
+    </div>
+    <div>
+        @Html.Partial("_importCSV")
+    </div>
 </div>
