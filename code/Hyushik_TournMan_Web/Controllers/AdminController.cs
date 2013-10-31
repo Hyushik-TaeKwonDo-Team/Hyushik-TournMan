@@ -7,10 +7,12 @@ using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
 using Hyushik_TournMan_BLL.Orchestrators;
 using Hyushik_TournMan_Common.Results;
 using Hyushik_TournMan_Web.Classes.Constants;
+using Hyushik_TournMan_Common.Constants;
+using Hyushik_TournMan_Common.Properties;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         private ICsvImportOrchestrator orch = new CsvImportOrchestrator();
 
@@ -37,7 +39,7 @@ namespace Hyushik_TournMan_Web.Controllers
                 result =  new OperationResult()
                 {
                     WasSuccessful = false,
-                    Message = "The file was empty or could not be read"
+                    Message = Resources.FileUnreadableMessage
                 };
             }
 
@@ -52,7 +54,7 @@ namespace Hyushik_TournMan_Web.Controllers
 
             resultMessages[result.Message] = notificationClass;
 
-            TempData[WebConstants.Parameters.NOTIFICATIONS] = resultMessages;
+            AddNotifications(resultMessages);
             // redirect back to the index action to show the form once again
             return RedirectToAction("Index");
         }

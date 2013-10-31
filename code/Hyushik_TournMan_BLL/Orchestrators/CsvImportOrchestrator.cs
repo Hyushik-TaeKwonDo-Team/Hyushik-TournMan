@@ -12,6 +12,7 @@ using CsvHelper;
 using System.IO;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using Hyushik_TournMan_Common.Properties;
 
 namespace Hyushik_TournMan_BLL.Orchestrators
 {
@@ -58,8 +59,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             }
             return new OperationResult()
             {
-                WasSuccessful = false,
-                Message = "Sucessful"
+                WasSuccessful = true,
+                Message = Resources.CsvFileReadSuccessfullyMessage
             };
         }
 
@@ -118,7 +119,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             }
             else
             {
-                throw new Exception("Invalid input for Yes/No string: "+input);
+                throw new Exception(String.Format(Resources.CsvParseYesNoErrorMessage, input));
             }
         }
 
