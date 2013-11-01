@@ -50,6 +50,7 @@
     <Compile Include="Models\AuthModels.cs" />
     <Compile Include="Models\Participant.cs" />
     <Compile Include="Models\ParticipantBoardSizeCount.cs" />
+    <Compile Include="Models\Tournament.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -57,6 +58,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Results\OperationResult.cs" />
+    <Compile Include="ViewModels\AdminViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

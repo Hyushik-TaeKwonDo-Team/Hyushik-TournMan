@@ -14,15 +14,14 @@ namespace Hyushik_TournMan_Web.Controllers
 {
     public class AdminController : BaseController
     {
-        private ICsvImportOrchestrator orch = new CsvImportOrchestrator();
+        private IAdminOrchestrator orch = new AdminOrchestrator();
 
         //
         // GET: /Admin/
 
         public ActionResult Index()
         {
-
-            return View();
+            return View(orch.GetAdminViewModel());
         }
 
         [HttpPost]
@@ -32,7 +31,7 @@ namespace Hyushik_TournMan_Web.Controllers
             OperationResult result;
             if (file != null && file.ContentLength > 0)
             {
-                result = orch.importParticipantCsvFile(file.InputStream);
+                result = orch.ImportParticipantCsvFile(file.InputStream);
             }
             else
             {
@@ -56,6 +55,13 @@ namespace Hyushik_TournMan_Web.Controllers
 
             AddNotifications(resultMessages);
             // redirect back to the index action to show the form once again
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public ActionResult AddTournament(String tournamentName)
+        {
             return RedirectToAction("Index");
         }
 

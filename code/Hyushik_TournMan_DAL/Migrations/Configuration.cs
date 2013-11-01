@@ -1,5 +1,6 @@
 namespace Hyushik_TournMan_DAL.Migrations
 {
+    using Hyushik_TournMan_Common.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -27,6 +28,13 @@ namespace Hyushik_TournMan_DAL.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+
+            context.Tournaments.AddOrUpdate(
+                t=> t.Name,
+                new Tournament(){Name="Tournament 1"},
+                new Tournament(){Name="Tournament 2"}
+                );
         }
     }
 }

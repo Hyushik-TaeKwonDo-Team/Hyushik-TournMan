@@ -1,0 +1,33 @@
+﻿@model IList<Hyushik_TournMan_Common.Models.Tournament>
+
+<div>
+    <h3>Tournaments</h3>
+    <div>
+        @if (Model.Count > 0)
+        {
+            <table>
+                <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Participants</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var tournament in Model)
+                    {
+                        <tr>
+                            <td>@tournament.Name</td>
+                            <td>Link Goes Here!</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else { 
+            <span>No Tournaments Found</span>
+        }
+    </div>
+    <div>
+        
+    </div>
+</div>

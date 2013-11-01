@@ -1,5 +1,9 @@
-﻿@using (Html.BeginForm("ImportCsv", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <input type="file" name="file" />
-    <input type="submit" value="OK" />
-}
+﻿
+<div>
+    <h3>Import Participants CSV</h3>
+    @using (Html.BeginForm("ImportCsv", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="file" />
+        <input type="submit" value="OK" />
+    }
+</div>

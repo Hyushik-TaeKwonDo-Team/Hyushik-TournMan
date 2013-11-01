@@ -86,5 +86,14 @@ namespace Hyushik_TournMan_Common.Properties {
                 return ResourceManager.GetString("FileUnreadableMessage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The tournament &quot;{0}&quot; was successfully created..
+        /// </summary>
+        public static string NewTournamentCreatedMessage {
+            get {
+                return ResourceManager.GetString("NewTournamentCreatedMessage", resourceCulture);
+            }
+        }
     }
 }

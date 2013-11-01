@@ -126,4 +126,7 @@
   <data name="FileUnreadableMessage" xml:space="preserve">
     <value>The file was empty or could not be read.</value>
   </data>
+  <data name="NewTournamentCreatedMessage" xml:space="preserve">
+    <value>The tournament "{0}" was successfully created.</value>
+  </data>
 </root>

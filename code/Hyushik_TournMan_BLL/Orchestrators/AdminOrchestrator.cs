@@ -13,14 +13,42 @@ using System.IO;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using Hyushik_TournMan_Common.Properties;
+using Hyushik_TournMan_Common.ViewModels;
 
 namespace Hyushik_TournMan_BLL.Orchestrators
 {
-    public class CsvImportOrchestrator : ICsvImportOrchestrator
+    public class AdminOrchestrator : IAdminOrchestrator
     {
         private TournManContext tournManContext = new TournManContext();
 
-        public OperationResult importParticipantCsvFile(Stream fileStream)
+        public AdminViewModel GetAdminViewModel()
+        {
+            return new AdminViewModel() { Tournaments=tournManContext.Tournaments.ToList<Tournament>() };
+        }
+
+        public OperationResult CreateNewTournament(String name)
+        {
+            try{
+                var newTourn = new Tournament(){ Name=name };
+                tournManContext.Tournaments.Add(newTourn);
+                tournManContext.SaveChanges();
+            }catch (Exception ex)
+            {
+                return new OperationResult()
+                            {
+                                WasSuccessful = false,
+                                Message=ex.Message
+                            };
+            }
+            return new OperationResult()
+            {
+                WasSuccessful = true,
+                Message = String.Format(Resources.NewTournamentCreatedMessage, name)
+            };
+            
+        }
+
+        public OperationResult ImportParticipantCsvFile(Stream fileStream)
         {
 
             var tournManContext = new TournManContext();
