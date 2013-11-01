@@ -63,7 +63,7 @@ namespace Hyushik_TournMan_Web.Controllers
             var file = vm.CsvFile;
             if (file != null && file.ContentLength > 0)
             {
-                result = orch.ImportParticipantCsvFile(file.InputStream);
+                result = orch.ImportParticipantCsvFile(file.InputStream, vm.SelectedTournamentId);
             }
             else
             {

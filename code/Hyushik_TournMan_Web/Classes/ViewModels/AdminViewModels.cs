@@ -38,7 +38,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         public IList<Tournament> Tournaments { get; set; }
 
         [DisplayName("Tournament")]
-        public int SelectedTournamentId { get; set; }
+        public long SelectedTournamentId { get; set; }
 
         public IEnumerable<SelectListItem> TournamentItems
         {

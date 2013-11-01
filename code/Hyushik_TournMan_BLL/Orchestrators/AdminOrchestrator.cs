@@ -35,7 +35,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 return result;
             }
             //check if tournament name is existence
-            if ( tournManContext.Tournaments.Where(t=>t.Name.Equals(name, StringComparison.OrdinalIgnoreCase)).Any() )
+            if ( tournManContext.Tournaments.Any(t=>t.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) )
             {
                 result.Message = String.Format(Resources.TournamentNameInUseMessage, name);
                 return result;
@@ -55,12 +55,13 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return result;
         }
 
-        public OperationResult ImportParticipantCsvFile(Stream fileStream)
+        public OperationResult ImportParticipantCsvFile(Stream fileStream, long targetTournamentId)
         {
 
             var tournManContext = new TournManContext();
             try
             {
+                var targetTourn = tournManContext.Tournaments.Where(t=>t.Id==targetTournamentId).First();
                 ICsvParser csvParser = new CsvParser(new StreamReader(fileStream));
                 CsvReader csvReader = new CsvReader(csvParser);
                 string[] headers = { };
@@ -79,8 +80,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                         row[j] = csvReader.GetField(j);
                     }
                     var part = MakeParticipantFromCSVLine(headers, row);
-                    tournManContext.Participants.Add(part);
-
+                    targetTourn.Participants.Add(part);
                 }
                 tournManContext.SaveChanges();
             }
