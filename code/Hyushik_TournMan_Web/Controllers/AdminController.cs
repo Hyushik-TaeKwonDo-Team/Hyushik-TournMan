@@ -90,6 +90,16 @@ namespace Hyushik_TournMan_Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Participants(long targetTournamentId)
+        {
+            var vm = new ParticipantsViewModel()
+            {
+                Tournament = orch.GetTournamentById(targetTournamentId)
+            };
+
+            return View(vm);
+        }
 
         [HttpPost]
         public ActionResult AddTournament(TournamentsViewModel vm)

@@ -16,7 +16,7 @@
                     {
                         <tr>
                             <td>@tournament.Name</td>
-                            <td>Link Goes Here!</td>
+                            <td>@Html.ActionLink("See Participants", "Participants", "Admin", new { targetTournamentId=tournament.Id }, null)</td>
                         </tr>
                     }
                 </tbody>

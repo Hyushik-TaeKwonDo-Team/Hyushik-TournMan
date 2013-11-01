@@ -20,6 +20,12 @@ namespace Hyushik_TournMan_BLL.Orchestrators
     {
         private TournManContext tournManContext = new TournManContext();
 
+        public Tournament GetTournamentById(long id)
+        {
+            //returns null if not found
+            return tournManContext.Tournaments.Where(t=>t.Id==id).FirstOrDefault();
+        }
+
         public IList<Tournament> GetAllTournaments()
         {
             return tournManContext.Tournaments.ToList<Tournament>();
@@ -27,14 +33,14 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 
         public OperationResult CreateNewTournament(string name)
         {
-            name = name.Trim();
             var result = new OperationResult() { WasSuccessful = false};
             
             if(String.IsNullOrWhiteSpace(name)){
                 result.Message = Resources.TournamentMustHaveNameMessage;
                 return result;
             }
-            //check if tournament name is existence
+            name = name.Trim();
+            //check if tournament name is in use
             if ( tournManContext.Tournaments.Any(t=>t.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) )
             {
                 result.Message = String.Format(Resources.TournamentNameInUseMessage, name);

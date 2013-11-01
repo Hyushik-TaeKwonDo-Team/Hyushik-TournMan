@@ -53,4 +53,9 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         }
 
     }
+
+    public class ParticipantsViewModel
+    {
+        public Tournament Tournament { get; set; }
+    }
 }

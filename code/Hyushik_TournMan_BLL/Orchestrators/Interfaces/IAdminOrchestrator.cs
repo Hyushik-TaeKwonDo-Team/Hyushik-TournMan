@@ -14,5 +14,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         OperationResult ImportParticipantCsvFile(Stream fileStream, long targetTournamentId);
         OperationResult CreateNewTournament(string name);
         IList<Tournament> GetAllTournaments();
+        Tournament GetTournamentById(long id);
     }
 }

@@ -309,6 +309,9 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_Notifications.cshtml" />
     <Content Include="Views\Admin\_Tournaments.cshtml" />
+    <Content Include="Views\Admin\Participants.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

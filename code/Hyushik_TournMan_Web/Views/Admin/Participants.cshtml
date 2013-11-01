@@ -1,0 +1,37 @@
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.ParticipantsViewModel
+@{
+    ViewBag.Title = "Participants";
+}
+
+<div>
+    @if(Model.Tournament!=null){
+        <h2>Participants in @Model.Tournament.Name</h2>
+        <div>
+            @if (Model.Tournament.Participants.Count > 0)
+            {
+                <table>
+                    <thead>
+                        <tr>
+                          <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var participant in Model.Tournament.Participants)
+                        {
+                            <tr>
+                                <td>@participant.Name</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else { 
+                <span>No Participants Found</span>
+            }
+        </div>
+    }else{
+        <div>
+            Tournament was not found
+        </div>
+    }
+</div>
