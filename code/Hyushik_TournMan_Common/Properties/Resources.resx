@@ -129,4 +129,10 @@
   <data name="NewTournamentCreatedMessage" xml:space="preserve">
     <value>The tournament "{0}" was successfully created.</value>
   </data>
+  <data name="TournamentMustHaveNameMessage" xml:space="preserve">
+    <value>A tournament must have a name.</value>
+  </data>
+  <data name="TournamentNameInUseMessage" xml:space="preserve">
+    <value>Tournament name "{0}" is already in use.</value>
+  </data>
 </root>

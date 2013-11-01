@@ -95,5 +95,23 @@ namespace Hyushik_TournMan_Common.Properties {
                 return ResourceManager.GetString("NewTournamentCreatedMessage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A tournament must have a name..
+        /// </summary>
+        public static string TournamentMustHaveNameMessage {
+            get {
+                return ResourceManager.GetString("TournamentMustHaveNameMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tournament name &quot;{0}&quot; is already in use..
+        /// </summary>
+        public static string TournamentNameInUseMessage {
+            get {
+                return ResourceManager.GetString("TournamentNameInUseMessage", resourceCulture);
+            }
+        }
     }
 }

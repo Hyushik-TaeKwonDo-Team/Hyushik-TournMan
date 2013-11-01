@@ -12,7 +12,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
     public interface IAdminOrchestrator
     {
         OperationResult ImportParticipantCsvFile(Stream fileStream);
-        OperationResult CreateNewTournament(String name);
+        OperationResult CreateNewTournament(string name);
         AdminViewModel GetAdminViewModel();
     }
 }

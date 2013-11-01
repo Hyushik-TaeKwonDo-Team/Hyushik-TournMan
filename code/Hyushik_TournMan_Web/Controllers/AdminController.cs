@@ -60,8 +60,22 @@ namespace Hyushik_TournMan_Web.Controllers
 
 
         [HttpPost]
-        public ActionResult AddTournament(String tournamentName)
+        public ActionResult AddTournament(string tournName)
         {
+            var result = orch.CreateNewTournament(tournName);
+
+            var resultMessages = new Dictionary<string, string>();
+            string notificationClass = String.Empty;
+            if (result.WasSuccessful)
+            {
+                notificationClass = WebConstants.CssClasses.Notifications.SUCCESS;
+            }
+            else if (!result.WasSuccessful)
+            {
+                notificationClass = WebConstants.CssClasses.Notifications.ERROR;
+            }
+            resultMessages[result.Message] = notificationClass;
+            AddNotifications(resultMessages);
             return RedirectToAction("Index");
         }
 

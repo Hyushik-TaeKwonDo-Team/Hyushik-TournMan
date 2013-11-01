@@ -28,6 +28,11 @@
         }
     </div>
     <div>
-        
+        @using (Html.BeginForm("AddTournament", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <label for="tournName">Add New Tournament:</label>
+            @Html.TextBox("tournName")
+            <input type="submit" value="Add" />
+        }
     </div>
 </div>

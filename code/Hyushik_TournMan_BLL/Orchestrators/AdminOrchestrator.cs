@@ -26,26 +26,34 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return new AdminViewModel() { Tournaments=tournManContext.Tournaments.ToList<Tournament>() };
         }
 
-        public OperationResult CreateNewTournament(String name)
+        public OperationResult CreateNewTournament(string name)
         {
+            name = name.Trim();
+            var result = new OperationResult() { WasSuccessful = false};
+            
+            if(String.IsNullOrWhiteSpace(name)){
+                result.Message = Resources.TournamentMustHaveNameMessage;
+                return result;
+            }
+            //check if tournament name is existence
+            if (tournManContext.Tournaments.Any(t => String.Equals(t.Name, name, StringComparison.OrdinalIgnoreCase)))
+            {
+                result.Message = String.Format(Resources.TournamentNameInUseMessage, name);
+                return result;
+            }
+
             try{
                 var newTourn = new Tournament(){ Name=name };
                 tournManContext.Tournaments.Add(newTourn);
                 tournManContext.SaveChanges();
             }catch (Exception ex)
             {
-                return new OperationResult()
-                            {
-                                WasSuccessful = false,
-                                Message=ex.Message
-                            };
+                result.Message=ex.Message;
+                return result;
             }
-            return new OperationResult()
-            {
-                WasSuccessful = true,
-                Message = String.Format(Resources.NewTournamentCreatedMessage, name)
-            };
-            
+            result.WasSuccessful = true;
+            result.Message = String.Format(Resources.NewTournamentCreatedMessage, name);
+            return result;
         }
 
         public OperationResult ImportParticipantCsvFile(Stream fileStream)
