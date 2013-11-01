@@ -1,5 +1,5 @@
-﻿using Hyushik_TournMan_Common.Results;
-using Hyushik_TournMan_Common.ViewModels;
+﻿using Hyushik_TournMan_Common.Models;
+using Hyushik_TournMan_Common.Results;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +13,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
     {
         OperationResult ImportParticipantCsvFile(Stream fileStream);
         OperationResult CreateNewTournament(string name);
-        AdminViewModel GetAdminViewModel();
+        IList<Tournament> GetAllTournaments();
     }
 }

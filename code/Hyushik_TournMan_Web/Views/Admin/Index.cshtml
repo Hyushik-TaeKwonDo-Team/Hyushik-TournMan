@@ -1,4 +1,4 @@
-﻿@model Hyushik_TournMan_Common.ViewModels.AdminViewModel
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.AdminViewModel
 @{
     ViewBag.Title = "Admin";
 }
@@ -9,9 +9,9 @@
         @Html.Partial("../Shared/_Notifications")
     </div>
     <div>
-        @Html.Partial("_Tournaments", Model.Tournaments)
+        @Html.Partial("_Tournaments", Model.TournamentViewModel)
     </div>
     <div>
-        @Html.Partial("_importCSV")
+        @Html.Partial("_importCSV", Model.ImportCsvViewModel)
     </div>
 </div>

@@ -13,7 +13,6 @@ using System.IO;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using Hyushik_TournMan_Common.Properties;
-using Hyushik_TournMan_Common.ViewModels;
 
 namespace Hyushik_TournMan_BLL.Orchestrators
 {
@@ -21,9 +20,9 @@ namespace Hyushik_TournMan_BLL.Orchestrators
     {
         private TournManContext tournManContext = new TournManContext();
 
-        public AdminViewModel GetAdminViewModel()
+        public IList<Tournament> GetAllTournaments()
         {
-            return new AdminViewModel() { Tournaments=tournManContext.Tournaments.ToList<Tournament>() };
+            return tournManContext.Tournaments.ToList<Tournament>();
         }
 
         public OperationResult CreateNewTournament(string name)
@@ -36,7 +35,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 return result;
             }
             //check if tournament name is existence
-            if (tournManContext.Tournaments.Any(t => String.Equals(t.Name, name, StringComparison.OrdinalIgnoreCase)))
+            if ( tournManContext.Tournaments.Where(t=>t.Name.Equals(name, StringComparison.OrdinalIgnoreCase)).Any() )
             {
                 result.Message = String.Format(Resources.TournamentNameInUseMessage, name);
                 return result;
