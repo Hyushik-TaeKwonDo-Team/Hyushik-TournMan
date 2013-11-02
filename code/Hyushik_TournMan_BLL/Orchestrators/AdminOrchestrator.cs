@@ -31,6 +31,44 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return tournManContext.Tournaments.ToList<Tournament>();
         }
 
+        public IList<BoardSizeCount> GetTotalBoardSizeCountsByTournamentId(long id){
+            return GetTotalBoardSizeCountsByTournament( GetTournamentById(id) );
+        }
+
+        public IList<BoardSizeCount> GetTotalBoardSizeCountsByTournament(Tournament tourn)
+        {
+            if(tourn==null){
+                return new List<BoardSizeCount>();
+            }
+
+            var totalBoardSizesDict = new Dictionary<string,int>();
+            var totalBoardSizesList = new List<BoardSizeCount>();
+            foreach( var part in tourn.Participants){
+                foreach ( var boardSizeCount in part.BoardSizeCounts)
+                {
+                    if (!totalBoardSizesDict.Keys.Contains(boardSizeCount.BoardSize))
+                    {
+                        totalBoardSizesDict[boardSizeCount.BoardSize] = 0;
+                    }
+
+                    totalBoardSizesDict[boardSizeCount.BoardSize] += boardSizeCount.Count;
+                }
+            }
+
+            foreach (var boardSize in totalBoardSizesDict.Keys)
+            {
+                totalBoardSizesList.Add(
+                    new BoardSizeCount()
+                    {
+                        BoardSize=boardSize,
+                        Count = totalBoardSizesDict[boardSize]
+                    }
+                    );
+            }
+            return totalBoardSizesList;
+
+        }
+
         public OperationResult CreateNewTournament(string name)
         {
             var result = new OperationResult() { WasSuccessful = false};

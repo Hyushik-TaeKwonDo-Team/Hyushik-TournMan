@@ -1,0 +1,110 @@
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.TournamentViewModel
+@{
+    ViewBag.Title = "Tournament View";
+}
+
+<div>
+    @if(Model.Tournament!=null){
+        <h2>Participants in @Model.Tournament.Name</h2>
+        <div>
+            @if (Model.Tournament.Participants.Count > 0)
+            {
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip</th>
+                            <th>Phone</th>
+                            <th>Gender</th>
+                            <th>Instructor Name</th>
+                            <th>School Name</th>
+                            <th>School Address</th>
+                            <th>School City</th>
+                            <th>School State</th>
+                            <th>School Zip</th>
+                            <th>School Phone</th>
+                            <th>School Email</th>
+                            <th>Rank</th>
+                            <th>Age</th>
+                            <th>Weight</th>
+                            <th>Weapons</th>
+                            <th>Breaking</th>
+                            <th>Forms</th>
+                            <th>Sparring (Point)</th>
+                            <th>Sparring (Olympic)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var participant in Model.Tournament.Participants)
+                        {
+                            <tr>
+                                <td>@participant.Name</td>
+                                <td>@participant.Email</td>
+                                <td>@participant.Address</td>
+                                <td>@participant.City</td>
+                                <td>@participant.State</td>
+                                <td>@participant.Zip</td>
+                                <td>@participant.Phone</td>
+                                <td>@participant.Gender</td>
+                                <td>@participant.InstructorName</td>
+                                <td>@participant.SchoolName</td>
+                                <td>@participant.SchoolAddress</td>
+                                <td>@participant.SchoolCity</td>
+                                <td>@participant.SchoolState</td>
+                                <td>@participant.SchoolZip</td>
+                                <td>@participant.SchoolPhone</td>
+                                <td>@participant.SchoolEmail</td>
+                                <td>@participant.Rank</td>
+                                <td>@participant.Age</td>
+                                <td>@participant.Weight</td>
+                                <td>@participant.Weapons</td>
+                                <td>@participant.Breaking</td>
+                                <td>@participant.Forms</td>
+                                <td>@participant.PointSparring</td>
+                                <td>@participant.OlympicSparring</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @Html.LabelFor(m => m.TotalBoardCounts);
+                if (Model.TotalBoardCounts!= null && Model.TotalBoardCounts.Count > 0)
+                {
+                    <div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Board Type</td>
+                                    <td>Amount Needed</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var boardSizeCount in Model.TotalBoardCounts)
+                                {
+                                    <tr>
+                                        <td>@boardSizeCount.BoardSize</td>
+                                        <td>@boardSizeCount.Count</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                }else{
+                    <span>No Boards were Ordered</span> 
+                }
+                
+            }
+            else { 
+                <span>No Participants Found</span>
+            }
+        </div>
+    }else{
+        <div>
+            Tournament was not found
+        </div>
+    }
+</div>

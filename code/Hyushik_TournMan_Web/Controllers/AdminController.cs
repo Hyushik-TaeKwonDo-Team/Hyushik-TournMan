@@ -91,11 +91,13 @@ namespace Hyushik_TournMan_Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Participants(long targetTournamentId)
+        public ActionResult Tournament(long id)
         {
-            var vm = new ParticipantsViewModel()
+            var vm = new TournamentViewModel()
             {
-                Tournament = orch.GetTournamentById(targetTournamentId)
+                Tournament = orch.GetTournamentById(id),
+                TotalBoardCounts = orch.GetTotalBoardSizeCountsByTournamentId(id)
+
             };
 
             return View(vm);

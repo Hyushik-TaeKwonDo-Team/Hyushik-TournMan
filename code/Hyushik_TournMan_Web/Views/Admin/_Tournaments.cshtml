@@ -7,16 +7,14 @@
             <table>
                 <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Participants</th>
+                      <th>Tournament Name</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var tournament in Model.Tournaments)
                     {
                         <tr>
-                            <td>@tournament.Name</td>
-                            <td>@Html.ActionLink("See Participants", "Participants", "Admin", new { targetTournamentId=tournament.Id }, null)</td>
+                            <td>@Html.ActionLink(@tournament.Name, "Tournament", "Admin", new { id=tournament.Id }, null)</td>
                         </tr>
                     }
                 </tbody>
@@ -29,8 +27,8 @@
     <div>
         @using (Html.BeginForm("AddTournament", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            @Html.DisplayFor(m => m.NewTournamentName)
-            @Html.TextBoxFor(m => m.NewTournamentName)
+            @Html.DisplayFor(m => m.NewTournamentName);
+            @Html.TextBoxFor(m => m.NewTournamentName);
             <input type="submit" value="Add" />
         }
     </div>
