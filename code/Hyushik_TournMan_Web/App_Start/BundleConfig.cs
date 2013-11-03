@@ -23,8 +23,11 @@ namespace Hyushik_TournMan_Web
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include("~/Content/bootstrap.css"));
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/main.css"));
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                        "~/Scripts/bootstrap.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/main.css"));
+            //bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/main.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

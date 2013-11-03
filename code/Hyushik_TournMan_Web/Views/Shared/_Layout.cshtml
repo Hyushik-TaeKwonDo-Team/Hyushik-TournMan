@@ -6,9 +6,9 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
-        @Styles.Render("~/Content/css/bootstrap")
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>   
         @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
     </head>
     <body>
@@ -26,8 +26,7 @@
           <ul class="nav navbar-nav pull-right">
             @*<li>@Html.Partial("_LoginPartial")</li>*@
             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-            <li>@Html.ActionLink("About", "About", "Home")</li>
-            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
           </ul>
         </div>
       </div>
@@ -41,7 +40,7 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                    <p>&copy; @DateTime.Now.Year</p>
                 </div>
             </div>
         </footer>
