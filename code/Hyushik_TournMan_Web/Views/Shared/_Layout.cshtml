@@ -31,19 +31,12 @@
         </div>
       </div>
     </div>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year</p>
-                </div>
-            </div>
-        </footer>
-
+    <div class="container" id="body">
+        @RenderSection("featured", required: false)
+        @RenderBody()
+    </div>
+    <footer>
+        <!-- EMPTY FOR NOW -->
+    </footer>
     </body>
 </html>
