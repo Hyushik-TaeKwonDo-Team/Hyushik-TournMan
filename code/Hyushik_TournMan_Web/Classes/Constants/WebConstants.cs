@@ -11,9 +11,10 @@ namespace Hyushik_TournMan_Web.Classes.Constants
         {
             public static class Notifications
             {
-                public const string SUCCESS = "success";
-                public const string WARNING = "warning";
-                public const string ERROR = "error";
+                public const string SUCCESS = "alert-success";
+                public const string WARNING = "alert-warning";
+                public const string ERROR = "alert-danger";
+                public const string INFO = "alert-info";
             }
         }
 

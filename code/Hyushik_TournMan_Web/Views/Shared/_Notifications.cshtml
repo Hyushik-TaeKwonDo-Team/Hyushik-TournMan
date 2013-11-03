@@ -6,7 +6,8 @@
         IDictionary<string, string> notifications = (Dictionary<string, string>)TempData[WebConstants.Parameters.NOTIFICATIONS];
         foreach(var message in notifications.Keys)
          {
-            <div class="notification @notifications[message]">
+            <div class="alert @notifications[message]">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 @message
             </div>
          }
