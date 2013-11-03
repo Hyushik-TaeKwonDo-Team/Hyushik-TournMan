@@ -1,5 +1,13 @@
-﻿@using (Html.BeginForm("ImportCsv", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <input type="file" name="file" />
-    <input type="submit" value="OK" />
-}
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.ImportCsvViewModel
+<div>
+    <h3>Import Participants CSV</h3>
+    @using (Html.BeginForm("ImportCsv", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.LabelFor(m => m.CsvFile)
+        @Html.TextBoxFor(m => m.CsvFile, new { type = "file" })
+        <input type="submit" value="OK" />
+        @Html.LabelFor(m => m.SelectedTournamentId)
+        @Html.DropDownListFor(m => m.SelectedTournamentId, Model.TournamentItems)
+        
+    }
+</div>

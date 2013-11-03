@@ -1,0 +1,35 @@
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.TournamentsViewModel
+<div>
+    <h3>Tournaments</h3>
+    <div>
+        @if (Model.Tournaments.Count > 0)
+        {
+            <table>
+                <thead>
+                    <tr>
+                      <th>Tournament Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var tournament in Model.Tournaments)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(@tournament.Name, "Tournament", "Admin", new { id=tournament.Id }, null)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else { 
+            <span>No Tournaments Found</span>
+        }
+    </div>
+    <div>
+        @using (Html.BeginForm("AddTournament", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.DisplayFor(m => m.NewTournamentName);
+            @Html.TextBoxFor(m => m.NewTournamentName);
+            <input type="submit" value="Add" />
+        }
+    </div>
+</div>

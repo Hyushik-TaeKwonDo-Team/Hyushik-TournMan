@@ -11,7 +11,8 @@ namespace Hyushik_TournMan_Common.Models
     public class Participant
     {
         [Key]
-        public int ParticipantId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long ParticipantId { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
@@ -39,6 +40,14 @@ namespace Hyushik_TournMan_Common.Models
         public bool Forms { get; set; }
         public bool PointSparring { get; set; }
         public bool OlympicSparring { get; set; }
+
+        public virtual List<BoardSizeCount> BoardSizeCounts { get; set; }
+
+        public Participant()
+        {
+            BoardSizeCounts = new List<BoardSizeCount>();
+        }
+
 
     }
 }

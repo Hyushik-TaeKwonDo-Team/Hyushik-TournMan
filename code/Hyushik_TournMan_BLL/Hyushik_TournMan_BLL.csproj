@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Orchestrators\CsvImportOrchestrator.cs" />
-    <Compile Include="Orchestrators\Interfaces\ICsvImportOrchestrator.cs" />
+    <Compile Include="Orchestrators\AdminOrchestrator.cs" />
+    <Compile Include="Orchestrators\Interfaces\IAdminOrchestrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

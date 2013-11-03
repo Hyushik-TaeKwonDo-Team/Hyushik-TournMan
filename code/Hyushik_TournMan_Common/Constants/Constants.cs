@@ -10,7 +10,9 @@ namespace Hyushik_TournMan_Common.Constants
     {
         public static class CSV
         {
-            public static int PRE_BOARD_SIZE_COLUMN_COUNT = 23;
+            public const int PRE_BOARD_SIZE_COLUMN_COUNT = 23;
+            public const string YES_STRING = "Yes";
+            public const string NO_STRING = "No";
         }
     }
 }

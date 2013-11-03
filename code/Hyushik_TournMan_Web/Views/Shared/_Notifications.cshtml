@@ -1,0 +1,15 @@
+﻿@using Hyushik_TournMan_Web.Classes.Constants
+
+<div>
+    @if (TempData[WebConstants.Parameters.NOTIFICATIONS] != null)
+    {
+        IDictionary<string, string> notifications = (Dictionary<string, string>)TempData[WebConstants.Parameters.NOTIFICATIONS];
+        foreach(var message in notifications.Keys)
+         {
+            <div class="notification @notifications[message]">
+                @message
+            </div>
+         }
+    }
+</div>
+
