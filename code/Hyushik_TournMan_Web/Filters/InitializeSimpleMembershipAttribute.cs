@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using WebMatrix.WebData;
 using Hyushik_TournMan_Common.Models;
 using Hyushik_TournMan_DAL.Contexts;
+using Hyushik_TournMan_Common.Constants;
+using System.Web.Security;
 
 namespace Hyushik_TournMan_Web.Filters
 {
@@ -40,10 +42,6 @@ namespace Hyushik_TournMan_Web.Filters
                     }
 
                     WebSecurity.InitializeDatabaseConnection("HyushikUsers", "UserProfile", "UserId", "UserName", autoCreateTables: true);
-                    if (!WebSecurity.UserExists("admin"))
-                        WebSecurity.CreateUserAndAccount(
-                            "admin",
-                            "password");
                 }
                 catch (Exception ex)
                 {
