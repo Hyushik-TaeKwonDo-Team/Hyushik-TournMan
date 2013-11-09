@@ -6,9 +6,9 @@ namespace Hyushik_TournMan_DAL.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Hyushik_TournMan_DAL.Contexts.TournManContext>
+    internal sealed class MainConfiguration : DbMigrationsConfiguration<Hyushik_TournMan_DAL.Contexts.TournManContext>
     {
-        public Configuration()
+        public MainConfiguration()
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;

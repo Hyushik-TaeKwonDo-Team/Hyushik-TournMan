@@ -10,7 +10,7 @@ namespace Hyushik_TournMan_DAL.Contexts
     public class UsersContext : DbContext
     {
         public UsersContext()
-            : base("HyushikDB")
+            : base("HyushikUsers")
         {
         }
 

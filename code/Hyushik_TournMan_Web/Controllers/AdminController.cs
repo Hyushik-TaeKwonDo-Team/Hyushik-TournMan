@@ -19,7 +19,7 @@ namespace Hyushik_TournMan_Web.Controllers
 
         //
         // GET: /Admin/
-
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
 

@@ -11,7 +11,7 @@ namespace Hyushik_TournMan_DAL.Contexts
     {
         
         public TournManContext()
-            : base("HyushikDB")
+            : base("HyushikTournament")
         {
         }
 

@@ -39,7 +39,7 @@ namespace Hyushik_TournMan_Web.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("HyushikDB", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("HyushikUsers", "UserProfile", "UserId", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {
