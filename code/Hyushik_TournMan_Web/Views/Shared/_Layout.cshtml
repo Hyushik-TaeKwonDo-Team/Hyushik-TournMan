@@ -28,9 +28,12 @@
           <ul class="nav navbar-nav pull-right">
             @*<li>@Html.Partial("_LoginPartial")</li>*@
             <li>@Html.ActionLink("Home", "Index", "Home")</li>
-            @if(User.IsInRole(Constants.Roles.ADMINISTRATOR_ROLE)){
+            @if(!User.Identity.IsAuthenticated){
+                <li>@Html.ActionLink("Log in", "Login", "Account")</li>
+            }else if(User.IsInRole(Constants.Roles.ADMINISTRATOR_ROLE)){
                 <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
             }
+            
           </ul>
         </div>
       </div>
