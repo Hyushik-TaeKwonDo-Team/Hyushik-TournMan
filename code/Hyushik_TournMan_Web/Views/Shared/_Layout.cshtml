@@ -30,8 +30,17 @@
             <li>@Html.ActionLink("Home", "Index", "Home")</li>
             @if(!User.Identity.IsAuthenticated){
                 <li>@Html.ActionLink("Log in", "Login", "Account")</li>
-            }else if(User.IsInRole(Constants.Roles.ADMINISTRATOR_ROLE)){
-                <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+            }else{
+                if(User.IsInRole(Constants.Roles.ADMINISTRATOR_ROLE)){
+                    <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                }
+                <li>  
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                    }
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Log Out</a>
+                </li>
             }
             
           </ul>
