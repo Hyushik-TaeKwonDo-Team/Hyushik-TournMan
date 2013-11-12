@@ -9,6 +9,8 @@ using Hyushik_TournMan_DAL.Contexts;
 using Hyushik_TournMan_Common.Constants;
 using System.Web.Security;
 
+using System.Linq;
+
 namespace Hyushik_TournMan_Web.Filters
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
@@ -42,6 +44,26 @@ namespace Hyushik_TournMan_Web.Filters
                     }
 
                     WebSecurity.InitializeDatabaseConnection("HyushikUsers", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+
+
+                    //Creating default admin
+                    var roles = (WebMatrix.WebData.SimpleRoleProvider)Roles.Provider;
+
+                    if (!roles.RoleExists(Constants.Roles.ADMINISTRATOR_ROLE))
+                        roles.CreateRole(Constants.Roles.ADMINISTRATOR_ROLE);
+
+                    if (!roles.RoleExists(Constants.Roles.JUDGE_ROLE))
+                        roles.CreateRole(Constants.Roles.JUDGE_ROLE);
+
+                    if (!WebSecurity.UserExists(Constants.DefaultAdmin.USERNAME) && 0 == roles.FindUsersInRole(Constants.Roles.ADMINISTRATOR_ROLE, String.Empty).Length)
+                    {
+                        WebSecurity.CreateUserAndAccount(
+                            Constants.DefaultAdmin.USERNAME,
+                            Constants.DefaultAdmin.PASSWORD);
+                        if (!roles.GetRolesForUser(Constants.DefaultAdmin.USERNAME).Contains(Constants.Roles.ADMINISTRATOR_ROLE))
+                            roles.AddUsersToRoles(new[] { Constants.DefaultAdmin.USERNAME }, new[] { Constants.Roles.ADMINISTRATOR_ROLE });
+                    }
+
                 }
                 catch (Exception ex)
                 {

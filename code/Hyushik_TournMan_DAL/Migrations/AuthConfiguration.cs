@@ -26,7 +26,7 @@ namespace Hyushik_TournMan_DAL.Migrations
                 "UserName", autoCreateTables: true);
 
             var roles = (WebMatrix.WebData.SimpleRoleProvider)Roles.Provider;
-
+            
             if (!roles.RoleExists(Constants.Roles.ADMINISTRATOR_ROLE))
                 roles.CreateRole(Constants.Roles.ADMINISTRATOR_ROLE);
 
@@ -48,6 +48,7 @@ namespace Hyushik_TournMan_DAL.Migrations
 
             if (!roles.GetRolesForUser("judge").Contains(Constants.Roles.JUDGE_ROLE))
                 roles.AddUsersToRoles(new[] { "judge" }, new[] { Constants.Roles.JUDGE_ROLE });
+             
 
         }
     }

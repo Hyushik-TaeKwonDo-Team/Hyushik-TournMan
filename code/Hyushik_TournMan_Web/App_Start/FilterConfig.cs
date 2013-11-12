@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using Hyushik_TournMan_Web.Filters;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Hyushik_TournMan_Web
@@ -8,7 +9,7 @@ namespace Hyushik_TournMan_Web
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            filters.Add(new AuthorizeAttribute());
+            filters.Add(new InitializeSimpleMembershipAttribute());
         }
     }
 }
