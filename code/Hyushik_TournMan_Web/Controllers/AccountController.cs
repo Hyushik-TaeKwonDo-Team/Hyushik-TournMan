@@ -8,6 +8,7 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
+using Hyushik_TournMan_Common.Properties;
 using Hyushik_TournMan_Web.Filters;
 using Hyushik_TournMan_Common.Models;
 using Hyushik_TournMan_DAL.Contexts;
@@ -16,7 +17,7 @@ namespace Hyushik_TournMan_Web.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         //
         // GET: /Account/Login
@@ -38,6 +39,7 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
+                AddSucessNotification(Resources.LoginSuccessfulMessage);
                 return RedirectToLocal(returnUrl);
             }
 
@@ -54,7 +56,7 @@ namespace Hyushik_TournMan_Web.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
-
+            AddSucessNotification(Resources.LogoutSucessfulMessage);
             return RedirectToAction("Index", "Home");
         }
 

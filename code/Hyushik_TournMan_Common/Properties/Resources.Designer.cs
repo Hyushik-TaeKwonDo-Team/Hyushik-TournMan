@@ -88,6 +88,24 @@ namespace Hyushik_TournMan_Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have successfully logged in.
+        /// </summary>
+        public static string LoginSuccessfulMessage {
+            get {
+                return ResourceManager.GetString("LoginSuccessfulMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have been logged out.
+        /// </summary>
+        public static string LogoutSucessfulMessage {
+            get {
+                return ResourceManager.GetString("LogoutSucessfulMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The tournament &quot;{0}&quot; was successfully created..
         /// </summary>
         public static string NewTournamentCreatedMessage {
