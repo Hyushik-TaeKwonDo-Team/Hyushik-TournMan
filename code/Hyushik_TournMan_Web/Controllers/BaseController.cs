@@ -23,5 +23,35 @@ namespace Hyushik_TournMan_Web.Controllers
             TempData[WebConstants.Parameters.NOTIFICATIONS] = currentNotifications;
         }
 
+        protected void AddSingleNotification(string message, string cssClass)
+        {
+            IDictionary<string, string> currentNotifications =
+                (IDictionary<string, string>)TempData[WebConstants.Parameters.NOTIFICATIONS] ?? new Dictionary<string, string>();
+
+            currentNotifications[message] = cssClass;
+
+            TempData[WebConstants.Parameters.NOTIFICATIONS] = currentNotifications;
+        }
+
+        protected void AddSucessNotification(string message)
+        {
+            AddSingleNotification(message, WebConstants.CssClasses.Notifications.SUCCESS);
+        }
+
+        protected void AddErrorNotification(string message)
+        {
+            AddSingleNotification(message, WebConstants.CssClasses.Notifications.ERROR);
+        }
+
+        protected void AddWarningNotification(string message)
+        {
+            AddSingleNotification(message, WebConstants.CssClasses.Notifications.WARNING);
+        }
+
+        protected void AddInfoNotification(string message)
+        {
+            AddSingleNotification(message, WebConstants.CssClasses.Notifications.INFO);
+        }
+
     }
 }

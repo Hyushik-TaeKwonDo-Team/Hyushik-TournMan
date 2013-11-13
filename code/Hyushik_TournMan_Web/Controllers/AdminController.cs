@@ -78,15 +78,10 @@ namespace Hyushik_TournMan_Web.Controllers
             var resultMessages = new Dictionary<string, string>();
             string notificationClass = String.Empty;
             if (result.WasSuccessful){
-                notificationClass = WebConstants.CssClasses.Notifications.SUCCESS;
+                AddSucessNotification(result.Message);
             }else if(!result.WasSuccessful){
-                notificationClass = WebConstants.CssClasses.Notifications.ERROR;
+                AddErrorNotification(result.Message);
             }
-
-            resultMessages[result.Message] = notificationClass;
-
-            AddNotifications(resultMessages);
-            // redirect back to the index action to show the form once again
             return RedirectToAction("Index");
         }
 
@@ -112,14 +107,12 @@ namespace Hyushik_TournMan_Web.Controllers
             string notificationClass = String.Empty;
             if (result.WasSuccessful)
             {
-                notificationClass = WebConstants.CssClasses.Notifications.SUCCESS;
+                AddSucessNotification(result.Message);
             }
             else if (!result.WasSuccessful)
             {
-                notificationClass = WebConstants.CssClasses.Notifications.ERROR;
+                AddErrorNotification(result.Message);
             }
-            resultMessages[result.Message] = notificationClass;
-            AddNotifications(resultMessages);
             return RedirectToAction("Index");
         }
 
