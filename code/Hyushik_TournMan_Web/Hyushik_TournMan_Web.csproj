@@ -305,6 +305,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Admin\_importCSV.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_UserNav.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>
