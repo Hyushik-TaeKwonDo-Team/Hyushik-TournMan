@@ -6,6 +6,7 @@
             <li>@Html.ActionLink("Home", "Index", "Home")</li>
             @if(!User.Identity.IsAuthenticated){
                 <li>@Html.ActionLink("Log in", "Login", "Account")</li>
+                <li>@Html.ActionLink("Register", "Register", "Account")</li>
             }else{
 
                 if(User.IsInRole(Constants.Roles.ADMINISTRATOR_ROLE)){

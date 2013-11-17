@@ -16,5 +16,9 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         IList<Tournament> GetAllTournaments();
         Tournament GetTournamentById(long id);
         IList<BoardSizeCount> GetTotalBoardSizeCountsByTournamentId(long id);
+        IList<UserProfile> GetAllUsers();
+        IDictionary<string, string[]> GetMappingOfUserNameToRoles();
+        OperationResult AddRole(string userName, string roleName);
+        OperationResult RemoveRole(string userName, string roleName);
     }
 }

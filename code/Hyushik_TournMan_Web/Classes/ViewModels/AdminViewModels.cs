@@ -12,6 +12,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
     {
         public TournamentsViewModel TournamentViewModel { get; set; }
         public ImportCsvViewModel ImportCsvViewModel { get; set; }
+        public UserRolesViewModel UserRolesViewModel { get; set; }
     }
 
 

@@ -10,16 +10,18 @@ using Hyushik_TournMan_Web.Classes.Constants;
 using Hyushik_TournMan_Common.Constants;
 using Hyushik_TournMan_Common.Properties;
 using Hyushik_TournMan_Web.Classes.ViewModels;
+using Hyushik_TournMan_Web.Filters;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
+    [InitializeSimpleMembership]
     public class AdminController : BaseController
     {
         private IAdminOrchestrator orch = new AdminOrchestrator();
 
         //
         // GET: /Admin/
-        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
 
@@ -45,12 +47,24 @@ namespace Hyushik_TournMan_Web.Controllers
             return vm;
         }
 
+        private UserRolesViewModel _buildUserRolesVM()
+        {
+            var vm = new UserRolesViewModel()
+            {
+                Users = orch.GetAllUsers(),
+                UserNameToRoles = orch.GetMappingOfUserNameToRoles()
+            };
+
+            return vm;
+        }
+
         private AdminViewModel _buildAdminVM()
         {
             var vm = new AdminViewModel()
             {
                 ImportCsvViewModel = _buildImportCsvVM(),
-                TournamentViewModel = _buildTournamentsVM()
+                TournamentViewModel = _buildTournamentsVM(),
+                UserRolesViewModel = _buildUserRolesVM()
             };
             return vm;
         }
@@ -113,6 +127,14 @@ namespace Hyushik_TournMan_Web.Controllers
             {
                 AddErrorNotification(result.Message);
             }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult AddRole(string userName, string roleName)
+        {
+            orch.AddRole(userName, roleName);
+
             return RedirectToAction("Index");
         }
 

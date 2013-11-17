@@ -12,13 +12,54 @@ using CsvHelper;
 using System.IO;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.Web.Security;
 using Hyushik_TournMan_Common.Properties;
 
 namespace Hyushik_TournMan_BLL.Orchestrators
 {
-    public class AdminOrchestrator : IAdminOrchestrator
+    public class AdminOrchestrator : BaseOrchestrator, IAdminOrchestrator
     {
         private TournManContext tournManContext = new TournManContext();
+
+        public IDictionary<string, string[]> GetMappingOfUserNameToRoles()
+        {
+            var roles = (WebMatrix.WebData.SimpleRoleProvider)Roles.Provider;
+            var users = GetUsers();
+
+            var mapping = new Dictionary<string, string[]>();
+            foreach(var user in users){
+                mapping[user.UserName] = roles.GetRolesForUser(user.UserName);
+            }
+
+            return mapping;
+        }
+
+        public OperationResult AddRole(string userName, string roleName)
+        {
+            var result = new OperationResult() { WasSuccessful = false};
+
+            var roles = (WebMatrix.WebData.SimpleRoleProvider)Roles.Provider;
+
+            if (!roles.GetRolesForUser(userName).Contains(roleName)) {
+                roles.AddUsersToRoles(new[] { userName }, new[] { roleName });
+                result.WasSuccessful = true;
+                //TODO set message
+                return result;
+            }
+            //TODO set message
+            return result;
+
+        }
+        public OperationResult RemoveRole(string userName, string roleName)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            return result;
+        }
+
+        public IList<UserProfile> GetAllUsers()
+        {
+            return GetUsers().ToList();
+        }
 
         public Tournament GetTournamentById(long id)
         {

@@ -1,0 +1,56 @@
+﻿@using Hyushik_TournMan_Common.Constants;
+@model Hyushik_TournMan_Web.Classes.ViewModels.UserRolesViewModel
+
+<div>
+    <span>Users</span>
+    @if (Model.Users.Count < 1)
+    {
+        <span>No Users Found</span>
+    }
+    else 
+    {
+    <table>
+        <tbody>
+            @foreach (var userProfile in Model.Users) {
+                <tr>
+                    <td>
+                        @userProfile.UserName
+                    </td>
+                    <td>
+                        @if (Model.UserNameToRoles[userProfile.UserName].Contains(Constants.Roles.JUDGE_ROLE))
+                        {  
+                            <span>Revoke Judge Privs</span>
+                        }
+                        else { 
+                            using (Html.BeginForm("AddRole", "Admin", FormMethod.Post))
+                            { 
+                                <input type="hidden" name="userName" value="@userProfile.UserName" />
+                                <input type="hidden" name="roleName" value="@Constants.Roles.JUDGE_ROLE" />
+                                
+                                <input type="submit" value="Make Judge"/>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @if (Model.UserNameToRoles[userProfile.UserName].Contains(Constants.Roles.ADMINISTRATOR_ROLE))
+                        {
+                            <span>Revoke Admin Privs</span>
+                        }
+                        else {
+                            using (Html.BeginForm("AddRole", "Admin", FormMethod.Post))
+                            { 
+                                <input type="hidden" name="userName" value="@userProfile.UserName" />
+                                <input type="hidden" name="roleName" value="@Constants.Roles.ADMINISTRATOR_ROLE" />
+                                
+                                <input type="submit" value="Make Admin"/>
+                            }
+                        }
+                    </td>
+                </tr> 
+            }
+            
+        </tbody>
+    </table>
+    
+    }
+</div>
