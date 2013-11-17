@@ -53,6 +53,17 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         public OperationResult RemoveRole(string userName, string roleName)
         {
             var result = new OperationResult() { WasSuccessful = false };
+
+            var roles = (WebMatrix.WebData.SimpleRoleProvider)Roles.Provider;
+
+            if (roles.GetRolesForUser(userName).Contains(roleName))
+            {
+                roles.RemoveUsersFromRoles(new[] { userName }, new[] { roleName });
+                result.WasSuccessful = true;
+                //TODO set message
+                return result;
+            }
+            //TODO set message
             return result;
         }
 

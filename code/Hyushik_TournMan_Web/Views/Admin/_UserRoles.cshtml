@@ -19,7 +19,13 @@
                     <td>
                         @if (Model.UserNameToRoles[userProfile.UserName].Contains(Constants.Roles.JUDGE_ROLE))
                         {  
-                            <span>Revoke Judge Privs</span>
+                            using (Html.BeginForm("RevokeRole", "Admin", FormMethod.Post))
+                            { 
+                                <input type="hidden" name="userName" value="@userProfile.UserName" />
+                                <input type="hidden" name="roleName" value="@Constants.Roles.JUDGE_ROLE" />
+                                
+                                <input type="submit" value="Revoke Judge Privs"/>
+                            }
                         }
                         else { 
                             using (Html.BeginForm("AddRole", "Admin", FormMethod.Post))
@@ -34,7 +40,13 @@
                     <td>
                         @if (Model.UserNameToRoles[userProfile.UserName].Contains(Constants.Roles.ADMINISTRATOR_ROLE))
                         {
-                            <span>Revoke Admin Privs</span>
+                            using (Html.BeginForm("RevokeRole", "Admin", FormMethod.Post))
+                            { 
+                                <input type="hidden" name="userName" value="@userProfile.UserName" />
+                                <input type="hidden" name="roleName" value="@Constants.Roles.ADMINISTRATOR_ROLE" />
+                                
+                                <input type="submit" value="Revoke Admin Privs"/>
+                            }
                         }
                         else {
                             using (Html.BeginForm("AddRole", "Admin", FormMethod.Post))

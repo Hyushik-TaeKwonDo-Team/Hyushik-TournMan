@@ -138,5 +138,13 @@ namespace Hyushik_TournMan_Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult RevokeRole(string userName, string roleName)
+        {
+            orch.RemoveRole(userName, roleName);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
