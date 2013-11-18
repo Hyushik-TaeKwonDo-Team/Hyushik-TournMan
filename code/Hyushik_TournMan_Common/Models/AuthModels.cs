@@ -20,7 +20,7 @@ namespace Hyushik_TournMan_Common.Models
     public class RegisterExternalLoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
         public string ExternalLoginData { get; set; }
@@ -48,7 +48,7 @@ namespace Hyushik_TournMan_Common.Models
     public class LoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [Required]
@@ -63,7 +63,7 @@ namespace Hyushik_TournMan_Common.Models
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [Required]
