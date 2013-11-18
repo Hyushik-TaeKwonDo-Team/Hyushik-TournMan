@@ -1,6 +1,7 @@
 ﻿@model Hyushik_TournMan_Web.Classes.ViewModels.ImportCsvViewModel
-<div>
+<div class="row top-buffer">
     <h3>Import Participants CSV</h3>
+    <hr />
     @using (Html.BeginForm("ImportCsv", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.LabelFor(m => m.CsvFile)

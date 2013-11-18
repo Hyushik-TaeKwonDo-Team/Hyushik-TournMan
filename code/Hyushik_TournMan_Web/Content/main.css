@@ -1,1 +1,10 @@
 ﻿.top-buffer { margin-top:20px; }
+
+b.list-group-item.active,
+b.list-group-item.active:hover,
+b.list-group-item.active:focus {
+  z-index: 2;
+  color: #ffffff;
+  background-color: #2c3e50;
+  border-color: #2c3e50;
+}
