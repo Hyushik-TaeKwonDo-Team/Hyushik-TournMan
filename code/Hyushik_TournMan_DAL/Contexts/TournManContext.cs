@@ -18,6 +18,7 @@ namespace Hyushik_TournMan_DAL.Contexts
         public DbSet<Participant> Participants { get; set; }
         public DbSet<BoardSizeCount> BoardSizeCounts { get; set; }
         public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<Technique> Techniques { get; set; }
 
     }
 }

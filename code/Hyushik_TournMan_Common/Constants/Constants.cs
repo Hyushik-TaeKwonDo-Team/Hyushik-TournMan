@@ -8,6 +8,12 @@ namespace Hyushik_TournMan_Common.Constants
 {
     public static class Constants
     {
+
+        public static class AppSettingsKeys
+        {
+            public const string StationFalloffProportion = "stationFalloffProportion";
+        }
+
         public static class CSV
         {
             public const int PRE_BOARD_SIZE_COLUMN_COUNT = 23;
