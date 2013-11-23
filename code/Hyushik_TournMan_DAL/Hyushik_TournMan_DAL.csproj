@@ -64,6 +64,7 @@
     <Compile Include="Migrations\AuthConfiguration.cs" />
     <Compile Include="Migrations\MainConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoredValues\StoredValues.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
