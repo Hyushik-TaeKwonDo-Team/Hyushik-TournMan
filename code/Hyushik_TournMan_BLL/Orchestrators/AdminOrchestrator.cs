@@ -34,6 +34,32 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return mapping;
         }
 
+        public OperationResult SetTournamentActiveStatus(long tournId, bool activeStatus)
+        {
+            var tourn = tournManContext.Tournaments.FirstOrDefault(x=>x.Id==tournId);
+            return SetTournamentActiveStatus(tourn, activeStatus);
+        }
+
+        public OperationResult SetTournamentActiveStatus(Tournament tourn, bool activeStatus)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            if(null==tourn){
+                //TODO error message
+                return result;
+            }
+            try{
+                tourn.Active=activeStatus;
+                tournManContext.SaveChanges();
+                //TODO resource string
+                result.WasSuccessful = true;
+                result.Message = "Status change sucessful.";
+                return result;
+            }catch(Exception ex){
+                result.Message = ex.Message;
+            }
+            return result ;
+        }
+
         public OperationResult AddRole(string userName, string roleName)
         {
             var result = new OperationResult() { WasSuccessful = false};

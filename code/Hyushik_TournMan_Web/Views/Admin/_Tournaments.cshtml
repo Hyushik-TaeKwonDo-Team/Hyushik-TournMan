@@ -12,6 +12,23 @@
                         @foreach (var tournament in Model.Tournaments)
                         {
                             @Html.ActionLink(@tournament.Name, "Tournament", "Admin", new { id=tournament.Id }, new { @class = "list-group-item" })
+                            using (Html.BeginForm("SetTournamentActiveStatus", "Admin", FormMethod.Post))
+                            {
+                                <input type="hidden" name="tournId" value="@tournament.Id" />
+                                if (!tournament.Active)
+                                {
+                                    
+                                    <input type="hidden" name="tournActive" value="true" />
+                                    <input type="submit" value="Activate Tournament"/>
+                                }
+                                else
+                                {
+                                    
+                                    <input type="hidden" name="tournActive" value="false" />
+                                    <input type="submit" value="Deactivate Tournament"/>
+                                }
+                            }
+                            
                         }
                     </div>
                 </div>

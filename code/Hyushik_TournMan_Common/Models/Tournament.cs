@@ -17,8 +17,11 @@ namespace Hyushik_TournMan_Common.Models
 
         [DisplayName("Tournament Name")]
         public string Name { get; set; }
+
         [DisplayName("Participants")]
         public virtual List<Participant> Participants { get; set; }
+
+        public bool Active { get; set; }
 
         public Tournament()
         {

@@ -20,5 +20,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         IDictionary<string, string[]> GetMappingOfUserNameToRoles();
         OperationResult AddRole(string userName, string roleName);
         OperationResult RemoveRole(string userName, string roleName);
+        OperationResult SetTournamentActiveStatus(long tournId, bool activeStatus);
+        OperationResult SetTournamentActiveStatus(Tournament tourn, bool activeStatus);
     }
 }
