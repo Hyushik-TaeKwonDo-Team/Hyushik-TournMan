@@ -32,7 +32,7 @@ namespace Hyushik_TournMan_DAL.Migrations
 
             context.Tournaments.AddOrUpdate(
                 t=> t.Name,
-                new Tournament(){Name="Tournament 1"},
+                new Tournament(){Name="Tournament 1", Active=true},
                 new Tournament(){Name="Tournament 2"}
                 );
         }

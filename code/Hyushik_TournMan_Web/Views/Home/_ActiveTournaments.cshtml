@@ -8,7 +8,7 @@
             @foreach (var tourn in Model.ActiveTournaments)
             {
                 <tr>
-                    <td>@Html.ActionLink(@tourn.Name, "Index", "Tournament", new { tournId=tourn.Id }, null)</td>
+                    <td>@Html.ActionLink(@tourn.Name, "Index", "ActiveTournament", new { tournId=tourn.Id }, null)</td>
                 </tr>
             }
         </table>

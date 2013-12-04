@@ -21,5 +21,16 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         {
             return _tournManContext.Tournaments.Where(t => t.Active).ToList();
         }
+
+        public IList<UserProfile> GetAllUsers()
+        {
+            return GetUsers().ToList();
+        }
+
+        public Tournament GetTournamentById(long id)
+        {
+            //returns null if not found
+            return _tournManContext.Tournaments.Where(t => t.Id == id).FirstOrDefault();
+        }
     }
 }

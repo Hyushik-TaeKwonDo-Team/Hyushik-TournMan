@@ -6,8 +6,8 @@ using System.Web;
 
 namespace Hyushik_TournMan_Web.Classes.ViewModels
 {
-    public class ActivatedTournamentsViewModel
+    public class ActiveTournamentViewModel
     {
-        public IList<Tournament> ActiveTournaments { get; set;}
+        public Tournament Tournament { get; set; }
     }
 }
