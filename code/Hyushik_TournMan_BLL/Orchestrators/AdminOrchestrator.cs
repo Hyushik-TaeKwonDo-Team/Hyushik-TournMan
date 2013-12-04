@@ -19,7 +19,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 {
     public class AdminOrchestrator : BaseOrchestrator, IAdminOrchestrator
     {
-        private TournManContext tournManContext = new TournManContext();
 
         public IDictionary<string, string[]> GetMappingOfUserNameToRoles()
         {
@@ -36,7 +35,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 
         public OperationResult SetTournamentActiveStatus(long tournId, bool activeStatus)
         {
-            var tourn = tournManContext.Tournaments.FirstOrDefault(x=>x.Id==tournId);
+            var tourn = _tournManContext.Tournaments.FirstOrDefault(x=>x.Id==tournId);
             return SetTournamentActiveStatus(tourn, activeStatus);
         }
 
@@ -49,7 +48,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             }
             try{
                 tourn.Active=activeStatus;
-                tournManContext.SaveChanges();
+                _tournManContext.SaveChanges();
                 //TODO resource string
                 result.WasSuccessful = true;
                 result.Message = "Status change sucessful.";
@@ -101,12 +100,12 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         public Tournament GetTournamentById(long id)
         {
             //returns null if not found
-            return tournManContext.Tournaments.Where(t=>t.Id==id).FirstOrDefault();
+            return _tournManContext.Tournaments.Where(t=>t.Id==id).FirstOrDefault();
         }
 
         public IList<Tournament> GetAllTournaments()
         {
-            return tournManContext.Tournaments.ToList<Tournament>();
+            return _tournManContext.Tournaments.ToList<Tournament>();
         }
 
         public IList<BoardSizeCount> GetTotalBoardSizeCountsByTournamentId(long id){
@@ -157,7 +156,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             }
             name = name.Trim();
             //check if tournament name is in use
-            if ( tournManContext.Tournaments.Any(t=>t.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) )
+            if ( _tournManContext.Tournaments.Any(t=>t.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) )
             {
                 result.Message = String.Format(Resources.TournamentNameInUseMessage, name);
                 return result;
@@ -165,8 +164,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 
             try{
                 var newTourn = new Tournament(){ Name=name };
-                tournManContext.Tournaments.Add(newTourn);
-                tournManContext.SaveChanges();
+                _tournManContext.Tournaments.Add(newTourn);
+                _tournManContext.SaveChanges();
             }catch (Exception ex)
             {
                 result.Message=ex.Message;

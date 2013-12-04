@@ -11,6 +11,7 @@ namespace Hyushik_TournMan_Web.Controllers
 {
     public class BaseController : Controller
     {
+
         protected void AddNotifications(IDictionary<string, string> notificationsToAdd)
         {
             IDictionary<string,string> currentNotifications =  

@@ -11,6 +11,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 {
     public interface IAdminOrchestrator
     {
+        IList<Tournament> GetActiveTournaments();
         OperationResult ImportParticipantCsvFile(Stream fileStream, long targetTournamentId);
         OperationResult CreateNewTournament(string name);
         IList<Tournament> GetAllTournaments();

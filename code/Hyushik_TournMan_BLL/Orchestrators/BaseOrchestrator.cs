@@ -10,10 +10,16 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 {
     public class BaseOrchestrator
     {
-        private UsersContext _usersContext = new UsersContext();
+        protected UsersContext _usersContext = new UsersContext();
+        protected TournManContext _tournManContext = new TournManContext();
 
         public IEnumerable<UserProfile> GetUsers(){
             return _usersContext.UserProfiles;
+        }
+
+        public IList<Tournament> GetActiveTournaments()
+        {
+            return _tournManContext.Tournaments.Where(t => t.Active).ToList();
         }
     }
 }

@@ -1,8 +1,19 @@
 ﻿@model Hyushik_TournMan_Web.Classes.ViewModels.ActivatedTournamentsViewModel
 
 <div>
-    @foreach(var tourn in Model.ActiveTournaments){
-        
+    <h2>Active Tournaments</h2>
+    @if (Model.ActiveTournaments.Count > 0)
+    {
+        <table>
+            @foreach (var tourn in Model.ActiveTournaments)
+            {
+                <tr>
+                    <td>@Html.ActionLink(@tourn.Name, "Index", "Tournament", new { tournId=tourn.Id }, null)</td>
+                </tr>
+            }
+        </table>
     }
-
+    else { 
+        <div>No Active Tournaments</div>
+    }
 </div>

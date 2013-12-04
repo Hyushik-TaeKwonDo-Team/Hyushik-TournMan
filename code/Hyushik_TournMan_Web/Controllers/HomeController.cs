@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Hyushik_TournMan_BLL.Orchestrators;
+using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
+using Hyushik_TournMan_Web.Classes.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,14 +9,31 @@ using System.Web.Mvc;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        private IHomeOrchestrator orch = new HomeOrchestrator();
+
+        protected HomeViewModel BuildHomeViewModel()
+        {
+            return new HomeViewModel
+            {
+                ActivatedTournamentsViewModel = BuildActivatedTournamentsViewModel()
+            };
+        }
+
+        protected ActivatedTournamentsViewModel BuildActivatedTournamentsViewModel()
+        {
+            return new ActivatedTournamentsViewModel()
+            {
+                ActiveTournaments = orch.GetActiveTournaments()
+            };
+        }
+
+
         [AllowAnonymous]
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
-            return View();
+            return View(BuildHomeViewModel());
         }
     }
 }

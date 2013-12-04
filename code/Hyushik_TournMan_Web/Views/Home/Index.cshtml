@@ -1,5 +1,5 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.HomeViewModel
 
-Default Index Page
+<div>
+    @Html.Partial("_ActiveTournaments", Model.ActivatedTournamentsViewModel)
+</div>

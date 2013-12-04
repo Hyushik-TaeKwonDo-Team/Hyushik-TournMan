@@ -64,7 +64,9 @@
   <ItemGroup>
     <Compile Include="Orchestrators\AdminOrchestrator.cs" />
     <Compile Include="Orchestrators\BaseOrchestrator.cs" />
+    <Compile Include="Orchestrators\HomeOrchestrator.cs" />
     <Compile Include="Orchestrators\Interfaces\IAdminOrchestrator.cs" />
+    <Compile Include="Orchestrators\Interfaces\IHomeOrchestrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

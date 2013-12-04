@@ -184,9 +184,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Classes\Constants\WebConstants.cs" />
-    <Compile Include="Classes\ViewModels\ActivatableTournaments.cs" />
     <Compile Include="Classes\ViewModels\ActivatedTournamentsViewModel.cs" />
     <Compile Include="Classes\ViewModels\AdminViewModels.cs" />
+    <Compile Include="Classes\ViewModels\HomeViewModel.cs" />
     <Compile Include="Classes\ViewModels\UserRolesViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
