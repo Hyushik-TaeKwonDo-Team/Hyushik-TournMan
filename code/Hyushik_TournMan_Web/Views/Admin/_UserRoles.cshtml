@@ -45,8 +45,14 @@
                             { 
                                 <input type="hidden" name="userName" value="@userProfile.UserName" />
                                 <input type="hidden" name="roleName" value="@Constants.Roles.ADMINISTRATOR_ROLE" />
+                                if (User.Identity.Name == userProfile.UserName)
+                                {
+                                    <input type="submit" value="Cannot Revoke Admin Privs from Self" disabled/>
+                                }
+                                else { 
+                                    <input type="submit" value="Revoke Admin Privs"/>
+                                }
                                 
-                                <input type="submit" value="Revoke Admin Privs"/>
                             }
                         }
                         else {
