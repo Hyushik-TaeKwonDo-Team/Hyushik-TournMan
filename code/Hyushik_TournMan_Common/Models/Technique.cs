@@ -23,5 +23,15 @@ namespace Hyushik_TournMan_Common.Models
 
         public virtual List<Technique> SubTechniques { get; set; }
 
+        public Technique()
+        {
+            SubTechniques = new List<Technique>();
+        }
+
+        public bool IsLeaf()
+        {
+            return 0 <= SubTechniques.Count;
+        }
+
     }
 }
