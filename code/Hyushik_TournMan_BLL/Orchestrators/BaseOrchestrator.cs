@@ -32,5 +32,10 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             //returns null if not found
             return _tournManContext.Tournaments.Where(t => t.Id == id).FirstOrDefault();
         }
+
+        public IList<Technique> GetTopLevelTechniques()
+        {
+            return _tournManContext.Techniques.Where(t=>t.Parent==null).ToList();
+        }
     }
 }

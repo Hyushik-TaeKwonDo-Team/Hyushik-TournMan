@@ -259,6 +259,7 @@
     <Content Include="Views\Admin\_UserRoles.cshtml" />
     <Content Include="Views\Home\_ActiveTournaments.cshtml" />
     <Content Include="Views\ActiveTournament\Index.cshtml" />
+    <Content Include="Views\Admin\_techniqueAdmin.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>

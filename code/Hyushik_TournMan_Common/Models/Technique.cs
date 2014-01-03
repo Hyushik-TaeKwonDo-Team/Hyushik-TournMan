@@ -21,6 +21,10 @@ namespace Hyushik_TournMan_Common.Models
         //Exclusionary techniques have no weight
         public bool Exclusionary { get; set; }
 
+        //exists for querying
+        public virtual Technique Parent { get; set; }
+
+        //please no recursion . . .
         public virtual List<Technique> SubTechniques { get; set; }
 
         public Technique()
@@ -30,7 +34,14 @@ namespace Hyushik_TournMan_Common.Models
 
         public bool IsLeaf()
         {
-            return 0 <= SubTechniques.Count;
+            return 0 == SubTechniques.Count;
+        }
+
+        public void AddSubTechnique(Technique technique)
+        {   if(!SubTechniques.Contains(technique)){
+                SubTechniques.Add(technique);
+            }
+            technique.Parent = this;
         }
 
     }

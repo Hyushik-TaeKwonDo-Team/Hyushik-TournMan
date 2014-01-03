@@ -23,5 +23,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         OperationResult RemoveRole(string userName, string roleName);
         OperationResult SetTournamentActiveStatus(long tournId, bool activeStatus);
         OperationResult SetTournamentActiveStatus(Tournament tourn, bool activeStatus);
+        IList<Technique> GetTopLevelTechniques();
     }
 }

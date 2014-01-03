@@ -35,6 +35,34 @@ namespace Hyushik_TournMan_DAL.Migrations
                 new Tournament(){Name="Tournament 1", Active=true},
                 new Tournament(){Name="Tournament 2"}
                 );
+
+            var toggleTech = new Technique()
+            {
+                Name = "Toggle Tech",
+                Exclusionary = false
+            };
+
+            var parentTech = new Technique()
+            {
+                Name = "Parent Tech",
+                Exclusionary = false
+            };
+
+            var childTech = new Technique()
+            {
+                Name = "Child Tech",
+                Exclusionary = false
+            };
+
+            parentTech.AddSubTechnique(childTech);
+
+            context.Techniques.AddOrUpdate(
+                t=>t.Name,
+                toggleTech,parentTech,childTech
+                );
+
+
+
         }
     }
 }

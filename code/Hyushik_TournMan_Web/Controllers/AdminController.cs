@@ -24,8 +24,6 @@ namespace Hyushik_TournMan_Web.Controllers
         // GET: /Admin/
         public ActionResult Index()
         {
-
-
             return View(_buildAdminVM());
         }
 
@@ -34,6 +32,15 @@ namespace Hyushik_TournMan_Web.Controllers
             var vm = new ImportCsvViewModel()
             {
                 Tournaments=orch.GetAllTournaments()
+            };
+            return vm;
+        }
+
+        private TechniquesViewModel _buildTechniquesVM()
+        {
+            var vm = new TechniquesViewModel()
+            {
+                Techniques = orch.GetTopLevelTechniques().ToList()
             };
             return vm;
         }
@@ -64,7 +71,8 @@ namespace Hyushik_TournMan_Web.Controllers
             {
                 ImportCsvViewModel = _buildImportCsvVM(),
                 TournamentViewModel = _buildTournamentsVM(),
-                UserRolesViewModel = _buildUserRolesVM()
+                UserRolesViewModel = _buildUserRolesVM(),
+                TechniquesViewModel = _buildTechniquesVM()
             };
             return vm;
         }

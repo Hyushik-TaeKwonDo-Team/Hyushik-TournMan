@@ -1,0 +1,37 @@
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.TechniquesViewModel
+@using Hyushik_TournMan_Common.Models
+
+
+
+@helper PrintTechnique(Technique tech, int depth)
+{
+    <span>@String.Concat(Enumerable.Repeat("  ", depth))</span><span>@tech.Name</span>
+    if(!tech.IsLeaf()){
+        <ul>
+            @foreach (var subTech in tech.SubTechniques)
+            {
+                <li>
+                    @PrintTechnique(subTech, depth+1)
+                </li>
+            }
+        </ul>
+    }
+    
+}
+
+<div>
+    <h2>Techniques</h2>
+    <div>
+        <ul>
+            @foreach(var tech in Model.Techniques){
+                <li>
+                    @PrintTechnique(tech, 0)
+                </li>
+            }
+            <li>
+                Add
+            </li>
+         </ul>
+        
+    </div>
+</div>
