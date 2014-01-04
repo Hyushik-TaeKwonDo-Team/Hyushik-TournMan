@@ -169,5 +169,28 @@ namespace Hyushik_TournMan_Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult UpdateTechnique(long techId, string techName, int techWeight)
+        {
+            //TODO
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult AddTechnique(long parentId, string techName, int techWeight)
+        {
+            //TODO
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteTechnique(long parentId, string techName, int techWeight)
+        {
+            //TODO
+
+            return RedirectToAction("Index");
+        }
     }
 }

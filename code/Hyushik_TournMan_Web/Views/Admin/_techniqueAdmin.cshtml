@@ -1,36 +1,72 @@
 ﻿@model Hyushik_TournMan_Web.Classes.ViewModels.TechniquesViewModel
 @using Hyushik_TournMan_Common.Models
 
+<script>
+    $(document).ready(function () {
+        $('.tech-edit').hide();
+        $('.tech-new-edit').hide();
+
+        $('.tech-edit-button').click(function(){
+            $(this).siblings('.tech-edit').toggle();
+            $(this).siblings('.tech-show').toggle();
+            $(this).toggle();
+        });
+
+        $('.tech-new-edit-button').click(function () {
+            $(this).siblings('.tech-new-edit').toggle();
+            $(this).siblings('.tech-new-show').toggle();
+            $(this).toggle();
+        });
+    });
+</script>
 
 
-@helper PrintTechnique(Technique tech, int depth)
+@helper PrintTechnique(Technique tech)
 {
-    <span>@String.Concat(Enumerable.Repeat("  ", depth))</span><span>@tech.Name</span>
-    if(!tech.IsLeaf()){
+    using (Html.BeginForm("UpdateTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" })){
+        <input type="hidden" name="techId" value="@tech.Id"/>
+        <span class="tech-show">@tech.Name</span><input type="text" name="techName" class="tech-edit" value="@tech.Name"/>
+        <span> Weight:</span><span class="tech-show">@tech.Weight</span><input type="number" class="tech-edit" value="@tech.Weight"/>
+        <a class="tech-show tech-edit-button">Edit</a><a class="tech-edit tech-edit-button">Cancel Edit</a>
+        <button type="submit" class="tech-edit">Update</button >
+    }
         <ul>
+            <li>
+                @using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" })){
+                    <a class="tech-new-show tech-new-edit-button">Add Subtechnique</a>
+                    <input name="parentId" type="hidden" value="@tech.Id">
+                    <input type="text" name="techName" class="tech-new-edit" value="New Technique"/>
+                    <span class="tech-new-edit"> Weight:</span><input type="number" name="techWeight" class="tech-new-edit" value="0"/>
+                    <a class="tech-new-edit tech-new-edit-button">Cancel</a>
+                    <button type="submit" class="tech-new-edit">Add</button >
+                }
+            </li>
             @foreach (var subTech in tech.SubTechniques)
             {
-                <li>
-                    @PrintTechnique(subTech, depth+1)
-                </li>
+                <li>@PrintTechnique(subTech)</li>
             }
         </ul>
-    }
-    
 }
+
 
 <div>
     <h2>Techniques</h2>
     <div>
         <ul>
-            @foreach(var tech in Model.Techniques){
-                <li>
-                    @PrintTechnique(tech, 0)
-                </li>
-            }
             <li>
-                Add
+                @using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" })){
+                    <a class="tech-new-show tech-new-edit-button">Add Technique</a>
+                    <input name="parentId" type="hidden" value="-1">
+                    <input type="text" name="techName" class="tech-new-edit" value="New Technique"/>
+                    <span class="tech-new-edit"> Weight:</span><input type="number" name="techWeight" class="tech-new-edit" value="0"/>
+                    <a class="tech-new-edit tech-new-edit-button">Cancel</a>
+                    <button type="submit" class="tech-new-edit">Add</button >
+                }
             </li>
+            @foreach (var tech in Model.Techniques)
+            {
+                <li> @PrintTechnique(tech)</li>
+            }
          </ul>
         
     </div>

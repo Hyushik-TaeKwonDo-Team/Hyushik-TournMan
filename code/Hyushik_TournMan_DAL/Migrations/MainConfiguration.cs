@@ -45,20 +45,27 @@ namespace Hyushik_TournMan_DAL.Migrations
             var parentTech = new Technique()
             {
                 Name = "Parent Tech",
-                Exclusionary = false
+                Exclusionary = true
             };
 
             var childTech = new Technique()
             {
                 Name = "Child Tech",
-                Exclusionary = false
+                Exclusionary = true
+            };
+
+            var secondaryChildTech = new Technique()
+            {
+                Name = "Secondary Child Tech",
+                Exclusionary = true
             };
 
             parentTech.AddSubTechnique(childTech);
+            childTech.AddSubTechnique(secondaryChildTech);
 
             context.Techniques.AddOrUpdate(
                 t=>t.Name,
-                toggleTech,parentTech,childTech
+                toggleTech,parentTech,childTech, secondaryChildTech
                 );
 
 
