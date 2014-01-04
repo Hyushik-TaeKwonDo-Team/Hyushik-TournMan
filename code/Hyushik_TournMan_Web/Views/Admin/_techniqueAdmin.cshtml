@@ -9,6 +9,17 @@
         $('.tech-edit-button').click(function(){
             $(this).siblings('.tech-edit').toggle();
             $(this).siblings('.tech-show').toggle();
+
+            $(this).siblings('.tech-checkbox').each(function (index, value) {
+                //console.log(value.name + " : " + $(value).attr("disabled"));
+                if ($(value).attr("disabled")) {
+                    //console.log("Removing");
+                    $(value).removeAttr("disabled");
+                } else {
+                    //console.log("Adding");
+                    $(value).attr("disabled", true);
+                }
+            });
             $(this).toggle();
         });
 
@@ -27,12 +38,14 @@
         <input type="hidden" name="techId" value="@tech.Id"/>
         <span class="tech-show">@tech.Name</span><input type="text" name="techName" class="tech-edit" value="@tech.Name"/>
         <span> Weight:</span><span class="tech-show">@tech.Weight</span><input type="number" class="tech-edit" value="@tech.Weight"/>
-        <a class="tech-show tech-edit-button">Edit</a><a class="tech-edit tech-edit-button">Cancel Edit</a>
+        <span> Toggleable:</span><input name="techToggleable" type="checkbox" class="tech-checkbox" checked="@tech.Toggleable" disabled/>
+        <a class="tech-show tech-edit-button">Edit</a> <a class="tech-edit tech-edit-button">Cancel Edit</a>
         <button type="submit" class="tech-edit">Update</button >
     }
         <ul>
             <li>
-                @using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" })){
+                @using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
                     <a class="tech-new-show tech-new-edit-button">Add Subtechnique</a>
                     <input name="parentId" type="hidden" value="@tech.Id">
                     <input type="text" name="techName" class="tech-new-edit" value="New Technique"/>
@@ -54,7 +67,8 @@
     <div>
         <ul>
             <li>
-                @using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" })){
+                @using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
                     <a class="tech-new-show tech-new-edit-button">Add Technique</a>
                     <input name="parentId" type="hidden" value="-1">
                     <input type="text" name="techName" class="tech-new-edit" value="New Technique"/>
