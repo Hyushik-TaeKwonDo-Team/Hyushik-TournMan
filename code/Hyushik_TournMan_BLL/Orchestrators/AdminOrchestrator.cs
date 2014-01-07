@@ -33,6 +33,43 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return mapping;
         }
 
+        private void RecursiveDeleteSubTechs(Technique tech)
+        {
+            if (tech.SubTechniques.Count > 0)
+            {
+                foreach (var subtech in tech.SubTechniques)
+                {
+                    RecursiveDeleteSubTechs(subtech);
+                    //this (marks for db deletion) causes collection modifucation issues for some reason
+                    //_tournManContext.Techniques.Remove(subtech);
+                }
+            }
+            tech.SubTechniques.Clear();
+            return;
+        }
+
+        public OperationResult UpdateTechnique(long techId, string techName, int techWeight, bool techToggleable)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var tech = _tournManContext.Techniques.FirstOrDefault(t => t.Id == techId);
+                tech.Name = techName;
+                tech.Weight = techWeight;
+                tech.Toggleable = techToggleable;
+                if(techToggleable){
+                    RecursiveDeleteSubTechs(tech);
+                }
+                _tournManContext.SaveChanges();
+            }catch(Exception ex){
+                result.Message = ex.Message;
+                return result;
+            }
+            result.WasSuccessful = true;
+            result.Message = "Update Sucessful";
+            return result;
+        }
+
         public OperationResult SetTournamentActiveStatus(long tournId, bool activeStatus)
         {
             var tourn = _tournManContext.Tournaments.FirstOrDefault(x=>x.Id==tournId);

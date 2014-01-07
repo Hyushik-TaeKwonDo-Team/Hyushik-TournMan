@@ -170,7 +170,22 @@ namespace Hyushik_TournMan_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateTechnique(long techId, string techName, int techWeight)
+        public ActionResult UpdateTechnique(long techId, string techName, int techWeight, bool techToggleable)
+        {
+            var result = orch.UpdateTechnique(techId, techName, techWeight, techToggleable);
+            if (result.WasSuccessful)
+            {
+                AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult AddTechnique(long parentId, string techName, int techWeight, bool techToggleable)
         {
             //TODO
 
@@ -178,15 +193,7 @@ namespace Hyushik_TournMan_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddTechnique(long parentId, string techName, int techWeight)
-        {
-            //TODO
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult DeleteTechnique(long parentId, string techName, int techWeight)
+        public ActionResult DeleteTechnique(long techId)
         {
             //TODO
 
