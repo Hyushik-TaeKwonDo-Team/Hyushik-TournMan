@@ -35,17 +35,41 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 
         private void RecursiveDeleteSubTechs(Technique tech)
         {
+
             if (tech.SubTechniques.Count > 0)
             {
-                foreach (var subtech in tech.SubTechniques)
+                foreach (var subtech in tech.SubTechniques.ToList())
                 {
                     RecursiveDeleteSubTechs(subtech);
-                    //this (marks for db deletion) causes collection modifucation issues for some reason
-                    //_tournManContext.Techniques.Remove(subtech);
+                    _tournManContext.Techniques.Remove(subtech);
                 }
             }
             tech.SubTechniques.Clear();
             return;
+        }
+
+        public OperationResult DeleteTechnique(long techId)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var tech = _tournManContext.Techniques.FirstOrDefault(t => t.Id == techId);
+
+                if(tech.Parent!=null){
+                    tech.Parent.SubTechniques.Remove(tech);
+                }
+                RecursiveDeleteSubTechs(tech);
+                _tournManContext.Techniques.Remove(tech);
+                _tournManContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+                return result;
+            }
+            result.WasSuccessful = true;
+            result.Message = "Technique Sucessfully Deleted!";
+            return result;
         }
 
         public OperationResult AddTechnique(long parentId, string techName, int techWeight, bool techToggleable)

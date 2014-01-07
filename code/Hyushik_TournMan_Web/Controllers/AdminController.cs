@@ -202,8 +202,15 @@ namespace Hyushik_TournMan_Web.Controllers
         [HttpPost]
         public ActionResult DeleteTechnique(long techId)
         {
-            //TODO
-
+            var result = orch.DeleteTechnique(techId);
+            if (result.WasSuccessful)
+            {
+                AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
             return RedirectToAction("Index");
         }
     }
