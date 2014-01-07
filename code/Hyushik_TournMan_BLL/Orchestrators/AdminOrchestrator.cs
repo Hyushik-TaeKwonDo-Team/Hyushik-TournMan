@@ -48,6 +48,34 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return;
         }
 
+        public OperationResult AddTechnique(long parentId, string techName, int techWeight, bool techToggleable)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var tech = new Technique();
+                
+                tech.Name = techName;
+                tech.Weight = techWeight;
+                tech.Toggleable = techToggleable;
+                //MAGIC NUMBER OF TOP SHELF TECHNIQUEs
+                if(parentId!=-1){
+                    var parentTech = _tournManContext.Techniques.FirstOrDefault(t => t.Id == parentId);
+                    tech.Parent = parentTech;
+                }
+                _tournManContext.Techniques.Add(tech);
+                _tournManContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+                return result;
+            }
+            result.WasSuccessful = true;
+            result.Message = "Technique Sucessfully Added!";
+            return result;
+        }
+
         public OperationResult UpdateTechnique(long techId, string techName, int techWeight, bool techToggleable)
         {
             var result = new OperationResult() { WasSuccessful = false };

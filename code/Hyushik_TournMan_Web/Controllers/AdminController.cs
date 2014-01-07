@@ -187,8 +187,15 @@ namespace Hyushik_TournMan_Web.Controllers
         [HttpPost]
         public ActionResult AddTechnique(long parentId, string techName, int techWeight, bool techToggleable)
         {
-            //TODO
-
+            var result = orch.AddTechnique(parentId, techName, techWeight, techToggleable);
+            if (result.WasSuccessful)
+            {
+                AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
             return RedirectToAction("Index");
         }
 

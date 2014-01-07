@@ -25,5 +25,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         OperationResult SetTournamentActiveStatus(Tournament tourn, bool activeStatus);
         IList<Technique> GetTopLevelTechniques();
         OperationResult UpdateTechnique(long techId, string techName, int techWeight, bool techToggleable);
+        OperationResult AddTechnique(long parentId, string techName, int techWeight, bool techToggleable);
     }
 }
