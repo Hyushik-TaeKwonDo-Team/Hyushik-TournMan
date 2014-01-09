@@ -18,6 +18,10 @@ namespace Hyushik_TournMan_Common.Models
 
         public double Weight { get; set; }
 
+        //exists only for scoring purposes, DO NOT PERSIST
+        [NotMapped]
+        public bool Selected { get; set; } 
+
         //toggleable techs have no subtechniques
         public bool Toggleable { get; set; }
 

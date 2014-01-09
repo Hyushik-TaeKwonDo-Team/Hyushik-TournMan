@@ -185,6 +185,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Classes\Constants\WebConstants.cs" />
     <Compile Include="Classes\ViewModels\AdminViewModels.cs" />
+    <Compile Include="Classes\ViewModels\BreakingViewModels.cs" />
     <Compile Include="Classes\ViewModels\HomeViewModels.cs" />
     <Compile Include="Classes\ViewModels\ActiveTournamentViewModel.cs" />
     <Compile Include="Classes\ViewModels\UserRolesViewModel.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ActiveTournamentController.cs" />
+    <Compile Include="Controllers\ScoringController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -260,6 +262,10 @@
     <Content Include="Views\Home\_ActiveTournaments.cshtml" />
     <Content Include="Views\ActiveTournament\Index.cshtml" />
     <Content Include="Views\Admin\_techniqueAdmin.cshtml" />
+    <Content Include="Views\Scoring\BreakingEntry.cshtml" />
+    <Content Include="Views\Scoring\BreakingJudging.cshtml" />
+    <Content Include="Views\Scoring\_BreakingEntryTechnique.cshtml" />
+    <Content Include="Views\Scoring\_BreakingEntryTechniqueList.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>

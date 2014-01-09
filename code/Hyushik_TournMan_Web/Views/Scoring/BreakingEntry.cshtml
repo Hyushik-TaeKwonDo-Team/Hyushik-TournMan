@@ -1,0 +1,24 @@
+﻿@using Hyushik_TournMan_Common.Models;
+@using Hyushik_TournMan_Web.Classes.ViewModels;
+@model BreakingViewModel
+
+<h2>Breaking Entry</h2>
+
+@helper StationDisplay(StationViewModel vm){
+    <div class="station">
+        <ul>
+            <li> 
+                <span class="technique sectionTop"><button class = "displayTechnique">Technique</button></span>
+                @Html.Partial("_BreakingEntryTechniqueList", vm.BaseTechniques);
+            </li>
+        </ul>
+    </div>
+}
+
+
+
+<div>
+    @foreach(var station in Model.Stations){
+        @StationDisplay(station);
+    }
+</div>

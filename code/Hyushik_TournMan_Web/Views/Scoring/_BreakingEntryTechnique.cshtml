@@ -1,0 +1,20 @@
+﻿@model Technique
+@using Hyushik_TournMan_Common.Models;
+
+@helper ToggleableTechniqueDisplay(Technique tech){
+    <label>
+        @Html.CheckBoxFor(model=>model.Selected);
+        @tech.Name
+    </label>
+}
+
+@helper NormalTechniqueDisplay(Technique tech){
+    
+}
+
+@if(Model.Toggleable){
+
+}
+else{
+
+}
