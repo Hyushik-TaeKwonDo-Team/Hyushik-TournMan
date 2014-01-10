@@ -69,6 +69,8 @@
     <Compile Include="Orchestrators\Interfaces\IHomeOrchestrator.cs" />
     <Compile Include="Orchestrators\Interfaces\IActiveTournamentOrchestrator.cs" />
     <Compile Include="Orchestrators\ActiveTournamentOrchestrator.cs" />
+    <Compile Include="Orchestrators\Interfaces\IScoringOrchestrator.cs" />
+    <Compile Include="Orchestrators\ScoringOrchestrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

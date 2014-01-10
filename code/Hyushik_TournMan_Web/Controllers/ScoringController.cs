@@ -5,18 +5,26 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Hyushik_TournMan_Common.Extensions;
+using Hyushik_TournMan_BLL.Orchestrators;
+using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
+using Hyushik_TournMan_Common.Models;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
     public class ScoringController : BaseController
     {
+
+        private IScoringOrchestrator _orch = new ScoringOrchestrator();
+
         //
         // GET: /Scoring/
 
         private StationViewModel mkStationViewModel()
         {
             var vm = new StationViewModel();
-            
+            vm.BaseTechniques = _orch.GetTopLevelTechniques().ToList<Technique>();
+
+
             return vm;
         }
 

@@ -8,6 +8,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hyushik_TournMan_Common.Models
 {
+    //for LAZINESS! - I mean, "Efficiency"
+    [Serializable]
     public class Technique
     {
         [Key]

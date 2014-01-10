@@ -19,6 +19,8 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         }
     }
 
+    //for LAZINESS! - I mean, "Efficiency"
+    [Serializable]
     public class StationViewModel {
         //way more data passed, but ease of editing
         public List<Technique> BaseTechniques { get; set; }
@@ -27,6 +29,8 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
 
     }
 
+    //for LAZINESS! - I mean, "Efficiency"
+    [Serializable]
     public class BoardsViewModel
     {
         public double Height { get; set; }
