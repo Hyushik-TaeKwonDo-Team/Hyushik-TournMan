@@ -266,6 +266,8 @@
     <Content Include="Views\Scoring\BreakingJudging.cshtml" />
     <Content Include="Views\Scoring\_BreakingEntryTechnique.cshtml" />
     <Content Include="Views\Scoring\_BreakingEntryTechniqueList.cshtml" />
+    <Content Include="Views\Scoring\_BreakingEntryBoards.cshtml" />
+    <Content Include="Views\Scoring\_BreakingEntryStation.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>

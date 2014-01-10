@@ -4,21 +4,73 @@
 
 <h2>Breaking Entry</h2>
 
-@helper StationDisplay(StationViewModel vm){
-    <div class="station">
-        <ul>
-            <li> 
-                <span class="technique sectionTop"><button class = "displayTechnique">Technique</button></span>
-                @Html.Partial("_BreakingEntryTechniqueList", vm.BaseTechniques)
-            </li>
-        </ul>
-    </div>
-}
+<script>
+    $(document).ready(function () {
+        $('.station').children().show();
+    });
+
+    $('.CollapsibleList').click(function () {
+        $('.selected').find('.techniqueCategory').siblings().hide();
+        $(this).parent().show();
+        $(this).hide();
+        $(this).siblings().show();
+    });
+
+    $('.techniqueLeaf').click(function () {
+
+        var j = $('.selected').find("input[name='Jumping']").is(':checked');
+        var s = $('.selected').find("input[name='Spinning']").is(':checked');
+
+        var outstr = '';
+
+        if (j) {
+            outstr += 'J. ';
+        }
+        if (s) {
+            outstr += 'S. ';
+        }
+
+        $('.selected').find('.displayTechnique').text(outstr + this.textContent);
+
+        $('.techniqueModifiers').hide();
+        $(this).closest('.techniqueCategory').siblings().show();
+        $(this).closest('.techniqueCategory').find('.CollapsibleList').show();
+        $(this).closest('.techniqueCategory').closest('ul').hide();
+        $(this).parent().hide();
+
+        $('.selected').find('.sectionTop').hide();
 
 
+
+        $('.selected').find('.board').siblings().show();
+
+
+    });
+
+    $('.back').click(function () {
+        $(this).closest('.techniqueCategory').siblings().show();
+        $(this).closest('.techniqueCategory').children().show();
+        $(this).closest('ul').hide();
+    });
+
+    $('.sectionBack').click(function () {
+        $('.sectionTop').show();
+        $('.selected').removeClass('selected');
+        $(this).parent().hide();
+        $('.techniqueModifiers').hide();
+    });
+
+
+
+    $('.sectionTop').click(function () {
+        $('.sectionTop').hide();
+        $(this).siblings().show();
+        $(this).closest('.station').addClass(' selected');
+    });
+</script>
 
 <div>
     @foreach(var station in Model.Stations){
-        @StationDisplay(station);
+        @Html.Partial("_BreakingEntryStation",station);
     }
 </div>

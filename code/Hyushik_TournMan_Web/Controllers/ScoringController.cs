@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Hyushik_TournMan_Common.Extensions;
 using Hyushik_TournMan_BLL.Orchestrators;
 using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
 using Hyushik_TournMan_Common.Models;
@@ -23,8 +22,7 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             var vm = new StationViewModel();
             vm.BaseTechniques = _orch.GetTopLevelTechniques().ToList<Technique>();
-
-
+            vm.BoardsViewModel = new BoardsViewModel();
             return vm;
         }
 
@@ -32,7 +30,7 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             var vm = new BreakingViewModel();
             var svm = mkStationViewModel();
-            for (int i = 5; i > 0;--i )
+            for (int i = 1; i > 0;--i )
             {
                 //tried to limit this with a deepcopy, it didn't work . . .
                 vm.Stations.Add( mkStationViewModel() );
