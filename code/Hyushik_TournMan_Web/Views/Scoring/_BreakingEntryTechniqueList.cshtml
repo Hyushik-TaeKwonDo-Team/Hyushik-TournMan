@@ -1,9 +1,22 @@
 ﻿@model List<Hyushik_TournMan_Common.Models.Technique>
 
-<ul class="techniqueModifiers">
 
-</ul>
-<ul class="techniqueCategory">
+@if(Model.Count>0){
+    <ul class="techniqueModifiers">
+        @foreach(var tech in Model.Where(t=>t.Toggleable)){
+            <li>@Html.Partial("_BreakingEntryTechnique",tech)</li>
+        }
+    </ul>
+    <ul class="techniqueCategory">
+        @foreach(var tech in Model.Where(t=>!t.Toggleable)){
+            string liClass = tech.IsLeaf() ? "techniqueLeaf" : "";
+            <li class="@liClass">@Html.Partial("_BreakingEntryTechnique",tech)</li>
+        }
+        <li class="back">
+            <button>Cancel</button>
+        </li>
+    </ul>
+}
 
-</ul>
+
 

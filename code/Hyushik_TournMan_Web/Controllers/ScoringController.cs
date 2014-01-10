@@ -34,7 +34,8 @@ namespace Hyushik_TournMan_Web.Controllers
             var svm = mkStationViewModel();
             for (int i = 5; i > 0;--i )
             {
-                vm.Stations.Add( svm.DeepClone<StationViewModel>() );
+                //tried to limit this with a deepcopy, it didn't work . . .
+                vm.Stations.Add( mkStationViewModel() );
             }
             return vm;
         }

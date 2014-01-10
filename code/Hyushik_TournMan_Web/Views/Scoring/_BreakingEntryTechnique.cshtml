@@ -3,18 +3,19 @@
 
 @helper ToggleableTechniqueDisplay(Technique tech){
     <label>
-        @Html.CheckBoxFor(model=>model.Selected);
+        @Html.CheckBoxFor(model=>model.Selected)
         @tech.Name
     </label>
 }
 
 @helper NormalTechniqueDisplay(Technique tech){
-    
+    <span class="CollapsibleList"><button>@tech.Name</button></span>
+    @Html.Partial("_BreakingEntryTechniqueList", @tech.SubTechniques);
 }
 
 @if(Model.Toggleable){
-
+    @ToggleableTechniqueDisplay(Model)
 }
 else{
-
+    @NormalTechniqueDisplay(Model)
 }

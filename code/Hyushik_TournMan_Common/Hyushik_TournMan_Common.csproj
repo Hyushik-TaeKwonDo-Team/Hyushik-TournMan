@@ -56,7 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\Constants.cs" />
-    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Models\AuthModels.cs" />
     <Compile Include="Models\BreakingResult.cs" />
     <Compile Include="Models\Participant.cs" />
