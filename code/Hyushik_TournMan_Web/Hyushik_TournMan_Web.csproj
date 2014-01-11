@@ -262,12 +262,9 @@
     <Content Include="Views\Home\_ActiveTournaments.cshtml" />
     <Content Include="Views\ActiveTournament\Index.cshtml" />
     <Content Include="Views\Admin\_techniqueAdmin.cshtml" />
-    <Content Include="Views\Scoring\CreateBreakingEntry.cshtml" />
     <Content Include="Views\Scoring\BreakingJudging.cshtml" />
-    <Content Include="Views\Scoring\_BreakingEntryTechnique.cshtml" />
-    <Content Include="Views\Scoring\_BreakingEntryTechniqueList.cshtml" />
     <Content Include="Views\Scoring\_BreakingEntryBoards.cshtml" />
-    <Content Include="Views\Scoring\_BreakingEntryStation.cshtml" />
+    <Content Include="Views\Scoring\EditorTemplates\Technique.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>

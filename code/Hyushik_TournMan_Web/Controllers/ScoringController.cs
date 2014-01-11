@@ -47,9 +47,9 @@ namespace Hyushik_TournMan_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult SumbitBreakingEntry(BreakingViewModel vm)
+        public ActionResult CreateBreakingEntry(BreakingViewModel vm)
         {
-            return View();
+            return RedirectToAction("CreateBreakingEntry");
         }
 
     }
