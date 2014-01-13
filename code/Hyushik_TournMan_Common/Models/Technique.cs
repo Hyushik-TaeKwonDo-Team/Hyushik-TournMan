@@ -43,6 +43,13 @@ namespace Hyushik_TournMan_Common.Models
             return 0 == SubTechniques.Count;
         }
 
+        public bool CanHaveWeight{
+            get
+            {
+                return IsLeaf() || Toggleable;
+            }
+        }
+
         public void AddSubTechnique(Technique technique)
         {   if(!SubTechniques.Contains(technique)){
                 SubTechniques.Add(technique);
