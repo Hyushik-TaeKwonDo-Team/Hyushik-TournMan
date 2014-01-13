@@ -6,8 +6,9 @@
 
 <script>
     $(document).ready(function () {
+        console.log("Firing");
         $('.station').children().show();
-    });
+    
 
     $('.CollapsibleList').click(function () {
         $('.selected').find('.techniqueCategory').siblings().hide();
@@ -18,19 +19,6 @@
 
     $('.techniqueLeaf').click(function () {
 
-        var j = $('.selected').find("input[name='Jumping']").is(':checked');
-        var s = $('.selected').find("input[name='Spinning']").is(':checked');
-
-        var outstr = '';
-
-        if (j) {
-            outstr += 'J. ';
-        }
-        if (s) {
-            outstr += 'S. ';
-        }
-
-        $('.selected').find('.displayTechnique').text(outstr + this.textContent);
 
         $('.techniqueModifiers').hide();
         $(this).closest('.techniqueCategory').siblings().show();
@@ -67,10 +55,69 @@
         $(this).siblings().show();
         $(this).closest('.station').addClass(' selected');
     });
+
+    });
 </script>
 
 <div>
-    @foreach(var station in Model.Stations){
-        @Html.Partial("_BreakingEntryStation",station);
+     @using (Html.BeginForm("CreateBreakingEntry", "Scoring", FormMethod.Post))
+     {
+         for (int i=0; i<Model.Stations.Count; ++i)
+         {
+            <div class="station">
+                <ul>
+                    <li> 
+                        <span class="technique sectionTop"><a class = "displayTechnique">Technique</a></span>
+                        @if(Model.Stations[i].BaseTechniques.Count>0){
+                            <ul class="techniqueModifiers">
+                                @foreach (var x in Model.Stations[i].BaseTechniques.Select((tech, index) => new { index, tech }).Where(x => x.tech.Toggleable))
+                                {
+                                    <li>@Html.EditorFor(model=>model.Stations[i].BaseTechniques[x.index])</li>
+                                }
+                            </ul>
+                            <ul class="techniqueCategory">
+                                @foreach (var x in Model.Stations[i].BaseTechniques.Select((tech, index) => new { index, tech }).Where(x => !x.tech.Toggleable))
+                                {
+                                    string liClass = x.tech.IsLeaf() ? "techniqueLeaf" : "";
+                                    <li class="@liClass">@Html.EditorFor(model=>model.Stations[i].BaseTechniques[x.index])</li>
+                                }
+                                <li class="back">
+                                    <a>Cancel</a>
+                                </li>
+                            </ul>
+                        }
+                    </li>
+                    <li> 
+                        <span class="board sectionTop"><a class = "displayBoard">Boards</a></span>
+                        <ul>
+                            <li>(
+                                @Html.TextBoxFor(model=>model.Stations[i].BoardsViewModel.Height) in x
+                                @Html.TextBoxFor(model=>model.Stations[i].BoardsViewModel.Depth)in) X
+                                @Html.TextBoxFor(model=>model.Stations[i].BoardsViewModel.Amount)num</li>
+                            <li>
+                                @Html.CheckBoxFor(model=>model.Stations[i].BoardsViewModel.SpeedBreak)Speed Break
+                            </li>
+                            <li>
+                                @Html.CheckBoxFor(model=>model.Stations[i].BoardsViewModel.Spacers)Spacers
+                            </li>
+                            <li class = "sectionBack">
+                                <a>Done</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li> 
+                        <span class="attempts sectionTop"><a class = "dosplayAttempts">Attempts</a></span>
+                        <ul>
+                            <li>
+                                @Html.TextBoxFor(model => model.Stations[i].Attempts)Attempts</li>
+                            <li class = "sectionBack">
+                                <a >Done</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+         }
+        <button type="submit">Submit</button>
     }
 </div>

@@ -87,6 +87,10 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                     var parentTech = _tournManContext.Techniques.FirstOrDefault(t => t.Id == parentId);
                     tech.Parent = parentTech;
                 }
+                if (!tech.CanHaveWeight)
+                {
+                    tech.Weight = 0;
+                }
                 _tournManContext.Techniques.Add(tech);
                 _tournManContext.SaveChanges();
             }
@@ -111,6 +115,10 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 tech.Toggleable = techToggleable;
                 if(techToggleable){
                     RecursiveDeleteSubTechs(tech);
+                }
+                if (!tech.CanHaveWeight)
+                {
+                    tech.Weight = 0;
                 }
                 _tournManContext.SaveChanges();
             }catch(Exception ex){
