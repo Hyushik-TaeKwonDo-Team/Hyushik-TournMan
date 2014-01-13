@@ -5,17 +5,29 @@
 <h2>Breaking Entry</h2>
 
 <script>
+
+
+
     $(document).ready(function () {
         console.log("Firing");
         $('.station').children().show();
     
+        $('.sectionTop').click(function () {
+            $('.sectionTop').hide();
+            $(this).siblings().show();
+            $(this).siblings('.techniqueCategory').addClass(' selectedCategory');
+            $(this).closest('.station').addClass(' selectedStation');
+        });
 
-    $('.CollapsibleList').click(function () {
-        $('.selected').find('.techniqueCategory').siblings().hide();
-        $(this).parent().show();
-        $(this).hide();
-        $(this).siblings().show();
-    });
+        $('.CollapsibleList').click(function () {
+            $('.selectedCategory').children('.back').hide();
+            $('.selectedCategory').siblings().hide();
+            //$(this).parent().show();
+            $(this).hide();
+            $(this).siblings().show();
+            $(this).siblings('.techniqueCategory').addClass(' selectedCategory');
+        });
+
 
     $('.techniqueLeaf').click(function () {
 
@@ -50,11 +62,7 @@
 
 
 
-    $('.sectionTop').click(function () {
-        $('.sectionTop').hide();
-        $(this).siblings().show();
-        $(this).closest('.station').addClass(' selected');
-    });
+    
 
     });
 </script>
