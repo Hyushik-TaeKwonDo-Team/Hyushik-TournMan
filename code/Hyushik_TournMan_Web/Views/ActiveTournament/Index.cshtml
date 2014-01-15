@@ -3,3 +3,7 @@
 <div>
     <h2>@Model.Tournament.Name</h2>
 </div>
+
+<div>
+    @Html.Partial("_breakingResults", Model.BreakingScoreListingViewModel)
+</div>

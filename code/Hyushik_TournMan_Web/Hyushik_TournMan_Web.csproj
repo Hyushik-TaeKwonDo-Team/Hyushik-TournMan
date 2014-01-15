@@ -185,6 +185,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Classes\Constants\WebConstants.cs" />
     <Compile Include="Classes\ViewModels\AdminViewModels.cs" />
+    <Compile Include="Classes\ViewModels\BreakingScoreListingViewModel.cs" />
     <Compile Include="Classes\ViewModels\BreakingViewModels.cs" />
     <Compile Include="Classes\ViewModels\HomeViewModels.cs" />
     <Compile Include="Classes\ViewModels\ActiveTournamentViewModel.cs" />
@@ -267,6 +268,7 @@
     <Content Include="Views\Scoring\CreateBreakingEntry.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\ActiveTournament\_breakingResults.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>

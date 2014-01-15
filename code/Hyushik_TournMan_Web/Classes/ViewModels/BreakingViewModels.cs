@@ -12,6 +12,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
     {
         //default 5
         public List<StationViewModel> Stations { get; set; }
+        public long TournamentId { get; set; }
 
         public BreakingViewModel()
         {
@@ -24,7 +25,6 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         public List<Technique> BaseTechniques { get; set; }
         public int Attempts { get; set; }
         public BoardsViewModel BoardsViewModel { get; set; }
-
     }
 
     public class BoardsViewModel

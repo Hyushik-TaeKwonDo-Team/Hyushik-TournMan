@@ -69,6 +69,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Results\OperationResult.cs" />
+    <Compile Include="Results\TechniqueValueResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

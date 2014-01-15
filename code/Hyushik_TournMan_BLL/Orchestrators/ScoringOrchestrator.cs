@@ -1,4 +1,6 @@
 ﻿using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
+using Hyushik_TournMan_Common.Models;
+using Hyushik_TournMan_Common.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,61 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 {
     public class ScoringOrchestrator: BaseOrchestrator, IScoringOrchestrator
     {
-        
+        public OperationResult SaveBreakingResult(BreakingResult breakingResult)
+        {
+            var result = new OperationResult();
+            try
+            {
+                _tournManContext.BreakingResults.Add(breakingResult);
+                _tournManContext.SaveChanges();
+            }catch(Exception ex){
+                result.Message = ex.Message;
+                return result;
+            }
+            result.Message = "Breaking Result saved sucessfully";
+            result.WasSuccessful = true;
+            return result;
+        }
+
+
+        public TechniqueValueResult CreateTechniqueValue(List<Technique> techniques)
+        {
+            var result = new TechniqueValueResult();
+            if(!techniques.Exists(t=>t.Selected)){
+                result.HasTechniqueValue = false;
+                result.WasSuccessful = true;
+                return result;
+            }
+            result.TechniqueValue = GetTechniqueValueFromTechniques(techniques.Where(x => x.Selected));
+            result.HasTechniqueValue = false;
+            result.WasSuccessful = true;
+            return result;
+        }
+
+        public TechniqueValue GetTechniqueValueFromTechnique(Technique tech)
+        {
+            var techniqueValue = new TechniqueValue();
+            techniqueValue.Name = techniqueValue.Name + " "+tech.Name;
+            techniqueValue.Value += tech.Weight;
+            if(!tech.IsLeaf()){
+                var secondVal = GetTechniqueValueFromTechniques(tech.SubTechniques.Where(st=>st.Selected));
+                techniqueValue.Name = techniqueValue.Name + " " + secondVal.Name;
+                techniqueValue.Value += secondVal.Value;
+            }
+            techniqueValue.Name.Trim();
+            return techniqueValue;
+        }
+
+        public TechniqueValue GetTechniqueValueFromTechniques(IEnumerable<Technique> techs)
+        {
+            var techniqueValue = new TechniqueValue();
+            foreach (var tech in techs)
+            {
+                var val = GetTechniqueValueFromTechnique(tech);
+                techniqueValue.Name = techniqueValue.Name + " " + val.Name;
+                techniqueValue.Value += val.Value;
+            }
+            return techniqueValue;
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace Hyushik_TournMan_Common.Models
         [Key]
         public long Id { get; set; }
         public Participant Participant { get; set; }
+        public Tournament Tournament { get; set; }
 
         //the list is a 0 indexed list of stations
         //the techniqueValue has the full technique name and final value of the technique
@@ -36,6 +37,6 @@ namespace Hyushik_TournMan_Common.Models
         public long Id {get; set;}
         //i.e "Spinning Flip Kick"
         public string Name {get; set;}
-        public int Value { get; set; }
+        public double Value { get; set; }
     }
 }

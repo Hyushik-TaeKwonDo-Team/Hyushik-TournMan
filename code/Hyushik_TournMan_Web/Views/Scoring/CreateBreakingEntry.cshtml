@@ -25,7 +25,21 @@
             //$(this).parent().show();
             $(this).hide();
             $(this).siblings().show();
+            $(this).parents('.techniqueCategory').removeClass(' selectedCategory');
             $(this).siblings('.techniqueCategory').addClass(' selectedCategory');
+        });
+
+        $('.back').click(function () {
+            $(this).hide();
+            $('.selectedCategory').hide();
+
+            var curCategory$ = $('.selectedCategory');
+            curCategory$.parents('.techniqueCategory').first().addClass(' selectedCategory');
+            curCategory$.removeClass('selectedCategory');
+
+            $('.selectedCategory').siblings().not('.sectionTop').show();
+            $('.selectedCategory').children().show();
+            $('.selectedCategory').find('.CollapsibleList').show();
         });
 
 
@@ -47,11 +61,7 @@
 
     });
 
-    $('.back').click(function () {
-        $(this).closest('.techniqueCategory').siblings().show();
-        $(this).closest('.techniqueCategory').children().show();
-        $(this).closest('ul').hide();
-    });
+    
 
     $('.sectionBack').click(function () {
         $('.sectionTop').show();

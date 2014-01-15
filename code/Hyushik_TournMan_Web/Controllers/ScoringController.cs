@@ -30,7 +30,8 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             var vm = new BreakingViewModel();
             var svm = mkStationViewModel();
-            for (int i = 1; i > 0;--i )
+            //TODO remove magic number
+            for (int i = 5; i > 0;--i )
             {
                 //tried to limit this with a deepcopy, it didn't work . . .
                 vm.Stations.Add( mkStationViewModel() );
@@ -49,7 +50,23 @@ namespace Hyushik_TournMan_Web.Controllers
         [HttpPost]
         public ActionResult CreateBreakingEntry(BreakingViewModel vm)
         {
-            //TODO
+            var model = new BreakingResult();
+
+            foreach(var stationVM in vm.Stations){
+                var result = _orch.CreateTechniqueValue(stationVM.BaseTechniques);
+                if(result.WasSuccessful && result.HasTechniqueValue){
+                    model.Stations.Add(result.TechniqueValue);
+                }
+            }
+            var saveResult = _orch.SaveBreakingResult(model);
+            if (saveResult.WasSuccessful)
+            {
+                AddSucessNotification(saveResult.Message);
+            }
+            else if (!saveResult.WasSuccessful)
+            {
+                AddErrorNotification(saveResult.Message);
+            }
 
             return RedirectToAction("CreateBreakingEntry");
         }
