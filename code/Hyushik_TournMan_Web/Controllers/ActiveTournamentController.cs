@@ -16,7 +16,8 @@ namespace Hyushik_TournMan_Web.Controllers
         protected ActiveTournamentViewModel BuildActiveTournamentViewModel(long tournId)
         {
             return new ActiveTournamentViewModel{
-                Tournament = orch.GetTournamentById(tournId)
+                Tournament = orch.GetTournamentById(tournId),
+                BreakingScoreListingViewModel = BuildBreakingScoreListingViewModel(tournId)
             };
         }
 
@@ -27,7 +28,7 @@ namespace Hyushik_TournMan_Web.Controllers
                 TournamentId = tournId
             };
             foreach(var entry in orch.GetBreakingResultByTournamentId(tournId)){
-                vm.AddListing(entry.Participant.Name, entry.Id)
+                vm.AddListing(entry.Participant.Name, entry.Id);
             }
 
             return vm;

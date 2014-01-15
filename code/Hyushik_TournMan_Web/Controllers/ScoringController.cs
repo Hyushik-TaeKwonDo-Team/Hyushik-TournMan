@@ -26,9 +26,10 @@ namespace Hyushik_TournMan_Web.Controllers
             return vm;
         }
 
-        private BreakingViewModel mkBreakingViewModel()
+        private BreakingViewModel mkBreakingViewModel(long tournId)
         {
             var vm = new BreakingViewModel();
+            vm.TournamentId = tournId;
             var svm = mkStationViewModel();
             //TODO remove magic number
             for (int i = 5; i > 0;--i )
@@ -40,9 +41,9 @@ namespace Hyushik_TournMan_Web.Controllers
         }
 
 
-        public ActionResult CreateBreakingEntry()
+        public ActionResult CreateBreakingEntry(long tournId)
         {
-            BreakingViewModel vm = mkBreakingViewModel();
+            BreakingViewModel vm = mkBreakingViewModel(tournId);
 
             return View(vm);
         }
@@ -51,7 +52,7 @@ namespace Hyushik_TournMan_Web.Controllers
         public ActionResult CreateBreakingEntry(BreakingViewModel vm)
         {
             var model = new BreakingResult();
-
+            model.Tournament = _orch.GetTournamentById(vm.TournamentId);
             foreach(var stationVM in vm.Stations){
                 var result = _orch.CreateTechniqueValue(stationVM.BaseTechniques);
                 if(result.WasSuccessful && result.HasTechniqueValue){

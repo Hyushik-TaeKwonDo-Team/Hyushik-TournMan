@@ -13,5 +13,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         IList<Technique> GetTopLevelTechniques();
         TechniqueValueResult CreateTechniqueValue(List<Technique> techniques);
         OperationResult SaveBreakingResult(BreakingResult breakingResult);
+        Tournament GetTournamentById(long id);
     }
 }
