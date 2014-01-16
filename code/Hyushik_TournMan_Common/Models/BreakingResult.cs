@@ -11,8 +11,8 @@ namespace Hyushik_TournMan_Common.Models
     {
         [Key]
         public long Id { get; set; }
-        public Participant Participant { get; set; }
-        public Tournament Tournament { get; set; }
+        public virtual Participant Participant { get; set; }
+        public virtual Tournament Tournament { get; set; }
 
         //the list is a 0 indexed list of stations
         //the techniqueValue has the full technique name and final value of the technique

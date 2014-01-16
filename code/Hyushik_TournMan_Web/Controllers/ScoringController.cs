@@ -30,6 +30,8 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             var vm = new BreakingViewModel();
             vm.TournamentId = tournId;
+            vm.Participants = _orch.GetParticipantsByTournId(tournId);
+            vm.SelectedParticipantId = -1;
             var svm = mkStationViewModel();
             //TODO remove magic number
             for (int i = 5; i > 0;--i )
@@ -53,6 +55,7 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             var model = new BreakingResult();
             model.Tournament = _orch.GetTournamentById(vm.TournamentId);
+            model.Participant = _orch.GetParticipantById(vm.SelectedParticipantId);
             foreach(var stationVM in vm.Stations){
                 var result = _orch.CreateTechniqueValue(stationVM.BaseTechniques);
                 if(result.WasSuccessful && result.HasTechniqueValue){
@@ -69,7 +72,7 @@ namespace Hyushik_TournMan_Web.Controllers
                 AddErrorNotification(saveResult.Message);
             }
 
-            return RedirectToAction("CreateBreakingEntry");
+            return RedirectToAction("Index", "ActiveTournament", new { tournId = vm.TournamentId });
         }
 
     }

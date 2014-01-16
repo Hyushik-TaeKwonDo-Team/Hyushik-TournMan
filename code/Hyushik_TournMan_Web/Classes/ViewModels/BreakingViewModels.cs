@@ -5,11 +5,16 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Hyushik_TournMan_Web.Classes.ViewModels
 {
     public class BreakingViewModel
     {
+
+        public IEnumerable<Participant> Participants { get; set; }
+        public long SelectedParticipantId { get; set; }
+
         //default 5
         public List<StationViewModel> Stations { get; set; }
         public long TournamentId { get; set; }
