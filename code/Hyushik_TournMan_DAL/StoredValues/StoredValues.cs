@@ -15,8 +15,20 @@ namespace Hyushik_TournMan_DAL.StoredValues
         {
             get
             {
-
                 return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.StationFalloffProportion]);
+            }
+            set
+            {
+                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.StationFalloffProportion] = value.ToString();
+            }
+        }
+
+        public static int MaxBreakingStationCount
+        {
+            get
+            {
+
+                return Int32.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.StationFalloffProportion]);
             }
             set
             {

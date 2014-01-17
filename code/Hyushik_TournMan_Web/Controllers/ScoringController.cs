@@ -8,6 +8,7 @@ using Hyushik_TournMan_BLL.Orchestrators;
 using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
 using Hyushik_TournMan_Common.Models;
 using Hyushik_TournMan_Web.Filters;
+using Hyushik_TournMan_DAL.StoredValues;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
@@ -44,7 +45,7 @@ namespace Hyushik_TournMan_Web.Controllers
             vm.SelectedParticipantId = -1;
             var svm = mkStationViewModel();
             //TODO remove magic number
-            for (int i = 5; i > 0;--i )
+            for (int i = StoredValues.MaxBreakingStationCount; i > 0;--i )
             {
                 //tried to limit this with a deepcopy, it didn't work . . .
                 vm.Stations.Add( mkStationViewModel() );
