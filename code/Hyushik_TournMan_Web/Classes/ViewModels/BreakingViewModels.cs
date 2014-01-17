@@ -1,6 +1,7 @@
 ﻿using Hyushik_TournMan_Common.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -39,5 +40,13 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         public int Amount { get; set; }
         public bool SpeedBreak { get; set; }
         public bool Spacers { get; set; }
+    }
+
+    public class JudgeBreakingScoringViewModel
+    {
+        public long EntryId { get; set; }
+
+        [Range(minimum: -5, maximum: 5, ErrorMessage = "Subjective score must be between -5 and 5.")]
+        public int SubjectiveScore { get; set; }
     }
 }

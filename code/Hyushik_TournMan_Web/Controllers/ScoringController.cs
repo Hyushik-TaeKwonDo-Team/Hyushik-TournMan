@@ -7,9 +7,12 @@ using System.Web.Mvc;
 using Hyushik_TournMan_BLL.Orchestrators;
 using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
 using Hyushik_TournMan_Common.Models;
+using Hyushik_TournMan_Web.Filters;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
+    [InitializeSimpleMembership]
+    [Authorize(Roles = "Judge")]
     public class ScoringController : BaseController
     {
 
@@ -24,6 +27,13 @@ namespace Hyushik_TournMan_Web.Controllers
             vm.BaseTechniques = _orch.GetTopLevelTechniques().ToList<Technique>();
             vm.BoardsViewModel = new BoardsViewModel();
             return vm;
+        }
+
+        protected JudgeBreakingScoringViewModel mkJudgeBreakingScoringViewModel(long entryId){
+            return new JudgeBreakingScoringViewModel()
+            {
+                EntryId = entryId
+            };
         }
 
         private BreakingViewModel mkBreakingViewModel(long tournId)
@@ -73,6 +83,33 @@ namespace Hyushik_TournMan_Web.Controllers
             }
 
             return RedirectToAction("Index", "ActiveTournament", new { tournId = vm.TournamentId });
+        }
+
+        public ActionResult JudgeBreakingEntry(long entryId)
+        {
+            return View(mkJudgeBreakingScoringViewModel(entryId));
+        }
+
+        [HttpPost]
+        public ActionResult JudgeBreakingEntry(JudgeBreakingScoringViewModel vm)
+        {
+            var score = new BreakingJudgeScore();
+            score.SubjectiveScore=vm.SubjectiveScore;
+            score.Judge_UserId = _orch.GetUsers().First(u=>u.UserName==User.Identity.Name).UserId;
+
+            var result = _orch.EnterJudgeScore(score, vm.EntryId);
+
+            if (result.WasSuccessful)
+            {
+                AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Index", "ActiveTournament", new { tournId = result.TournamentId });
         }
 
     }

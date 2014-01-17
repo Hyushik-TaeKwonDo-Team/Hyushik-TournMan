@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
+    [Hyushik_TournMan_Web.Filters.InitializeSimpleMembership]
     public class BaseController : Controller
     {
 

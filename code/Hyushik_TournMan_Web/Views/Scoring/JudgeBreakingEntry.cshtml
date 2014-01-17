@@ -1,0 +1,13 @@
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.JudgeBreakingScoringViewModel
+
+<div>
+    <h2>Please Enter Score</h2>
+    @using (Html.BeginForm("JudgeBreakingEntry", "Scoring", FormMethod.Post))
+    {
+        @Html.HiddenFor(model=>model.EntryId)
+        @Html.TextBoxFor(model => model.SubjectiveScore)
+        <button>Enter</button>
+    }
+</div>
+
+
