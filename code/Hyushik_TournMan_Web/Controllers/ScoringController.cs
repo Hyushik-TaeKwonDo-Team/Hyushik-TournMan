@@ -44,7 +44,6 @@ namespace Hyushik_TournMan_Web.Controllers
             vm.Participants = _orch.GetParticipantsByTournId(tournId);
             vm.SelectedParticipantId = -1;
             var svm = mkStationViewModel();
-            //TODO remove magic number
             for (int i = StoredValues.MaxBreakingStationCount; i > 0;--i )
             {
                 //tried to limit this with a deepcopy, it didn't work . . .

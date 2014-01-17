@@ -51,9 +51,10 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         public OperationResult DeleteTechnique(long techId)
         {
             var result = new OperationResult() { WasSuccessful = false };
+            Technique tech;
             try
             {
-                var tech = _tournManContext.Techniques.FirstOrDefault(t => t.Id == techId);
+                tech = _tournManContext.Techniques.FirstOrDefault(t => t.Id == techId);
 
                 if(tech.Parent!=null){
                     tech.Parent.SubTechniques.Remove(tech);
@@ -68,16 +69,17 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 return result;
             }
             result.WasSuccessful = true;
-            result.Message = "Technique Sucessfully Deleted!";
+            result.Message = String.Format(Resources.TechniqueDeletedMessage,tech.Name);
             return result;
         }
 
         public OperationResult AddTechnique(long parentId, string techName, int techWeight, bool techToggleable)
         {
             var result = new OperationResult() { WasSuccessful = false };
+            Technique tech;
             try
             {
-                var tech = new Technique();
+                tech = new Technique();
                 
                 tech.Name = techName;
                 tech.Weight = techWeight;
@@ -100,16 +102,17 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 return result;
             }
             result.WasSuccessful = true;
-            result.Message = "Technique Sucessfully Added!";
+            result.Message = String.Format(Resources.TechniqueAddedMessage, tech.Name);
             return result;
         }
 
         public OperationResult UpdateTechnique(long techId, string techName, int techWeight, bool techToggleable)
         {
             var result = new OperationResult() { WasSuccessful = false };
+            Technique tech;
             try
             {
-                var tech = _tournManContext.Techniques.FirstOrDefault(t => t.Id == techId);
+                tech = _tournManContext.Techniques.FirstOrDefault(t => t.Id == techId);
                 tech.Name = techName;
                 tech.Weight = techWeight;
                 tech.Toggleable = techToggleable;
@@ -126,7 +129,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 return result;
             }
             result.WasSuccessful = true;
-            result.Message = "Update Sucessful";
+            result.Message = String.Format(Resources.TechniqueAddedMessage, tech.Name);
             return result;
         }
 
@@ -140,7 +143,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         {
             var result = new OperationResult() { WasSuccessful = false };
             if(null==tourn){
-                //TODO error message
+                result.Message = Resources.TournamentNotFoundMessage;
                 return result;
             }
             try{
@@ -148,8 +151,11 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 _tournManContext.SaveChanges();
                 //TODO resource string
                 result.WasSuccessful = true;
-                result.Message = "Status change sucessful.";
-                return result;
+                if(activeStatus){
+                    result.Message = String.Format(Resources.TournamentActivatedMessage, tourn.Name);
+                }else{
+                    result.Message = String.Format(Resources.TournamentDeactivatedMessage, tourn.Name);
+                }
             }catch(Exception ex){
                 result.Message = ex.Message;
             }
@@ -165,10 +171,10 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             if (!roles.GetRolesForUser(userName).Contains(roleName)) {
                 roles.AddUsersToRoles(new[] { userName }, new[] { roleName });
                 result.WasSuccessful = true;
-                //TODO set message
+                result.Message = String.Format(Resources.UserAddedRoleMessage, userName, roleName);
                 return result;
             }
-            //TODO set message
+            result.Message = String.Format(Resources.UserAlreadyHasRoleMessage, userName, roleName);
             return result;
 
         }
@@ -182,10 +188,10 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             {
                 roles.RemoveUsersFromRoles(new[] { userName }, new[] { roleName });
                 result.WasSuccessful = true;
-                //TODO set message
+                result.Message = String.Format(Resources.UserRemovedRoleMessage, userName, roleName);
                 return result;
             }
-            //TODO set message
+            result.Message = String.Format(Resources.UserDoesNotAlreadyHaveRoleMessage, userName, roleName);
             return result;
         }
 
