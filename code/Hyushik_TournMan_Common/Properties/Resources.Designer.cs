@@ -61,6 +61,24 @@ namespace Hyushik_TournMan_Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Breaking score entered for &quot;{0}&quot;.
+        /// </summary>
+        public static string BreakingJudgeScoreEnteredMessage {
+            get {
+                return ResourceManager.GetString("BreakingJudgeScoreEnteredMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breaking Result recorded for &quot;{0}&quot;.
+        /// </summary>
+        public static string BreakingResultCreatedMessage {
+            get {
+                return ResourceManager.GetString("BreakingResultCreatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The file was loaded sucessfully!.
         /// </summary>
         public static string CsvFileReadSuccessfullyMessage {
@@ -138,15 +156,6 @@ namespace Hyushik_TournMan_Common.Properties {
         public static string TechniqueUpdatedMessage {
             get {
                 return ResourceManager.GetString("TechniqueUpdatedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string Test {
-            get {
-                return ResourceManager.GetString("Test", resourceCulture);
             }
         }
         

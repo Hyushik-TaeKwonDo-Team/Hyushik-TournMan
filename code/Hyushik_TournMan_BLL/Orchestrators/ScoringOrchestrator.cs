@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hyushik_TournMan_Common.Properties;
 
 namespace Hyushik_TournMan_BLL.Orchestrators
 {
@@ -14,10 +15,11 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         public SaveBreakingJudgeScoreResult EnterJudgeScore(BreakingJudgeScore score, long entryId)
         {
             var result = new SaveBreakingJudgeScoreResult();
+            BreakingResult entry;
             try
             {
                 
-                var entry = GetBreakingResultById(entryId);
+                entry = GetBreakingResultById(entryId);
                 result.TournamentId = entry.Tournament.Id;
                 entry.JudgeScores.Add(score);
                 _tournManContext.SaveChanges();
@@ -27,7 +29,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 result.Message = ex.Message;
                 return result;
             }
-            result.Message = "Score saved sucessfully";
+            result.Message = String.Format(Resources.BreakingJudgeScoreEnteredMessage,entry.Participant.Name);
             result.WasSuccessful = true;
             return result;
         }
@@ -44,7 +46,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 result.Message = ex.Message;
                 return result;
             }
-            result.Message = "Breaking Result saved sucessfully";
+            result.Message = String.Format(Resources.BreakingResultCreatedMessage,breakingResult.Participant.Name); ;
             result.WasSuccessful = true;
             return result;
         }
