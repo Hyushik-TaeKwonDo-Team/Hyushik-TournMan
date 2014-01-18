@@ -149,7 +149,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             try{
                 tourn.Active=activeStatus;
                 _tournManContext.SaveChanges();
-                //TODO resource string
                 result.WasSuccessful = true;
                 if(activeStatus){
                     result.Message = String.Format(Resources.TournamentActivatedMessage, tourn.Name);
