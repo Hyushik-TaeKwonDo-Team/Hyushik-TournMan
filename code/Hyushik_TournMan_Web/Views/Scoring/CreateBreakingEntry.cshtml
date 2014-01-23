@@ -1,0 +1,145 @@
+﻿@using Hyushik_TournMan_Common.Models;
+@using Hyushik_TournMan_Web.Classes.ViewModels;
+@model BreakingViewModel
+
+<h2>Breaking Entry</h2>
+
+<script>
+
+
+
+    $(document).ready(function () {
+        console.log("Firing");
+        $('.station').children().show();
+    
+        $('.sectionTop').click(function () {
+            $('.sectionTop').hide();
+            $(this).siblings().show();
+            $(this).siblings('.techniqueCategory').addClass(' selectedCategory');
+            $(this).closest('.station').addClass(' selectedStation');
+        });
+
+        $('.CollapsibleList').click(function () {
+            $('.selectedCategory').children('.back').hide();
+            $('.selectedCategory').siblings().hide();
+            //$(this).parent().show();
+            $(this).hide();
+            $(this).siblings().show();
+            $(this).parents('.techniqueCategory').removeClass(' selectedCategory');
+            $(this).siblings('.techniqueCategory').addClass(' selectedCategory');
+        });
+
+        $('.back').click(function () {
+            $(this).hide();
+            $('.selectedCategory').hide();
+
+            var curCategory$ = $('.selectedCategory');
+            curCategory$.parents('.techniqueCategory').first().addClass(' selectedCategory');
+            curCategory$.removeClass('selectedCategory');
+
+            $('.selectedCategory').siblings().not('.sectionTop').show();
+            $('.selectedCategory').children().show();
+            $('.selectedCategory').find('.CollapsibleList').show();
+        });
+
+
+    $('.techniqueLeaf').click(function () {
+
+
+        $('.techniqueModifiers').hide();
+        $(this).closest('.techniqueCategory').siblings().show();
+        $(this).closest('.techniqueCategory').find('.CollapsibleList').show();
+        $(this).closest('.techniqueCategory').closest('ul').hide();
+        $(this).parent().hide();
+
+        $('.selected').find('.sectionTop').hide();
+
+
+
+        $('.selected').find('.board').siblings().show();
+
+
+    });
+
+    
+
+    $('.sectionBack').click(function () {
+        $('.sectionTop').show();
+        $('.selected').removeClass('selected');
+        $(this).parent().hide();
+        $('.techniqueModifiers').hide();
+    });
+
+
+
+    
+
+    });
+</script>
+
+<div>
+     @using (Html.BeginForm("CreateBreakingEntry", "Scoring", FormMethod.Post))
+     {
+         @Html.HiddenFor(model=>model.TournamentId)
+         
+         @Html.DropDownListFor(model=>model.SelectedParticipantId,new SelectList(Model.Participants, "ParticipantId", "Name"))
+         
+         for (int i=0; i<Model.Stations.Count; ++i)
+         {
+            <div class="station">
+                <ul>
+                    <li> 
+                        <span class="technique sectionTop"><a class = "displayTechnique">Technique</a></span>
+                        @if(Model.Stations[i].BaseTechniques.Count>0){
+                            <ul class="techniqueModifiers">
+                                @foreach (var x in Model.Stations[i].BaseTechniques.Select((tech, index) => new { index, tech }).Where(x => x.tech.Toggleable))
+                                {
+                                    <li>@Html.EditorFor(model=>model.Stations[i].BaseTechniques[x.index])</li>
+                                }
+                            </ul>
+                            <ul class="techniqueCategory">
+                                @foreach (var x in Model.Stations[i].BaseTechniques.Select((tech, index) => new { index, tech }).Where(x => !x.tech.Toggleable))
+                                {
+                                    string liClass = x.tech.IsLeaf() ? "techniqueLeaf" : "";
+                                    <li class="@liClass">@Html.EditorFor(model=>model.Stations[i].BaseTechniques[x.index])</li>
+                                }
+                                <li class="back">
+                                    <a>Cancel</a>
+                                </li>
+                            </ul>
+                        }
+                    </li>
+                    <li> 
+                        <span class="board sectionTop"><a class = "displayBoard">Boards</a></span>
+                        <ul>
+                            <li>(
+                                @Html.TextBoxFor(model=>model.Stations[i].BoardsViewModel.Height) in x
+                                @Html.TextBoxFor(model=>model.Stations[i].BoardsViewModel.Depth)in) X
+                                @Html.TextBoxFor(model=>model.Stations[i].BoardsViewModel.Amount)num</li>
+                            <li>
+                                @Html.CheckBoxFor(model=>model.Stations[i].BoardsViewModel.SpeedBreak)Speed Break
+                            </li>
+                            <li>
+                                @Html.CheckBoxFor(model=>model.Stations[i].BoardsViewModel.Spacers)Spacers
+                            </li>
+                            <li class = "sectionBack">
+                                <a>Done</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li> 
+                        <span class="attempts sectionTop"><a class = "dosplayAttempts">Attempts</a></span>
+                        <ul>
+                            <li>
+                                @Html.TextBoxFor(model => model.Stations[i].Attempts)Attempts</li>
+                            <li class = "sectionBack">
+                                <a >Done</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+         }
+        <button type="submit">Submit</button>
+    }
+</div>

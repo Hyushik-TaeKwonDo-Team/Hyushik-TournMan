@@ -9,6 +9,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 {
     public interface IActiveTournamentOrchestrator
     {
+        List<BreakingResult> GetBreakingResultByTournamentId(long tournId);
         Tournament GetTournamentById(long id);
     }
 }

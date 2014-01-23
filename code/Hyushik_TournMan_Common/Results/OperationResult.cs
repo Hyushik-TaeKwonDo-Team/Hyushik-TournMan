@@ -10,5 +10,9 @@ namespace Hyushik_TournMan_Common.Results
     {
         public bool WasSuccessful {get; set;}
         public string Message { get; set; }
+
+        public OperationResult(){
+            WasSuccessful = false;
+        }
     }
 }

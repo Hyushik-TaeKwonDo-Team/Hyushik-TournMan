@@ -11,14 +11,21 @@ namespace Hyushik_TournMan_Common.Models
     {
         [Key]
         public long Id { get; set; }
-        public Participant Participant { get; set; }
+        public virtual Participant Participant { get; set; }
+        public virtual Tournament Tournament { get; set; }
 
         //the list is a 0 indexed list of stations
         //the techniqueValue has the full technique name and final value of the technique
         //adds more data to the db but is cleaner in code than making a weird reverse tree traversal
         //also allows for auditing?  I guess?
         public virtual List<TechniqueValue> Stations { get; set; }
-        public BreakingJudgeScore JudgeScores { get; set; }
+        public List<BreakingJudgeScore> JudgeScores { get; set; }
+
+        public BreakingResult()
+        {
+            Stations = new List<TechniqueValue>();
+            JudgeScores = new List<BreakingJudgeScore>();
+        }
 
     }
 
@@ -36,6 +43,6 @@ namespace Hyushik_TournMan_Common.Models
         public long Id {get; set;}
         //i.e "Spinning Flip Kick"
         public string Name {get; set;}
-        public int Value { get; set; }
+        public double Value { get; set; }
     }
 }

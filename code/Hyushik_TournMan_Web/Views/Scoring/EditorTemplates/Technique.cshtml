@@ -1,0 +1,35 @@
+﻿@model Technique
+@using Hyushik_TournMan_Common.Models;
+
+
+@Html.HiddenFor(model=>model.Id)
+@Html.HiddenFor(model=>model.Name)
+@Html.HiddenFor(model=>model.Weight)
+
+@if(Model.Toggleable){
+    <label>
+        @Html.CheckBoxFor(model=>model.Selected)
+        @Model.Name
+    </label>
+}
+else{
+    <span class="CollapsibleList"><a>@Model.Name</a></span>
+    if(Model.SubTechniques.Count>0){
+        <ul class="techniqueModifiers">
+            @foreach (var x in Model.SubTechniques.Select((tech, index) => new { index, tech }).Where(x => x.tech.Toggleable))
+            {
+                <li>@Html.EditorFor(model=>model.SubTechniques[x.index])</li>
+            }
+        </ul>
+        <ul class="techniqueCategory">
+            @foreach (var x in Model.SubTechniques.Select((tech, index) => new {index, tech}).Where(x=>!x.tech.Toggleable))
+            {
+                string liClass = x.tech.IsLeaf() ? "techniqueLeaf" : "";
+                <li class=" @liClass">@Html.EditorFor(model=>model.SubTechniques[x.index])</li>
+            }
+            <li class="back">
+                <a>Cancel</a>
+            </li>
+        </ul>
+    }
+}

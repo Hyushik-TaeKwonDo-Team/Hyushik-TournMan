@@ -9,5 +9,6 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
     public class ActiveTournamentViewModel
     {
         public Tournament Tournament { get; set; }
+        public BreakingScoreListingViewModel BreakingScoreListingViewModel { get; set; }
     }
 }

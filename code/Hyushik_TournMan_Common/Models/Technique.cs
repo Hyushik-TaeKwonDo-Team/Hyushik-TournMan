@@ -8,6 +8,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hyushik_TournMan_Common.Models
 {
+    //for LAZINESS! - I mean, "Efficiency"
+    [Serializable]
     public class Technique
     {
         [Key]
@@ -17,6 +19,10 @@ namespace Hyushik_TournMan_Common.Models
         public string Name {get; set;}
 
         public double Weight { get; set; }
+
+        //exists only for scoring purposes, DO NOT PERSIST
+        [NotMapped]
+        public bool Selected { get; set; } 
 
         //toggleable techs have no subtechniques
         public bool Toggleable { get; set; }
@@ -35,6 +41,13 @@ namespace Hyushik_TournMan_Common.Models
         public bool IsLeaf()
         {
             return 0 == SubTechniques.Count;
+        }
+
+        public bool CanHaveWeight{
+            get
+            {
+                return IsLeaf() || Toggleable;
+            }
         }
 
         public void AddSubTechnique(Technique technique)

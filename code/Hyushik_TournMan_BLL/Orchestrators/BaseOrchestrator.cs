@@ -43,5 +43,19 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         {
             return _tournManContext.Techniques.Where(t=>t.Parent==null).ToList();
         }
+
+        public IList<Participant> GetParticipantsByTournId(long tournId)
+        {
+            return _tournManContext.Tournaments.First(t => t.Id == tournId).Participants;
+        }
+
+        public Participant GetParticipantById(long partId)
+        {
+            return _tournManContext.Participants.FirstOrDefault(p=>p.ParticipantId==partId);
+        }
+
+        public BreakingResult GetBreakingResultById(long id){
+            return _tournManContext.BreakingResults.FirstOrDefault(br => br.Id == id);
+        }
     }
 }

@@ -2,6 +2,7 @@
 @using Hyushik_TournMan_Common.Models
 
 <script>
+
     $(document).ready(function () {
         $('.tech-edit').hide();
         $('.tech-new-edit').hide();
@@ -22,34 +23,43 @@
             $('#deleteTechId').val(id);
             $('#delete-button').click();
         });
+
+        $('.tech-weight-toggle').click(function () {
+            toggleWeights($(this));
+        });
     });
 </script>
 
 @using (Html.BeginForm("DeleteTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
+{
             <div class="hidden">
                 <input id="deleteTechId" type="hidden" name="techId" value="-1"/>
                 <button id="delete-button" type="submit"/>
             </div>
-        }
+}
 
 @helper PrintTechnique(Technique tech)
 {   
     
-        using (Html.BeginForm("UpdateTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" })){
+    using (Html.BeginForm("UpdateTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
             <input type="hidden" name="techId" value="@tech.Id"/>
             <span class="tech-show">@tech.Name</span><input type="text" name="techName" class="tech-edit" value="@tech.Name"/>
-            <span> Weight:</span><span class="tech-show">@tech.Weight</span><input name="techWeight" type="number" class="tech-edit" value="@tech.Weight"/>
-            <span> Toggleable:</span>@Html.CheckBox("techPriorToggleable", @tech.Toggleable,  new { @class="tech-show", disabled="disabled" })@Html.CheckBox("techToggleable", @tech.Toggleable,  new { @class="tech-edit" })
+            if(tech.CanHaveWeight){
+                <span> Weight:</span><span class="tech-show">@tech.Weight</span><input name="techWeight" type="number" class="tech-edit" value="@tech.Weight"/>
+            }else{
+                <input name="techWeight" type="hidden" class="tech-edit" value="@tech.Weight"/>
+            }    
+            <span> Toggleable:</span>@Html.CheckBox("techPriorToggleable", @tech.Toggleable, new { @class = "tech-show", disabled = "disabled" })@Html.CheckBox("techToggleable", @tech.Toggleable, new { @class = "tech-edit tech-weight-toggle" })
             <a class="tech-show tech-edit-button">Edit</a> <a class="tech-edit tech-edit-button">Cancel Edit</a>
             <button type="submit" class="tech-edit">Update</button >
             <a class="tech-edit tech-delete-button">Delete</a>
-        }
-        
-        if (tech.Toggleable)
-        {
-            return;
-        }
+    }
+
+    if (tech.Toggleable)
+    {
+        return;
+    }
         <ul>
             <li>
                 @using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -57,8 +67,10 @@
                     <a class="tech-new-show tech-new-edit-button">Add Subtechnique</a>
                     <input name="parentId" type="hidden" value="@tech.Id">
                     <input type="text" name="techName" class="tech-new-edit" value="New Technique"/>
-                    <span class="tech-new-edit"> Weight:</span><input type="number" name="techWeight" class="tech-new-edit" value="0"/>
-                    <span class="tech-new-edit"> Toggleable:</span>@Html.CheckBox("techToggleable", @tech.Toggleable, new { @class = "tech-new-edit" })
+                    <span class="tech-edit">
+                        <span class="tech-weight"> Weight:<input type="number" name="techWeight"  value="0"/></span>
+                        <span>Toggleable: </span>@Html.CheckBox("techToggleable", false, new { @class = "tech-weight-toggle" })
+                    </span>
                     <a class="tech-new-edit tech-new-edit-button">Cancel</a>
                     <button type="submit" class="tech-new-edit">Add</button >
                 }
@@ -81,8 +93,10 @@
                     <a class="tech-new-show tech-new-edit-button">Add Technique</a>
                     <input name="parentId" type="hidden" value="-1">
                     <input type="text" name="techName" class="tech-new-edit" value="New Technique"/>
-                    <span class="tech-new-edit"> Weight:</span><input type="number" name="techWeight" class="tech-new-edit" value="0"/>
-                    <span class="tech-new-edit"> Toggleable:</span>@Html.CheckBox("techToggleable", false, new { @class = "tech-new-edit" })
+                    <span class="tech-new-edit">
+                        <span class="tech-weight"> Weight:<input type="number" name="techWeight"  value="0"/></span>
+                        <span>Toggleable: </span>@Html.CheckBox("techToggleable", false, new { @class = "tech-weight-toggle" })
+                    </span>
                     <a class="tech-new-edit tech-new-edit-button">Cancel</a>
                     <button type="submit" class="tech-new-edit">Add</button >
                 }

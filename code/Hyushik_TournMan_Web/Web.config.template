@@ -22,6 +22,7 @@
 
     <!--specific to this app-->
     <add key="stationFalloffProportion" value=".2" />
+    <add key="maxBreakingStationCount" value="5" />
   </appSettings>
   <system.web>
     <compilation debug="true" targetFramework="4.5" />

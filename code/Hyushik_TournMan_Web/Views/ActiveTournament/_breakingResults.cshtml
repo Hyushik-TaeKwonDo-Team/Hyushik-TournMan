@@ -1,0 +1,19 @@
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.BreakingScoreListingViewModel
+
+<div>
+    <h2>Breaking</h2>
+    <div>
+    @foreach(var listing in Model.BreakingScoreListings){
+        <div>
+            <span>@listing.ParticipantName</span>
+            @Html.ActionLink("Judge", "JudgeBreakingEntry", "Scoring", new { entryId=listing.BreakingEntryId}, null)
+        
+        </div>
+    }
+    </div>
+    
+    <div>
+        @Html.ActionLink("Add New", "CreateBreakingEntry","Scoring", new { tournId=Model.TournamentId }, null)
+    </div>
+
+</div>
