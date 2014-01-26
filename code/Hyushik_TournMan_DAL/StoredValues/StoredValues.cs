@@ -28,11 +28,11 @@ namespace Hyushik_TournMan_DAL.StoredValues
             get
             {
 
-                return Int32.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.StationFalloffProportion]);
+                return Int32.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.MaxBreakingStationCount]);
             }
             set
             {
-                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.StationFalloffProportion] = value.ToString();
+                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.MaxBreakingStationCount] = value.ToString();
             }
         }
     }
