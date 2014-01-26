@@ -25,7 +25,7 @@
                                 <input type="hidden" name="userName" value="@userProfile.UserName" />
                                 <input type="hidden" name="roleName" value="@Constants.Roles.JUDGE_ROLE" />
                                 
-                                <input type="submit" value="Revoke Judge Privs"/>
+                                <input type="submit" value="Revoke Judge Privs" class="btn btn-primary btn-sm"/>
                             }
                         }
                         else { 
@@ -34,7 +34,7 @@
                                 <input type="hidden" name="userName" value="@userProfile.UserName" />
                                 <input type="hidden" name="roleName" value="@Constants.Roles.JUDGE_ROLE" />
                                 
-                                <input type="submit" value="Make Judge"/>
+                                <input type="submit" value="Make Judge" class="btn btn-primary btn-sm"/>
                             }
                         }
                     </td>
@@ -47,10 +47,10 @@
                                 <input type="hidden" name="roleName" value="@Constants.Roles.ADMINISTRATOR_ROLE" />
                                 if (User.Identity.Name == userProfile.UserName)
                                 {
-                                    <input type="submit" value="Cannot Revoke Admin Privs from Self" disabled/>
+                                    <input type="submit" value="Cannot Revoke Admin Privs from Self" class="btn btn-primary btn-sm" disabled/>
                                 }
                                 else { 
-                                    <input type="submit" value="Revoke Admin Privs"/>
+                                    <input type="submit" value="Revoke Admin Privs" class="btn btn-primary btn-sm"/>
                                 }
                                 
                             }
@@ -61,7 +61,7 @@
                                 <input type="hidden" name="userName" value="@userProfile.UserName" />
                                 <input type="hidden" name="roleName" value="@Constants.Roles.ADMINISTRATOR_ROLE" />
                                 
-                                <input type="submit" value="Make Admin"/>
+                                <input type="submit" value="Make Admin" class="btn btn-primary btn-sm"/>
                             }
                         }
                     </td>

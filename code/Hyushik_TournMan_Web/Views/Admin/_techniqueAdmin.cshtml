@@ -61,7 +61,12 @@
         return;
     }
         <ul>
-            <li>
+            
+            @foreach (var subTech in tech.SubTechniques)
+            {
+                <li class="list-group-item">@PrintTechnique(subTech)</li>
+            }
+            <li class="list-group-item">
                 @using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <a class="tech-new-show tech-new-edit-button">Add Subtechnique</a>
@@ -75,10 +80,6 @@
                     <button type="submit" class="tech-new-edit">Add</button >
                 }
             </li>
-            @foreach (var subTech in tech.SubTechniques)
-            {
-                <li>@PrintTechnique(subTech)</li>
-            }
         </ul>
 }
 
@@ -86,26 +87,25 @@
 <div>
     <h2>Techniques</h2>
     <div>
-        <ul>
-            <li>
-                @using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    <a class="tech-new-show tech-new-edit-button">Add Technique</a>
-                    <input name="parentId" type="hidden" value="-1">
-                    <input type="text" name="techName" class="tech-new-edit" value="New Technique"/>
-                    <span class="tech-new-edit">
-                        <span class="tech-weight"> Weight:<input type="number" name="techWeight"  value="0"/></span>
-                        <span>Toggleable: </span>@Html.CheckBox("techToggleable", false, new { @class = "tech-weight-toggle" })
-                    </span>
-                    <a class="tech-new-edit tech-new-edit-button">Cancel</a>
-                    <button type="submit" class="tech-new-edit">Add</button >
-                }
-            </li>
+        <ul class="list-group">
             @foreach (var tech in Model.Techniques)
             {
-                <li> @PrintTechnique(tech)</li>
+                <li class="list-group-item"> @PrintTechnique(tech)</li>
             }
-         </ul>
-        
+         </ul>   
+
+        @using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="button" value="Add Technique" class="tech-new-show tech-new-edit-button btn btn-primary btn-sm" />
+            /*<a class="tech-new-show tech-new-edit-button">Add Technique</a>*/
+            <input name="parentId" type="hidden" value="-1">
+            <input type="text" name="techName" class="tech-new-edit" value="New Technique"/>
+            <span class="tech-new-edit">
+                <span class="tech-weight"> Weight:<input type="number" name="techWeight"  value="0"/></span>
+                <span>Toggleable: </span>@Html.CheckBox("techToggleable", false, new { @class = "tech-weight-toggle" })
+            </span>
+            <a class="tech-new-edit tech-new-edit-button">Cancel</a>
+            <button type="submit" class="tech-new-edit">Add</button >
+        }
     </div>
 </div>
