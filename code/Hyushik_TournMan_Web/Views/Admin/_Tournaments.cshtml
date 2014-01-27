@@ -11,24 +11,25 @@
                         <b class="list-group-item active">Tournament Name</b>
                         @foreach (var tournament in Model.Tournaments)
                         {
-                            @Html.ActionLink(@tournament.Name, "Tournament", "Admin", new { id=tournament.Id }, new { @class = "list-group-item" })
-                            using (Html.BeginForm("SetTournamentActiveStatus", "Admin", FormMethod.Post))
+                            <a href="@Url.Action("Tournament", "Admin", new { id=tournament.Id})" class="list-group-item">
+                            @using (Html.BeginForm("SetTournamentActiveStatus", "Admin", FormMethod.Post))
                             {
+                                @tournament.Name
                                 <input type="hidden" name="tournId" value="@tournament.Id" />
                                 if (!tournament.Active)
                                 {
                                     
                                     <input type="hidden" name="tournActive" value="true" />
-                                    <input type="submit" value="Activate Tournament"/>
+                                    <input type="submit" value="Activate Tournament" class="btn btn-primary btn-xs" style="float:right" />
                                 }
                                 else
                                 {
                                     
                                     <input type="hidden" name="tournActive" value="false" />
-                                    <input type="submit" value="Deactivate Tournament"/>
+                                    <input type="submit" value="Deactivate Tournament" class="btn btn-primary btn-xs"style="float:right" />
                                 }
                             }
-                            
+                            </a>
                         }
                     </div>
                 </div>
@@ -43,7 +44,7 @@
         {
             @Html.DisplayFor(m => m.NewTournamentName);
             @Html.TextBoxFor(m => m.NewTournamentName);
-            <input type="submit" value="Add" />
+            <input type="submit" value="Add" class="btn btn-primary btn-sm"/>
         }
     </div>
 </div>
