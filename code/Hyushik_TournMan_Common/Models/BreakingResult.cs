@@ -18,12 +18,12 @@ namespace Hyushik_TournMan_Common.Models
         //the techniqueValue has the full technique name and final value of the technique
         //adds more data to the db but is cleaner in code than making a weird reverse tree traversal
         //also allows for auditing?  I guess?
-        public virtual List<TechniqueValue> Stations { get; set; }
+        public virtual List<Station> Stations { get; set; }
         public List<BreakingJudgeScore> JudgeScores { get; set; }
 
         public BreakingResult()
         {
-            Stations = new List<TechniqueValue>();
+            Stations = new List<Station>();
             JudgeScores = new List<BreakingJudgeScore>();
         }
 
@@ -44,5 +44,19 @@ namespace Hyushik_TournMan_Common.Models
         //i.e "Spinning Flip Kick"
         public string Name {get; set;}
         public double Value { get; set; }
+    }
+    public class Station{
+        [Key]
+        public long Id { get; set; }
+        public TechniqueValue Techneque{get;set;}
+        public BoardSizeCount Boards{get;set;}
+
+        public int BoardCount { get; set; }
+        public Boolean BoardSpacers { get; set; }
+        public double BoardWidth { get; set; }
+        public double BoardDepth { get; set; }
+
+
+        public int attempts { get; set; }
     }
 }
