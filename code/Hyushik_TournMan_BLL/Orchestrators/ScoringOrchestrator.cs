@@ -40,13 +40,14 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             var result = new OperationResult();
             try
             {
+                result.Message = String.Format(Resources.BreakingResultCreatedMessage, breakingResult.Participant.Name);
                 _tournManContext.BreakingResults.Add(breakingResult);
                 _tournManContext.SaveChanges();
+                
             }catch(Exception ex){
                 result.Message = ex.Message;
                 return result;
             }
-            result.Message = String.Format(Resources.BreakingResultCreatedMessage,breakingResult.Participant.Name); ;
             result.WasSuccessful = true;
             return result;
         }
