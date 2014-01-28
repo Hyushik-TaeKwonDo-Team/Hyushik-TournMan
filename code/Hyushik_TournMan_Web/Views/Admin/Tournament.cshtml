@@ -32,6 +32,8 @@
                         @foreach (var participant in Model.Tournament.Participants)
                         {
                             <tr>
+                                <td>@Html.ActionLink(participant.Name, "Participant", "Admin", new { id=participant.ParticipantId }, new { @class = "list-group-item" })</td>
+                                <td>"DERP"</td>
                                 <td>@participant.Name</td>
                                 <td>@participant.Gender</td>
                                 <td>@participant.Rank</td>

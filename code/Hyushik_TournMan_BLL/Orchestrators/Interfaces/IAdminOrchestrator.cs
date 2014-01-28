@@ -16,6 +16,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         OperationResult CreateNewTournament(string name);
         IList<Tournament> GetAllTournaments();
         Tournament GetTournamentById(long id);
+        Participant GetParticipantById(long id);
         IList<BoardSizeCount> GetTotalBoardSizeCountsByTournamentId(long id);
         IList<UserProfile> GetAllUsers();
         IDictionary<string, string[]> GetMappingOfUserNameToRoles();

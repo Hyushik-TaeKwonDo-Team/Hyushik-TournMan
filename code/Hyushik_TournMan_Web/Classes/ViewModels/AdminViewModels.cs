@@ -67,4 +67,10 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         [DisplayName("Boards Needed for Tournament")]
         public IList<BoardSizeCount> TotalBoardCounts { get; set; }
     }
+
+    public class ParticipantViewModel
+    {
+        public Participant Participant { get; set; }
+    }
+       
 }

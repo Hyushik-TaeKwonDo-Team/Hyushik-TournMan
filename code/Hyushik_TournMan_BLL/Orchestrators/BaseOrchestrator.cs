@@ -49,11 +49,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return _tournManContext.Tournaments.First(t => t.Id == tournId).Participants;
         }
 
-        public Participant GetParticipantById(long partId)
-        {
-            return _tournManContext.Participants.FirstOrDefault(p=>p.ParticipantId==partId);
-        }
-
         public BreakingResult GetBreakingResultById(long id){
             return _tournManContext.BreakingResults.FirstOrDefault(br => br.Id == id);
         }

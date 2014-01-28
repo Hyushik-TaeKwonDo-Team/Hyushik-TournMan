@@ -269,6 +269,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\ActiveTournament\_breakingResults.cshtml" />
+    <Content Include="Views\Admin\Participant.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>

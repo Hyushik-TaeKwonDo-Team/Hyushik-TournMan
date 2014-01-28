@@ -120,6 +120,17 @@ namespace Hyushik_TournMan_Web.Controllers
             return View(vm);
         }
 
+        [HttpGet]
+        public ActionResult Participant(long id)
+        {
+            var vm = new ParticipantViewModel()
+            {
+                Participant = orch.GetParticipantById(id)
+            };
+
+            return View(vm);
+        }
+
         [HttpPost]
         public ActionResult AddTournament(TournamentsViewModel vm)
         {
