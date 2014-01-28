@@ -28,7 +28,12 @@ namespace Hyushik_TournMan_Web.Controllers
                 TournamentId = tournId
             };
             foreach(var entry in orch.GetBreakingResultByTournamentId(tournId)){
-                vm.AddListing(entry.Participant.Name, entry.Id);
+                var scoreResult = orch.CalculateBreakingScore(entry);
+                if(scoreResult.WasSuccessful){
+                    vm.AddListing(entry.Participant.Name, entry.Id, scoreResult.Score);
+                }
+
+                
             }
 
             return vm;

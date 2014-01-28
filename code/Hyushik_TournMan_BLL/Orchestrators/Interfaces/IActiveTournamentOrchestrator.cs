@@ -1,4 +1,5 @@
 ﻿using Hyushik_TournMan_Common.Models;
+using Hyushik_TournMan_Common.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
     {
         List<BreakingResult> GetBreakingResultByTournamentId(long tournId);
         Tournament GetTournamentById(long id);
+        BreakingScoringResult CalculateBreakingScore(BreakingResult breakingResult);
     }
 }

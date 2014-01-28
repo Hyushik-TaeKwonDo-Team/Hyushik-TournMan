@@ -1,4 +1,5 @@
 ﻿using Hyushik_TournMan_Common.Models;
+using Hyushik_TournMan_Common.Results;
 using Hyushik_TournMan_DAL.Contexts;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,25 @@ namespace Hyushik_TournMan_BLL.Orchestrators
     {
         protected UsersContext _usersContext = new UsersContext();
         protected TournManContext _tournManContext = new TournManContext();
+
+
+        public BreakingScoringResult CalculateBreakingScore(BreakingResult breakingResult)
+        {
+            var result = new BreakingScoringResult() { WasSuccessful = false };
+            try
+            {
+                var algo = new BreakingAlgorithim();
+                result.Score = algo.ScoreAll(breakingResult);
+            }catch(Exception ex){
+                result.Message = ex.Message;
+                return result;
+            }
+
+            result.WasSuccessful = true;
+
+            return result;
+        }
+
 
         public IEnumerable<UserProfile> GetUsers(){
             return _usersContext.UserProfiles;

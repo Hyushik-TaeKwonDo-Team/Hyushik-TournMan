@@ -7,7 +7,7 @@
         <div>
             <span>@listing.ParticipantName</span>
             @Html.ActionLink("Judge", "JudgeBreakingEntry", "Scoring", new { entryId=listing.BreakingEntryId}, null)
-        
+            Current Score: @listing.CurrentScore
         </div>
     }
     </div>

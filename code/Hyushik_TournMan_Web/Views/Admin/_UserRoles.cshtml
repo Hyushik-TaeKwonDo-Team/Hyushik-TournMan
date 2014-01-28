@@ -2,7 +2,7 @@
 @model Hyushik_TournMan_Web.Classes.ViewModels.UserRolesViewModel
 
 <div class="row top-buffer">
-    <h3>Users</h3>
+    <h3>User Roles</h3>
     <hr />
     @if (Model.Users.Count < 1)
     {
@@ -10,8 +10,16 @@
     }
     else 
     {
-    <table>
-        <tbody>
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Judge</th>
+                    <th>Admin</th>
+                </tr>
+            <tbody>
             @foreach (var userProfile in Model.Users) {
                 <tr>
                     <td>
@@ -25,7 +33,7 @@
                                 <input type="hidden" name="userName" value="@userProfile.UserName" />
                                 <input type="hidden" name="roleName" value="@Constants.Roles.JUDGE_ROLE" />
                                 
-                                <input type="submit" value="Revoke Judge Privs"/>
+                                <input type="submit" value="Remove" class="btn btn-danger btn-sm"/>
                             }
                         }
                         else { 
@@ -34,7 +42,7 @@
                                 <input type="hidden" name="userName" value="@userProfile.UserName" />
                                 <input type="hidden" name="roleName" value="@Constants.Roles.JUDGE_ROLE" />
                                 
-                                <input type="submit" value="Make Judge"/>
+                                <input type="submit" value="Make" class="btn btn-success btn-sm"/>
                             }
                         }
                     </td>
@@ -47,10 +55,10 @@
                                 <input type="hidden" name="roleName" value="@Constants.Roles.ADMINISTRATOR_ROLE" />
                                 if (User.Identity.Name == userProfile.UserName)
                                 {
-                                    <input type="submit" value="Cannot Revoke Admin Privs from Self" disabled/>
+                                    <input type="submit" value="Remove" class="btn btn-danger btn-sm" disabled/>
                                 }
                                 else { 
-                                    <input type="submit" value="Revoke Admin Privs"/>
+                                    <input type="submit" value="Remove" class="btn btn-danger btn-sm"/>
                                 }
                                 
                             }
@@ -61,15 +69,16 @@
                                 <input type="hidden" name="userName" value="@userProfile.UserName" />
                                 <input type="hidden" name="roleName" value="@Constants.Roles.ADMINISTRATOR_ROLE" />
                                 
-                                <input type="submit" value="Make Admin"/>
+                                <input type="submit" value="Make" class="btn btn-success btn-sm"/>
                             }
                         }
                     </td>
                 </tr> 
             }
             
-        </tbody>
-    </table>
-    
+            </tbody>
+        </table>
+        </div>
+    </div>
     }
 </div>
