@@ -69,7 +69,15 @@ namespace Hyushik_TournMan_Web.Controllers
             foreach(var stationVM in vm.Stations){
                 var result = _orch.CreateTechniqueValue(stationVM.BaseTechniques);
                 if(result.WasSuccessful && result.HasTechniqueValue){
-                    model.Stations.Add(result.TechniqueValue);
+                    model.Stations.Add(new Station()
+                    {
+                        attempts = stationVM.Attempts,
+                        BoardCount = stationVM.BoardsViewModel.Amount,
+                        BoardWidth = stationVM.BoardsViewModel.Width,
+                        BoardDepth = stationVM.BoardsViewModel.Depth,
+                        BoardSpacers = stationVM.BoardsViewModel.Spacers,
+                        Technique = result.TechniqueValue
+                    });
                 }
             }
             var saveResult = _orch.SaveBreakingResult(model);

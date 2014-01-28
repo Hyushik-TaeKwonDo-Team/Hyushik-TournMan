@@ -68,6 +68,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Results\BreakingScoringResult.cs" />
     <Compile Include="Results\OperationResult.cs" />
     <Compile Include="Results\SaveBreakingJudgeScoreResult.cs" />
     <Compile Include="Results\TechniqueValueResult.cs" />

@@ -35,7 +35,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
 
     public class BoardsViewModel
     {
-        public double Height { get; set; }
+        public double Width { get; set; }
         public double Depth { get; set; }
         public int Amount { get; set; }
         public bool SpeedBreak { get; set; }
