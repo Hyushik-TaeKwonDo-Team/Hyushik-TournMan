@@ -1,5 +1,6 @@
 ﻿@model Hyushik_TournMan_Web.Classes.ViewModels.TournamentsViewModel
-<div>
+<div class="row">
+    <div class="col-sm-12">
     <h3>Tournaments</h3>
     <hr />
     <div>
@@ -20,13 +21,13 @@
                                 {
                                     
                                     <input type="hidden" name="tournActive" value="true" />
-                                    <input type="submit" value="Activate Tournament" class="btn btn-primary btn-xs" style="float:right" />
+                                    <input type="submit" value="Activate" class="btn btn-primary btn-xs" style="float:right" />
                                 }
                                 else
                                 {
                                     
                                     <input type="hidden" name="tournActive" value="false" />
-                                    <input type="submit" value="Deactivate Tournament" class="btn btn-primary btn-xs"style="float:right" />
+                                    <input type="submit" value="Deactivate" class="btn btn-primary btn-xs"style="float:right" />
                                 }
                             }
                             </a>
@@ -55,4 +56,4 @@
             </div>
         }
     </div>
-</div>
+</div></div>
