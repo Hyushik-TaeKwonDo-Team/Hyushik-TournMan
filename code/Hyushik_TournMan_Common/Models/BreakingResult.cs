@@ -48,14 +48,12 @@ namespace Hyushik_TournMan_Common.Models
     public class Station{
         [Key]
         public long Id { get; set; }
-        public TechniqueValue Techneque{get;set;}
-        public BoardSizeCount Boards{get;set;}
+        public TechniqueValue Technique{get;set;}
 
         public int BoardCount { get; set; }
-        public Boolean BoardSpacers { get; set; }
+        public bool BoardSpacers { get; set; }
         public double BoardWidth { get; set; }
         public double BoardDepth { get; set; }
-
 
         public int attempts { get; set; }
     }

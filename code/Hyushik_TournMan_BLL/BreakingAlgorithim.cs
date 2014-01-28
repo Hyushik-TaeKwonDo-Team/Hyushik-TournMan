@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hyushik_TournMan_BLL
 {
-    class Algorithim
+    public class BreakingAlgorithim
     {
         private double boardExp = 1.4;
         private  double NO_SPACER_BONUS = 1.3;
@@ -60,7 +60,7 @@ namespace Hyushik_TournMan_BLL
         public double scoreStation(Station station)
         {
 
-            var tScore = station.Techneque.Value;
+            var tScore = station.Technique.Value;
             var bScore = getBoardScore(station);
             var penalty = getMissPenalty(station.attempts);
 
