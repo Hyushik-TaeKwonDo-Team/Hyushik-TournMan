@@ -1,0 +1,72 @@
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.ParticipantViewModel
+@{
+    ViewBag.Title = "Participant View";
+}
+
+<h2>Participant</h2>
+
+    <div class="panel panel-default table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Rank</th>
+                    <th>Age</th>
+                    <th>Weight</th>
+                    <th>Weapons</th>
+                    <th>Breaking</th>
+                    <th>Forms</th>
+                    <th>Sparring (Point)</th>
+                    <th>Sparring (Olympic)</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>@Model.Participant.Name</td>
+                        <td>@Model.Participant.Gender</td>
+                        <td>@Model.Participant.Rank</td>
+                        <td>@Model.Participant.Age</td>
+                        <td>@Model.Participant.Weight</td>
+                        <td>@Model.Participant.Weapons</td>
+                        <td>@Model.Participant.Breaking</td>
+                        <td>@Model.Participant.Forms</td>
+                        <td>@Model.Participant.PointSparring</td>
+                        <td>@Model.Participant.OlympicSparring</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="panel panel-default table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
+                    <th>Phone Number</th>
+                    <th>Instructor Name</th>
+                    <th>School Address</th>
+                    <th>School City</th>
+                    <th>School State</th>
+                    <th>School Zip Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>@Model.Participant.Address</td>
+                        <td>@Model.Participant.City</td>
+                        <td>@Model.Participant.State</td>
+                        <td>@Model.Participant.Zip</td>
+                        <td>@Model.Participant.Phone</td>
+                        <td>@Model.Participant.InstructorName</td>
+                        <td>@Model.Participant.SchoolAddress</td>
+                        <td>@Model.Participant.SchoolCity</td>
+                        <td>@Model.Participant.SchoolState</td>
+                        <td>@Model.Participant.SchoolZip</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
