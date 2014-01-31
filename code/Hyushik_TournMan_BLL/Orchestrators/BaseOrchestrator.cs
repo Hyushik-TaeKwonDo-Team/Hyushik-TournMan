@@ -1,6 +1,7 @@
 ﻿using Hyushik_TournMan_Common.Models;
 using Hyushik_TournMan_Common.Results;
 using Hyushik_TournMan_DAL.Contexts;
+using Hyushik_TournMan_DAL.StoredValues;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         protected UsersContext _usersContext = new UsersContext();
         protected TournManContext _tournManContext = new TournManContext();
 
-
+ 
         public BreakingScoringResult CalculateBreakingScore(BreakingResult breakingResult)
         {
             var result = new BreakingScoringResult() { WasSuccessful = false };
@@ -71,5 +72,26 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         public BreakingResult GetBreakingResultById(long id){
             return _tournManContext.BreakingResults.FirstOrDefault(br => br.Id == id);
         }
+
+        public double GetStationFalloffProportion()
+        {
+            return StoredValues.StationFalloffProportion;
+        }
+
+        public double SetStationFalloffProportion(double value)
+        {
+            return StoredValues.StationFalloffProportion=value;
+        }
+
+        public int GetMaxBreakingStationCount()
+        {
+            return StoredValues.MaxBreakingStationCount;
+        }
+
+        public double SetStationMaxBreakingStationCount(int value)
+        {
+            return StoredValues.MaxBreakingStationCount = value;
+        }
+
     }
 }

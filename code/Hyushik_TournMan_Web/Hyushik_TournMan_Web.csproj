@@ -273,6 +273,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\ActiveTournament\_breakingResults.cshtml" />
+    <Content Include="Views\Admin\_BreakingStoredValues.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>

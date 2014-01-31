@@ -27,6 +27,17 @@ namespace Hyushik_TournMan_Web.Controllers
             return View(_buildAdminVM());
         }
 
+        private BreakingStoredValuesViewModel _breakingStoredValuesViewModel()
+        {
+            var vm = new BreakingStoredValuesViewModel()
+            {
+                //convert from double
+                StationFalloffProportion = (int)(orch.GetStationFalloffProportion()*100),
+                MaxBreakingStationCount = orch.GetMaxBreakingStationCount()
+            };
+            return vm;
+        }
+
         private ImportCsvViewModel _buildImportCsvVM()
         {
             var vm = new ImportCsvViewModel()
@@ -72,7 +83,8 @@ namespace Hyushik_TournMan_Web.Controllers
                 ImportCsvViewModel = _buildImportCsvVM(),
                 TournamentViewModel = _buildTournamentsVM(),
                 UserRolesViewModel = _buildUserRolesVM(),
-                TechniquesViewModel = _buildTechniquesVM()
+                TechniquesViewModel = _buildTechniquesVM(),
+                BreakingStoredValuesViewModel = _breakingStoredValuesViewModel()
             };
             return vm;
         }

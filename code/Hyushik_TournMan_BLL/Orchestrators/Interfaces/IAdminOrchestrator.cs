@@ -27,5 +27,9 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         OperationResult UpdateTechnique(long techId, string techName, int techWeight, bool techToggleable);
         OperationResult AddTechnique(long parentId, string techName, int techWeight, bool techToggleable);
         OperationResult DeleteTechnique(long techId);
+        double GetStationFalloffProportion();
+        double SetStationFalloffProportion(double value);
+        int GetMaxBreakingStationCount();
+        double SetStationMaxBreakingStationCount(int value);
     }
 }
