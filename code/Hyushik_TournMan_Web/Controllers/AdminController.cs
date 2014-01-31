@@ -225,5 +225,14 @@ namespace Hyushik_TournMan_Web.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult SetBreakingStoredValues(BreakingStoredValuesViewModel vm)
+        {
+            //d is for double, that's good enough for me
+            orch.SetStationFalloffProportion(vm.StationFalloffProportion / 100d);
+            orch.SetStationMaxBreakingStationCount(vm.MaxBreakingStationCount);
+            return RedirectToAction("Index");   
+        }
     }
 }

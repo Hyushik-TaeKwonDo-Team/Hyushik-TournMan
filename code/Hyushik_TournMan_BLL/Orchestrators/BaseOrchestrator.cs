@@ -78,9 +78,9 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return StoredValues.StationFalloffProportion;
         }
 
-        public double SetStationFalloffProportion(double value)
+        public void SetStationFalloffProportion(double value)
         {
-            return StoredValues.StationFalloffProportion=value;
+            StoredValues.StationFalloffProportion=value;
         }
 
         public int GetMaxBreakingStationCount()
@@ -88,9 +88,9 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return StoredValues.MaxBreakingStationCount;
         }
 
-        public double SetStationMaxBreakingStationCount(int value)
+        public void SetStationMaxBreakingStationCount(int value)
         {
-            return StoredValues.MaxBreakingStationCount = value;
+            StoredValues.MaxBreakingStationCount = value;
         }
 
     }
