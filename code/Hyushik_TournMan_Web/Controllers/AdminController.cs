@@ -27,6 +27,17 @@ namespace Hyushik_TournMan_Web.Controllers
             return View(_buildAdminVM());
         }
 
+        private BreakingStoredValuesViewModel _breakingStoredValuesViewModel()
+        {
+            var vm = new BreakingStoredValuesViewModel()
+            {
+                //convert from double
+                StationFalloffProportion = (int)(orch.GetStationFalloffProportion()*100),
+                MaxBreakingStationCount = orch.GetMaxBreakingStationCount()
+            };
+            return vm;
+        }
+
         private ImportCsvViewModel _buildImportCsvVM()
         {
             var vm = new ImportCsvViewModel()
@@ -72,7 +83,8 @@ namespace Hyushik_TournMan_Web.Controllers
                 ImportCsvViewModel = _buildImportCsvVM(),
                 TournamentViewModel = _buildTournamentsVM(),
                 UserRolesViewModel = _buildUserRolesVM(),
-                TechniquesViewModel = _buildTechniquesVM()
+                TechniquesViewModel = _buildTechniquesVM(),
+                BreakingStoredValuesViewModel = _breakingStoredValuesViewModel()
             };
             return vm;
         }
@@ -115,6 +127,17 @@ namespace Hyushik_TournMan_Web.Controllers
                 Tournament = orch.GetTournamentById(id),
                 TotalBoardCounts = orch.GetTotalBoardSizeCountsByTournamentId(id)
 
+            };
+
+            return View(vm);
+        }
+
+        [HttpGet]
+        public ActionResult Participant(long id)
+        {
+            var vm = new ParticipantViewModel()
+            {
+                Participant = orch.GetParticipantById(id)
             };
 
             return View(vm);
@@ -212,6 +235,15 @@ namespace Hyushik_TournMan_Web.Controllers
                 AddErrorNotification(result.Message);
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult SetBreakingStoredValues(BreakingStoredValuesViewModel vm)
+        {
+            //d is for double, that's good enough for me
+            orch.SetStationFalloffProportion(vm.StationFalloffProportion / 100d);
+            orch.SetStationMaxBreakingStationCount(vm.MaxBreakingStationCount);
+            return RedirectToAction("Index");   
         }
     }
 }

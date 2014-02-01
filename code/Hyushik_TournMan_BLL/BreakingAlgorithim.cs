@@ -39,18 +39,22 @@ namespace Hyushik_TournMan_BLL
 
 
             //average the judges subjective parts and use that to give a precentage boost to the total partisipent score
-
-            double judgeAverage = 0;
-            foreach (var judge in BreakingResult.JudgeScores)
+            if (BreakingResult.JudgeScores.Count > 0)
             {
-                judgeAverage = judgeAverage + judge.SubjectiveScore;
+                double judgeAverage = 0;
+                foreach (var judge in BreakingResult.JudgeScores)
+                {
+                    judgeAverage = judgeAverage + judge.SubjectiveScore;
+                }
+
+                judgeAverage = judgeAverage / BreakingResult.JudgeScores.Count;
+
+                var endScore = beforeBonus * (1 + (judgeAverage / 100));
+                return endScore;
             }
+            return beforeBonus;
 
-            judgeAverage = judgeAverage / BreakingResult.JudgeScores.Count;
-
-            var endScore = beforeBonus * (1 + (judgeAverage / 100));
-
-            return endScore;
+            
         }
 
 

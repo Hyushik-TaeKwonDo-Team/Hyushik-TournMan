@@ -1,6 +1,7 @@
 ﻿using Hyushik_TournMan_Common.Models;
 using Hyushik_TournMan_Common.Results;
 using Hyushik_TournMan_DAL.Contexts;
+using Hyushik_TournMan_DAL.StoredValues;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         protected UsersContext _usersContext = new UsersContext();
         protected TournManContext _tournManContext = new TournManContext();
 
-
+ 
         public BreakingScoringResult CalculateBreakingScore(BreakingResult breakingResult)
         {
             var result = new BreakingScoringResult() { WasSuccessful = false };
@@ -53,6 +54,12 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return _tournManContext.Tournaments.Where(t => t.Id == id).FirstOrDefault();
         }
 
+        public Participant GetParticipantById(long id)
+        {
+            //returns null if not found
+            return _tournManContext.Participants.Where(p => p.ParticipantId == id).FirstOrDefault();
+        }
+
         public IList<Technique> GetTopLevelTechniques()
         {
             return _tournManContext.Techniques.Where(t=>t.Parent==null).ToList();
@@ -63,13 +70,29 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return _tournManContext.Tournaments.First(t => t.Id == tournId).Participants;
         }
 
-        public Participant GetParticipantById(long partId)
-        {
-            return _tournManContext.Participants.FirstOrDefault(p=>p.ParticipantId==partId);
-        }
-
         public BreakingResult GetBreakingResultById(long id){
             return _tournManContext.BreakingResults.FirstOrDefault(br => br.Id == id);
         }
+
+        public double GetStationFalloffProportion()
+        {
+            return StoredValues.StationFalloffProportion;
+        }
+
+        public void SetStationFalloffProportion(double value)
+        {
+            StoredValues.StationFalloffProportion=value;
+        }
+
+        public int GetMaxBreakingStationCount()
+        {
+            return StoredValues.MaxBreakingStationCount;
+        }
+
+        public void SetStationMaxBreakingStationCount(int value)
+        {
+            StoredValues.MaxBreakingStationCount = value;
+        }
+
     }
 }

@@ -16,6 +16,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         OperationResult CreateNewTournament(string name);
         IList<Tournament> GetAllTournaments();
         Tournament GetTournamentById(long id);
+        Participant GetParticipantById(long id);
         IList<BoardSizeCount> GetTotalBoardSizeCountsByTournamentId(long id);
         IList<UserProfile> GetAllUsers();
         IDictionary<string, string[]> GetMappingOfUserNameToRoles();
@@ -27,5 +28,9 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         OperationResult UpdateTechnique(long techId, string techName, int techWeight, bool techToggleable);
         OperationResult AddTechnique(long parentId, string techName, int techWeight, bool techToggleable);
         OperationResult DeleteTechnique(long techId);
+        double GetStationFalloffProportion();
+        void SetStationFalloffProportion(double value);
+        int GetMaxBreakingStationCount();
+        void SetStationMaxBreakingStationCount(int value);
     }
 }
