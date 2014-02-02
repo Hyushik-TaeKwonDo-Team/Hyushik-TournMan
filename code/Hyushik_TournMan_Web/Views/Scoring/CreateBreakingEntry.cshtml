@@ -131,7 +131,7 @@
                         <span class="attempts sectionTop"><a class = "dosplayAttempts">Attempts</a></span>
                         <ul>
                             <li>
-                                @Html.TextBoxFor(model => model.Stations[i].Attempts)Attempts</li>
+                                @Html.TextBoxFor(model => model.Stations[i].Attempts, new { @class = "form-control", @type="number", @min="1",  @max="10"})Attempts</li>
                             <li class = "sectionBack">
                                 <a >Done</a>
                             </li>
@@ -140,6 +140,6 @@
                 </ul>
             </div>
          }
-        <button type="submit">Submit</button>
-    }
+        <input type="submit" value="Submit" class="btn btn-primary" />
+     }
 </div>

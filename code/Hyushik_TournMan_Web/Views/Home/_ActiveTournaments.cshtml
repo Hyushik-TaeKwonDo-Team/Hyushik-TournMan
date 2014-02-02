@@ -4,14 +4,13 @@
     <h2>Active Tournaments</h2>
     @if (Model.ActiveTournaments.Count > 0)
     {
-        <table>
+        <div class="list-group">
+                        <b class="list-group-item active">Tournament Name</b>
             @foreach (var tourn in Model.ActiveTournaments)
             {
-                <tr>
-                    <td>@Html.ActionLink(@tourn.Name, "Index", "ActiveTournament", new { tournId=tourn.Id }, null)</td>
-                </tr>
+              <a href="@Url.Action("ActiveTournament", "../TournMan", new { tournId=tourn.Id})" class="list-group-item"> @tourn.Name </a>
             }
-        </table>
+        </div>
     }
     else { 
         <div>No Active Tournaments</div>
