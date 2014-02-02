@@ -1,18 +1,22 @@
 ﻿@model Hyushik_TournMan_Web.Classes.ViewModels.BreakingStoredValuesViewModel
-<div>
-    <h2>Breaking Values</h2>
+<div class="row">
+    <div class="col-sm-12">
+    <h3>Breaking Values</h3>
+    <hr />
+    <div class="col-md-4 col-sm-6 col-xs-12">
     @using (Html.BeginForm("SetBreakingStoredValues", "Admin", FormMethod.Post))
     {
-        <div>
-            <span>Station Falloff Proportion</span>
-            @Html.TextBoxFor(model=>model.StationFalloffProportion)% 
-            <span>This is the percentage of the total each subsequent station is worth.  Please enter a number between 1 and 100</span>
+        <div class="row">
+            <abbr title="The percentage of the total each subsequent station is worth" >Station Falloff Proportion</abbr>
+            @Html.TextBoxFor(model=>model.StationFalloffProportion, new { @class = "form-control", @type="number", @min="1",  @max="100"})
         </div>
-        <div>
+        <div class="row">
             <span>Maximum Number of Stations</span>
-            @Html.TextBoxFor(model=>model.MaxBreakingStationCount)
+            @Html.TextBoxFor(model=>model.MaxBreakingStationCount, new { @class = "form-control", @type="number"})
         </div>
-        <button type="submit">Update Values</button>
+        <div class="row">
+            <input type="submit" value="Update Values" class="btn btn-primary" />
+        </div>
     }
-    
-</div>
+    </div>
+</div></div>
