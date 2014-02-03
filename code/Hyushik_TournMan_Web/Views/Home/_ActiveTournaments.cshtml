@@ -9,7 +9,7 @@
                         <b class="list-group-item active">Tournament Name</b>
             @foreach (var tourn in Model.ActiveTournaments)
             {
-              <a href="@Url.Action("ActiveTournament", "../Hyushik-TournMan", new { tournId=tourn.Id})" class="list-group-item"> @tourn.Name </a>
+              <a href="@Url.Action("Index", "ActiveTournament", new { tournId=tourn.Id})" class="list-group-item"> @tourn.Name </a>
             }
         </div>
     }
