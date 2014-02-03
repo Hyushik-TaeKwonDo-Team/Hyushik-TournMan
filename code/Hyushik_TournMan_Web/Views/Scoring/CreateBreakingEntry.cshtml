@@ -3,7 +3,7 @@
 @model BreakingViewModel
 
 <h2>Breaking Entry</h2>
-
+<!--
 <script>
 
 
@@ -20,7 +20,7 @@
         });
 
         $('.CollapsibleList').click(function () {
-            $('.selectedCategory').children('.back').hide();
+            $('.selectedCategory').children('.sectionBack').hide();
             $('.selectedCategory').siblings().hide();
             //$(this).parent().show();
             $(this).hide();
@@ -29,7 +29,7 @@
             $(this).siblings('.techniqueCategory').addClass(' selectedCategory');
         });
 
-        $('.back').click(function () {
+        $('.sectionBack').click(function () {
             $(this).hide();
             $('.selectedCategory').hide();
 
@@ -45,6 +45,7 @@
 
     $('.techniqueLeaf').click(function () {
 
+        $('.selectedCategory').find('.displayTechnique').siblings().show();
 
         $('.techniqueModifiers').hide();
         $(this).closest('.techniqueCategory').siblings().show();
@@ -52,11 +53,11 @@
         $(this).closest('.techniqueCategory').closest('ul').hide();
         $(this).parent().hide();
 
-        $('.selected').find('.sectionTop').hide();
+        $('.selectedCategory').find('.sectionTop').hide();
 
 
 
-        $('.selected').find('.board').siblings().show();
+        $('.selectedCategory').find('.board').siblings().show();
 
 
     });
@@ -64,8 +65,8 @@
     
 
     $('.sectionBack').click(function () {
-        $('.sectionTop').show();
-        $('.selected').removeClass('selected');
+        $('.sectionTop').siblings().show();
+        $('.selectedCategory').removeClass('selectedCategory');
         $(this).parent().hide();
         $('.techniqueModifiers').hide();
     });
@@ -76,7 +77,7 @@
 
     });
 </script>
-
+-->
 <div>
      @using (Html.BeginForm("CreateBreakingEntry", "Scoring", FormMethod.Post))
      {
@@ -103,7 +104,7 @@
                                     string liClass = x.tech.IsLeaf() ? "techniqueLeaf" : "";
                                     <li class="@liClass">@Html.EditorFor(model=>model.Stations[i].BaseTechniques[x.index])</li>
                                 }
-                                <li class="back">
+                                <li class="sectionBack">
                                     <a>Cancel</a>
                                 </li>
                             </ul>
