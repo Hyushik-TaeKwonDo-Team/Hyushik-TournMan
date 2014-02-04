@@ -3,81 +3,76 @@
 @model BreakingViewModel
 
 <h2>Breaking Entry</h2>
-<!--
+
 <script>
+    window.navToTech = function navToTech(targetId){
+        console.log("targetId: "+targetId);
+        var target$ = $("#"+targetId);
+        //hideTech($(".visibleTech"));
+        showTech(target$);
+    }
 
+    function hideTech(tech$){
+        console.log("hiding tech: " + tech$);
+        tech$.parents(".techniqueCategory").siblings().show();
+        tech$.show();
+        tech$.siblings().hide();
+        tech$.parents().hide();
+        tech$.parent().siblings(".sectionBack").show();
+        tech$.removeClass(" visibleTech");
+    }
 
+    function showTech(tech$){
+        console.log("showing tech: " + tech$);
+        $(" visibleTech").addClass(" visibleTech");
+        tech$.parents(".techniqueCategory").siblings().hide();
+        tech$.hide();  
+        tech$.siblings().show();
+        tech$.parents().show();
+        tech$.parent().siblings(".sectionBack").hide();
+        tech$.parents(".techniqueCategory").siblings().hide();
+        tech$.addClass(" visibleTech");
+    }
+
+    function toTop() {
+        //hideTech($(".visibleTech"));
+        $('.sectionTop').siblings().hide();
+        $('.sectionTop').show();
+        $('.submitBreaking').show();
+    }
+
+    function clearStationTechnique(targetStation$) {
+        var technique$ = targetStation$.find(".technique");
+        //TODO
+    }
 
     $(document).ready(function () {
-        console.log("Firing");
         $('.station').children().show();
-    
+        console.log("derp");
+
         $('.sectionTop').click(function () {
+            //DNFW
             $('.sectionTop').hide();
             $(this).siblings().show();
-            $(this).siblings('.techniqueCategory').addClass(' selectedCategory');
-            $(this).closest('.station').addClass(' selectedStation');
+            $('.submitBreaking').hide();
         });
 
-        $('.CollapsibleList').click(function () {
-            $('.selectedCategory').children('.sectionBack').hide();
-            $('.selectedCategory').siblings().hide();
-            //$(this).parent().show();
-            $(this).hide();
-            $(this).siblings().show();
-            $(this).parents('.techniqueCategory').removeClass(' selectedCategory');
-            $(this).siblings('.techniqueCategory').addClass(' selectedCategory');
-        });
+        $('.technique').click
 
         $('.sectionBack').click(function () {
-            $(this).hide();
-            $('.selectedCategory').hide();
-
-            var curCategory$ = $('.selectedCategory');
-            curCategory$.parents('.techniqueCategory').first().addClass(' selectedCategory');
-            curCategory$.removeClass('selectedCategory');
-
-            $('.selectedCategory').siblings().not('.sectionTop').show();
-            $('.selectedCategory').children().show();
-            $('.selectedCategory').find('.CollapsibleList').show();
+            //DNFW
+            //whoops, FW'd
+            toTop();
         });
 
-
-    $('.techniqueLeaf').click(function () {
-
-        $('.selectedCategory').find('.displayTechnique').siblings().show();
-
-        $('.techniqueModifiers').hide();
-        $(this).closest('.techniqueCategory').siblings().show();
-        $(this).closest('.techniqueCategory').find('.CollapsibleList').show();
-        $(this).closest('.techniqueCategory').closest('ul').hide();
-        $(this).parent().hide();
-
-        $('.selectedCategory').find('.sectionTop').hide();
-
-
-
-        $('.selectedCategory').find('.board').siblings().show();
-
-
-    });
-
-    
-
-    $('.sectionBack').click(function () {
-        $('.sectionTop').siblings().show();
-        $('.selectedCategory').removeClass('selectedCategory');
-        $(this).parent().hide();
-        $('.techniqueModifiers').hide();
+        $('.techniqueLeaf').click(function () {
+            toTop();
+        });
     });
 
 
-
-    
-
-    });
 </script>
--->
+
 <div>
      @using (Html.BeginForm("CreateBreakingEntry", "Scoring", FormMethod.Post))
      {
@@ -143,6 +138,6 @@
                 </ul>
             </div>
          }
-        <input type="submit" value="Submit" class="btn btn-primary" />
+        <input type="submit" value="Submit" class="btn btn-primary submitBreaking" />
      }
 </div>

@@ -13,7 +13,17 @@
     </label>
 }
 else{
-    <span class="CollapsibleList"><a>@Model.Name</a></span>
+    <span id="tech-@Model.Id" class="CollapsibleList">
+        @if (Model.IsLeaf())
+        {
+            <a>@Model.Name</a>
+        }
+        else {
+            <a onclick="navToTech('tech-@Model.Id')">@Model.Name</a>
+         }  
+            
+            
+    </span>
     if(Model.SubTechniques.Count>0){
         <ul class="techniqueModifiers">
             @foreach (var x in Model.SubTechniques.Select((tech, index) => new { index, tech }).Where(x => x.tech.Toggleable))
@@ -27,9 +37,10 @@ else{
                 string liClass = x.tech.IsLeaf() ? "techniqueLeaf" : "";
                 <li class=" @liClass">@Html.EditorFor(model=>model.SubTechniques[x.index])</li>
             }
-            <li class="back">
+            <li class="sectionBack">
                 <a>Cancel</a>
             </li>
+            
         </ul>
     }
 }
