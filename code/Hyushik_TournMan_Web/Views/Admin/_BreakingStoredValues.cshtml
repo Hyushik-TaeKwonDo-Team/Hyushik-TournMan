@@ -15,6 +15,14 @@
             @Html.TextBoxFor(model=>model.MaxBreakingStationCount, new { @class = "form-control", @type="number", @min="1",  @max="10"})
         </div>
         <div class="row">
+            <abbr title="Please use comma separated values">Possible Board Widths</abbr>
+            @Html.TextBoxFor(model=>model.PossibleBoardWidths, new { @class = "form-control"})
+        </div>
+        <div class="row">
+            <abbr title="Please use comma separated values">Possible Board Depths</abbr>
+            @Html.TextBoxFor(model=>model.PossibleBoardDepths, new { @class = "form-control"})
+        </div>
+        <div class="row">
             <input type="submit" value="Update Values" class="btn btn-primary" />
         </div>
     }

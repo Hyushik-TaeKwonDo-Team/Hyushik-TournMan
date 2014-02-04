@@ -13,6 +13,8 @@ namespace Hyushik_TournMan_Common.Constants
         {
             public const string StationFalloffProportion = "stationFalloffProportion";
             public const string MaxBreakingStationCount = "maxBreakingStationCount";
+            public const string PossibleBoardWidths = "possibleBoardWidths";
+            public const string PossibleBoardDepths = "possibleBoardDepths";
         }
 
         public static class CSV

@@ -15,6 +15,93 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         protected UsersContext _usersContext = new UsersContext();
         protected TournManContext _tournManContext = new TournManContext();
 
+        public string GetPossibleBoardWidthsAsString()
+        {
+            return string.Join(",",GetPossibleBoardWidths());
+        }
+
+        public string GetPossibleBoardDepthsAsString()
+        {
+            return string.Join(",",GetPossibleBoardDepths());
+        }
+
+        public List<double> GetPossibleBoardWidths()
+        {
+            return StoredValues.PossibleBoardWidths;
+        }
+
+        public List<double> GetPossibleBoardDepths()
+        {
+            return StoredValues.PossibleBoardDepths;
+        }
+
+        public OperationResult SetPossibleBoardDepths(string sourceString)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var subresult = SetPossibleBoardDepths(
+                        sourceString.Split(',').Select(
+                            d => double.Parse(d.Trim())
+                        ).ToList()
+                    );
+                result.Message = subresult.Message;
+                result.WasSuccessful = subresult.WasSuccessful;
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public OperationResult SetPossibleBoardDepths(List<double> newVals)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                StoredValues.PossibleBoardDepths = newVals;
+                result.WasSuccessful = true;
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            };
+            return result;
+        }
+
+        public OperationResult SetPossibleBoardWidths(string sourceString)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var subresult = SetPossibleBoardWidths(    
+                        sourceString.Split(',').Select(
+                            d=>double.Parse(d.Trim())
+                        ).ToList()  
+                    );
+                result.Message= subresult.Message;
+                result.WasSuccessful = subresult.WasSuccessful;
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public OperationResult SetPossibleBoardWidths(List<double> newVals)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                StoredValues.PossibleBoardWidths = newVals;
+                result.WasSuccessful = true;
+            }catch(Exception ex){
+                result.Message = ex.Message;
+            }; 
+            return result;
+        }
  
         public BreakingScoringResult CalculateBreakingScore(BreakingResult breakingResult)
         {

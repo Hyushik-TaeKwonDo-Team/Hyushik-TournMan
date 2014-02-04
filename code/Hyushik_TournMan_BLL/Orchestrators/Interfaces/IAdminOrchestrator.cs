@@ -32,5 +32,14 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         void SetStationFalloffProportion(double value);
         int GetMaxBreakingStationCount();
         void SetStationMaxBreakingStationCount(int value);
+
+        string GetPossibleBoardWidthsAsString();
+        string GetPossibleBoardDepthsAsString();
+        List<double> GetPossibleBoardWidths();
+        List<double> GetPossibleBoardDepths();
+        OperationResult SetPossibleBoardDepths(string sourceString); 
+        OperationResult SetPossibleBoardDepths(List<double> newVals);
+        OperationResult SetPossibleBoardWidths(string sourceString);
+        OperationResult SetPossibleBoardWidths(List<double> newVals);
     }
 }

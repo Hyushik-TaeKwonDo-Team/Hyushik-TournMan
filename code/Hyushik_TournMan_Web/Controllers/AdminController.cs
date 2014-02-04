@@ -33,7 +33,9 @@ namespace Hyushik_TournMan_Web.Controllers
             {
                 //convert from double
                 StationFalloffProportion = (int)(orch.GetStationFalloffProportion()*100),
-                MaxBreakingStationCount = orch.GetMaxBreakingStationCount()
+                MaxBreakingStationCount = orch.GetMaxBreakingStationCount(),
+                PossibleBoardWidths = orch.GetPossibleBoardWidthsAsString(),
+                PossibleBoardDepths = orch.GetPossibleBoardDepthsAsString()
             };
             return vm;
         }
@@ -243,6 +245,8 @@ namespace Hyushik_TournMan_Web.Controllers
             //d is for double, that's good enough for me
             orch.SetStationFalloffProportion(vm.StationFalloffProportion / 100d);
             orch.SetStationMaxBreakingStationCount(vm.MaxBreakingStationCount);
+            orch.SetPossibleBoardWidths(vm.PossibleBoardWidths);
+            orch.SetPossibleBoardDepths(vm.PossibleBoardDepths);
             return RedirectToAction("Index");   
         }
     }

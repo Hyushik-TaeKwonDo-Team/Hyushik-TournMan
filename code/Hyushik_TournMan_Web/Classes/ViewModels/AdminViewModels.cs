@@ -76,6 +76,8 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         public int StationFalloffProportion { get; set; }
         [Range(minimum: 1, maximum: 20, ErrorMessage = "Count must be between 1 and 20.")]
         public int MaxBreakingStationCount { get; set; }
+        public string PossibleBoardWidths { get; set; }
+        public string PossibleBoardDepths { get; set; }
     }
     public class ParticipantViewModel
     {

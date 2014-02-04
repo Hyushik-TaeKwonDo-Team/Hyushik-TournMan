@@ -23,6 +23,8 @@
     <!--specific to this app-->
     <add key="stationFalloffProportion" value=".2" />
     <add key="maxBreakingStationCount" value="5" />
+    <add key="possibleBoardWidths" value="4,6,8,10" />
+    <add key="possibleBoardDepths" value=".25,.33,.5" />
   </appSettings>
   <system.web>
     <compilation debug="true" targetFramework="4.5" />
