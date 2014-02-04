@@ -43,7 +43,7 @@ namespace Hyushik_TournMan_Web.Filters
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("HyushikUsers", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+                    if (!WebSecurity.Initialized) WebSecurity.InitializeDatabaseConnection("HyushikUsers", "UserProfile", "UserId", "UserName", autoCreateTables: true);
 
 
                     //Creating default admin
