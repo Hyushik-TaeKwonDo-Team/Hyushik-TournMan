@@ -31,6 +31,11 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         public List<Technique> BaseTechniques { get; set; }
         public int Attempts { get; set; }
         public BoardsViewModel BoardsViewModel { get; set; }
+
+        public StationViewModel()
+        {
+            Attempts = 1;
+        }
         
     }
 
@@ -43,6 +48,11 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         public bool Spacers { get; set; }
         public List<double> PossibleBoardWidths { get; set; }
         public List<double> PossibleBoardDepths { get; set; }
+
+        public BoardsViewModel()
+        {
+            Amount = 1;
+        }
     }
 
     public class JudgeBreakingScoringViewModel
