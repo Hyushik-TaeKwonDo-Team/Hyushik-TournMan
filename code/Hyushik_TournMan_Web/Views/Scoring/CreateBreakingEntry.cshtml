@@ -8,30 +8,19 @@
     window.navToTech = function navToTech(targetId){
         console.log("targetId: "+targetId);
         var target$ = $("#"+targetId);
-        //hideTech($(".visibleTech"));
         showTech(target$);
-    }
-
-    function hideTech(tech$){
-        console.log("hiding tech: " + tech$);
-        tech$.parents(".techniqueCategory").siblings().show();
-        tech$.show();
-        tech$.siblings().hide();
-        tech$.parents().hide();
-        tech$.parent().siblings(".sectionBack").show();
-        tech$.removeClass(" visibleTech");
     }
 
     function showTech(tech$){
         console.log("showing tech: " + tech$);
-        $(" visibleTech").addClass(" visibleTech");
         tech$.parents(".techniqueCategory").siblings().hide();
-        tech$.hide();  
+        tech$.hide();
+        tech$.parent().siblings().hide();
         tech$.siblings().show();
         tech$.parents().show();
-        tech$.parent().siblings(".sectionBack").hide();
-        tech$.parents(".techniqueCategory").siblings().hide();
-        tech$.addClass(" visibleTech");
+        tech$.siblings(".techniqueCategory").children().show();
+        tech$.siblings(".techniqueCategory").children().children("[id^=tech-]").show();
+        tech$.siblings(".techniqueCategory").children().children(".techniqueCategory").hide();
     }
 
     function toTop() {
@@ -52,16 +41,23 @@
 
         $('.sectionTop').click(function () {
             //DNFW
+            //whoops, FW'd
             $('.sectionTop').hide();
             $(this).siblings().show();
             $('.submitBreaking').hide();
         });
 
-        $('.technique').click
+        $('.technique').click(function () {
+            $(this).siblings(".techniqueCategory").find(".sectionBack").hide();
+            $(this).siblings(".techniqueCategory").find("[id^=tech-]").hide();
+            $(this).siblings(".techniqueCategory").children().show();
+            $(this).siblings(".techniqueCategory").children().children("[id^=tech-]").show();
+            $(this).siblings(".techniqueCategory").children().children(".techniqueCategory").hide();
+        });
 
         $('.sectionBack').click(function () {
             //DNFW
-            //whoops, FW'd
+            //FW'd with this too, Bro
             toTop();
         });
 
