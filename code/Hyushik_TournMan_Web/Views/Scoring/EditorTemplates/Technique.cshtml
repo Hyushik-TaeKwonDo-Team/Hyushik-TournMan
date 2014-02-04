@@ -16,10 +16,16 @@ else{
     <span id="tech-@Model.Id" class="CollapsibleList">
         @if (Model.IsLeaf())
         {
-            <a>@Model.Name</a>
+            <label>
+                @Html.CheckBoxFor(model=>model.Selected)
+                @Model.Name
+            </label>
         }
         else {
-            <a onclick="navToTech('tech-@Model.Id')">@Model.Name</a>
+            <label onclick="navToTech('tech-@Model.Id')">
+                @Html.CheckBoxFor(model=>model.Selected)
+                @Model.Name
+            </label>
          }  
             
             

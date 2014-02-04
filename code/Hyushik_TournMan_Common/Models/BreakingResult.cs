@@ -19,7 +19,7 @@ namespace Hyushik_TournMan_Common.Models
         //adds more data to the db but is cleaner in code than making a weird reverse tree traversal
         //also allows for auditing?  I guess?
         public virtual List<Station> Stations { get; set; }
-        public List<BreakingJudgeScore> JudgeScores { get; set; }
+        public virtual List<BreakingJudgeScore> JudgeScores { get; set; }
 
         public BreakingResult()
         {

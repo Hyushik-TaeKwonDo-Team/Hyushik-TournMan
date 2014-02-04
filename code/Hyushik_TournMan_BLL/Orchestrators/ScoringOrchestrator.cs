@@ -62,7 +62,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 return result;
             }
             result.TechniqueValue = GetTechniqueValueFromTechniques(techniques.Where(x => x.Selected));
-            result.HasTechniqueValue = false;
+            result.HasTechniqueValue = true;
             result.WasSuccessful = true;
             return result;
         }
@@ -70,11 +70,11 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         public TechniqueValue GetTechniqueValueFromTechnique(Technique tech)
         {
             var techniqueValue = new TechniqueValue();
-            techniqueValue.Name = techniqueValue.Name + " "+tech.Name;
+            techniqueValue.Name = techniqueValue.Name.Trim() + " "+tech.Name.Trim();
             techniqueValue.Value += tech.Weight;
             if(!tech.IsLeaf()){
                 var secondVal = GetTechniqueValueFromTechniques(tech.SubTechniques.Where(st=>st.Selected));
-                techniqueValue.Name = techniqueValue.Name + " " + secondVal.Name;
+                techniqueValue.Name = techniqueValue.Name.Trim() + " " + secondVal.Name.Trim();
                 techniqueValue.Value += secondVal.Value;
             }
             techniqueValue.Name.Trim();
