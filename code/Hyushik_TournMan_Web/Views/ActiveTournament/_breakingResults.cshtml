@@ -3,7 +3,7 @@
 <div>
     <h2>Breaking</h2>
     <div>
-    @foreach(var listing in Model.BreakingScoreListings){
+    @foreach(var listing in Model.BreakingScoreListings.OrderByDescending(bsl=>bsl.CurrentScore)){
         <div>
             <span>@listing.ParticipantName</span>
             @Html.ActionLink("Judge", "JudgeBreakingEntry", "Scoring", new { entryId=listing.BreakingEntryId}, null)
