@@ -114,8 +114,8 @@
                         <span class="board sectionTop"><a class = "displayBoard">Boards</a></span>
                         <ul>
                             <li>(
-                                @Html.TextBoxFor(model=>model.Stations[i].BoardsViewModel.Width) in x
-                                @Html.TextBoxFor(model=>model.Stations[i].BoardsViewModel.Depth)in) X
+                                @Html.DropDownListFor(model=>model.Stations[i].BoardsViewModel.Width, new SelectList(Model.Stations[i].BoardsViewModel.PossibleBoardWidths)) in x
+                                @Html.DropDownListFor(model=>model.Stations[i].BoardsViewModel.Depth, new SelectList(Model.Stations[i].BoardsViewModel.PossibleBoardDepths))in, ) X
                                 @Html.TextBoxFor(model=>model.Stations[i].BoardsViewModel.Amount)num</li>
                             <li>
                                 @Html.CheckBoxFor(model=>model.Stations[i].BoardsViewModel.SpeedBreak)Speed Break

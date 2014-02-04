@@ -18,5 +18,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         IList<Participant> GetParticipantsByTournId(long tournId);
         Participant GetParticipantById(long partId);
         IEnumerable<UserProfile> GetUsers();
+        List<double> GetPossibleBoardWidths();
+        List<double> GetPossibleBoardDepths();
     }
 }

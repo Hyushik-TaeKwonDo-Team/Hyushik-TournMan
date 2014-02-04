@@ -24,7 +24,7 @@ namespace Hyushik_TournMan_Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-            WebSecurity.InitializeDatabaseConnection("HyushikUsers", "UserProfile", "UserId", "UserName", true);
+            if (!WebSecurity.Initialized) WebSecurity.InitializeDatabaseConnection("HyushikUsers", "UserProfile", "UserId", "UserName", true);
         }
     }
 }

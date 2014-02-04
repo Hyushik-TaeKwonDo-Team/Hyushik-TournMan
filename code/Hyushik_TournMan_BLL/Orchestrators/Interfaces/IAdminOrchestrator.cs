@@ -35,8 +35,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 
         string GetPossibleBoardWidthsAsString();
         string GetPossibleBoardDepthsAsString();
-        List<double> GetPossibleBoardWidths();
-        List<double> GetPossibleBoardDepths();
         OperationResult SetPossibleBoardDepths(string sourceString); 
         OperationResult SetPossibleBoardDepths(List<double> newVals);
         OperationResult SetPossibleBoardWidths(string sourceString);

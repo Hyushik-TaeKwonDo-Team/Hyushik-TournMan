@@ -27,6 +27,8 @@ namespace Hyushik_TournMan_Web.Controllers
             var vm = new StationViewModel();
             vm.BaseTechniques = _orch.GetTopLevelTechniques().ToList<Technique>();
             vm.BoardsViewModel = new BoardsViewModel();
+            vm.BoardsViewModel.PossibleBoardWidths = _orch.GetPossibleBoardWidths();
+            vm.BoardsViewModel.PossibleBoardDepths = _orch.GetPossibleBoardDepths();
             return vm;
         }
 
