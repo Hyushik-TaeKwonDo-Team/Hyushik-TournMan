@@ -41,45 +41,48 @@
 @helper PrintTechnique(Technique tech)
 {   
     
+    using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" })){
+        if (!tech.Toggleable)
+        {
+            <a class="tech-new-show tech-new-edit-button" style="float:right">Add Subtechnique</a>
+            <input name="parentId" type="hidden" value="@tech.Id" />
+            <input type="text" name="techName" class="tech-new-edit" value="New Technique"/>
+            <span class="tech-edit"> @* should this be tech-new-edit ?? *@
+                <span class="tech-weight"> Weight:<input type="number" name="techWeight"  value="0"/></span>
+                <span>Toggleable: </span>@Html.CheckBox("techToggleable", false, new { @class = "tech-weight-toggle" })
+            </span>
+            <a class="tech-new-edit tech-new-edit-button">Cancel</a>
+            <button type="submit" class="tech-new-edit">Add</button >
+        }
+        }
     using (Html.BeginForm("UpdateTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
             <input type="hidden" name="techId" value="@tech.Id"/>
             <span class="tech-show">@tech.Name</span><input type="text" name="techName" class="tech-edit" value="@tech.Name"/>
-            if(tech.CanHaveWeight){
+        if (tech.CanHaveWeight)
+        {
                 <span> Weight:</span><span class="tech-show">@tech.Weight</span><input name="techWeight" type="number" class="tech-edit" value="@tech.Weight"/>
-            }else{
+        }
+        else
+        {
                 <input name="techWeight" type="hidden" class="tech-edit" value="@tech.Weight"/>
-            }    
+        }    
             <span> Toggleable:</span>@Html.CheckBox("techPriorToggleable", @tech.Toggleable, new { @class = "tech-show", disabled = "disabled" })@Html.CheckBox("techToggleable", @tech.Toggleable, new { @class = "tech-edit tech-weight-toggle" })
             <a class="tech-show tech-edit-button">Edit</a> <a class="tech-edit tech-edit-button">Cancel Edit</a>
             <button type="submit" class="tech-edit">Update</button >
             <a class="tech-edit tech-delete-button">Delete</a>
     }
 
-    if (tech.Toggleable)
-    {
-        return;
-    }
+            if (tech.Toggleable)
+            {
+                return;
+            }
         <ul>
             
             @foreach (var subTech in tech.SubTechniques)
             {
                 <li class="list-group-item">@PrintTechnique(subTech)</li>
             }
-            <li class="list-group-item">
-                @using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    <a class="tech-new-show tech-new-edit-button">Add Subtechnique</a>
-                    <input name="parentId" type="hidden" value="@tech.Id">
-                    <input type="text" name="techName" class="tech-new-edit" value="New Technique"/>
-                    <span class="tech-edit">
-                        <span class="tech-weight"> Weight:<input type="number" name="techWeight"  value="0"/></span>
-                        <span>Toggleable: </span>@Html.CheckBox("techToggleable", false, new { @class = "tech-weight-toggle" })
-                    </span>
-                    <a class="tech-new-edit tech-new-edit-button">Cancel</a>
-                    <button type="submit" class="tech-new-edit">Add</button >
-                }
-            </li>
         </ul>
 }
 

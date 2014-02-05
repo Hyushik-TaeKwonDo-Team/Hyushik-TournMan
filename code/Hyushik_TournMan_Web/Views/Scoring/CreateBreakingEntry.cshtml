@@ -123,8 +123,7 @@
                         <span class="attempts sectionTop"><a class = "dosplayAttempts">Attempts</a></span>
                         <ul>
                             <li>
-                                @Html.TextBoxFor(model=>model.Stations[i].Attempts)Attempts
-
+                                @Html.TextBoxFor(model=>model.Stations[i].Attempts, new { @class = "form-control", @type="number", @min="1",  @max="10"})
                             </li>
                             <li class = "sectionBack">
                                 <a >Done</a>
