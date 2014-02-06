@@ -17,3 +17,7 @@ b.list-group-item.active:focus {
 .station li {
     display:inline-block;
 }
+
+#techniqueSelection li:first-child{
+    margin-top: 10px;
+}

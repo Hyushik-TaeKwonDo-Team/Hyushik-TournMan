@@ -46,6 +46,7 @@
         {
             @* This is very hacked together. There can be only one Modal, so the values are passed via js through onClick *@
             <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#popTechnique" style="float:right" onClick="$('input[name=parentId]').val('@tech.Id')">+ SubTechnique</button>
+    
             <!-- Modal -->
             <div class="modal fade" id="popTechnique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-dialog">
@@ -57,10 +58,10 @@
                   <div class="modal-body">
                     <input name="parentId" type="hidden" value="" />
                     <div class="form-group">
-                        <input type="text" name="techName" class="form-control" value="New Technique Name"/>
+                        <input type="text" name="techName" class="form-control" placeholder="New Technique Name" value=""/>
                     </div>
                     <div class="form-group">
-                        <span class="tech-weight"> Weight:<input type="number" name="techWeight"  value="0" class="form-control"/></span>
+                        <span class="tech-weight"> Weight:<input type="number" name="techWeight"  value="0" class="form-control" min="0" max="100"/></span>
                     </div>
                     <div class="form-group">
                         <label>Toggleable: @Html.CheckBox("techToggleable", false, new { @class = "tech-weight-toggle" })</label>
@@ -111,7 +112,7 @@
     <div class="col-sm-12">
     <h3>Techniques</h3>
     <hr />
-    <div>
+    <div id="techniqueSelection">
         <ul class="list-group">
             @foreach (var tech in Model.Techniques)
             {
