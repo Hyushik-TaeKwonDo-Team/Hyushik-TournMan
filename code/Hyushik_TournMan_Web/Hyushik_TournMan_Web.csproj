@@ -190,6 +190,7 @@
     <Compile Include="Classes\ViewModels\HomeViewModels.cs" />
     <Compile Include="Classes\ViewModels\ActiveTournamentViewModel.cs" />
     <Compile Include="Classes\ViewModels\UserRolesViewModel.cs" />
+    <Compile Include="Classes\ViewModels\WeaponsOrFormsListingViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -277,6 +278,7 @@
     <Content Include="Views\Admin\Participant.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\ActiveTournament\_WeaponOrFormResults.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>

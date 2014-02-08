@@ -1,0 +1,39 @@
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.WeaponsOrFormsListingViewModel
+
+@{string prefix = string.Empty;}
+
+<div>
+    
+    @if(Model.IsWeapons){
+        <h2>Weapons</h2>
+    }else{
+        <h2>Forms</h2>
+    }
+    <div>
+    @foreach(var listing in Model.WeaponsOrFormsListings.OrderByDescending(wfl=>wfl.CurrentScore)){
+        <div>
+            @using (Html.BeginForm("UpdateWeaponOrFormScoring", "Scoring", FormMethod.Post)) { 
+                <span>@listing.ParticipantName</span>
+                <span>Current Score: @listing.CurrentScore</span>
+                <input type="number" name="judgeScore" min="0" max="10"/>
+                <input type="hidden" name="entryId" value="@listing.WeaponsOrFormsResultId"/>
+                <input type="hidden" name="isWeapon" value="@Model.IsWeapons"/>
+                <button type="submit">Add Score</button>
+            }
+        </div>
+        
+    }
+    </div>
+
+    <div>
+        <a>Add New</a>
+        <!--Craig, this can/should be a modal-->
+        @using (Html.BeginForm("NewWeaponOrFormScoring", "Scoring", FormMethod.Post)) {
+                <input type="hidden" name="entryId" value="@Model.TournamentId"/> 
+                @Html.DropDownList("partId", new SelectList(Model.Participants, "ParticipantId", "Name"))
+                <input type="hidden" name="isWeapon" value="@Model.IsWeapons"/>
+                <button type="submit">Add</button>
+            }
+    </div>
+
+</div>

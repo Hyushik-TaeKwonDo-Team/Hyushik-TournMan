@@ -1,9 +1,19 @@
 ﻿@model Hyushik_TournMan_Web.Classes.ViewModels.ActiveTournamentViewModel
 
 <div>
-    <h2>@Model.Tournament.Name</h2>
-</div>
+    <div>
+        <h2>@Model.Tournament.Name</h2>
+    </div>
 
-<div>
-    @Html.Partial("_breakingResults", Model.BreakingScoreListingViewModel)
+    <div>
+        @Html.Partial("_breakingResults", Model.BreakingScoreListingViewModel)
+    </div>
+
+    <div>
+        @Html.Partial("_WeaponOrFormResults", Model.WeaponsListingViewModel)
+    </div>
+
+    <div>
+        @Html.Partial("_WeaponOrFormResults", Model.FormsListingViewModel)
+    </div>
 </div>

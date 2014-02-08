@@ -10,5 +10,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
     {
         public Tournament Tournament { get; set; }
         public BreakingScoreListingViewModel BreakingScoreListingViewModel { get; set; }
+        public WeaponsOrFormsListingViewModel WeaponsListingViewModel { get; set; }
+        public WeaponsOrFormsListingViewModel FormsListingViewModel { get; set; }
     }
 }

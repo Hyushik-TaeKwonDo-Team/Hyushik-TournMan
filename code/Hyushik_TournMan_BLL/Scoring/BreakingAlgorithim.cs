@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hyushik_TournMan_BLL
+namespace Hyushik_TournMan_BLL.Scoring
 {
     public class BreakingAlgorithim
     {

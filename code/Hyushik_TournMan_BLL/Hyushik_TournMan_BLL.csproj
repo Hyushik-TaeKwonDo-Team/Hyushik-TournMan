@@ -62,7 +62,7 @@
     <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BreakingAlgorithim.cs" />
+    <Compile Include="Scoring\BreakingAlgorithim.cs" />
     <Compile Include="Orchestrators\AdminOrchestrator.cs" />
     <Compile Include="Orchestrators\BaseOrchestrator.cs" />
     <Compile Include="Orchestrators\HomeOrchestrator.cs" />
@@ -73,6 +73,7 @@
     <Compile Include="Orchestrators\Interfaces\IScoringOrchestrator.cs" />
     <Compile Include="Orchestrators\ScoringOrchestrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scoring\WeaponsOrFormsAlgorithm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

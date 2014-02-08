@@ -13,11 +13,21 @@ namespace Hyushik_TournMan_Web.Controllers
     {
         private IActiveTournamentOrchestrator orch = new ActiveTournamentOrchestrator();
 
+        protected WeaponsOrFormsListingViewModel buildWeaponsViewModel(){
+            return new WeaponsOrFormsListingViewModel();
+        }
+
+        protected WeaponsOrFormsListingViewModel buildFormsViewModel(){
+            return new WeaponsOrFormsListingViewModel();
+        }
+
         protected ActiveTournamentViewModel BuildActiveTournamentViewModel(long tournId)
         {
             return new ActiveTournamentViewModel{
                 Tournament = orch.GetTournamentById(tournId),
-                BreakingScoreListingViewModel = BuildBreakingScoreListingViewModel(tournId)
+                BreakingScoreListingViewModel = BuildBreakingScoreListingViewModel(tournId),
+                WeaponsListingViewModel = buildWeaponsViewModel(),
+                FormsListingViewModel = buildFormsViewModel()
             };
         }
 

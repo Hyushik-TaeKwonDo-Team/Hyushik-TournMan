@@ -7,7 +7,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
 {
     public class BreakingScoreListingViewModel
     {
-        public long TournamentId;
+        public long TournamentId { get; set; }
 
         public List<BreakingScoreListing> BreakingScoreListings { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using Hyushik_TournMan_Common.Models;
+﻿using Hyushik_TournMan_BLL.Scoring;
+using Hyushik_TournMan_Common.Models;
 using Hyushik_TournMan_Common.Results;
 using Hyushik_TournMan_DAL.Contexts;
 using Hyushik_TournMan_DAL.StoredValues;
