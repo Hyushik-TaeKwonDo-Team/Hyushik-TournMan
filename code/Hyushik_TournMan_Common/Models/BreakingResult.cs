@@ -49,6 +49,7 @@ namespace Hyushik_TournMan_Common.Models
         [Key]
         public long Id { get; set; }
         public virtual TechniqueValue Technique{get;set;}
+        public bool SpeedHold { get; set; }
 
         public int BoardCount { get; set; }
         public bool BoardSpacers { get; set; }

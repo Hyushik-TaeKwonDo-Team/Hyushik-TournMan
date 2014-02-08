@@ -12,6 +12,8 @@ namespace Hyushik_TournMan_BLL
     {
         private double boardExp = 1.4;
         private  double NO_SPACER_BONUS = 1.3;
+        private double attempt_decay_rate = 0.2;
+        private double SPEED_HOLD_BONUS = 1.3;
 
 
 
@@ -24,35 +26,36 @@ namespace Hyushik_TournMan_BLL
             {
                 stationscores.Add(scoreStation(station));
             }
-            stationscores.Sort();
-            stationscores.Reverse();
-
-            //apply the fall off deductions for mutapale stations
-            for (var i = 0; i < stationscores.Count; i += 1)
-            {
-                stationscores[i] = stationscores[i] * Math.Pow(StoredValues.StationFalloffProportion,i);
-            }
 
 
-            double beforeBonus = stationscores.Sum();
+            double averageScore = stationscores.Sum() / stationscores.Count;
+
+            double Multiple_Technique_Coefficient = 1 + (0.1 * stationscores.Count - 1);
 
 
 
-            //average the judges subjective parts and use that to give a precentage boost to the total partisipent score
+
+
+
+            double tieBreaking = 0;
+
+            //average the judges subjective parts
             if (BreakingResult.JudgeScores.Count > 0)
             {
-                double judgeAverage = 0;
+                double judgeSum = 0;
                 foreach (var judge in BreakingResult.JudgeScores)
                 {
-                    judgeAverage = judgeAverage + judge.SubjectiveScore;
+                    judgeSum = judgeSum + judge.SubjectiveScore;
                 }
 
-                judgeAverage = judgeAverage / BreakingResult.JudgeScores.Count;
+                tieBreaking = judgeSum / BreakingResult.JudgeScores.Count;
 
-                var endScore = beforeBonus * (1 + (judgeAverage / 100));
-                return endScore;
             }
-            return beforeBonus;
+
+
+
+
+            return (averageScore * Multiple_Technique_Coefficient) + tieBreaking;
 
             
         }
@@ -68,6 +71,7 @@ namespace Hyushik_TournMan_BLL
             var bScore = getBoardScore(station);
             var penalty = getMissPenalty(station.attempts);
 
+
             return (tScore+bScore)*penalty;
         }
 
@@ -77,7 +81,7 @@ namespace Hyushik_TournMan_BLL
             /*
               This returns a percent of the total score for the station that the participent earns 
              */
-            double penalty = 1 / (Math.Sqrt(Math.Sqrt(attempts)));
+            double penalty = Math.Pow(Math.E, -attempt_decay_rate * (attempts - 1));
 
             return penalty;
         }
@@ -86,7 +90,7 @@ namespace Hyushik_TournMan_BLL
         private double getBoardScore(Station station)
         {
 
-            var boardBase = (station.BoardWidth) * station.BoardDepth;
+            var boardBase = (station.BoardWidth) * (1+station.BoardDepth);
 
             if (station.BoardCount == 1)
             {
@@ -101,6 +105,11 @@ namespace Hyushik_TournMan_BLL
                 tmpScore = tmpScore * NO_SPACER_BONUS;
             }
 
+            if (station.SpeedHold)
+            {
+                tmpScore = tmpScore * SPEED_HOLD_BONUS;
+            }
+            
             return tmpScore;
         }
 
