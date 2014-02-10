@@ -19,6 +19,16 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
             Participants = new List<Participant>();
         }
 
+        public void AddListing(string name, double score, long resultId)
+        {
+            WeaponsOrFormsListings.Add(new WeaponsOrFormsListing()
+            {
+                ParticipantName=name,
+                CurrentScore=score,
+                WeaponsOrFormsResultId=resultId,
+            });
+        }
+
     }
 
     public class WeaponsOrFormsListing{

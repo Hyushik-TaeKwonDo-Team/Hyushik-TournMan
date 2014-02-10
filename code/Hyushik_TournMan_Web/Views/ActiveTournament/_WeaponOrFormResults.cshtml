@@ -17,7 +17,7 @@
                 <span>Current Score: @listing.CurrentScore</span>
                 <input type="number" name="judgeScore" min="0" max="10"/>
                 <input type="hidden" name="entryId" value="@listing.WeaponsOrFormsResultId"/>
-                <input type="hidden" name="isWeapon" value="@Model.IsWeapons"/>
+                <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
                 <button type="submit">Add Score</button>
             }
         </div>
@@ -29,9 +29,9 @@
         <a>Add New</a>
         <!--Craig, this can/should be a modal-->
         @using (Html.BeginForm("NewWeaponOrFormScoring", "Scoring", FormMethod.Post)) {
-                <input type="hidden" name="entryId" value="@Model.TournamentId"/> 
+                <input type="hidden" name="tournId" value="@Model.TournamentId"/> 
                 @Html.DropDownList("partId", new SelectList(Model.Participants, "ParticipantId", "Name"))
-                <input type="hidden" name="isWeapon" value="@Model.IsWeapons"/>
+                <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
                 <button type="submit">Add</button>
             }
     </div>

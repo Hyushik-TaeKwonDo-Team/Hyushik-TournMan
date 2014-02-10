@@ -13,5 +13,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         List<BreakingResult> GetBreakingResultByTournamentId(long tournId);
         Tournament GetTournamentById(long id);
         BreakingScoringResult CalculateBreakingScore(BreakingResult breakingResult);
+        IList<Participant> GetParticipantsByTournId(long tournId);
+        List<WeaponResult> GetWeaponResultsByTournId(long tournId);
+        List<FormResult> GetFormResultsByTournId(long tournId);
     }
 }

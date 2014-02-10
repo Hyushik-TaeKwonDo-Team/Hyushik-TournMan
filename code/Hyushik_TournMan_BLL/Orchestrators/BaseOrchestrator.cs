@@ -16,6 +16,16 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         protected UsersContext _usersContext = new UsersContext();
         protected TournManContext _tournManContext = new TournManContext();
 
+        public List<WeaponResult> GetWeaponResultsByTournId(long tournId)
+        {
+            return _tournManContext.WeaponResults.Where(wr => wr.Tournament.Id==tournId).ToList();
+        }
+
+        public List<FormResult> GetFormResultsByTournId(long tournId)
+        {
+            return _tournManContext.FormResults.Where(wr => wr.Tournament.Id == tournId).ToList();
+        }
+
         public string GetPossibleBoardWidthsAsString()
         {
             return string.Join(",",GetPossibleBoardWidths());

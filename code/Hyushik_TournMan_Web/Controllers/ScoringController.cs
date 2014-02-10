@@ -9,6 +9,7 @@ using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
 using Hyushik_TournMan_Common.Models;
 using Hyushik_TournMan_Web.Filters;
 using Hyushik_TournMan_DAL.StoredValues;
+using Hyushik_TournMan_Common.Results;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
@@ -21,6 +22,28 @@ namespace Hyushik_TournMan_Web.Controllers
 
         //
         // GET: /Scoring/
+
+        [HttpPost]
+        public ActionResult NewWeaponOrFormScoring(long tournId, long partId, bool isWeapon)
+        {
+            OperationResult result;
+
+            if(isWeapon){
+                result = _orch.NewWeaponEntry(tournId, partId);
+            }else{
+                result = _orch.NewFormEntry(tournId, partId);
+            }
+            
+            if (result.WasSuccessful)
+            {
+                AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
+            return RedirectToAction("Index", "ActiveTournament", new { tournId = tournId });
+        }
 
         private StationViewModel mkStationViewModel()
         {

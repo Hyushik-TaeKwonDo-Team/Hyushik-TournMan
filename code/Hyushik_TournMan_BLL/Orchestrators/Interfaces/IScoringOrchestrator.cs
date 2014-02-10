@@ -20,5 +20,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         IEnumerable<UserProfile> GetUsers();
         List<double> GetPossibleBoardWidths();
         List<double> GetPossibleBoardDepths();
+
+        OperationResult NewWeaponEntry(long tournId, long partId);
+        OperationResult NewFormEntry(long tournId, long partId);
     }
 }

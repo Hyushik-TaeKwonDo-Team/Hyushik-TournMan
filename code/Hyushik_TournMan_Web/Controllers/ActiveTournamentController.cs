@@ -1,5 +1,6 @@
 ﻿using Hyushik_TournMan_BLL.Orchestrators;
 using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
+using Hyushik_TournMan_BLL.Scoring;
 using Hyushik_TournMan_Web.Classes.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,39 @@ namespace Hyushik_TournMan_Web.Controllers
     {
         private IActiveTournamentOrchestrator orch = new ActiveTournamentOrchestrator();
 
-        protected WeaponsOrFormsListingViewModel buildWeaponsViewModel(){
-            return new WeaponsOrFormsListingViewModel();
+        protected WeaponsOrFormsListingViewModel buildWeaponsViewModel(long tournId){
+            var scoringAlgorithm = new WeaponsOrFormsAlgorithm();
+            var vm =  new WeaponsOrFormsListingViewModel() 
+            {
+                Participants = orch.GetParticipantsByTournId(tournId).ToList(),
+                IsWeapons = true,
+                TournamentId = tournId
+            };
+            foreach(var result in orch.GetWeaponResultsByTournId(tournId))
+            {
+                vm.AddListing(result.Participant.Name, scoringAlgorithm.CalculateScore(result), result.Id);
+            }
+
+            return vm;
+
+
         }
 
-        protected WeaponsOrFormsListingViewModel buildFormsViewModel(){
-            return new WeaponsOrFormsListingViewModel();
+        protected WeaponsOrFormsListingViewModel buildFormsViewModel(long tournId)
+        {
+            var scoringAlgorithm = new WeaponsOrFormsAlgorithm();
+            var vm = new WeaponsOrFormsListingViewModel()
+            {
+                Participants = orch.GetParticipantsByTournId(tournId).ToList(),
+                IsWeapons = false,
+                TournamentId = tournId
+            };
+            foreach (var result in orch.GetFormResultsByTournId(tournId))
+            {
+                vm.AddListing(result.Participant.Name, scoringAlgorithm.CalculateScore(result), result.Id);
+            }
+
+            return vm;
         }
 
         protected ActiveTournamentViewModel BuildActiveTournamentViewModel(long tournId)
@@ -26,8 +54,8 @@ namespace Hyushik_TournMan_Web.Controllers
             return new ActiveTournamentViewModel{
                 Tournament = orch.GetTournamentById(tournId),
                 BreakingScoreListingViewModel = BuildBreakingScoreListingViewModel(tournId),
-                WeaponsListingViewModel = buildWeaponsViewModel(),
-                FormsListingViewModel = buildFormsViewModel()
+                WeaponsListingViewModel = buildWeaponsViewModel(tournId),
+                FormsListingViewModel = buildFormsViewModel(tournId)
             };
         }
 
@@ -53,6 +81,7 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             return View(BuildActiveTournamentViewModel(tournId));
         }
+
 
     }
 }

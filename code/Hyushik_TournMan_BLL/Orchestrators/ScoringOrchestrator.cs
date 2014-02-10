@@ -12,6 +12,48 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 {
     public class ScoringOrchestrator: BaseOrchestrator, IScoringOrchestrator
     {
+
+        public OperationResult NewWeaponEntry(long tournId, long partId)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var entry = new WeaponResult(){
+                    Tournament = GetTournamentById(tournId),
+                    Participant = GetParticipantById(partId)
+                };
+                _tournManContext.WeaponResults.Add(entry);
+                _tournManContext.SaveChanges();
+                result.Message = String.Format(Resources.WeaponScoreAddedMessage, entry.Participant.Name);
+                result.WasSuccessful = true;
+            }catch(Exception ex){
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public OperationResult NewFormEntry(long tournId, long partId)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var entry = new FormResult()
+                {
+                    Tournament = GetTournamentById(tournId),
+                    Participant = GetParticipantById(partId)
+                };
+                _tournManContext.FormResults.Add(entry);
+                _tournManContext.SaveChanges();
+                result.Message = String.Format(Resources.FormScoreAddedMessage, entry.Participant.Name);
+                result.WasSuccessful = true;
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
         public SaveBreakingJudgeScoreResult EnterJudgeScore(BreakingJudgeScore score, long entryId)
         {
             var result = new SaveBreakingJudgeScoreResult();
