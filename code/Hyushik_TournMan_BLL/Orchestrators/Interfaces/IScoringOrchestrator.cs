@@ -23,5 +23,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 
         OperationResult NewWeaponEntry(long tournId, long partId);
         OperationResult NewFormEntry(long tournId, long partId);
+        OperationResult ScoreWeaponEntry(long entryId, int score, string userName);
+        OperationResult ScoreFormEntry(long entryId, int score, string userName);
     }
 }

@@ -16,6 +16,16 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         protected UsersContext _usersContext = new UsersContext();
         protected TournManContext _tournManContext = new TournManContext();
 
+        public WeaponResult GetWeaponResultById(long id)
+        {
+            return _tournManContext.WeaponResults.First(wr => wr.Tournament.Id == id);
+        }
+
+        public FormResult GetFormResultById(long id)
+        {
+            return _tournManContext.FormResults.First(fr => fr.Tournament.Id == id);
+        }
+
         public List<WeaponResult> GetWeaponResultsByTournId(long tournId)
         {
             return _tournManContext.WeaponResults.Where(wr => wr.Tournament.Id==tournId).ToList();
@@ -134,6 +144,11 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 
         public IEnumerable<UserProfile> GetUsers(){
             return _usersContext.UserProfiles;
+        }
+
+        public UserProfile GetUserByName(string name)
+        {
+            return GetUsers().First(u=>u.UserName==name);
         }
 
         public IList<Tournament> GetActiveTournaments()

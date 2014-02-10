@@ -12,6 +12,49 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 {
     public class ScoringOrchestrator: BaseOrchestrator, IScoringOrchestrator
     {
+        public OperationResult ScoreWeaponEntry(long entryId, int score, string userName)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var entry = GetWeaponResultById(entryId);
+                entry.JudgeScores.Add(new WeaponAndFormJudgeScore()
+                {
+                    Score=score,
+                    Judge_UserId=GetUserByName(userName).UserId
+                });
+                _tournManContext.SaveChanges();
+                result.Message = String.Format(Resources.FormScoreJudgedMessage, entry.Participant.Name, score);
+                result.WasSuccessful = true;
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public OperationResult ScoreFormEntry(long entryId, int score, string userName)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var entry = GetFormResultById(entryId);
+                entry.JudgeScores.Add(new WeaponAndFormJudgeScore()
+                {
+                    Score = score,
+                    Judge_UserId = GetUserByName(userName).UserId
+                });
+                _tournManContext.SaveChanges();
+                result.Message = String.Format(Resources.WeaponScoreJudgedMessage, entry.Participant.Name, score);
+                result.WasSuccessful = true;
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            return result;
+        }
 
         public OperationResult NewWeaponEntry(long tournId, long partId)
         {

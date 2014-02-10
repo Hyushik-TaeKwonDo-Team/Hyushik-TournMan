@@ -135,6 +135,9 @@
   <data name="FormScoreAddedMessage" xml:space="preserve">
     <value>Form scoring has started for "{0}"</value>
   </data>
+  <data name="FormScoreJudgedMessage" xml:space="preserve">
+    <value>Form for "{0}" has been scored "{1}"</value>
+  </data>
   <data name="LoginSuccessfulMessage" xml:space="preserve">
     <value>You have successfully logged in</value>
   </data>
@@ -182,5 +185,8 @@
   </data>
   <data name="WeaponScoreAddedMessage" xml:space="preserve">
     <value>Weapon scoring has started for "{0}"</value>
+  </data>
+  <data name="WeaponScoreJudgedMessage" xml:space="preserve">
+    <value>Weapon for "{0}" has been scored "{1}"</value>
   </data>
 </root>

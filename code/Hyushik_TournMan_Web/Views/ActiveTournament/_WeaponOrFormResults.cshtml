@@ -16,6 +16,7 @@
                 <span>@listing.ParticipantName</span>
                 <span>Current Score: @listing.CurrentScore</span>
                 <input type="number" name="judgeScore" min="0" max="10"/>
+                <input type="hidden" name="tournId" value="@Model.TournamentId"/>
                 <input type="hidden" name="entryId" value="@listing.WeaponsOrFormsResultId"/>
                 <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
                 <button type="submit">Add Score</button>

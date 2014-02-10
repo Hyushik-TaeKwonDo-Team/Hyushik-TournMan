@@ -24,6 +24,31 @@ namespace Hyushik_TournMan_Web.Controllers
         // GET: /Scoring/
 
         [HttpPost]
+        public ActionResult UpdateWeaponOrFormScoring(long entryId, int judgeScore, bool isWeapon, long tournId)
+        {
+            OperationResult result;
+
+            if (isWeapon)
+            {
+                result = _orch.ScoreWeaponEntry(entryId, judgeScore, User.Identity.Name);
+            }
+            else
+            {
+                result = _orch.ScoreFormEntry(entryId, judgeScore, User.Identity.Name);
+            }
+
+            if (result.WasSuccessful)
+            {
+                AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
+            return RedirectToAction("Index", "ActiveTournament", new { tournId = tournId });
+        }
+
+        [HttpPost]
         public ActionResult NewWeaponOrFormScoring(long tournId, long partId, bool isWeapon)
         {
             OperationResult result;

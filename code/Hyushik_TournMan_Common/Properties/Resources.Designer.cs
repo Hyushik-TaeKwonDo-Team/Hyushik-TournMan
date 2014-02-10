@@ -115,6 +115,15 @@ namespace Hyushik_TournMan_Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Form for &quot;{0}&quot; has been scored &quot;{1}&quot;.
+        /// </summary>
+        public static string FormScoreJudgedMessage {
+            get {
+                return ResourceManager.GetString("FormScoreJudgedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have successfully logged in.
         /// </summary>
         public static string LoginSuccessfulMessage {
@@ -255,6 +264,15 @@ namespace Hyushik_TournMan_Common.Properties {
         public static string WeaponScoreAddedMessage {
             get {
                 return ResourceManager.GetString("WeaponScoreAddedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weapon for &quot;{0}&quot; has been scored &quot;{1}&quot;.
+        /// </summary>
+        public static string WeaponScoreJudgedMessage {
+            get {
+                return ResourceManager.GetString("WeaponScoreJudgedMessage", resourceCulture);
             }
         }
     }
