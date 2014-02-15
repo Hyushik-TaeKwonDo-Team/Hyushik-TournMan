@@ -6,8 +6,8 @@
 
 <script>
     window.navToTech = function navToTech(targetId){
-        console.log("targetId: "+targetId);
-        var target$ = $("#"+targetId);
+        var target$ = $(".selectedStation #" + targetId);
+        console.log("Target: " + target$);
         showTech(target$);
     }
 
@@ -25,9 +25,11 @@
 
     function toTop() {
         //hideTech($(".visibleTech"));
+        $('.station').show();
         $('.sectionTop').siblings().hide();
         $('.sectionTop').show();
         $('.submitBreaking').show();
+        $(".selectedStation").removeClass("selectedStation");
     }
 
     function clearStationTechnique(targetStation$) {
@@ -48,6 +50,9 @@
         });
 
         $('.technique').click(function () {
+            $('.station').hide();
+            $(this).parents('.station').show();
+            $(this).parents(".station").addClass(" selectedStation");
             $(this).siblings(".techniqueCategory").find(".sectionBack").hide();
             $(this).siblings(".techniqueCategory").find("[id^=tech-]").hide();
             $(this).siblings(".techniqueCategory").children().show();
@@ -78,9 +83,9 @@
          
          for (int i=0; i<Model.Stations.Count; ++i)
          {
-            <div class="station">
+            <div id="station-@i" class="station">
                 <ul>
-                    <li> 
+                    <li class="stationWrapper"> 
                         <span class="technique sectionTop"><a class = "displayTechnique">Technique</a></span>
                         @if(Model.Stations[i].BaseTechniques.Count>0){
                             <ul class="techniqueModifiers">
