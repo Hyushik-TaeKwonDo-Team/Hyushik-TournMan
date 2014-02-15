@@ -29,6 +29,7 @@
         $('.sectionTop').siblings().hide();
         $('.sectionTop').show();
         $('.submitBreaking').show();
+        $('.sectionToppish').show();
         $(".selectedStation").removeClass("selectedStation");
     }
 
@@ -49,6 +50,7 @@
             $('.sectionTop').hide();
             $(this).siblings().show();
             $('.submitBreaking').hide();
+            $('.sectionToppish').hide();
         });
 
         $('.technique').click(function () {
@@ -143,7 +145,7 @@
                         </ul>
                     </li>
                     <li>
-                        <button type="button" class="clearTechnique">Clear Technique</button>
+                        <button type="button" class="clearTechnique sectionToppish">Clear Technique</button>
                     </li>
                 </ul>
             </div>
