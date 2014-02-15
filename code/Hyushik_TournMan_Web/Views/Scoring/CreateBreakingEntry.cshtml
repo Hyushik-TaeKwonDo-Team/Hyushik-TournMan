@@ -33,8 +33,10 @@
     }
 
     function clearStationTechnique(targetStation$) {
-        var technique$ = targetStation$.find(".technique");
-        //TODO
+        targetStation$.find('input[type=checkbox]:checked').removeAttr('checked');
+        targetStation$.find('[id$=BoardsViewModel_Width]').get(0).selectedIndex = 0;
+        targetStation$.find('[id$=BoardsViewModel_Depth]').get(0).selectedIndex = 0;
+        targetStation$.find('[id$=BoardsViewModel_Amount]').val("1"); //fear the magic number
     }
 
     $(document).ready(function () {
@@ -63,11 +65,16 @@
         $('.sectionBack').click(function () {
             //DNFW
             //FW'd with this too, Bro
+            
             toTop();
         });
 
         $('.techniqueLeaf').click(function () {
             toTop();
+        });
+
+        $('.clearTechnique').click(function () {
+            clearStationTechnique($(this).parents(".station"));
         });
     });
 
@@ -100,7 +107,7 @@
                                     string liClass = x.tech.IsLeaf() ? "techniqueLeaf" : "";
                                     <li class="@liClass">@Html.EditorFor(model=>model.Stations[i].BaseTechniques[x.index])</li>
                                 }
-                                <li class="sectionBack">
+                                <li class="sectionBack clearTechnique">
                                     <a>Cancel</a>
                                 </li>
                             </ul>
@@ -134,6 +141,9 @@
                                 <a >Done</a>
                             </li>
                         </ul>
+                    </li>
+                    <li>
+                        <button type="button" class="clearTechnique">Clear Technique</button>
                     </li>
                 </ul>
             </div>
