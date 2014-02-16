@@ -62,6 +62,7 @@
         });
 
         $('.techniqueLeaf').click(function () {
+            $(this).closest('.station').find('.displayTechnique').text($(this).text());
             toTop();
         });
     });
