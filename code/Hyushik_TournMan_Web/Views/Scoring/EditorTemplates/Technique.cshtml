@@ -13,7 +13,7 @@
     </label>
 }
 else{
-    <span id="tech-@Model.Id" class="CollapsibleList">
+    <span id="tech-@Model.Id" class="CollapsibleList tech-@Model.Id">
         @if (Model.IsLeaf())
         {
             <label>
@@ -43,7 +43,7 @@ else{
                 string liClass = x.tech.IsLeaf() ? "techniqueLeaf" : "";
                 <li class=" @liClass">@Html.EditorFor(model=>model.SubTechniques[x.index])</li>
             }
-            <li class="sectionBack">
+            <li class="sectionBack clearTechnique">
                 <a>Cancel</a>
             </li>
             
