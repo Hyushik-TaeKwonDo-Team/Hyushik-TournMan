@@ -19,12 +19,12 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 
         public WeaponResult GetWeaponResultById(long id)
         {
-            return _tournManContext.WeaponResults.First(wr => wr.Tournament.Id == id);
+            return _tournManContext.WeaponResults.First(wr => wr.Id == id);
         }
 
         public FormResult GetFormResultById(long id)
         {
-            return _tournManContext.FormResults.First(fr => fr.Tournament.Id == id);
+            return _tournManContext.FormResults.First(fr => fr.Id == id);
         }
 
         public List<WeaponResult> GetWeaponResultsByTournId(long tournId)

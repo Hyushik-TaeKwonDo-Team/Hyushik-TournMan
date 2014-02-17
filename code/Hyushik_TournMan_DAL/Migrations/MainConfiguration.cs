@@ -30,13 +30,17 @@ namespace Hyushik_TournMan_DAL.Migrations
             //
 
             var part1 = new Participant() { Name = "Participant 1" };
+            var part2 = new Participant() { Name = "Participant 2" };
+            var part3 = new Participant() { Name = "Participant 3" };
             context.Participants.AddOrUpdate(
                 p => p.Name,
-                part1
+                part1, part2, part3
                 );
 
             var tourn1 = new Tournament() { Name = "Tournament 1", Active = true };
             tourn1.Participants.Add(part1);
+            tourn1.Participants.Add(part2);
+            tourn1.Participants.Add(part3);
 
             context.Tournaments.AddOrUpdate(
                 t=> t.Name,

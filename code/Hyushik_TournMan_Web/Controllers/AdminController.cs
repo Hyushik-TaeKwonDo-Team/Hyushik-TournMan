@@ -242,10 +242,8 @@ namespace Hyushik_TournMan_Web.Controllers
         [HttpPost]
         public ActionResult SetBreakingStoredValues(BreakingStoredValuesViewModel vm)
         {
-            //d is for double, that's good enough for me
-
             var results = new List<OperationResult>();
-            
+            //d is for double, that's good enough for me
             orch.SetStationFalloffProportion(vm.StationFalloffProportion / 100d);
             orch.SetStationMaxBreakingStationCount(vm.MaxBreakingStationCount);
             results.Add(orch.SetPossibleBoardWidths(vm.PossibleBoardWidths));
