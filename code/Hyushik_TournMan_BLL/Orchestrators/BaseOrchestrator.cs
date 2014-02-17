@@ -1,5 +1,6 @@
 ﻿using Hyushik_TournMan_BLL.Scoring;
 using Hyushik_TournMan_Common.Models;
+using Hyushik_TournMan_Common.Properties;
 using Hyushik_TournMan_Common.Results;
 using Hyushik_TournMan_DAL.Contexts;
 using Hyushik_TournMan_DAL.StoredValues;
@@ -81,8 +82,10 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             var result = new OperationResult() { WasSuccessful = false };
             try
             {
+                var changed = !Enumerable.SequenceEqual(newVals, GetPossibleBoardDepths());
                 StoredValues.PossibleBoardDepths = newVals;
                 result.WasSuccessful = true;
+                if (changed) result.Message = Resources.PossibleBoardDepthsUpdatedMessage;
             }
             catch (Exception ex)
             {
@@ -113,11 +116,14 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 
         public OperationResult SetPossibleBoardWidths(List<double> newVals)
         {
+            
             var result = new OperationResult() { WasSuccessful = false };
             try
             {
+                var changed = !Enumerable.SequenceEqual(newVals, GetPossibleBoardWidths());
                 StoredValues.PossibleBoardWidths = newVals;
                 result.WasSuccessful = true;
+                 if (changed) result.Message = Resources.PossibleBoardWidthsUpdatedMessage;
             }catch(Exception ex){
                 result.Message = ex.Message;
             }; 

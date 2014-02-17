@@ -243,10 +243,28 @@ namespace Hyushik_TournMan_Web.Controllers
         public ActionResult SetBreakingStoredValues(BreakingStoredValuesViewModel vm)
         {
             //d is for double, that's good enough for me
+
+            var results = new List<OperationResult>();
+            
             orch.SetStationFalloffProportion(vm.StationFalloffProportion / 100d);
             orch.SetStationMaxBreakingStationCount(vm.MaxBreakingStationCount);
-            orch.SetPossibleBoardWidths(vm.PossibleBoardWidths);
-            orch.SetPossibleBoardDepths(vm.PossibleBoardDepths);
+            results.Add(orch.SetPossibleBoardWidths(vm.PossibleBoardWidths));
+            results.Add(orch.SetPossibleBoardDepths(vm.PossibleBoardDepths));
+
+            foreach (var result in results){
+                if(String.IsNullOrEmpty(result.Message)){
+                    continue; 
+                }
+                if (result.WasSuccessful)
+                {
+                    AddSucessNotification(result.Message);
+                }
+                else if (!result.WasSuccessful)
+                {
+                    AddErrorNotification(result.Message);
+                }
+            }
+
             return RedirectToAction("Index");   
         }
     }

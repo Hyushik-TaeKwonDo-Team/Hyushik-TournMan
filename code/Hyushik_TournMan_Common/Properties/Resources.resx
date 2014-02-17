@@ -147,6 +147,12 @@
   <data name="NewTournamentCreatedMessage" xml:space="preserve">
     <value>The tournament "{0}" was successfully created.</value>
   </data>
+  <data name="PossibleBoardDepthsUpdatedMessage" xml:space="preserve">
+    <value>Possible board depths have been updated</value>
+  </data>
+  <data name="PossibleBoardWidthsUpdatedMessage" xml:space="preserve">
+    <value>Possible board widths have been updated</value>
+  </data>
   <data name="TechniqueAddedMessage" xml:space="preserve">
     <value>Technique "{0}" was added</value>
   </data>
