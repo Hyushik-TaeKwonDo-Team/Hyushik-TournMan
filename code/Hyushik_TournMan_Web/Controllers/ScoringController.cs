@@ -155,7 +155,7 @@ namespace Hyushik_TournMan_Web.Controllers
             score.SubjectiveScore=vm.SubjectiveScore;
             score.Judge_UserId = _orch.GetUsers().First(u=>u.UserName==User.Identity.Name).UserId;
 
-            var result = _orch.EnterJudgeScore(score, vm.EntryId);
+            var result = _orch.EnterBreakingJudgeScore(score, vm.EntryId);
 
             if (result.WasSuccessful)
             {

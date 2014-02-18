@@ -112,14 +112,17 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return result;
         }
 
-        public SaveBreakingJudgeScoreResult EnterJudgeScore(BreakingJudgeScore score, long entryId)
+        public SaveBreakingJudgeScoreResult EnterBreakingJudgeScore(BreakingJudgeScore score, long entryId)
         {
             var result = new SaveBreakingJudgeScoreResult();
             BreakingResult entry;
             try
             {
-                
                 entry = GetBreakingResultById(entryId);
+                var previousScore = entry.JudgeScores.FirstOrDefault(js=>js.Judge_UserId==score.Judge_UserId);
+                if(null!=previousScore){
+                    entry.JudgeScores.Remove(previousScore);
+                }
                 result.TournamentId = entry.Tournament.Id;
                 entry.JudgeScores.Add(score);
                 _tournManContext.SaveChanges();

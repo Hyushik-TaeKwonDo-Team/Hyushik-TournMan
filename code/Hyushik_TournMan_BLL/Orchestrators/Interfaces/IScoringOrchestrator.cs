@@ -10,7 +10,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 {
     public interface IScoringOrchestrator
     {
-        SaveBreakingJudgeScoreResult EnterJudgeScore(BreakingJudgeScore score, long entryId);
+        SaveBreakingJudgeScoreResult EnterBreakingJudgeScore(BreakingJudgeScore score, long entryId);
         IList<Technique> GetTopLevelTechniques();
         TechniqueValueResult CreateTechniqueValue(List<Technique> techniques);
         OperationResult SaveBreakingResult(BreakingResult breakingResult);
