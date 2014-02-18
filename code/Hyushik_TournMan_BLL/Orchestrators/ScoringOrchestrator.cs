@@ -18,13 +18,19 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             try
             {
                 var entry = GetWeaponResultById(entryId);
-                entry.JudgeScores.Add(new WeaponAndFormJudgeScore()
-                {
-                    Score=score,
-                    Judge_UserId=GetUserByName(userName).UserId
-                });
-                _tournManContext.SaveChanges();
+                var user = GetUserByName(userName);
+                var previousScore = entry.JudgeScores.FirstOrDefault(js=>js.Judge_UserId==user.UserId);
+                if(null!=previousScore){
+                    previousScore.Score = score;
+                }else{
+                    entry.JudgeScores.Add(new WeaponAndFormJudgeScore()
+                    {
+                        Score=score,
+                        Judge_UserId = user.UserId
+                    });
+                }
                 result.Message = String.Format(Resources.FormScoreJudgedMessage, entry.Participant.Name, score);
+                _tournManContext.SaveChanges();
                 result.WasSuccessful = true;
             }
             catch (Exception ex)
@@ -40,11 +46,20 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             try
             {
                 var entry = GetFormResultById(entryId);
-                entry.JudgeScores.Add(new WeaponAndFormJudgeScore()
+                var user = GetUserByName(userName);
+                var previousScore = entry.JudgeScores.FirstOrDefault(js => js.Judge_UserId == user.UserId);
+                if (null != previousScore)
                 {
-                    Score = score,
-                    Judge_UserId = GetUserByName(userName).UserId
-                });
+                    previousScore.Score = score;
+                }
+                else
+                {
+                    entry.JudgeScores.Add(new WeaponAndFormJudgeScore()
+                    {
+                        Score = score,
+                        Judge_UserId = user.UserId
+                    });
+                }
                 _tournManContext.SaveChanges();
                 result.Message = String.Format(Resources.WeaponScoreJudgedMessage, entry.Participant.Name, score);
                 result.WasSuccessful = true;
