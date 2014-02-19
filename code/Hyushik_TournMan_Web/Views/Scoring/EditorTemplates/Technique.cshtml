@@ -14,22 +14,23 @@
 }
 else{
     <span id="tech-@Model.Id" class="CollapsibleList tech-@Model.Id">
+        <span class="btn-group col-xs-4 col-sm-2" data-toggle="buttons">
         @if (Model.IsLeaf())
         {
-            <label>
+            <label class="btn btn-primary">
                 @Html.CheckBoxFor(model=>model.Selected)
                 @Model.Name
             </label>
         }
         else {
-            <label onclick="navToTech('tech-@Model.Id')">
+            <label class="btn btn-primary" onclick="navToTech('tech-@Model.Id')">
                 @Html.CheckBoxFor(model=>model.Selected)
                 @Model.Name
             </label>
          }  
-            
-            
+         </span>   
     </span>
+    
     if(Model.SubTechniques.Count>0){
         <ul class="techniqueModifiers">
             @foreach (var x in Model.SubTechniques.Select((tech, index) => new { index, tech }).Where(x => x.tech.Toggleable))
@@ -44,7 +45,7 @@ else{
                 <li class=" @liClass">@Html.EditorFor(model=>model.SubTechniques[x.index])</li>
             }
             <li class="sectionBack clearTechnique">
-                <a>Cancel</a>
+                <a class="btn btn-default btn-sm">Cancel</a>
             </li>
             
         </ul>
