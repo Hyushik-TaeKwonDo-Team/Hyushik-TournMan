@@ -42,8 +42,6 @@
 {   
     
     using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" })){
-        if (!tech.Toggleable)
-        {
             @* This is very hacked together. There can be only one Modal, so the values are passed via js through onClick *@
             <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#popTechnique" style="float:right" onClick="$('input[name=parentId]').val('@tech.Id')">+ SubTechnique</button>
     
@@ -63,9 +61,6 @@
                     <div class="form-group">
                         <span class="tech-weight"> Weight:<input type="number" name="techWeight"  value="0" class="form-control" min="0" max="100"/></span>
                     </div>
-                    <div class="form-group">
-                        <label>Toggleable: @Html.CheckBox("techToggleable", false, new { @class = "tech-weight-toggle" })</label>
-                    </div>
                   </div>
                   <div class="modal-footer">
                     <button class="btn btn-primary" type="submit">Add</button>
@@ -73,7 +68,6 @@
                 </div>
               </div>
             </div>
-        }
         }
     using (Html.BeginForm("UpdateTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
@@ -87,16 +81,10 @@
         {
                 <input name="techWeight" type="hidden" class="tech-edit" value="@tech.Weight"/>
         }    
-            <span> Toggleable:</span>@Html.CheckBox("techPriorToggleable", @tech.Toggleable, new { @class = "tech-show", disabled = "disabled" })@Html.CheckBox("techToggleable", @tech.Toggleable, new { @class = "tech-edit tech-weight-toggle" })
             <a class="tech-show tech-edit-button">Edit</a> <a class="tech-edit tech-edit-button">Cancel Edit</a>
             <button type="submit" class="tech-edit">Update</button >
             <a class="tech-edit tech-delete-button">Delete</a>
     }
-
-            if (tech.Toggleable)
-            {
-                return;
-            }
         <ul>
             
             @foreach (var subTech in tech.SubTechniques)
@@ -126,7 +114,6 @@
             <input type="text" name="techName" class="tech-new-edit" value="New Technique"/>
             <span class="tech-new-edit">
                 <span class="tech-weight"> Weight:<input type="number" name="techWeight"  value="0"/></span>
-                <span>Toggleable: </span>@Html.CheckBox("techToggleable", false, new { @class = "tech-weight-toggle" })
             </span>
             <a class="tech-new-edit tech-new-edit-button">Cancel</a>
             <button type="submit" class="tech-new-edit">Add</button >

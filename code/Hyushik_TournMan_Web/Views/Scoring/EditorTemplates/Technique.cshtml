@@ -6,13 +6,7 @@
 @Html.HiddenFor(model=>model.Name)
 @Html.HiddenFor(model=>model.Weight)
 
-@if(Model.Toggleable){
-    <label>
-        @Html.CheckBoxFor(model=>model.Selected)
-        @Model.Name
-    </label>
-}
-else{
+
     <span id="tech-@Model.Id" class="CollapsibleList tech-@Model.Id">
         <span class="btn-group col-xs-4 col-sm-2" data-toggle="buttons">
         @if (Model.IsLeaf())
@@ -31,15 +25,9 @@ else{
          </span>   
     </span>
     
-    if(Model.SubTechniques.Count>0){
-        <ul class="techniqueModifiers">
-            @foreach (var x in Model.SubTechniques.Select((tech, index) => new { index, tech }).Where(x => x.tech.Toggleable))
-            {
-                <li>@Html.EditorFor(model=>model.SubTechniques[x.index])</li>
-            }
-        </ul>
+    @if(Model.SubTechniques.Count>0){
         <ul class="techniqueCategory">
-            @foreach (var x in Model.SubTechniques.Select((tech, index) => new {index, tech}).Where(x=>!x.tech.Toggleable))
+            @foreach (var x in Model.SubTechniques.Select((tech, index) => new {index, tech}))
             {
                 string liClass = x.tech.IsLeaf() ? "techniqueLeaf" : "";
                 <li class=" @liClass">@Html.EditorFor(model=>model.SubTechniques[x.index])</li>
@@ -50,4 +38,3 @@ else{
             
         </ul>
     }
-}

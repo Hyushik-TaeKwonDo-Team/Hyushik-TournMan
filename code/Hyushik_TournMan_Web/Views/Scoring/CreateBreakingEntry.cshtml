@@ -105,14 +105,8 @@
                     <li class="stationWrapper"> 
                         <span class="technique sectionTop"><a class = "displayTechnique">Technique</a></span>
                         @if(Model.Stations[i].BaseTechniques.Count>0){
-                            <ul class="techniqueModifiers">
-                                @foreach (var x in Model.Stations[i].BaseTechniques.Select((tech, index) => new { index, tech }).Where(x => x.tech.Toggleable))
-                                {
-                                    <li>@Html.EditorFor(model=>model.Stations[i].BaseTechniques[x.index])</li>
-                                }
-                            </ul>
                             <ul class="techniqueCategory">
-                                @foreach (var x in Model.Stations[i].BaseTechniques.Select((tech, index) => new { index, tech }).Where(x => !x.tech.Toggleable))
+                                @foreach (var x in Model.Stations[i].BaseTechniques.Select((tech, index) => new { index, tech }))
                                 {
                                     string liClass = x.tech.IsLeaf() ? "techniqueLeaf" : "";
                                     <li class="@liClass">@Html.EditorFor(model=>model.Stations[i].BaseTechniques[x.index])</li>

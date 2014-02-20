@@ -24,9 +24,6 @@ namespace Hyushik_TournMan_Common.Models
         [NotMapped]
         public bool Selected { get; set; } 
 
-        //toggleable techs have no subtechniques
-        public bool Toggleable { get; set; }
-
         //exists for querying
         public virtual Technique Parent { get; set; }
 
@@ -46,7 +43,7 @@ namespace Hyushik_TournMan_Common.Models
         public bool CanHaveWeight{
             get
             {
-                return IsLeaf() || Toggleable;
+                return IsLeaf();
             }
         }
 

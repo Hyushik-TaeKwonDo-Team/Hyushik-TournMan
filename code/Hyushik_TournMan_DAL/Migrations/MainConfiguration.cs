@@ -51,26 +51,22 @@ namespace Hyushik_TournMan_DAL.Migrations
 
             var toggleTech = new Technique()
             {
-                Name = "Toggle Tech",
-                Toggleable = true
+                Name = "Toggle Tech"
             };
 
             var parentTech = new Technique()
             {
-                Name = "Parent Tech",
-                Toggleable = false
+                Name = "Parent Tech"
             };
 
             var childTech = new Technique()
             {
-                Name = "Child Tech",
-                Toggleable = false
+                Name = "Child Tech"
             };
 
             var secondaryChildTech = new Technique()
             {
-                Name = "Secondary Child Tech",
-                Toggleable = false
+                Name = "Secondary Child Tech"
             };
 
             parentTech.AddSubTechnique(childTech);

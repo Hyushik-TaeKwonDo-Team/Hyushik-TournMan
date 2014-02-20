@@ -83,7 +83,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 
                 tech.Name = techName;
                 tech.Weight = techWeight;
-                tech.Toggleable = techToggleable;
                 //MAGIC NUMBER OF TOP SHELF TECHNIQUEs
                 if(parentId!=-1){
                     var parentTech = _tournManContext.Techniques.FirstOrDefault(t => t.Id == parentId);
@@ -115,7 +114,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 tech = _tournManContext.Techniques.FirstOrDefault(t => t.Id == techId);
                 tech.Name = techName;
                 tech.Weight = techWeight;
-                tech.Toggleable = techToggleable;
                 if(techToggleable){
                     RecursiveDeleteSubTechs(tech);
                 }
