@@ -195,9 +195,9 @@ namespace Hyushik_TournMan_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateTechnique(long techId, string techName, int techWeight, bool techToggleable)
+        public ActionResult UpdateTechnique(long techId, string techName, int techWeight)
         {
-            var result = orch.UpdateTechnique(techId, techName, techWeight, techToggleable);
+            var result = orch.UpdateTechnique(techId, techName, techWeight);
             if (result.WasSuccessful)
             {
                 AddSucessNotification(result.Message);
@@ -210,9 +210,9 @@ namespace Hyushik_TournMan_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddTechnique(long parentId, string techName, int techWeight, bool techToggleable)
+        public ActionResult AddTechnique(long parentId, string techName, int techWeight)
         {
-            var result = orch.AddTechnique(parentId, techName, techWeight, techToggleable);
+            var result = orch.AddTechnique(parentId, techName, techWeight);
             if (result.WasSuccessful)
             {
                 AddSucessNotification(result.Message);

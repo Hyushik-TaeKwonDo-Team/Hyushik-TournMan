@@ -73,7 +73,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return result;
         }
 
-        public OperationResult AddTechnique(long parentId, string techName, int techWeight, bool techToggleable)
+        public OperationResult AddTechnique(long parentId, string techName, int techWeight)
         {
             var result = new OperationResult() { WasSuccessful = false };
             Technique tech;
@@ -105,7 +105,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return result;
         }
 
-        public OperationResult UpdateTechnique(long techId, string techName, int techWeight, bool techToggleable)
+        public OperationResult UpdateTechnique(long techId, string techName, int techWeight)
         {
             var result = new OperationResult() { WasSuccessful = false };
             Technique tech;
@@ -114,9 +114,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 tech = _tournManContext.Techniques.FirstOrDefault(t => t.Id == techId);
                 tech.Name = techName;
                 tech.Weight = techWeight;
-                if(techToggleable){
-                    RecursiveDeleteSubTechs(tech);
-                }
                 if (!tech.CanHaveWeight)
                 {
                     tech.Weight = 0;
