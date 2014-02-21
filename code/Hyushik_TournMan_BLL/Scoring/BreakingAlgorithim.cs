@@ -55,7 +55,7 @@ namespace Hyushik_TournMan_BLL.Scoring
 
 
 
-            return (averageScore * Multiple_Technique_Coefficient) + tieBreaking;
+            return (averageScore * Multiple_Technique_Coefficient) + (tieBreaking/10);
 
             
         }
