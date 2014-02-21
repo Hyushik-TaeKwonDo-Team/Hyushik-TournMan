@@ -16,7 +16,7 @@
             <span>Current Score: @listing.CurrentScore</span>
             @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) { 
                 using (Html.BeginForm("UpdateWeaponOrFormScoring", "Scoring", FormMethod.Post)) { 
-                    <input type="number" name="judgeScore" min="0" max="10"/>
+                    <input type="number" name="judgeScore" min="0" max="10" pattern="\d+"/>
                     <input type="hidden" name="tournId" value="@Model.TournamentId"/>
                     <input type="hidden" name="entryId" value="@listing.WeaponsOrFormsResultId"/>
                     <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
