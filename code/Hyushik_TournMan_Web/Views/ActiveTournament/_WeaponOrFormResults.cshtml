@@ -27,12 +27,12 @@
     </div>
 
     <div>
-        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#popTechnique">Add New</button>
+        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#popTechnique-@Model.IsWeapons.ToString()">Add New</button>
 
         @using (Html.BeginForm("NewWeaponOrFormScoring", "Scoring", FormMethod.Post)) {
             
             <!-- Modal -->
-                <div class="modal fade" id="popTechnique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="popTechnique-@Model.IsWeapons.ToString()" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
