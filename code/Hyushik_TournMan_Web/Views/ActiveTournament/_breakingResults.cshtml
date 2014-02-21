@@ -7,7 +7,7 @@
             <tr>
                 <th>Name</th>
                 <th>Score</th>
-                @if (Roles.IsUserInRole("Judge")){<th>Add Weight to Score</th>}
+                @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<th>Add Weight to Score</th>}
             </tr>
         </thead>
         <tbody>
@@ -15,7 +15,7 @@
                 <tr>
                     <td>@listing.ParticipantName</td>
                     <td>@listing.CurrentScore</td>
-                    @if (Roles.IsUserInRole("Judge")){
+                    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
                         <td>@Html.ActionLink("Judge", "JudgeBreakingEntry", "Scoring", new { entryId=listing.BreakingEntryId}, null)</td>
                     }
                  </tr>
@@ -23,8 +23,11 @@
           </tbody>
     </table>
     
-    <div>
-        @Html.ActionLink("Add New", "CreateBreakingEntry", "Scoring", new { tournId = Model.TournamentId }, new { @class = "btn btn-primary btn-sm" })
-    </div>
+    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) {
+        <div>
+
+            @Html.ActionLink("Add New", "CreateBreakingEntry", "Scoring", new { tournId = Model.TournamentId }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    }
 
 </div>

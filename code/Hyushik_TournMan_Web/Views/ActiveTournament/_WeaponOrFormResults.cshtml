@@ -12,24 +12,27 @@
     <div>
     @foreach(var listing in Model.WeaponsOrFormsListings.OrderByDescending(wfl=>wfl.CurrentScore)){
         <div>
-            @using (Html.BeginForm("UpdateWeaponOrFormScoring", "Scoring", FormMethod.Post)) { 
-                <span>@listing.ParticipantName</span>
-                <span>Current Score: @listing.CurrentScore</span>
-                <input type="number" name="judgeScore" min="0" max="10"/>
-                <input type="hidden" name="tournId" value="@Model.TournamentId"/>
-                <input type="hidden" name="entryId" value="@listing.WeaponsOrFormsResultId"/>
-                <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
-                <button type="submit">Add Score</button>
+            <span>@listing.ParticipantName</span>
+            <span>Current Score: @listing.CurrentScore</span>
+            @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) { 
+                using (Html.BeginForm("UpdateWeaponOrFormScoring", "Scoring", FormMethod.Post)) { 
+                    <input type="number" name="judgeScore" min="0" max="10"/>
+                    <input type="hidden" name="tournId" value="@Model.TournamentId"/>
+                    <input type="hidden" name="entryId" value="@listing.WeaponsOrFormsResultId"/>
+                    <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
+                    <button type="submit">Add Score</button>
+                }
             }
         </div>
         
     }
     </div>
-
+    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) {
     <div>
         <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#popTechnique-@Model.IsWeapons.ToString()">Add New</button>
 
         @using (Html.BeginForm("NewWeaponOrFormScoring", "Scoring", FormMethod.Post)) {
+            
             
             <!-- Modal -->
                 <div class="modal fade" id="popTechnique-@Model.IsWeapons.ToString()" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -54,6 +57,8 @@
                 </div>
         
             }
+
     </div>
+    }
 
 </div>
