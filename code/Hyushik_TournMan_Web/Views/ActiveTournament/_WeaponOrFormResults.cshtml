@@ -29,7 +29,7 @@
     </div>
     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) {
     <div>
-        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#popTechnique-@Model.IsWeapons.ToString()">Add New</button>
+        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#popTechnique-@Model.IsWeapons.ToString()">Add New</button>
 
         @using (Html.BeginForm("NewWeaponOrFormScoring", "Scoring", FormMethod.Post)) {
             
