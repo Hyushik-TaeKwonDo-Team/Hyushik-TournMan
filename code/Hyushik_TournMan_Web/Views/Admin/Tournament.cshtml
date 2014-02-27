@@ -46,6 +46,7 @@
                     </tbody>
                 </table>
                 </div>
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addParticipant">Add New Participant</button>
                 <h3>Boards Needed</h3>
                 <hr />
                 if (Model.TotalBoardCounts!= null && Model.TotalBoardCounts.Count > 0)
@@ -77,6 +78,7 @@
             }
             else { 
                 <span>No Participants Found</span>
+                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addParticipant">Add New Participant</button>
             }
         </div>
     }else{
@@ -84,4 +86,22 @@
             Tournament was not found
         </div>
     }
+
+                <!-- Modal -->
+                <div class="modal fade" id="addParticipant" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Add a Participant</h4>
+                      </div>
+                      <div class="modal-body">
+
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Add</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 </div>
