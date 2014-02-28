@@ -12,6 +12,23 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 {
     public class ScoringOrchestrator: BaseOrchestrator, IScoringOrchestrator
     {
+        public OperationResult UpdateStationAttempts(long stationId, int attempts, bool didNotBreak)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var station = _tournManContext.Stations.First(st=>st.Id==stationId);
+                station.Attempts = attempts;
+                station.DidNotBreak = didNotBreak;
+                _tournManContext.SaveChanges();
+                result.WasSuccessful = true;
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            return result;
+        }
 
 
         public OperationResult ScoreWeaponEntry(long entryId, int score, string userName)

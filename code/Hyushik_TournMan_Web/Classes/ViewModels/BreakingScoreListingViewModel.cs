@@ -25,6 +25,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
                     BreakingEntryId=id,
                     CurrentScore = currentScore,
                     Stations = stations
+                    
                 }
             );
         }

@@ -6,13 +6,14 @@
         {
             using (Html.BeginForm("UpdateStationAttempts", "Scoring", FormMethod.Post))
             {
-                @Html.TextBox("attempts", station.Attempts)
                 @Html.Hidden("stationId", station.Id)
+                @Html.Hidden("tournId", Model.TournamentId)
+                @Html.TextBox("attempts", station.Attempts)
+                
                 <label>
                     <span>No break:</span>
-                    <input type="checkbox" name="didNotBreak">
-                </label>
-                                    
+                    @Html.CheckBox("didNotBreak", station.DidNotBreak)
+                </label>                
                 <button type="submit">Update</button>
             }
         }
@@ -39,7 +40,7 @@
             @foreach(var listing in Model.BreakingScoreListings.OrderByDescending(bsl=>bsl.CurrentScore)){
                 <tr>
                     <td>@listing.ParticipantName</td>
-                    <td>@listing.CurrentScore</td>
+                    <td>@listing.CurrentScore.ToString("F2")</td>
                     <td>@if (listing.Stations.Count > 0)
                         {
                             <span>@listing.Stations.First().Technique.Name</span>
