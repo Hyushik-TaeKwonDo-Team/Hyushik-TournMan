@@ -97,6 +97,57 @@
                       </div>
                       <div class="modal-body">
 
+                          <div class="form-group">
+                              <input type="text" class="form-control" id="firstLastName" placeholder="Name">
+                          </div>
+
+                          <div class="form-group">
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio" name="optionsRadios" id="radioMale" value="male" checked>
+                                Male
+                              </label>
+                            </div>
+                            <div class="radio-inline">
+                              <label>
+                                <input type="radio" name="optionsRadios" id="radioFemale" value="female">
+                                Female
+                              </label>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label>Age:<input type="number" class="form-control" id="age"></label>
+                          </div>
+
+                          <div class="form-group">
+                          <label for="rank">Rank:</label>
+			              <select id="rank" name="rank" class="form-control">
+			                <option value="White">White</option>
+			                <option value="Yellow/Orange">Yellow/Orange</option>
+			                <option value="Green">Green</option>
+			                <option value="Blue">Blue</option>
+			                <option value="Brown/Red">Brown/Red</option>
+			                <option value="Black">Black</option>
+			              </select>
+                          </div>
+                          <div class="form-group">
+                            <label class="checkbox">
+                              <input type="checkbox" id="checkbox1" value="Weapons"> Weapons
+                            </label>
+                            <label class="checkbox">
+                              <input type="checkbox" id="checkbox2" value="Breaking"> Breaking
+                            </label>
+                            <label class="checkbox">
+                              <input type="checkbox" id="checkbox3" value="Forms"> Forms
+                            </label>
+                            <label class="checkbox">
+                              <input type="checkbox" id="checkbox4" value="Point"> Sparring (Point)
+                            </label>
+                            <label class="checkbox">
+                              <input type="checkbox" id="checkbox5" value="Olympic"> Sparring (Olympic)
+                            </label>
+                          </div>
                       </div>
                       <div class="modal-footer">
                         <button class="btn btn-primary" type="submit">Add</button>
