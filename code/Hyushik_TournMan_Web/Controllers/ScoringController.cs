@@ -170,5 +170,24 @@ namespace Hyushik_TournMan_Web.Controllers
             return RedirectToAction("Index", "ActiveTournament", new { tournId = result.TournamentId });
         }
 
+        [HttpPost]
+        public ActionResult DeleteBreakingEntry(long tournId, long entryId)
+        {
+       
+
+            var result = _orch.DeleteBreakingEntry(entryId);
+
+            if (result.WasSuccessful)
+            {
+                //AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
+
+            return RedirectToAction("Index", "ActiveTournament", new { tournId = tournId });
+        }
+
     }
 }

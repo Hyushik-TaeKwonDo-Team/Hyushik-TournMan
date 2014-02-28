@@ -12,6 +12,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 {
     public class ScoringOrchestrator: BaseOrchestrator, IScoringOrchestrator
     {
+
+
         public OperationResult ScoreWeaponEntry(long entryId, int score, string userName)
         {
             var result = new OperationResult() { WasSuccessful = false };
