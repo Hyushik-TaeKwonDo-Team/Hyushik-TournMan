@@ -137,6 +137,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             {
                 var algo = new BreakingAlgorithim();
                 result.Score = algo.ScoreAll(breakingResult);
+                result.Stations = breakingResult.Stations;
             }catch(Exception ex){
                 result.Message = ex.Message;
                 return result;

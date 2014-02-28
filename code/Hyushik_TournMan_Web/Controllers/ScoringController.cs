@@ -121,7 +121,7 @@ namespace Hyushik_TournMan_Web.Controllers
                 if(result.WasSuccessful && result.HasTechniqueValue){
                     model.Stations.Add(new Station()
                     {
-                        attempts = stationVM.Attempts,
+                        Attempts = stationVM.Attempts,
                         BoardCount = stationVM.BoardsViewModel.Amount,
                         BoardWidth = stationVM.BoardsViewModel.Width,
                         BoardDepth = stationVM.BoardsViewModel.Depth,

@@ -7,7 +7,10 @@
             <tr>
                 <th>Name</th>
                 <th>Score</th>
+                <th>Stations</th>
+                <th>Attempts</th>
                 @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<th>Add Weight to Score</th>}
+                @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<th>Delete Entry</th>}
             </tr>
         </thead>
         <tbody>
@@ -15,10 +18,34 @@
                 <tr>
                     <td>@listing.ParticipantName</td>
                     <td>@listing.CurrentScore</td>
+                    <td>@if (listing.Stations.Count > 0)
+                        {
+                            <span>@listing.Stations.First().Technique.Name</span>
+                        }
+                    </td>
+                    <td>@if (listing.Stations.Count > 0)
+                        {
+                            @Html.TextBox("attempts", listing.Stations.First().Attempts);
+                        }
+                    </td>
+
                     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
                         <td>@Html.ActionLink("Judge", "JudgeBreakingEntry", "Scoring", new { entryId=listing.BreakingEntryId}, null)</td>
                     }
-                 </tr>
+                    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
+                        <td>
+                            @using (Html.BeginForm("DeleteBreakingEntry", "Scoring", FormMethod.Post))
+                            {
+                                <input name="tournId" type="hidden" value="@Model.TournamentId"/>
+                                <input name="entryId" type="hidden" value="@listing.BreakingEntryId"/>
+                                <button type="submit">Delete @listing.ParticipantName's attempt</button>
+                            }
+                        </td>
+                    }
+                    <td>
+                    </td>
+                </tr>
+                
               }
           </tbody>
     </table>

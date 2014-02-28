@@ -69,7 +69,7 @@ namespace Hyushik_TournMan_BLL.Scoring
 
             var tScore = station.Technique.Value;
             var bScore = getBoardScore(station);
-            var penalty = getMissPenalty(station.attempts);
+            var penalty = getMissPenalty(station.Attempts);
 
 
             return (tScore+bScore)*penalty;

@@ -159,40 +159,39 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         public TechniqueValueResult CreateTechniqueValue(List<Technique> techniques)
         {
             var result = new TechniqueValueResult();
-            if(!techniques.Exists(t=>t.Selected)){
-                result.HasTechniqueValue = false;
+            try {
+                if (!techniques.Exists(t => t.Selected))
+                {
+                    result.HasTechniqueValue = false;
+                    result.WasSuccessful = true;
+                    return result;
+                }
+                result.TechniqueValue = GetTechniqueValueFromTechnique(techniques.First(x => x.Selected));
+                result.HasTechniqueValue = true;
                 result.WasSuccessful = true;
-                return result;
+            }catch (Exception ex){
+                result.Message = ex.Message;
+                result.WasSuccessful = false;
             }
-            result.TechniqueValue = GetTechniqueValueFromTechniques(techniques.Where(x => x.Selected));
-            result.HasTechniqueValue = true;
-            result.WasSuccessful = true;
+            
             return result;
         }
 
         public TechniqueValue GetTechniqueValueFromTechnique(Technique tech)
         {
-            var techniqueValue = new TechniqueValue();
-            techniqueValue.Name = techniqueValue.Name + " "+tech.Name.Trim();
-            techniqueValue.Value += tech.Weight;
-            if(!tech.IsLeaf()){
-                var secondVal = GetTechniqueValueFromTechniques(tech.SubTechniques.Where(st=>st.Selected));
-                techniqueValue.Name = techniqueValue.Name + " " + secondVal.Name.Trim();
-                techniqueValue.Value += secondVal.Value;
-            }
-            techniqueValue.Name.Trim();
-            return techniqueValue;
-        }
-
-        public TechniqueValue GetTechniqueValueFromTechniques(IEnumerable<Technique> techs)
-        {
-            var techniqueValue = new TechniqueValue();
-            foreach (var tech in techs)
+            if (!tech.IsLeaf())
             {
-                var val = GetTechniqueValueFromTechnique(tech);
-                techniqueValue.Name = techniqueValue.Name + " " + val.Name;
-                techniqueValue.Value += val.Value;
+                return GetTechniqueValueFromTechnique(tech.SubTechniques.First(st => st.Selected));
             }
+            var techniqueValue = new TechniqueValue();
+            if(String.IsNullOrWhiteSpace(tech.NameNote)){
+                techniqueValue.Name = tech.Name;
+            }else{
+                techniqueValue.Name = tech.Name;
+            }
+            
+            techniqueValue.Value = tech.Weight;
+            techniqueValue.Name.Trim();
             return techniqueValue;
         }
     }
