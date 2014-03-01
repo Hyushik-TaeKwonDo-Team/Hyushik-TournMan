@@ -82,6 +82,7 @@ namespace Hyushik_TournMan_BLL.Scoring
 
             var tScore = station.Technique.Value;
             var bScore = getBoardScore(station);
+
             var penalty = getMissPenalty(station);
 
 
@@ -96,15 +97,15 @@ namespace Hyushik_TournMan_BLL.Scoring
              */
             double penalty ;
 
-            if (station.broken || station.attempts<=maxAttempts)
+            if (station.DidNotBreak || station.Attempts >= maxAttempts)
             {
-                //if they broke it use the number attempts they took
-                penalty = Math.Pow(Math.E, -attempt_decay_rate * (station.attempts - 1));
+                //if they diddent break use the max attempts 
+                penalty = Math.Pow(Math.E, -attempt_decay_rate * (maxAttempts - 1));
             }
             else
             {   
-                //if they diddent break use the max attempts 
-                penalty = Math.Pow(Math.E, -attempt_decay_rate * (maxAttempts - 1));
+                //if they broke it use the number attempts they took
+                penalty = Math.Pow(Math.E, -attempt_decay_rate * (station.Attempts - 1));
             }
             
 

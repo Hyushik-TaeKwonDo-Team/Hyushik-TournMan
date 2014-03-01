@@ -17,6 +17,34 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         protected UsersContext _usersContext = new UsersContext();
         protected TournManContext _tournManContext = new TournManContext();
 
+        public OperationResult DeleteBreakingEntry(long entryId)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var entry = _tournManContext.BreakingResults.First(be => be.Id == entryId);
+                
+                foreach(var score in entry.JudgeScores.ToList()){
+                    _tournManContext.BreakingJudgeScores.Remove(score);
+                }
+
+                foreach (var station in entry.Stations.ToList())
+                {
+                    _tournManContext.Stations.Remove(station);
+                }
+               
+                _tournManContext.BreakingResults.Remove(entry);
+                _tournManContext.SaveChanges();
+                result.WasSuccessful = true;
+                //TODO MESSAGE
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
         public WeaponResult GetWeaponResultById(long id)
         {
             return _tournManContext.WeaponResults.First(wr => wr.Id == id);
@@ -137,6 +165,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             {
                 var algo = new BreakingAlgorithim();
                 result.Score = algo.ScoreAll(breakingResult);
+                result.Stations = breakingResult.Stations;
             }catch(Exception ex){
                 result.Message = ex.Message;
                 return result;
