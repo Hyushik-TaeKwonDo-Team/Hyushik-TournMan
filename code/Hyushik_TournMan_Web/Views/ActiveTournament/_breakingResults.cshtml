@@ -59,7 +59,14 @@
 
                     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.ADMINISTRATOR_ROLE)){
                         <td>
-
+                            @if (listing.JudgeIdToScore.Keys.Count<1)
+                            {
+                                <div>No current scores</div>
+                            }
+                            @foreach(var judgeId in listing.JudgeIdToScore.Keys){//using thius one as it is slightly more likely to not error from bad data
+                                <div>@listing.JudgeIdToName[judgeId]: @listing.JudgeIdToScore[judgeId].ToString()</div>
+                            }
+                                
                         </td>
                     }
                         

@@ -12,6 +12,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 {
     public class ScoringOrchestrator: BaseOrchestrator, IScoringOrchestrator
     {
+
         public OperationResult UpdateStationAttempts(long stationId, int attempts, bool didNotBreak)
         {
             var result = new OperationResult() { WasSuccessful = false };

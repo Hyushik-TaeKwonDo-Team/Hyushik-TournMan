@@ -10,6 +10,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 {
     public interface IActiveTournamentOrchestrator
     {
+        GetJudgeNamesAndScoresOperationResult GetBreakingJudgeOpinions(long entryId);
         List<BreakingResult> GetBreakingResultByTournamentId(long tournId);
         Tournament GetTournamentById(long id);
         BreakingScoringResult CalculateBreakingScore(BreakingResult breakingResult);

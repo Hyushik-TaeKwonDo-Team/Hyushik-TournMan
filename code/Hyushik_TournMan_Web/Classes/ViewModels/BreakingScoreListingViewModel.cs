@@ -17,15 +17,16 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
             BreakingScoreListings = new List<BreakingScoreListing>();
         }
 
-        public void AddListing(string name, long id, double currentScore, List<Station> stations)
+        public void AddListing(string name, long id, double currentScore, List<Station> stations, Dictionary<long, string> judgeIdToName, Dictionary<long, int> judgeIdToScore)
         {
             BreakingScoreListings.Add(
                 new BreakingScoreListing{
                     ParticipantName=name,
                     BreakingEntryId=id,
                     CurrentScore = currentScore,
-                    Stations = stations
-                    
+                    Stations = stations,
+                    JudgeIdToName = judgeIdToName,
+                    JudgeIdToScore = judgeIdToScore
                 }
             );
         }
@@ -36,5 +37,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         public double CurrentScore { get; set; }
         public long BreakingEntryId {get; set;}
         public List<Station> Stations { get; set; }
+        public Dictionary<long, string> JudgeIdToName { get; set; }
+        public Dictionary<long, int> JudgeIdToScore { get; set; }
     }
 }
