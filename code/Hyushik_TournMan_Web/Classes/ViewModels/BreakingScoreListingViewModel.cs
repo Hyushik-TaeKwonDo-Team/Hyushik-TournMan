@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hyushik_TournMan_Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,12 +17,16 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
             BreakingScoreListings = new List<BreakingScoreListing>();
         }
 
-        public void AddListing(string name, long id, double currentScore){
+        public void AddListing(string name, long id, double currentScore, List<Station> stations, Dictionary<long, string> judgeIdToName, Dictionary<long, int> judgeIdToScore)
+        {
             BreakingScoreListings.Add(
                 new BreakingScoreListing{
                     ParticipantName=name,
                     BreakingEntryId=id,
-                    CurrentScore = currentScore
+                    CurrentScore = currentScore,
+                    Stations = stations,
+                    JudgeIdToName = judgeIdToName,
+                    JudgeIdToScore = judgeIdToScore
                 }
             );
         }
@@ -31,5 +36,8 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         public string ParticipantName {get; set;}
         public double CurrentScore { get; set; }
         public long BreakingEntryId {get; set;}
+        public List<Station> Stations { get; set; }
+        public Dictionary<long, string> JudgeIdToName { get; set; }
+        public Dictionary<long, int> JudgeIdToScore { get; set; }
     }
 }

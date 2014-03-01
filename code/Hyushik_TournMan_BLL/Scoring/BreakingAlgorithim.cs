@@ -10,10 +10,16 @@ namespace Hyushik_TournMan_BLL.Scoring
 {
     public class BreakingAlgorithim
     {
-        private double boardExp = 1.4;
-        private  double NO_SPACER_BONUS = 1.3;
+        private double boardExp = 0.15;
+        private int maxBoards = 15;
+        private int maxAttempts = 5;
         private double attempt_decay_rate = 0.2;
-        private double SPEED_HOLD_BONUS = 1.3;
+        
+        private  double SPACER_PENALTY = 0.05;
+        private double POWER_HOLD_PENALTY = 0.1; // we value a spead techneque over not having spacers
+
+        private double judgeworth = 3;
+        private double maxScore = 10;
 
 
 
@@ -30,14 +36,11 @@ namespace Hyushik_TournMan_BLL.Scoring
 
             double averageScore = stationscores.Sum() / stationscores.Count;
 
-            double Multiple_Technique_Coefficient = 1 + (0.1 * stationscores.Count - 1);
+            double Multiple_Technique_Coefficient = 1 + (0.1 * (stationscores.Count - 1));
 
 
 
-
-
-
-            double tieBreaking = 0;
+            double avragejudgeScore = 0;
 
             //average the judges subjective parts
             if (BreakingResult.JudgeScores.Count > 0)
@@ -48,14 +51,24 @@ namespace Hyushik_TournMan_BLL.Scoring
                     judgeSum = judgeSum + judge.SubjectiveScore;
                 }
 
-                tieBreaking = judgeSum / BreakingResult.JudgeScores.Count;
+                avragejudgeScore = judgeSum / BreakingResult.JudgeScores.Count;
 
             }
 
 
+            var beforeJudgeIntervention = averageScore * Multiple_Technique_Coefficient;
+
+            var NormalJudgeVal = judgeworth*(avragejudgeScore / maxScore);
 
 
-            return (averageScore * Multiple_Technique_Coefficient) + (tieBreaking/3);
+
+
+
+            var NormalScoreVal = (maxScore - judgeworth) * (beforeJudgeIntervention / (maxScore * (1 + (0.1 * (StoredValues.MaxBreakingStationCount - 1)))));
+
+
+
+            return NormalScoreVal + NormalJudgeVal;
 
             
         }
@@ -69,19 +82,32 @@ namespace Hyushik_TournMan_BLL.Scoring
 
             var tScore = station.Technique.Value;
             var bScore = getBoardScore(station);
-            var penalty = getMissPenalty(station.attempts);
+
+            var penalty = getMissPenalty(station);
 
 
-            return (tScore+bScore)*penalty;
+            return tScore*bScore*penalty;
         }
 
 
-        private double getMissPenalty(double attempts)
+        private double getMissPenalty(Station station)
         {
             /*
               This returns a percent of the total score for the station that the participent earns 
              */
-            double penalty = Math.Pow(Math.E, -attempt_decay_rate * (attempts - 1));
+            double penalty ;
+
+            if (station.DidNotBreak || station.Attempts >= maxAttempts)
+            {
+                //if they diddent break use the max attempts 
+                penalty = Math.Pow(Math.E, -attempt_decay_rate * (maxAttempts - 1));
+            }
+            else
+            {   
+                //if they broke it use the number attempts they took
+                penalty = Math.Pow(Math.E, -attempt_decay_rate * (station.Attempts - 1));
+            }
+            
 
             return penalty;
         }
@@ -90,27 +116,28 @@ namespace Hyushik_TournMan_BLL.Scoring
         private double getBoardScore(Station station)
         {
 
-            var boardBase = (station.BoardWidth) * (1+station.BoardDepth);
+            var maxboardpart=StoredValues.PossibleBoardWidths.Max() * ( 1 + StoredValues.PossibleBoardDepths.Max());
 
-            if (station.BoardCount == 1)
+            var boardBase = ((station.BoardWidth) * (1 + station.BoardDepth)) / maxboardpart;
+
+            //BoardScore =((boardBase/(maxBoards+1))*(attempts+1))^boardExp
+            var boardScore = Math.Pow(((boardBase / (maxBoards + 1)) * (station.BoardCount + 1)) , boardExp);
+
+
+            if (station.BoardSpacers)
             {
-                return boardBase;
+                boardScore = boardScore - SPACER_PENALTY;
             }
 
-            var tmpScore = boardBase + Math.Pow((station.BoardCount - 1), boardExp);
 
-
-            if (!station.BoardSpacers)
+            if (!station.SpeedHold)
             {
-                tmpScore = tmpScore * NO_SPACER_BONUS;
+                boardScore = boardScore - POWER_HOLD_PENALTY;
             }
 
-            if (station.SpeedHold)
-            {
-                tmpScore = tmpScore * SPEED_HOLD_BONUS;
-            }
-            
-            return tmpScore;
+
+
+            return boardScore;
         }
 
 

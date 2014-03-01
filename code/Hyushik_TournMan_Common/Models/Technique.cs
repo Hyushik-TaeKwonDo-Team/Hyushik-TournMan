@@ -22,7 +22,11 @@ namespace Hyushik_TournMan_Common.Models
 
         //exists only for scoring purposes, DO NOT PERSIST
         [NotMapped]
-        public bool Selected { get; set; } 
+        public bool Selected { get; set; }
+
+        //exists only for scoring purposes, DO NOT PERSIST
+        [NotMapped]
+        public string NameNote { get; set; } 
 
         //exists for querying
         public virtual Technique Parent { get; set; }

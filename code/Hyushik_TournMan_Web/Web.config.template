@@ -21,10 +21,10 @@
     <add key="enableSimpleMembership" value="true" />
 
     <!--specific to this app-->
-    <add key="stationFalloffProportion" value=".2" />
+    <add key="stationFalloffProportion" value="0.2" />
     <add key="maxBreakingStationCount" value="5" />
     <add key="possibleBoardWidths" value="4,6,8,10" />
-    <add key="possibleBoardDepths" value=".25,.33,.5" />
+    <add key="possibleBoardDepths" value="0.25,0.33,0.5,1.0" />
   </appSettings>
   <system.web>
     <compilation debug="true" targetFramework="4.5" />

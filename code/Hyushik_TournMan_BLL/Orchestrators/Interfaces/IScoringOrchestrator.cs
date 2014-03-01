@@ -10,6 +10,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 {
     public interface IScoringOrchestrator
     {
+        OperationResult UpdateStationAttempts(long stationId, int attempts, bool didNotBreak);
+        OperationResult DeleteBreakingEntry(long entryId);
         SaveBreakingJudgeScoreResult EnterBreakingJudgeScore(BreakingJudgeScore score, long entryId);
         IList<Technique> GetTopLevelTechniques();
         TechniqueValueResult CreateTechniqueValue(List<Technique> techniques);

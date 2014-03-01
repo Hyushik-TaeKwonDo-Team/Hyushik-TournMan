@@ -24,6 +24,22 @@ namespace Hyushik_TournMan_Web.Controllers
         // GET: /Scoring/
 
         [HttpPost]
+        public ActionResult UpdateStationAttempts(long stationId, long tournId, int attempts, bool didNotBreak)
+        {
+            var result = _orch.UpdateStationAttempts(stationId, attempts, didNotBreak);
+            
+            if (result.WasSuccessful)
+            {
+                //AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
+            return RedirectToAction("Index", "ActiveTournament", new { tournId = tournId });
+        }
+
+        [HttpPost]
         public ActionResult UpdateWeaponOrFormScoring(long entryId, int judgeScore, bool isWeapon, long tournId)
         {
             OperationResult result;
@@ -121,7 +137,7 @@ namespace Hyushik_TournMan_Web.Controllers
                 if(result.WasSuccessful && result.HasTechniqueValue){
                     model.Stations.Add(new Station()
                     {
-                        attempts = stationVM.Attempts,
+                        Attempts = stationVM.Attempts,
                         BoardCount = stationVM.BoardsViewModel.Amount,
                         BoardWidth = stationVM.BoardsViewModel.Width,
                         BoardDepth = stationVM.BoardsViewModel.Depth,
@@ -168,6 +184,25 @@ namespace Hyushik_TournMan_Web.Controllers
             }
 
             return RedirectToAction("Index", "ActiveTournament", new { tournId = result.TournamentId });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteBreakingEntry(long tournId, long entryId)
+        {
+       
+
+            var result = _orch.DeleteBreakingEntry(entryId);
+
+            if (result.WasSuccessful)
+            {
+                //AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
+
+            return RedirectToAction("Index", "ActiveTournament", new { tournId = tournId });
         }
 
     }

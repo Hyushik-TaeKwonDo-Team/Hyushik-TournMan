@@ -67,8 +67,19 @@ namespace Hyushik_TournMan_Web.Controllers
             };
             foreach(var entry in orch.GetBreakingResultByTournamentId(tournId)){
                 var scoreResult = orch.CalculateBreakingScore(entry);
-                if(scoreResult.WasSuccessful){
-                    vm.AddListing(entry.Participant.Name, entry.Id, scoreResult.Score);
+                var judgeScoresResult = orch.GetBreakingJudgeOpinions(entry.Id);
+                if (scoreResult.WasSuccessful && judgeScoresResult.WasSuccessful)
+                {
+                    vm.AddListing(entry.Participant.Name, entry.Id, scoreResult.Score, scoreResult.Stations, judgeScoresResult.JudgeIdToName, judgeScoresResult.JudgeIdToScore);
+
+                }
+                else if (!scoreResult.WasSuccessful)
+                {
+                    AddErrorNotification(scoreResult.Message);
+                }
+                else if (!judgeScoresResult.WasSuccessful)
+                {
+                    AddErrorNotification(judgeScoresResult.Message);
                 }
 
                 
