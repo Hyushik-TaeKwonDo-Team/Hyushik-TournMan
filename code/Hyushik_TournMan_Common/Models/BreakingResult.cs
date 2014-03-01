@@ -57,5 +57,7 @@ namespace Hyushik_TournMan_Common.Models
         public double BoardDepth { get; set; }
 
         public int attempts { get; set; }
+
+        public bool broken { get; set; }
     }
 }
