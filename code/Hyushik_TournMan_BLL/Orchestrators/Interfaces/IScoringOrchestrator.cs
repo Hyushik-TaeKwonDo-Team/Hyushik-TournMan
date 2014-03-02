@@ -19,7 +19,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         Tournament GetTournamentById(long id);
         Ring GetRingById(long id);
         IList<Participant> GetParticipantsByTournId(long tournId);
-        IList<Participant> GetParticipantsByRingId(long tournId);
+        IList<Participant> GetParticipantsByRingId(long ringId);
         Participant GetParticipantById(long partId);
         IEnumerable<UserProfile> GetUsers();
         List<double> GetPossibleBoardWidths();

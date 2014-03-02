@@ -280,6 +280,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Ring\_WeaponOrFormResults.cshtml" />
+    <Content Include="Views\ActiveTournament\Index.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>
@@ -310,7 +311,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ActiveTournament\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

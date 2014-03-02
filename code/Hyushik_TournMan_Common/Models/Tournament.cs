@@ -28,6 +28,7 @@ namespace Hyushik_TournMan_Common.Models
         public Tournament()
         {
             Participants = new List<Participant>();
+            Rings = new List<Ring>();
         }
 
     }

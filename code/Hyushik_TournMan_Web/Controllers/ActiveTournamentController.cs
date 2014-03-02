@@ -12,11 +12,13 @@ namespace Hyushik_TournMan_Web.Controllers
 {
     public class ActiveTournamentController : BaseController
     {
-       
+
+        IActiveTournamentOrchestrator _orch = new ActiveTournamentOrchestrator();
 
         public ActionResult Index(long tournId)
         {
-            return View();
+            var tourn = _orch.GetTournamentById(tournId);
+            return View(tourn);
         }
 
 

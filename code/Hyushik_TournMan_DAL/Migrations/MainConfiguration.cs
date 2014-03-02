@@ -38,16 +38,29 @@ namespace Hyushik_TournMan_DAL.Migrations
                 );
 
             var tourn1 = new Tournament() { Name = "Tournament 1", Active = true };
+
+            var ring1 = new Ring() { Name = "Ring 1", Tournament=tourn1};
+            var ring2 = new Ring() { Name = "Ring 2", Tournament = tourn1 };
+
+            
             tourn1.Participants.Add(part1);
             tourn1.Participants.Add(part2);
             tourn1.Participants.Add(part3);
 
+            tourn1.Rings.Add(ring1);
+            tourn1.Rings.Add(ring2);
+            
             context.Tournaments.AddOrUpdate(
                 t=> t.Name,
                 tourn1,
                 new Tournament(){Name="Tournament 2"}
                 );
 
+            context.Rings.AddOrUpdate(
+                r => r.Name,
+                ring1,
+                ring2
+                );
 
             var toggleTech = new Technique()
             {

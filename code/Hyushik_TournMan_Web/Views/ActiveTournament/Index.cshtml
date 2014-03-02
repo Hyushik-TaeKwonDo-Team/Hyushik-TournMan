@@ -1,0 +1,29 @@
+﻿@model Hyushik_TournMan_Common.Models.Tournament
+<div>
+    <div>
+        <h2>@Model.Name</h2>
+    </div>
+    <div>
+        <h3>Rings</h3>
+        <div>
+             @if (Model.Rings.Count > 0)
+             {
+                <table class="table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>Ring Name</th>
+                        <th>Participant Count</th>
+                    </tr>
+                    @foreach(var ring in Model.Rings){
+                        <tr>
+                            <td>@ring.Name</td>
+                            <td>@ring.SelectedParticipants.Count</td>
+                        </tr>
+                    }
+                    
+                </table>
+             }else{
+                 <span>No Rings Currently created.  Please ask an admin to do so.</span>
+             }
+        </div>
+    </div>
+</div>

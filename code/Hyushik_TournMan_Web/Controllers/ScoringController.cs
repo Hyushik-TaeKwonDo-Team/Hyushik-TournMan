@@ -24,7 +24,7 @@ namespace Hyushik_TournMan_Web.Controllers
         // GET: /Scoring/
 
         [HttpPost]
-        public ActionResult UpdateStationAttempts(long stationId, long tournId, int attempts, bool didNotBreak)
+        public ActionResult UpdateStationAttempts(long stationId, long ringId, int attempts, bool didNotBreak)
         {
             var result = _orch.UpdateStationAttempts(stationId, attempts, didNotBreak);
             
@@ -36,11 +36,11 @@ namespace Hyushik_TournMan_Web.Controllers
             {
                 AddErrorNotification(result.Message);
             }
-            return RedirectToAction("Index", "ActiveTournament", new { tournId = tournId });
+            return RedirectToRing(ringId);
         }
 
         [HttpPost]
-        public ActionResult UpdateWeaponOrFormScoring(long entryId, int judgeScore, bool isWeapon, long tournId)
+        public ActionResult UpdateWeaponOrFormScoring(long entryId, int judgeScore, bool isWeapon, long ringId)
         {
             OperationResult result;
 
@@ -61,18 +61,18 @@ namespace Hyushik_TournMan_Web.Controllers
             {
                 AddErrorNotification(result.Message);
             }
-            return RedirectToAction("Index", "ActiveTournament", new { tournId = tournId });
+            return RedirectToRing(ringId);
         }
 
         [HttpPost]
-        public ActionResult NewWeaponOrFormScoring(long tournId, long partId, bool isWeapon)
+        public ActionResult NewWeaponOrFormScoring(long ringId, long partId, bool isWeapon)
         {
             OperationResult result;
 
             if(isWeapon){
-                result = _orch.NewWeaponEntry(tournId, partId);
+                result = _orch.NewWeaponEntry(ringId, partId);
             }else{
-                result = _orch.NewFormEntry(tournId, partId);
+                result = _orch.NewFormEntry(ringId, partId);
             }
             
             if (result.WasSuccessful)
@@ -83,7 +83,7 @@ namespace Hyushik_TournMan_Web.Controllers
             {
                 AddErrorNotification(result.Message);
             }
-            return RedirectToAction("Index", "ActiveTournament", new { tournId = tournId });
+            return RedirectToRing(ringId);
         }
 
         private StationViewModel mkStationViewModel()
@@ -180,14 +180,14 @@ namespace Hyushik_TournMan_Web.Controllers
             else if (!result.WasSuccessful)
             {
                 AddErrorNotification(result.Message);
-                return RedirectToAction("Index", "Home");
+                return RedirectToHome();
             }
 
             return RedirectToRing(result.RingId );
         }
 
         [HttpPost]
-        public ActionResult DeleteBreakingEntry(long tournId, long entryId)
+        public ActionResult DeleteBreakingEntry(long ringId, long entryId)
         {
        
 
@@ -202,7 +202,7 @@ namespace Hyushik_TournMan_Web.Controllers
                 AddErrorNotification(result.Message);
             }
 
-            return RedirectToAction("Index", "ActiveTournament", new { tournId = tournId });
+            return RedirectToRing(ringId);
         }
 
     }
