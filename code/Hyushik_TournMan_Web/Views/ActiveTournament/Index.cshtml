@@ -15,7 +15,7 @@
                     </tr>
                     @foreach(var ring in Model.Rings){
                         <tr>
-                            <td>@ring.Name</td>
+                            <td>@Html.ActionLink(ring.Name, "Index", "Ring", new {ringId=ring.Id},  new { @class = "list-group-item" })</td>
                             <td>@ring.SelectedParticipants.Count</td>
                         </tr>
                     }
