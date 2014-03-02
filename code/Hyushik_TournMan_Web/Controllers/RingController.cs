@@ -24,7 +24,7 @@ namespace Hyushik_TournMan_Web.Controllers
             {
                 Participants = orch.GetParticipantsByRingId(ringId).ToList(),
                 IsWeapons = true,
-                TournamentId = ringId
+                RingId = ringId
             };
             foreach (var result in orch.GetWeaponResultsByRingId(ringId))
             {
@@ -43,7 +43,7 @@ namespace Hyushik_TournMan_Web.Controllers
             {
                 Participants = orch.GetParticipantsByRingId(ringId).ToList(),
                 IsWeapons = false,
-                TournamentId = ringId
+                RingId = ringId
             };
             foreach (var result in orch.GetFormResultsByRingId(ringId))
             {
@@ -57,7 +57,7 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             return new RingViewModel
             {
-                Tournament = orch.GetTournamentById(ringId),
+                Ring = orch.GetRingById(ringId),
                 BreakingScoreListingViewModel = BuildBreakingScoreListingViewModel(ringId),
                 WeaponsListingViewModel = buildWeaponsViewModel(ringId),
                 FormsListingViewModel = buildFormsViewModel(ringId)
@@ -68,7 +68,7 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             var vm = new BreakingScoreListingViewModel
             {
-                TournamentId = ringId
+                RingId = ringId
             };
             foreach (var entry in orch.GetBreakingResultByRingId(ringId))
             {

@@ -17,7 +17,7 @@
             @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) { 
                 using (Html.BeginForm("UpdateWeaponOrFormScoring", "Scoring", FormMethod.Post)) { 
                     <input type="number" name="judgeScore" min="0" max="10" pattern="\d+"/>
-                    <input type="hidden" name="tournId" value="@Model.TournamentId"/>
+                    <input type="hidden" name="ringId" value="@Model.RingId"/>
                     <input type="hidden" name="entryId" value="@listing.WeaponsOrFormsResultId"/>
                     <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
                     <button type="submit">Add Score</button>
@@ -44,7 +44,7 @@
                       </div>
                       <div class="modal-body">
 
-                      <input type="hidden" name="tournId" value="@Model.TournamentId"/> 
+                      <input type="hidden" name="tournId" value="@Model.RingId"/> 
                       @Html.DropDownList("partId", new SelectList(Model.Participants, "ParticipantId", "Name"), new { @class="form-control" })
                       <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
 
