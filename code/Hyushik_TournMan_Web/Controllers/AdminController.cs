@@ -265,5 +265,14 @@ namespace Hyushik_TournMan_Web.Controllers
 
             return RedirectToAction("Index");   
         }
+
+        [HttpPost]
+        public ActionResult AddIndividualParticipant(long tournId, string firstLastName, string optionsRadios, int age, string rank)
+        {
+            AddSucessNotification("Added " + firstLastName + " to the tournament.");
+            String[] participantInfo = {firstLastName, optionsRadios, age.ToString(), rank};
+            orch.AddIndividualParticipant(tournId, participantInfo);
+            return RedirectToAction("Tournament", "Admin", new { id=tournId});
+        }
     }
 }

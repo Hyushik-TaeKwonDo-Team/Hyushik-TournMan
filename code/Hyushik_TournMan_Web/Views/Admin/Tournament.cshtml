@@ -86,7 +86,8 @@
             Tournament was not found
         </div>
     }
-
+     @using (Html.BeginForm("AddIndividualParticipant", "Admin", FormMethod.Post))
+     {
                 <!-- Modal -->
                 <div class="modal fade" id="addParticipant" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
@@ -98,7 +99,7 @@
                       <div class="modal-body">
 
                           <div class="form-group form-group-small">
-                              <input type="text" class="form-control" id="firstLastName" placeholder="Name">
+                              <input type="text" class="form-control" id="firstLastName" name="firstLastName" placeholder="Name">
                           </div>
 
                           <div class="form-group form-group-none">
@@ -117,7 +118,7 @@
                           </div>
 
                           <div class="form-group form-group-small">
-                            <label>Age:<input type="number" class="form-control" id="age"></label>
+                            <label>Age:<input type="number" class="form-control" id="age" name="age"></label>
                           </div>
 
                           <div class="form-group form-group-small">
@@ -148,6 +149,7 @@
                               <input type="checkbox" id="checkbox5" value="Olympic"> Sparring (Olympic)
                             </label>
                           </div>
+                          <input type="hidden" name="tournId" value="@Model.Tournament.Id"/>
                       </div>
                       <div class="modal-footer">
                         <button class="btn btn-primary" type="submit">Add</button>
@@ -155,4 +157,5 @@
                     </div>
                   </div>
                 </div>
+     }
 </div>
