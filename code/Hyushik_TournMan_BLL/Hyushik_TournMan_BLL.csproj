@@ -68,8 +68,8 @@
     <Compile Include="Orchestrators\HomeOrchestrator.cs" />
     <Compile Include="Orchestrators\Interfaces\IAdminOrchestrator.cs" />
     <Compile Include="Orchestrators\Interfaces\IHomeOrchestrator.cs" />
-    <Compile Include="Orchestrators\Interfaces\IActiveTournamentOrchestrator.cs" />
-    <Compile Include="Orchestrators\ActiveTournamentOrchestrator.cs" />
+    <Compile Include="Orchestrators\Interfaces\IRingOrchestrator.cs" />
+    <Compile Include="Orchestrators\RingOrchestrator.cs" />
     <Compile Include="Orchestrators\Interfaces\IScoringOrchestrator.cs" />
     <Compile Include="Orchestrators\ScoringOrchestrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

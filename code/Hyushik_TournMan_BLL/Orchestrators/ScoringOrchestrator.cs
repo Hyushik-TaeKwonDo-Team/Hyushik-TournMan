@@ -97,7 +97,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             try
             {
                 var entry = new WeaponResult(){
-                    Tournament = GetTournamentById(tournId),
+                    Ring = GetRingById(tournId),
                     Participant = GetParticipantById(partId)
                 };
                 _tournManContext.WeaponResults.Add(entry);
@@ -117,7 +117,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             {
                 var entry = new FormResult()
                 {
-                    Tournament = GetTournamentById(tournId),
+                    Ring = GetRingById(tournId),
                     Participant = GetParticipantById(partId)
                 };
                 _tournManContext.FormResults.Add(entry);
@@ -143,7 +143,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 if(null!=previousScore){
                     entry.JudgeScores.Remove(previousScore);
                 }
-                result.TournamentId = entry.Tournament.Id;
+                result.RingId = entry.Ring.Id;
                 entry.JudgeScores.Add(score);
                 _tournManContext.SaveChanges();
             }

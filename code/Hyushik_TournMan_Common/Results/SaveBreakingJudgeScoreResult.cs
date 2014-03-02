@@ -8,6 +8,6 @@ namespace Hyushik_TournMan_Common.Results
 {
     public class SaveBreakingJudgeScoreResult: OperationResult
     {
-        public long TournamentId { get; set; }
+        public long RingId { get; set; }
     }
 }

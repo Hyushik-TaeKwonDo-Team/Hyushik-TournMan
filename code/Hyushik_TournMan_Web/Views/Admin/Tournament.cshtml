@@ -8,6 +8,24 @@
 
 <div>
     @if(Model.Tournament!=null){
+        
+        
+        <h3>Rings</h3>
+        <div>
+             @if (Model.Tournament.Rings.Count > 0)
+             {
+                <table class="table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>Name</th>
+                        <th>Delete</th>
+                    </tr>
+                </table>
+             }else{
+                 <span>No Rings Found</span>
+             }
+        </div>
+        
+
         <h3>Participants</h3>
         <hr />
         <div>

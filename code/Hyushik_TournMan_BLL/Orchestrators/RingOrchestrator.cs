@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Hyushik_TournMan_BLL.Orchestrators
 {
-    public class ActiveTournamentOrchestrator : BaseOrchestrator, IActiveTournamentOrchestrator
+    public class RingOrchestrator : BaseOrchestrator, IRingOrchestrator
     {
         public GetJudgeNamesAndScoresOperationResult GetBreakingJudgeOpinions(long entryId)
         {
@@ -35,9 +35,9 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return result;
         }
 
-        public List<BreakingResult> GetBreakingResultByTournamentId(long tournId)
+        public List<BreakingResult> GetBreakingResultByRingId(long ringId)
         {
-            return _tournManContext.BreakingResults.Where(br => br.Tournament.Id == tournId).ToList();
+            return _tournManContext.BreakingResults.Where(br => br.Ring.Id == ringId).ToList();
         }
     }
 }

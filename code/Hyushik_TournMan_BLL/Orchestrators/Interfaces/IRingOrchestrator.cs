@@ -8,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 {
-    public interface IActiveTournamentOrchestrator
+    public interface IRingOrchestrator
     {
         GetJudgeNamesAndScoresOperationResult GetBreakingJudgeOpinions(long entryId);
-        List<BreakingResult> GetBreakingResultByTournamentId(long tournId);
+        List<BreakingResult> GetBreakingResultByRingId(long tournId);
         Tournament GetTournamentById(long id);
+        Ring GetRingById(long id);
         BreakingScoringResult CalculateBreakingScore(BreakingResult breakingResult);
-        IList<Participant> GetParticipantsByTournId(long tournId);
-        List<WeaponResult> GetWeaponResultsByTournId(long tournId);
-        List<FormResult> GetFormResultsByTournId(long tournId);
+        IList<Participant> GetParticipantsByRingId(long ringId);
+        List<WeaponResult> GetWeaponResultsByRingId(long ringId);
+        List<FormResult> GetFormResultsByRingId(long ringId);
     }
 }

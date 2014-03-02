@@ -12,7 +12,7 @@ namespace Hyushik_TournMan_Common.Models
         [Key]
         public long Id { get; set; }
         public virtual Participant Participant { get; set; }
-        public virtual Tournament Tournament { get; set; }
+        public virtual Ring Ring { get; set; }
 
         //the list is a 0 indexed list of stations
         //the techniqueValue has the full technique name and final value of the technique
@@ -26,7 +26,6 @@ namespace Hyushik_TournMan_Common.Models
             Stations = new List<Station>();
             JudgeScores = new List<BreakingJudgeScore>();
         }
-
     }
 
     public class BreakingJudgeScore
@@ -45,6 +44,7 @@ namespace Hyushik_TournMan_Common.Models
         public string Name {get; set;}
         public double Value { get; set; }
     }
+
     public class Station{
         [Key]
         public long Id { get; set; }
