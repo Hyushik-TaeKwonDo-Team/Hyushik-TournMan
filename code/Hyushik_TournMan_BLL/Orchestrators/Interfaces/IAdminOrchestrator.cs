@@ -32,7 +32,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         void SetStationFalloffProportion(double value);
         int GetMaxBreakingStationCount();
         void SetStationMaxBreakingStationCount(int value);
-        void AddIndividualParticipant(long targetTournamentId, String[] info);
+        void AddIndividualParticipant(long targetTournamentId, String[] info, Boolean[] events);
 
         string GetPossibleBoardWidthsAsString();
         string GetPossibleBoardDepthsAsString();

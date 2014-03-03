@@ -313,7 +313,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
          * Only has param for Name, Gender, Age, Rank, and [Weapons, Breaking, Forms, Point, Olympic]
          **/
 
-        public void AddIndividualParticipant(long targetTournamentId, String[] info)
+        public void AddIndividualParticipant(long targetTournamentId, String[] info, Boolean[] events)
         {
             var tournManContext = new TournManContext();
             var targetTourn = tournManContext.Tournaments.Where(t => t.Id == targetTournamentId).First();
@@ -323,13 +323,12 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             participant.Gender = info[i++];
             participant.Age = info[i++];
             participant.Rank = info[i++];
-            /*
-            participant.Weapons = convertCSVBoolStringToBool(row[i++]);
-            participant.Breaking = convertCSVBoolStringToBool(row[i++]);
-            participant.Forms = convertCSVBoolStringToBool(row[i++]);
-            participant.PointSparring = convertCSVBoolStringToBool(row[i++]);
-            participant.OlympicSparring = convertCSVBoolStringToBool(row[i++]);
-            */
+            i = 0;
+            participant.Weapons = events[i++];
+            participant.Breaking = events[i++];
+            participant.Forms = events[i++];
+            participant.PointSparring = events[i++];
+            participant.OlympicSparring = events[i++];
             targetTourn.Participants.Add(participant);
             tournManContext.SaveChanges();
         }
