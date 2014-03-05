@@ -22,6 +22,18 @@
         }
 }
 
+<script>
+    function validate() {
+        if (window.confirm("Are you sure that you want to delete this participant's break?")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+</script>
+
 <div>
     <h2>Breaking</h2>
     <table class="table table-striped table-bordered table-hover">
@@ -78,7 +90,7 @@
                             {
                                 <input name="tournId" type="hidden" value="@Model.TournamentId"/>
                                 <input name="entryId" type="hidden" value="@listing.BreakingEntryId"/>
-                                <button type="submit" class="btn btn-danger glyphicon glyphicon-remove"> </button>
+                                <button type="submit" class="btn btn-danger glyphicon glyphicon-remove" onClick="return validate();"> </button>
                             }
                         </td>
                     }
