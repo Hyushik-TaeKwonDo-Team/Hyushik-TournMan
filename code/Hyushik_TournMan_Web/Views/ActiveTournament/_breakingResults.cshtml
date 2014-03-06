@@ -32,10 +32,15 @@
         }
     }
 
-    function showHide(breakID) {
-        $(breakID).toggle();
-    }
-
+    $(document).ready(function () {
+        /* Toggles [secondclass]-toggleChild */
+        $('.toggleParent').click(function () {
+            var name = "." + $(this).attr('class').split(' ')[1] + "-toggleChild";
+            $(name).toggle();
+            $(this).closest('tr').toggleClass("active");
+            
+        });
+    });
 </script>
 
 <div>
@@ -55,7 +60,7 @@
         <tbody>
             @foreach(var listing in Model.BreakingScoreListings.OrderByDescending(bsl=>bsl.CurrentScore)){
                 <tr>
-                    <td onClick="showHide('.@listing.BreakingEntryId');">@listing.ParticipantName</td>
+                    <td class="toggleParent @listing.BreakingEntryId">@listing.ParticipantName</td>
                     <td>@listing.CurrentScore.ToString("F2")</td>
                     <td>@if (listing.Stations.Count > 0)
                         {
@@ -104,7 +109,7 @@
                 </tr>
                 var NewRowCount = listing.Stations.Count;
                 for(int row=1; row < NewRowCount; row++){
-                    <tr class="@listing.BreakingEntryId" style="display:none">
+                    <tr class="@listing.BreakingEntryId-toggleChild" style="display:none">
                         <td></td>
                         <td></td>
                         <td>
