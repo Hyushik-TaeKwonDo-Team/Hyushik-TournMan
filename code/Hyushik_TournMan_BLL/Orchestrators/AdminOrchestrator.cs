@@ -19,6 +19,39 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 {
     public class AdminOrchestrator : BaseOrchestrator, IAdminOrchestrator
     {
+        //everything needs to be 0 indexed the same
+        public OperationResult AddParticipantsToRings(List<long> ringIds, List<long> participantIds, List<List<bool>> RingsVsParticipants)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                foreach(var p in RingsVsParticipants.Select((list, index) => new { index, list })){
+                    var participant = GetParticipantById(participantIds[p.index]);
+                    foreach (var r in p.list.Select((added, index) => new { index, added }))
+                    {
+                        var ring = GetRingById(ringIds[r.index]);
+                        //needs to be added
+                        if (r.added && !ring.SelectedParticipants.Contains(participant))
+                        {
+                            ring.SelectedParticipants.Add(participant);
+                        }else if(!r.added && ring.SelectedParticipants.Contains(participant)){ //needs to be removed
+                            ring.SelectedParticipants.Remove(participant);
+                        }
+                    }
+                }
+                _tournManContext.SaveChanges();
+                result.WasSuccessful = true;
+                //TODO message
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            return result;
+
+
+        }
+
 
         public IDictionary<string, string[]> GetMappingOfUserNameToRoles()
         {

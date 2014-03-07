@@ -119,9 +119,9 @@ namespace Hyushik_TournMan_Web.Controllers
         }
 
 
-        public ActionResult CreateBreakingEntry(long tournId)
+        public ActionResult CreateBreakingEntry(long ringId)
         {
-            BreakingViewModel vm = mkBreakingViewModel(tournId);
+            BreakingViewModel vm = mkBreakingViewModel(ringId);
 
             return View(vm);
         }

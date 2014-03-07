@@ -27,6 +27,15 @@ namespace Hyushik_TournMan_Web.Controllers
             return View(_buildAdminVM());
         }
 
+        private RingParticipantSelectionViewModel _buildRingParticipantSelectionViewModel(long tournId)
+        {
+            var tourn = orch.GetTournamentById(tournId);
+            var vm = new RingParticipantSelectionViewModel(tourn, tourn.Rings, tourn.Participants);
+            return vm;
+        }
+
+
+
         private BreakingStoredValuesViewModel _breakingStoredValuesViewModel()
         {
             var vm = new BreakingStoredValuesViewModel()
@@ -265,5 +274,21 @@ namespace Hyushik_TournMan_Web.Controllers
 
             return RedirectToAction("Index");   
         }
+
+        public ActionResult AddParticipantsToRings(long tournId)
+        {
+
+            return View(_buildRingParticipantSelectionViewModel(tournId));
+        }
+
+
+        [HttpPost]
+        public ActionResult AddParticipantsToRings(RingParticipantSelectionViewModel vm)
+        {
+            orch.AddParticipantsToRings(vm.Rings.Select(r => r.Id).ToList(), vm.Participants.Select(p => p.ParticipantId).ToList(), vm.RingsVsParticipants);
+            return RedirectToAction("Tournament", "Admin", new {id = vm.Tournament.Id});
+        }
+
+
     }
 }

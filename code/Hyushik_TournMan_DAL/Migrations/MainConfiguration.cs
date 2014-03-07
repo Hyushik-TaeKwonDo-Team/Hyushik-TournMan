@@ -32,6 +32,7 @@ namespace Hyushik_TournMan_DAL.Migrations
             var part1 = new Participant() { Name = "Participant 1" };
             var part2 = new Participant() { Name = "Participant 2" };
             var part3 = new Participant() { Name = "Participant 3" };
+
             context.Participants.AddOrUpdate(
                 p => p.Name,
                 part1, part2, part3
@@ -42,6 +43,7 @@ namespace Hyushik_TournMan_DAL.Migrations
             var ring1 = new Ring() { Name = "Ring 1", Tournament=tourn1};
             var ring2 = new Ring() { Name = "Ring 2", Tournament = tourn1 };
 
+            ring1.SelectedParticipants.Add(part1);
             
             tourn1.Participants.Add(part1);
             tourn1.Participants.Add(part2);
@@ -50,10 +52,16 @@ namespace Hyushik_TournMan_DAL.Migrations
             tourn1.Rings.Add(ring1);
             tourn1.Rings.Add(ring2);
             
+
             context.Tournaments.AddOrUpdate(
                 t=> t.Name,
                 tourn1,
                 new Tournament(){Name="Tournament 2"}
+                );
+
+            context.Participants.AddOrUpdate(
+                p => p.Name,
+                part1, part2, part3
                 );
 
             context.Rings.AddOrUpdate(
@@ -61,6 +69,8 @@ namespace Hyushik_TournMan_DAL.Migrations
                 ring1,
                 ring2
                 );
+
+            
 
             var toggleTech = new Technique()
             {
