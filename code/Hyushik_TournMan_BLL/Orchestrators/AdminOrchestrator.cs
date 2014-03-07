@@ -31,10 +31,12 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                     {
                         var ring = GetRingById(ringIds[r.index]);
                         //needs to be added
-                        if (r.added && !ring.SelectedParticipants.Contains(participant))
+                        if (r.added && !ring.SelectedParticipants.Exists(part=>part.ParticipantId==participant.ParticipantId))
                         {
                             ring.SelectedParticipants.Add(participant);
-                        }else if(!r.added && ring.SelectedParticipants.Contains(participant)){ //needs to be removed
+                        }
+                        else if (!r.added && ring.SelectedParticipants.Exists(part => part.ParticipantId == participant.ParticipantId))
+                        { //needs to be removed
                             ring.SelectedParticipants.Remove(participant);
                         }
                     }

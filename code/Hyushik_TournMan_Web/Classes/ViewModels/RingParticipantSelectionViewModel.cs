@@ -12,33 +12,33 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         public List<Participant> Participants { get; set; }
         public List<Ring> Rings { get; set; }
         //x = rings, y = parts 
-        public List<List<bool>> RingsVsParticipants { get; set; }
+        public List<List<bool>> PartRingJoin { get; set; }
 
         public RingParticipantSelectionViewModel()
         {
             Rings = new List<Ring>();
             Participants = new List<Participant>();
-            RingsVsParticipants = new List<List<bool>>();
+            PartRingJoin = new List<List<bool>>();
         }
 
         public RingParticipantSelectionViewModel(Tournament tourn, List<Ring> rings, List<Participant> participants)
         {
             Tournament = tourn;
-            RingsVsParticipants = new List<List<bool>>();
+            PartRingJoin = new List<List<bool>>();
             Rings = rings.OrderBy(r => r.Name).ToList();
             Participants = participants.OrderBy(r => r.Name).ToList();
             //build the matrix
-            foreach(var part in participants){
+            foreach(var part in Participants){
                 var partList = new List<bool>();
-                partList.AddRange(Enumerable.Repeat(false, rings.Count));
-                for (var i = 0; i < rings.Count; ++i )
+                partList.AddRange(Enumerable.Repeat(false, Rings.Count));
+                for (var i = 0; i < Rings.Count; ++i )
                 {
-                    if (rings.ElementAt(i).SelectedParticipants.Contains(part))
+                    if (rings[i].SelectedParticipants.Exists(p=>p.ParticipantId==part.ParticipantId))
                     {
                         partList[i]= true;
                     }
                 }
-                RingsVsParticipants.Add(partList);
+                PartRingJoin.Add(partList);
             }
 
 

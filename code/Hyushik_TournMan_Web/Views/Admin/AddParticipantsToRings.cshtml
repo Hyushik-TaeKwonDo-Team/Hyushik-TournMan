@@ -4,7 +4,7 @@
 <h3>@Model.Tournament.Name</h3>
 
 <div>
-    @if (Model.RingsVsParticipants.Count > 0)
+    @if (Model.PartRingJoin.Count > 0)
     {
         using (Html.BeginForm("AddParticipantsToRings", "Admin", FormMethod.Post))
         {
@@ -12,7 +12,6 @@
             foreach (var r in @Model.Rings.Select((ring, index) => new { index, ring }))
             {
                 @Html.HiddenFor(model=>model.Rings[r.index].Id)
-                @Html.HiddenFor(model=>model.Rings[r.index].Name)
             }
             foreach (var p in @Model.Participants.Select((part, index) => new { index, part }))
             {
@@ -39,10 +38,10 @@
                                 @p.part.Name
                             </td>
                     
-                            @foreach (var x in @Model.RingsVsParticipants[p.index].Select((rvp, index) => new { index, rvp }))
+                            @foreach (var x in @Model.PartRingJoin[p.index].Select((rvp, index) => new { index, rvp }))
                             {
                                 <td>
-                                    @Html.CheckBoxFor(model => model.RingsVsParticipants[p.index][x.index])
+                                    @Html.CheckBoxFor(model => model.PartRingJoin[p.index][x.index])
                                 </td>
                             }
                         </tr>  

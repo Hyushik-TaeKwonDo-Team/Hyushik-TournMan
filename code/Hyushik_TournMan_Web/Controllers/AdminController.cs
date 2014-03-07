@@ -285,7 +285,7 @@ namespace Hyushik_TournMan_Web.Controllers
         [HttpPost]
         public ActionResult AddParticipantsToRings(RingParticipantSelectionViewModel vm)
         {
-            orch.AddParticipantsToRings(vm.Rings.Select(r => r.Id).ToList(), vm.Participants.Select(p => p.ParticipantId).ToList(), vm.RingsVsParticipants);
+            orch.AddParticipantsToRings(vm.Rings.Select(r => r.Id).ToList(), vm.Participants.Select(p => p.ParticipantId).ToList(), vm.PartRingJoin);
             return RedirectToAction("Tournament", "Admin", new {id = vm.Tournament.Id});
         }
 
