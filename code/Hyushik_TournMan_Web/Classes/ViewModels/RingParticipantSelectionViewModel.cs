@@ -25,8 +25,8 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         {
             Tournament = tourn;
             RingsVsParticipants = new List<List<bool>>();
-            Rings = rings;
-            Participants = participants;
+            Rings = rings.OrderBy(r => r.Name).ToList();
+            Participants = participants.OrderBy(r => r.Name).ToList();
             //build the matrix
             foreach(var part in participants){
                 var partList = new List<bool>();
@@ -35,7 +35,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
                 {
                     if (rings.ElementAt(i).SelectedParticipants.Contains(part))
                     {
-                        partList.Insert(i, true);
+                        partList[i]= true;
                     }
                 }
                 RingsVsParticipants.Add(partList);
