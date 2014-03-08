@@ -34,11 +34,18 @@
     }
 
     function clearStationTechnique(targetStation$) {
-        targetStation$.find('input[type=checkbox]:checked').removeAttr('checked');
+
+        //targetStation$.find('input[type=checkbox]:checked')
+        //.removeAttr('checked');
+
+        //targetStation$.find('[id$=BoardsViewModel_Width]').get(0)
         targetStation$.find('[id$=BoardsViewModel_Width]').get(0).selectedIndex = 0;
         targetStation$.find('[id$=BoardsViewModel_Depth]').get(0).selectedIndex = 0;
         targetStation$.find('[id$=BoardsViewModel_Amount]').val("1"); //fear the magic number
         setTechniqueName(targetStation$, "Technique");
+
+        targetStation$.find('.displayBoard').text("Boards");
+
     }
 
     function setTechniqueName(station$, textToSet) {
@@ -59,6 +66,9 @@
         });
 
         $('.technique').click(function () {
+            
+            clearStationTechnique($(this).parents('.station'));
+
             $('.station').hide();
             $(this).parents('.station').show();
             $(this).parents(".station").addClass(" selectedStation");
@@ -75,6 +85,29 @@
             
             toTop();
         });
+
+        
+        $('.BoardsBack').click(function () {
+
+            var station$ = $(this).parents(".station");
+
+            var width$ = station$.find('[id$=BoardsViewModel_Width]').get(0);
+            var Windex = width$.selectedIndex;
+            var width = width$[Windex].value;
+
+            var depth$ = station$.find('[id$=BoardsViewModel_Depth]').get(0);
+            var Dindex = depth$.selectedIndex;
+            var depth = depth$[Dindex].value;
+
+            var num = station$.find('[id$=BoardsViewModel_Amount]').val();
+
+
+            
+            station$.find('.displayBoard').text(num + " X (" + width + "x" + depth + ")");
+
+            toTop();
+        });
+
 
         $('.techniqueLeaf').click(function () {
             setTechniqueName($(this).closest('.station'), $(this).text());
@@ -130,7 +163,7 @@
                             <li>
                                 @Html.CheckBoxFor(model=>model.Stations[i].BoardsViewModel.Spacers)Spacers
                             </li>
-                            <li class = "sectionBack">
+                            <li class = "BoardsBack">
                                 <a>Done</a>
                             </li>
                         </ul>

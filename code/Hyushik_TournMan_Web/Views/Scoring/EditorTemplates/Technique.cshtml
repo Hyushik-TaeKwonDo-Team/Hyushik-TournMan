@@ -12,8 +12,9 @@
         @if (Model.IsLeaf())
         {
             <label class="btn btn-primary">
-                @Html.CheckBoxFor(model=>model.Selected)
                 @Model.Name
+                @Html.CheckBoxFor(model=>model.Selected)
+                
             </label>
         }
         else {
