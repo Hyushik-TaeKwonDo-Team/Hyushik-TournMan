@@ -62,14 +62,16 @@
     <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Orchestrators\ActiveTournamentOrchestrator.cs" />
+    <Compile Include="Orchestrators\Interfaces\IActiveTournamentOrchestrator.cs" />
     <Compile Include="Scoring\BreakingAlgorithim.cs" />
     <Compile Include="Orchestrators\AdminOrchestrator.cs" />
     <Compile Include="Orchestrators\BaseOrchestrator.cs" />
     <Compile Include="Orchestrators\HomeOrchestrator.cs" />
     <Compile Include="Orchestrators\Interfaces\IAdminOrchestrator.cs" />
     <Compile Include="Orchestrators\Interfaces\IHomeOrchestrator.cs" />
-    <Compile Include="Orchestrators\Interfaces\IActiveTournamentOrchestrator.cs" />
-    <Compile Include="Orchestrators\ActiveTournamentOrchestrator.cs" />
+    <Compile Include="Orchestrators\Interfaces\IRingOrchestrator.cs" />
+    <Compile Include="Orchestrators\RingOrchestrator.cs" />
     <Compile Include="Orchestrators\Interfaces\IScoringOrchestrator.cs" />
     <Compile Include="Orchestrators\ScoringOrchestrator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

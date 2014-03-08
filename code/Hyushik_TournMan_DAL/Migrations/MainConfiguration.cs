@@ -32,15 +32,26 @@ namespace Hyushik_TournMan_DAL.Migrations
             var part1 = new Participant() { Name = "Participant 1" };
             var part2 = new Participant() { Name = "Participant 2" };
             var part3 = new Participant() { Name = "Participant 3" };
+
             context.Participants.AddOrUpdate(
                 p => p.Name,
                 part1, part2, part3
                 );
 
             var tourn1 = new Tournament() { Name = "Tournament 1", Active = true };
+
+            var ring1 = new Ring() { Name = "Ring 1", Tournament = tourn1};
+            var ring2 = new Ring() { Name = "Ring 2", Tournament = tourn1 };
+
+            ring1.SelectedParticipants.Add(part1);
+            
             tourn1.Participants.Add(part1);
             tourn1.Participants.Add(part2);
             tourn1.Participants.Add(part3);
+
+            tourn1.Rings.Add(ring1);
+            tourn1.Rings.Add(ring2);
+            
 
             context.Tournaments.AddOrUpdate(
                 t=> t.Name,
@@ -48,33 +59,64 @@ namespace Hyushik_TournMan_DAL.Migrations
                 new Tournament(){Name="Tournament 2"}
                 );
 
+            context.Participants.AddOrUpdate(
+                p => p.Name,
+                part1, part2, part3
+                );
 
-            var toggleTech = new Technique()
+            context.Rings.AddOrUpdate(
+                r => r.Name,
+                ring1,
+                ring2
+                );
+
+            
+
+            var kickParent = new Technique()
             {
-                Name = "Toggle Tech"
+                Name = "Kick"
             };
 
-            var parentTech = new Technique()
+            var jumpKickTech = new Technique()
             {
-                Name = "Parent Tech"
+                Name = "Jump Kick",
+                Weight = 6
             };
 
-            var childTech = new Technique()
+            var spinKickTech = new Technique()
             {
-                Name = "Child Tech"
+                Name = "Spin Kick",
+                Weight = 8
             };
 
-            var secondaryChildTech = new Technique()
+            var jumpSpinKickTech = new Technique()
             {
-                Name = "Secondary Child Tech"
+                Name = "Jump Spin Kick",
+                Weight = 9
             };
 
-            parentTech.AddSubTechnique(childTech);
-            childTech.AddSubTechnique(secondaryChildTech);
+            var splitKickTech = new Technique()
+            {
+                Name = "Split Kick",
+                Weight = 10
+            };
+
+            var genericKickTech = new Technique()
+            {
+                Name = "Generic Kick",
+                Weight = 5
+            };
+
+            kickParent.AddSubTechnique(jumpKickTech);
+            kickParent.AddSubTechnique(spinKickTech);
+            kickParent.AddSubTechnique(jumpSpinKickTech);
+            kickParent.AddSubTechnique(splitKickTech);
+            kickParent.AddSubTechnique(genericKickTech);
+
 
             context.Techniques.AddOrUpdate(
                 t=>t.Name,
-                toggleTech,parentTech,childTech, secondaryChildTech
+                kickParent, jumpKickTech, spinKickTech, jumpSpinKickTech, splitKickTech, genericKickTech
                 );
 
 

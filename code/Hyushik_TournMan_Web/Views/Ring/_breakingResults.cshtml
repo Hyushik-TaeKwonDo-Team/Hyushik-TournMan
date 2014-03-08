@@ -7,7 +7,7 @@
             using (Html.BeginForm("UpdateStationAttempts", "Scoring", FormMethod.Post))
             {
                 @Html.Hidden("stationId", station.Id)
-                @Html.Hidden("tournId", Model.TournamentId)
+                @Html.Hidden("ringId", Model.RingId)
                 @Html.TextBox("attempts", station.Attempts, new {@type="number", @min="1", @max="10"})
                 
                 <label>
@@ -102,7 +102,7 @@
                         <td style="text-align:center">
                             @using (Html.BeginForm("DeleteBreakingEntry", "Scoring", FormMethod.Post))
                             {
-                                <input name="tournId" type="hidden" value="@Model.TournamentId"/>
+                                <input name="ringId" type="hidden" value="@Model.RingId"/>
                                 <input name="entryId" type="hidden" value="@listing.BreakingEntryId"/>
                                 <button type="submit" class="btn btn-sm btn-danger glyphicon glyphicon-remove" onClick="return validate();"> </button>
                             }
@@ -140,7 +140,7 @@
     
     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) {
         <div>
-            @Html.ActionLink("Add New", "CreateBreakingEntry", "Scoring", new { tournId = Model.TournamentId }, new { @class = "btn btn-primary btn-sm" })
+            @Html.ActionLink("Add New", "CreateBreakingEntry", "Scoring", new { ringId = Model.RingId }, new { @class = "btn btn-primary btn-sm" })
         </div>
     }
 

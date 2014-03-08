@@ -55,14 +55,14 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return _tournManContext.FormResults.First(fr => fr.Id == id);
         }
 
-        public List<WeaponResult> GetWeaponResultsByTournId(long tournId)
+        public List<WeaponResult> GetWeaponResultsByRingId(long ringId)
         {
-            return _tournManContext.WeaponResults.Where(wr => wr.Tournament.Id==tournId).ToList();
+            return _tournManContext.WeaponResults.Where(wr => wr.Ring.Id==ringId).ToList();
         }
 
-        public List<FormResult> GetFormResultsByTournId(long tournId)
+        public List<FormResult> GetFormResultsByRingId(long ringId)
         {
-            return _tournManContext.FormResults.Where(wr => wr.Tournament.Id == tournId).ToList();
+            return _tournManContext.FormResults.Where(wr => wr.Ring.Id == ringId).ToList();
         }
 
         public string GetPossibleBoardWidthsAsString()
@@ -202,6 +202,12 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return _tournManContext.Tournaments.Where(t => t.Id == id).FirstOrDefault();
         }
 
+        public Ring GetRingById(long id)
+        {
+            //returns null if not found
+            return _tournManContext.Rings.Where(t => t.Id == id).FirstOrDefault();
+        }
+
         public Participant GetParticipantById(long id)
         {
             //returns null if not found
@@ -216,6 +222,11 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         public IList<Participant> GetParticipantsByTournId(long tournId)
         {
             return _tournManContext.Tournaments.First(t => t.Id == tournId).Participants;
+        }
+
+        public IList<Participant> GetParticipantsByRingId(long ringId)
+        {
+            return _tournManContext.Rings.First(t => t.Id == ringId).SelectedParticipants;
         }
 
         public BreakingResult GetBreakingResultById(long id){

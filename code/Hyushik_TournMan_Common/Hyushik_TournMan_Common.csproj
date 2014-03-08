@@ -60,6 +60,7 @@
     <Compile Include="Models\BreakingResult.cs" />
     <Compile Include="Models\Participant.cs" />
     <Compile Include="Models\ParticipantBoardSizeCount.cs" />
+    <Compile Include="Models\Ring.cs" />
     <Compile Include="Models\Technique.cs" />
     <Compile Include="Models\Tournament.cs" />
     <Compile Include="Models\WeaponAndFormResults.cs" />

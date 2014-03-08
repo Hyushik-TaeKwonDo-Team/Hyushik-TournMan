@@ -12,6 +12,20 @@ namespace Hyushik_TournMan_Web.Controllers
     [Hyushik_TournMan_Web.Filters.InitializeSimpleMembership]
     public class BaseController : Controller
     {
+        protected ActionResult RedirectToHome()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        protected ActionResult RedirectToActiveTourn(long tournId)
+        {
+            return RedirectToAction("Index", "ActiveTournament", new { tournId = tournId });
+        }
+
+        protected ActionResult RedirectToRing(long ringId)
+        {
+            return RedirectToAction("Index", "Ring", new { ringId = ringId });
+        }
 
         protected void AddNotifications(IDictionary<string, string> notificationsToAdd)
         {
@@ -29,7 +43,6 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             IDictionary<string, string> currentNotifications =
                 (IDictionary<string, string>)TempData[WebConstants.Parameters.NOTIFICATIONS] ?? new Dictionary<string, string>();
-
             currentNotifications[message] = cssClass;
 
             TempData[WebConstants.Parameters.NOTIFICATIONS] = currentNotifications;

@@ -21,11 +21,14 @@ namespace Hyushik_TournMan_Common.Models
         [DisplayName("Participants")]
         public virtual List<Participant> Participants { get; set; }
 
+        public virtual List<Ring> Rings{ get; set; }
+
         public bool Active { get; set; }
 
         public Tournament()
         {
             Participants = new List<Participant>();
+            Rings = new List<Ring>();
         }
 
     }

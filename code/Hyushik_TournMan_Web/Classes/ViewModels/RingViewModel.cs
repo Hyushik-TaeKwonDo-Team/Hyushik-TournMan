@@ -6,9 +6,9 @@ using System.Web;
 
 namespace Hyushik_TournMan_Web.Classes.ViewModels
 {
-    public class ActiveTournamentViewModel
+    public class RingViewModel
     {
-        public Tournament Tournament { get; set; }
+        public Ring Ring { get; set; }
         public BreakingScoreListingViewModel BreakingScoreListingViewModel { get; set; }
         public WeaponsOrFormsListingViewModel WeaponsListingViewModel { get; set; }
         public WeaponsOrFormsListingViewModel FormsListingViewModel { get; set; }
