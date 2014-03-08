@@ -59,7 +59,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var participant in Model.Tournament.Participants)
+                        @foreach (var participant in Model.Tournament.Participants.OrderBy(bls=>bls.Name))
                         {
                             <tr>
                                 <td>@Html.ActionLink(participant.Name, "Participant", "Admin", new { id=participant.ParticipantId }, new { @class = "list-group-item" })</td>
@@ -116,7 +116,8 @@
             Tournament was not found
         </div>
     }
-
+     @using (Html.BeginForm("AddIndividualParticipant", "Admin", FormMethod.Post))
+     {
                 <!-- Modal -->
                 <div class="modal fade" id="addParticipant" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
@@ -127,11 +128,11 @@
                       </div>
                       <div class="modal-body">
 
-                          <div class="form-group">
-                              <input type="text" class="form-control" id="firstLastName" placeholder="Name">
+                          <div class="form-group form-group-small">
+                              <input type="text" class="form-control" id="firstLastName" name="firstLastName" placeholder="Name">
                           </div>
 
-                          <div class="form-group">
+                          <div class="form-group form-group-none">
                             <div class="radio-inline">
                               <label>
                                 <input type="radio" name="optionsRadios" id="radioMale" value="male" checked>
@@ -146,11 +147,11 @@
                             </div>
                           </div>
 
-                          <div class="form-group">
-                            <label>Age:<input type="number" class="form-control" id="age"></label>
+                          <div class="form-group form-group-small">
+                            <label>Age:<input type="number" class="form-control" id="age" name="age"></label>
                           </div>
 
-                          <div class="form-group">
+                          <div class="form-group form-group-small">
                           <label for="rank">Rank:</label>
 			              <select id="rank" name="rank" class="form-control">
 			                <option value="White">White</option>
@@ -161,23 +162,24 @@
 			                <option value="Black">Black</option>
 			              </select>
                           </div>
-                          <div class="form-group">
+                          <div class="form-group form-group-none">
                             <label class="checkbox">
-                              <input type="checkbox" id="checkbox1" value="Weapons"> Weapons
+                              <input type="checkbox" id="checkbox1" value="Weapons" name="weapons"> Weapons
                             </label>
                             <label class="checkbox">
-                              <input type="checkbox" id="checkbox2" value="Breaking"> Breaking
+                              <input type="checkbox" id="checkbox2" value="Breaking" name="breaking"> Breaking
                             </label>
                             <label class="checkbox">
-                              <input type="checkbox" id="checkbox3" value="Forms"> Forms
+                              <input type="checkbox" id="checkbox3" value="Forms" name="forms"> Forms
                             </label>
                             <label class="checkbox">
-                              <input type="checkbox" id="checkbox4" value="Point"> Sparring (Point)
+                              <input type="checkbox" id="checkbox4" value="Point" name="point"> Sparring (Point)
                             </label>
                             <label class="checkbox">
-                              <input type="checkbox" id="checkbox5" value="Olympic"> Sparring (Olympic)
+                              <input type="checkbox" id="checkbox5" value="Olympic" name="olympic"> Sparring (Olympic)
                             </label>
                           </div>
+                          <input type="hidden" name="tournId" value="@Model.Tournament.Id"/>
                       </div>
                       <div class="modal-footer">
                         <button class="btn btn-primary" type="submit">Add</button>
@@ -185,4 +187,5 @@
                     </div>
                   </div>
                 </div>
+     }
 </div>

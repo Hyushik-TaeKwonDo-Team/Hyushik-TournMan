@@ -59,7 +59,7 @@
                         <input type="text" name="techName" class="form-control" placeholder="New Technique Name" value=""/>
                     </div>
                     <div class="form-group">
-                        <span class="tech-weight"> Weight:<input type="number" name="techWeight"  value="0" class="form-control" min="0" max="100"/></span>
+                        <span class="tech-weight"> Weight:<input type="number" name="techWeight"  value="0" class="form-control" min="0" max="10"/></span>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -109,7 +109,7 @@
 
         @using (Html.BeginForm("AddTechnique", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            <input type="button" value="Add Technique" class="tech-new-show tech-new-edit-button btn btn-primary btn-sm" />
+            <input type="button" value="Add Category" class="tech-new-show tech-new-edit-button btn btn-primary btn-sm" />
             <input name="parentId" type="hidden" value="-1">
             <input type="text" name="techName" class="tech-new-edit" value="New Technique"/>
             <span class="tech-new-edit">

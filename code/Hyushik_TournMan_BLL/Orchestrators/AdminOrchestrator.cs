@@ -343,6 +343,31 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             };
         }
 
+        /**
+         * Currently building the function to add an indidividual participant
+         * Only has param for Name, Gender, Age, Rank, and [Weapons, Breaking, Forms, Point, Olympic]
+         **/
+
+        public void AddIndividualParticipant(long targetTournamentId, String[] info, Boolean[] events)
+        {
+            var tournManContext = new TournManContext();
+            var targetTourn = tournManContext.Tournaments.Where(t => t.Id == targetTournamentId).First();
+            var participant = new Participant();
+            int i = 0;
+            participant.Name = info[i++];
+            participant.Gender = info[i++];
+            participant.Age = info[i++];
+            participant.Rank = info[i++];
+            i = 0;
+            participant.Weapons = events[i++];
+            participant.Breaking = events[i++];
+            participant.Forms = events[i++];
+            participant.PointSparring = events[i++];
+            participant.OlympicSparring = events[i++];
+            targetTourn.Participants.Add(participant);
+            tournManContext.SaveChanges();
+        }
+
         private Participant MakeParticipantFromCSVLine(string[] headers, string[] row)
         {
             int i = 0;

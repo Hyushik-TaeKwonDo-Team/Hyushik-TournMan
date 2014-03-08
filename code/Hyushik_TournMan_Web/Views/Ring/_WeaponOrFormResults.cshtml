@@ -9,24 +9,38 @@
     }else{
         <h2>Forms</h2>
     }
-    <div>
-    @foreach(var listing in Model.WeaponsOrFormsListings.OrderByDescending(wfl=>wfl.CurrentScore)){
-        <div>
-            <span>@listing.ParticipantName</span>
-            <span>Current Score: @listing.CurrentScore</span>
-            @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) { 
-                using (Html.BeginForm("UpdateWeaponOrFormScoring", "Scoring", FormMethod.Post)) { 
-                    <input type="number" name="judgeScore" min="0" max="10" pattern="\d+"/>
-                    <input type="hidden" name="ringId" value="@Model.RingId"/>
-                    <input type="hidden" name="entryId" value="@listing.WeaponsOrFormsResultId"/>
-                    <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
-                    <button type="submit">Add Score</button>
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+                @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
+                    <th>Add Weight to Score</th>
+                    <th>Delete Entry</th>
                 }
+            </tr>
+        </thead>
+        <tbody>
+    @foreach(var listing in Model.WeaponsOrFormsListings.OrderByDescending(wfl=>wfl.CurrentScore)){
+        <tr>
+            <td>@listing.ParticipantName</td>
+            <td>@listing.CurrentScore</td>
+            @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) { 
+                <td>
+                    @using (Html.BeginForm("UpdateWeaponOrFormScoring", "Scoring", FormMethod.Post)) { 
+                        <input type="number" name="judgeScore" min="0" max="10" pattern="\d+"/>
+                        <input type="hidden" name="tournId" value="@Model.RingId"/>
+                        <input type="hidden" name="entryId" value="@listing.WeaponsOrFormsResultId"/>
+                        <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
+                        <button type="submit" class="btn btn-default btn-sm">Add Score</button>
+                    }
+                </td>
+                <td>Delete</td>
             }
-        </div>
+        </tr>
         
     }
-    </div>
+    </table>
     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) {
     <div>
         <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#popTechnique-@Model.IsWeapons.ToString()">Add New</button>

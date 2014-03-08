@@ -289,6 +289,24 @@ namespace Hyushik_TournMan_Web.Controllers
             return RedirectToAction("Tournament", "Admin", new {id = vm.Tournament.Id});
         }
 
-
+        [HttpPost]
+        public ActionResult AddIndividualParticipant(long tournId, string firstLastName, string optionsRadios, int age, string rank, string weapons, string breaking, string forms, string point, string olympic)
+        {
+            AddSucessNotification("Added " + firstLastName + " to the tournament.");
+            String[] participantInfo = {firstLastName, optionsRadios, age.ToString(), rank};
+            bool[] events = {false, false, false, false, false};
+            if (weapons != null)
+                events[0] = true;
+            if (breaking != null)
+                events[1] = true;
+            if (forms != null)
+                events[2] = true;
+            if (point != null)
+                events[3] = true;
+            if (olympic != null)
+                events[4] = true;
+            orch.AddIndividualParticipant(tournId, participantInfo, events);
+            return RedirectToAction("Tournament", "Admin", new { id=tournId});
+        }
     }
 }

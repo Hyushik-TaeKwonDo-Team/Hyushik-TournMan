@@ -21,3 +21,11 @@ b.list-group-item.active:focus {
 #techniqueSelection li:first-child{
     margin-top: 10px;
 }
+
+.form-group.form-group-small{
+    margin-bottom:7px;
+}
+
+.form-group.form-group-none{
+    margin-bottom:0px;
+}
