@@ -125,7 +125,7 @@
 <div>
      @using (Html.BeginForm("CreateBreakingEntry", "Scoring", FormMethod.Post))
      {
-         @Html.HiddenFor(model=>model.TournamentId)
+         @Html.HiddenFor(model=>model.RingId)
          
          @Html.DropDownListFor(model=>model.SelectedParticipantId,new SelectList(Model.Participants, "ParticipantId", "Name"))
 

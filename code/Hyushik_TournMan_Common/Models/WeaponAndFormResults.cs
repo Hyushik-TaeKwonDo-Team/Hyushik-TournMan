@@ -9,7 +9,7 @@ namespace Hyushik_TournMan_Common.Models
 {
     public abstract class WeaponOrFormResult{
 
-        public virtual Tournament Tournament { get; set; }
+        public virtual Ring Ring { get; set; }
         public virtual Participant Participant { get; set; }
         public virtual List<WeaponAndFormJudgeScore> JudgeScores {get; set;}
 

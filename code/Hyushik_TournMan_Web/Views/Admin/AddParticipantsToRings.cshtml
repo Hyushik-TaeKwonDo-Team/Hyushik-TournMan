@@ -1,0 +1,66 @@
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.RingParticipantSelectionViewModel
+
+<h2>Add Participants To Rings</h2>
+<h3>@Model.Tournament.Name</h3>
+
+<div>
+    @if (Model.PartRingJoin.Count > 0)
+    {
+        using (Html.BeginForm("AddParticipantsToRings", "Admin", FormMethod.Post))
+        {
+            @Html.HiddenFor(model=>model.Tournament.Id)
+            foreach (var r in @Model.Rings.Select((ring, index) => new { index, ring }))
+            {
+                @Html.HiddenFor(model=>model.Rings[r.index].Id)
+            }
+            foreach (var p in @Model.Participants.Select((part, index) => new { index, part }))
+            {
+                @Html.HiddenFor(model=>model.Participants[p.index].ParticipantId)
+            }
+        
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        @foreach (var r in @Model.Rings.Select((ring, index) => new { index, ring }))
+                        {
+                            <th>
+                                @r.ring.Name
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var p in @Model.Participants.Select((part, index) => new { index, part }))
+                    {
+                        <tr>
+                            <td>
+                                @p.part.Name
+                            </td>
+                    
+                            @foreach (var x in @Model.PartRingJoin[p.index].Select((rvp, index) => new { index, rvp }))
+                            {
+                                <td>
+                                    @Html.CheckBoxFor(model => model.PartRingJoin[p.index][x.index])
+                                </td>
+                            }
+                        </tr>  
+                    }
+                </tbody>
+            </table>
+            <button type="submit">Update</button>
+        }
+    }
+    else {
+        <div>
+            @if (Model.Rings.Count<1) 
+            { 
+                <span>No rings have been configured.</span>
+            }
+            else if (Model.Participants.Count < 1)
+            {
+                <span>No participants have been configured.</span>
+            }
+        </div>
+    }
+</div>

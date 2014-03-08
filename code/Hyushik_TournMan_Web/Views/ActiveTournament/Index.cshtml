@@ -1,19 +1,29 @@
-﻿@model Hyushik_TournMan_Web.Classes.ViewModels.ActiveTournamentViewModel
-
+﻿@model Hyushik_TournMan_Common.Models.Tournament
 <div>
     <div>
-        <h2>@Model.Tournament.Name</h2>
+        <h2>@Model.Name</h2>
     </div>
-
     <div>
-        @Html.Partial("_breakingResults", Model.BreakingScoreListingViewModel)
-    </div>
-
-    <div>
-        @Html.Partial("_WeaponOrFormResults", Model.WeaponsListingViewModel)
-    </div>
-
-    <div>
-        @Html.Partial("_WeaponOrFormResults", Model.FormsListingViewModel)
+        <h3>Rings</h3>
+        <div>
+             @if (Model.Rings.Count > 0)
+             {
+                <table class="table table-striped table-bordered table-hover">
+                    <tr>
+                        <th>Ring Name</th>
+                        <th>Participant Count</th>
+                    </tr>
+                    @foreach(var ring in Model.Rings){
+                        <tr>
+                            <td>@Html.ActionLink(ring.Name, "Index", "Ring", new {ringId=ring.Id},  new { @class = "list-group-item" })</td>
+                            <td>@ring.SelectedParticipants.Count</td>
+                        </tr>
+                    }
+                    
+                </table>
+             }else{
+                 <span>No Rings Currently created.  Please ask an admin to do so.</span>
+             }
+        </div>
     </div>
 </div>
