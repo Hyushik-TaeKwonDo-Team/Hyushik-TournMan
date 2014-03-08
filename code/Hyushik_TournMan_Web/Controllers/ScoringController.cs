@@ -24,9 +24,9 @@ namespace Hyushik_TournMan_Web.Controllers
         // GET: /Scoring/
 
         [HttpPost]
-        public ActionResult UpdateStationAttempts(long stationId, long ringId, int attempts, bool didNotBreak)
+        public ActionResult UpdateStationAttempts(long stationId, long ringId, int attempts, bool broke)
         {
-            var result = _orch.UpdateStationAttempts(stationId, attempts, didNotBreak);
+            var result = _orch.UpdateStationAttempts(stationId, attempts, !broke);
             
             if (result.WasSuccessful)
             {

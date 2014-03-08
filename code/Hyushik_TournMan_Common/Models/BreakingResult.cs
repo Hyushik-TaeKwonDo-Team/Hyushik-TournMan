@@ -60,6 +60,11 @@ namespace Hyushik_TournMan_Common.Models
         public int Attempts { get; set; }
         public bool DidNotBreak { get; set; }
 
+        public Station()
+        {
+            DidNotBreak = true;
+        }
+
     }
 
 }
