@@ -427,5 +427,25 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             }
         }
 
+        public OperationResult DeleteRing(long ringId)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var ring = _tournManContext.Rings.FirstOrDefault(t => t.Id == ringId);
+                ring.SelectedParticipants.Clear();
+                _tournManContext.Rings.Remove(ring);
+                _tournManContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+                return result;
+            }
+            result.WasSuccessful = true;
+            //TODO message
+            return result;
+        }
+
     }
 }

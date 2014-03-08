@@ -40,7 +40,7 @@ namespace Hyushik_TournMan_DAL.Migrations
 
             var tourn1 = new Tournament() { Name = "Tournament 1", Active = true };
 
-            var ring1 = new Ring() { Name = "Ring 1", Tournament=tourn1};
+            var ring1 = new Ring() { Name = "Ring 1", Tournament = tourn1};
             var ring2 = new Ring() { Name = "Ring 2", Tournament = tourn1 };
 
             ring1.SelectedParticipants.Add(part1);
@@ -72,32 +72,51 @@ namespace Hyushik_TournMan_DAL.Migrations
 
             
 
-            var toggleTech = new Technique()
+            var kickParent = new Technique()
             {
-                Name = "Toggle Tech"
+                Name = "Kick"
             };
 
-            var parentTech = new Technique()
+            var jumpKickTech = new Technique()
             {
-                Name = "Parent Tech"
+                Name = "Jump Kick",
+                Weight = 6
             };
 
-            var childTech = new Technique()
+            var spinKickTech = new Technique()
             {
-                Name = "Child Tech"
+                Name = "Spin Kick",
+                Weight = 8
             };
 
-            var secondaryChildTech = new Technique()
+            var jumpSpinKickTech = new Technique()
             {
-                Name = "Secondary Child Tech"
+                Name = "Jump Spin Kick",
+                Weight = 9
             };
 
-            parentTech.AddSubTechnique(childTech);
-            childTech.AddSubTechnique(secondaryChildTech);
+            var splitKickTech = new Technique()
+            {
+                Name = "Split Kick",
+                Weight = 10
+            };
+
+            var genericKickTech = new Technique()
+            {
+                Name = "Generic Kick",
+                Weight = 5
+            };
+
+            kickParent.AddSubTechnique(jumpKickTech);
+            kickParent.AddSubTechnique(spinKickTech);
+            kickParent.AddSubTechnique(jumpSpinKickTech);
+            kickParent.AddSubTechnique(splitKickTech);
+            kickParent.AddSubTechnique(genericKickTech);
+
 
             context.Techniques.AddOrUpdate(
                 t=>t.Name,
-                toggleTech,parentTech,childTech, secondaryChildTech
+                kickParent, jumpKickTech, spinKickTech, jumpSpinKickTech, splitKickTech, genericKickTech
                 );
 
 

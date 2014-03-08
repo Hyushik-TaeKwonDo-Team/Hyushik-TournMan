@@ -308,5 +308,21 @@ namespace Hyushik_TournMan_Web.Controllers
             orch.AddIndividualParticipant(tournId, participantInfo, events);
             return RedirectToAction("Tournament", "Admin", new { id=tournId});
         }
+
+        [HttpPost]
+        public ActionResult DeleteRing(long ringId, long tournId)
+        {
+            var result = orch.DeleteRing(ringId);
+            if (result.WasSuccessful)
+            {
+                //AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
+            return RedirectToAction("Tournament", "Admin", new { id=tournId});
+        }
+
     }
 }

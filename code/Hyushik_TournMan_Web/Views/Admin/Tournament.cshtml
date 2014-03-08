@@ -25,7 +25,13 @@
                             <tr>
                                 <td>@ring.Name</td>
                                 <td>@ring.SelectedParticipants.Count</td>
-                                <td>TODO</td>
+                                <td>
+                                    @using (Html.BeginForm("DeleteRing", "Admin", FormMethod.Post)) {
+                                        @Html.Hidden("ringId", ring.Id)
+                                        @Html.Hidden("tournId", ring.Tournament.Id)
+                                        <button>Delete</button>
+                                    }
+                                </td>
                             </tr>
                         }
                     </table>

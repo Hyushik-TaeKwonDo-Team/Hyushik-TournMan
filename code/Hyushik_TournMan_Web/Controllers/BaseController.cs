@@ -43,7 +43,6 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             IDictionary<string, string> currentNotifications =
                 (IDictionary<string, string>)TempData[WebConstants.Parameters.NOTIFICATIONS] ?? new Dictionary<string, string>();
-
             currentNotifications[message] = cssClass;
 
             TempData[WebConstants.Parameters.NOTIFICATIONS] = currentNotifications;
