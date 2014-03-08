@@ -38,7 +38,7 @@
             var name = "." + $(this).attr('class').split(' ')[1] + "-toggleChild";
             $(name).toggle();
             $(this).closest('tr').toggleClass("active");
-            
+            $(this).find(".glyphicon").toggleClass("glyphicon-minus").toggleClass("glyphicon-plus");
         });
     });
 </script>
@@ -60,8 +60,11 @@
         <tbody>
             @foreach(var listing in Model.BreakingScoreListings.OrderByDescending(bsl=>bsl.CurrentScore)){
                 <tr>
-                    <td class="toggleParent @listing.BreakingEntryId">@listing.ParticipantName</td>
-                    <td>@listing.CurrentScore.ToString("F2")</td>
+                    <td class="toggleParent @listing.BreakingEntryId">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        @listing.ParticipantName
+                    </td>
+                    <td class="toggleParent @listing.BreakingEntryId">@listing.CurrentScore.ToString("F2")</td>
                     <td>@if (listing.Stations.Count > 0)
                         {
                             <span>@listing.Stations.First().Technique.Name</span>
