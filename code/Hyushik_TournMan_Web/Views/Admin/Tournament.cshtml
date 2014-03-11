@@ -40,6 +40,14 @@
                  }
             </div>
             <div>
+                <span>Ring Name: </span>
+                @using (Html.BeginForm("CreateRing", "Admin", FormMethod.Post)) {
+                    @Html.TextBox("ringName", "")
+                    @Html.Hidden("tournId", Model.Tournament.Id)
+                    <button>New Ring</button>
+                }
+            </div>
+            <div>
                 @Html.ActionLink("Update Participants in Rings", "AddParticipantsToRings", "Admin", new {tournId=Model.Tournament.Id }, new { })
             </div>
         </div>

@@ -11,6 +11,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 {
     public interface IAdminOrchestrator
     {
+        OperationResult CreateRing(string name, long tournId);
         OperationResult DeleteRing(long ringId);
         OperationResult AddParticipantsToRings(List<long> ringIds, List<long> participantIds, List<List<bool>> RingsVsParticipants);
         IList<Tournament> GetActiveTournaments();

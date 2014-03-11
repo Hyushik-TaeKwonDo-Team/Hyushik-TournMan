@@ -286,7 +286,7 @@ namespace Hyushik_TournMan_Web.Controllers
         public ActionResult AddParticipantsToRings(RingParticipantSelectionViewModel vm)
         {
             orch.AddParticipantsToRings(vm.Rings.Select(r => r.Id).ToList(), vm.Participants.Select(p => p.ParticipantId).ToList(), vm.PartRingJoin);
-            return RedirectToAction("Tournament", "Admin", new {id = vm.Tournament.Id});
+            return RedirectToTournamentAdmin(vm.Tournament.Id);
         }
 
         [HttpPost]
@@ -306,7 +306,7 @@ namespace Hyushik_TournMan_Web.Controllers
             if (olympic != null)
                 events[4] = true;
             orch.AddIndividualParticipant(tournId, participantInfo, events);
-            return RedirectToAction("Tournament", "Admin", new { id=tournId});
+            return RedirectToTournamentAdmin(tournId);
         }
 
         [HttpPost]
@@ -321,7 +321,26 @@ namespace Hyushik_TournMan_Web.Controllers
             {
                 AddErrorNotification(result.Message);
             }
-            return RedirectToAction("Tournament", "Admin", new { id=tournId});
+            return RedirectToTournamentAdmin(tournId);
+        }
+
+        [HttpPost]
+        public ActionResult CreateRing(string ringName, long tournId)
+        {
+            var result = orch.CreateRing(ringName, tournId);
+            if (result.WasSuccessful)
+            {
+                //AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
+            return RedirectToTournamentAdmin(tournId);
+        }
+
+        protected ActionResult RedirectToTournamentAdmin(long tournId){
+            return RedirectToAction("Tournament", "Admin", new { id = tournId });
         }
 
     }
