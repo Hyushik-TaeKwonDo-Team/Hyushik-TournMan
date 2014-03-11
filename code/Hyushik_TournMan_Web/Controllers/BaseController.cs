@@ -12,6 +12,7 @@ namespace Hyushik_TournMan_Web.Controllers
     [Hyushik_TournMan_Web.Filters.InitializeSimpleMembership]
     public class BaseController : Controller
     {
+
         protected ActionResult RedirectToHome()
         {
             return RedirectToAction("Index", "Home");

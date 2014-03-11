@@ -17,6 +17,30 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         protected UsersContext _usersContext = new UsersContext();
         protected TournManContext _tournManContext = new TournManContext();
 
+
+
+
+        public ParticipantSelectionOperationResult GetParticipantSelectionByRingId(long ringId)
+        {
+            var result = new ParticipantSelectionOperationResult() { WasSuccessful = false };
+            try
+            {
+                var selection = new ParticipantSelection();
+                var ring = GetRingById(ringId);
+                selection.Participants = ring.SelectedParticipants;
+                selection.RingId = ring.Id;
+                selection.TournId = ring.Tournament.Id;
+                result.ParticipantSelection = selection;
+                result.WasSuccessful = true;
+                //TODO message
+            }catch(Exception ex){
+                result.Message = ex.Message;
+            }
+            return result;
+
+        }
+
+
         public OperationResult CreateRing(string name, long tournId)
         {
             var result = new OperationResult() { WasSuccessful = false };

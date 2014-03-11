@@ -283,6 +283,7 @@
     <Content Include="Views\Ring\_WeaponOrFormResults.cshtml" />
     <Content Include="Views\ActiveTournament\Index.cshtml" />
     <Content Include="Views\Admin\AddParticipantsToRings.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ParticipantSelection.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>

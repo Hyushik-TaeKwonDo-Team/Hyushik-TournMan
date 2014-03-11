@@ -11,12 +11,11 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         public long RingId { get; set; }
         public List<WeaponsOrFormsListing> WeaponsOrFormsListings { get; set; }
         public bool IsWeapons { get; set; }
-        public List<Participant> Participants { get; set; }
+        public ParticipantSelection ParticipantSelection { get; set; }
 
         public WeaponsOrFormsListingViewModel()
         {
             WeaponsOrFormsListings = new List<WeaponsOrFormsListing>();
-            Participants = new List<Participant>();
         }
 
         public void AddListing(string name, double score, long resultId)

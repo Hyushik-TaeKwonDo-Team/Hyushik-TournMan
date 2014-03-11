@@ -60,7 +60,9 @@
     <Compile Include="Models\BreakingResult.cs" />
     <Compile Include="Models\Participant.cs" />
     <Compile Include="Models\ParticipantBoardSizeCount.cs" />
+    <Compile Include="Models\ParticipantSelection.cs" />
     <Compile Include="Models\Ring.cs" />
+    <Compile Include="Models\SparringResult.cs" />
     <Compile Include="Models\Technique.cs" />
     <Compile Include="Models\Tournament.cs" />
     <Compile Include="Models\WeaponAndFormResults.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Results\BreakingScoringResult.cs" />
     <Compile Include="Results\GetJudgeNamesAndScoresOperationResult.cs" />
     <Compile Include="Results\OperationResult.cs" />
+    <Compile Include="Results\ParticipantSelectionOperationResult.cs" />
     <Compile Include="Results\SaveBreakingJudgeScoreResult.cs" />
     <Compile Include="Results\TechniqueValueResult.cs" />
   </ItemGroup>

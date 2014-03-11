@@ -59,7 +59,7 @@
                       <div class="modal-body">
 
                       <input type="hidden" name="ringId" value="@Model.RingId"/> 
-                      @Html.DropDownList("partId", new SelectList(Model.Participants, "ParticipantId", "Name"), new { @class="form-control" })
+                      @Html.EditorFor(m=>m.ParticipantSelection)
                       <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
 
                       </div>

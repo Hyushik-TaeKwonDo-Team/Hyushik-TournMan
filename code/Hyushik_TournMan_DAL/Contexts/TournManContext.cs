@@ -30,7 +30,7 @@ namespace Hyushik_TournMan_DAL.Contexts
         public DbSet<WeaponResult> WeaponResults { get; set; }
         public DbSet<FormResult> FormResults { get; set; }
         public DbSet<WeaponAndFormJudgeScore> WeaponAndFormJudgeScores { get; set; }
-        
+        public DbSet<SparringResult> SparringResults { get; set; }
         
 
     }

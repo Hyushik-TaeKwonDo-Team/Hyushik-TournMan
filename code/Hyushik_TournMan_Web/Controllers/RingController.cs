@@ -1,6 +1,7 @@
 ﻿using Hyushik_TournMan_BLL.Orchestrators;
 using Hyushik_TournMan_BLL.Orchestrators.Interfaces;
 using Hyushik_TournMan_BLL.Scoring;
+using Hyushik_TournMan_Common.Models;
 using Hyushik_TournMan_Web.Classes.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,31 @@ namespace Hyushik_TournMan_Web.Controllers
 
         private IRingOrchestrator orch = new RingOrchestrator();
 
+        protected ParticipantSelection MkParticipantSelection(long ringId)
+        {
+
+            var result = orch.GetParticipantSelectionByRingId(ringId);
+            if (result.WasSuccessful)
+            {
+                return result.ParticipantSelection;
+            }
+            else
+            {
+                //AddErrorNotification(result.Message);
+                return null;
+            }
+
+             
+        }
+
         protected WeaponsOrFormsListingViewModel buildWeaponsViewModel(long ringId)
         {
             var scoringAlgorithm = new WeaponsOrFormsAlgorithm();
             var vm = new WeaponsOrFormsListingViewModel()
             {
-                Participants = orch.GetParticipantsByRingId(ringId).ToList(),
                 IsWeapons = true,
-                RingId = ringId
+                RingId = ringId,
+                ParticipantSelection = MkParticipantSelection(ringId)
             };
             foreach (var result in orch.GetWeaponResultsByRingId(ringId))
             {
@@ -33,7 +51,6 @@ namespace Hyushik_TournMan_Web.Controllers
 
             return vm;
 
-
         }
 
         protected WeaponsOrFormsListingViewModel buildFormsViewModel(long ringId)
@@ -41,9 +58,9 @@ namespace Hyushik_TournMan_Web.Controllers
             var scoringAlgorithm = new WeaponsOrFormsAlgorithm();
             var vm = new WeaponsOrFormsListingViewModel()
             {
-                Participants = orch.GetParticipantsByRingId(ringId).ToList(),
                 IsWeapons = false,
-                RingId = ringId
+                RingId = ringId,
+                ParticipantSelection = MkParticipantSelection(ringId)
             };
             foreach (var result in orch.GetFormResultsByRingId(ringId))
             {
