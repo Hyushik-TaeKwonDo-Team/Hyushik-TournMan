@@ -10,6 +10,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 {
     public interface IScoringOrchestrator
     {
+        UserProfile GetUserByName(string name);
         OperationResult DeleteFormsResult(long fid);
         OperationResult DeleteWeaponsResult(long wid);
         OperationResult DeleteSparringResult(long sparId);

@@ -331,7 +331,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 
         public UserProfile GetUserByName(string name)
         {
-            return GetUsers().First(u=>u.UserName==name);
+            return GetUsers().First(u=>u.UserName.ToLower()==name.ToLower());
         }
 
         public IList<Tournament> GetActiveTournaments()

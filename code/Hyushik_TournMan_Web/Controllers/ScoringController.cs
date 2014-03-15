@@ -264,7 +264,7 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             var score = new BreakingJudgeScore();
             score.SubjectiveScore=vm.SubjectiveScore;
-            score.Judge_UserId = _orch.GetUsers().First(u=>u.UserName==User.Identity.Name).UserId;
+            score.Judge_UserId = _orch.GetUserByName(User.Identity.Name).UserId;
 
             var result = _orch.EnterBreakingJudgeScore(score, vm.EntryId);
 
