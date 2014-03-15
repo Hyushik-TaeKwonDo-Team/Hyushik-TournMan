@@ -20,6 +20,24 @@ namespace Hyushik_TournMan_Web.Controllers
 
         private IScoringOrchestrator _orch = new ScoringOrchestrator();
 
+
+        [HttpPost]
+        public ActionResult DeleteSparringEntry(long ringId, long sparId)
+        {
+            var result = _orch.DeleteSparringResult(sparId);
+
+            if (result.WasSuccessful)
+            {
+                //AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
+
+            return RedirectToRing(ringId);
+        }
+
         [HttpPost]
         public ActionResult SaveSparringResult(SparringViewModel vm)
         {

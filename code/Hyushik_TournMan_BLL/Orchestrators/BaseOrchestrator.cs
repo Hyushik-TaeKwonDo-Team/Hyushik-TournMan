@@ -17,6 +17,24 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         protected UsersContext _usersContext = new UsersContext();
         protected TournManContext _tournManContext = new TournManContext();
 
+        public OperationResult DeleteSparringResult(long sparId )
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var sparResult = _tournManContext.SparringResults.First(sr=>sr.Id==sparId);
+                _tournManContext.SparringResults.Remove(sparResult);
+                _tournManContext.SaveChanges();
+                result.WasSuccessful = true;
+                //TODO message
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
         public OperationResult SaveSparringResult(SparringResult sparResult)
         {
             var result = new OperationResult() { WasSuccessful = false };
