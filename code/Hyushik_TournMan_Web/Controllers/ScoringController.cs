@@ -65,9 +65,11 @@ namespace Hyushik_TournMan_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewWeaponOrFormScoring(long ringId, long partId, bool isWeapon)
+        public ActionResult NewWeaponOrFormScoring(ParticipantSelection participantSelection, long ringId, bool isWeapon)
         {
             OperationResult result;
+
+            var partId = _orch.GetParticipantIdBySelection(participantSelection);
 
             if(isWeapon){
                 result = _orch.NewWeaponEntry(ringId, partId);
