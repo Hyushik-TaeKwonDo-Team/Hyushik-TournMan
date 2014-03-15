@@ -17,6 +17,51 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         protected UsersContext _usersContext = new UsersContext();
         protected TournManContext _tournManContext = new TournManContext();
 
+        public OperationResult DeleteFormsResult(long fid)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var fResult = _tournManContext.FormResults.First(w => w.Id == fid);
+                foreach (var score in fResult.JudgeScores.ToList())
+                {
+                    _tournManContext.WeaponAndFormJudgeScores.Remove(score);
+                }
+                fResult.JudgeScores.Clear();
+                _tournManContext.FormResults.Remove(fResult);
+                _tournManContext.SaveChanges();
+                result.WasSuccessful = true;
+                //TODO message
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+        
+        public OperationResult DeleteWeaponsResult(long wid)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                var wResult = _tournManContext.WeaponResults.First(w=>w.Id == wid);
+                foreach(var score in wResult.JudgeScores.ToList()){
+                    _tournManContext.WeaponAndFormJudgeScores.Remove(score);
+                }
+                wResult.JudgeScores.Clear();
+                _tournManContext.WeaponResults.Remove(wResult);
+                _tournManContext.SaveChanges();
+                result.WasSuccessful = true;
+                //TODO message
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
         public OperationResult DeleteSparringResult(long sparId )
         {
             var result = new OperationResult() { WasSuccessful = false };

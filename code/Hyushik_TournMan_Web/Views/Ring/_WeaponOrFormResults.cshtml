@@ -35,7 +35,14 @@
                         <button type="submit" class="btn btn-default btn-sm">Add Score</button>
                     }
                 </td>
-                <td>Delete</td>
+                <td>
+                    @using (Html.BeginForm(Model.IsWeapons ? "DeleteWeaponResult" : "DeleteFormResult", "Scoring", FormMethod.Post))
+                    {
+                        <input name="ringId" type="hidden" value="@Model.RingId"/>
+                        <input name="worfId" type="hidden" value="@listing.WeaponsOrFormsResultId"/>
+                        <button type="submit" class="btn btn-sm btn-danger glyphicon glyphicon-remove"> </button>
+                    }
+                </td>
             }
         </tr>
         

@@ -20,6 +20,39 @@ namespace Hyushik_TournMan_Web.Controllers
 
         private IScoringOrchestrator _orch = new ScoringOrchestrator();
 
+        [HttpPost]
+        public ActionResult DeleteFormResult(long ringId, long worfId)
+        {
+            var result = _orch.DeleteFormsResult(worfId);
+
+            if (result.WasSuccessful)
+            {
+                //AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
+
+            return RedirectToRing(ringId);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteWeaponResult(long ringId, long worfId)
+        {
+            var result = _orch.DeleteWeaponsResult(worfId);
+
+            if (result.WasSuccessful)
+            {
+                //AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
+
+            return RedirectToRing(ringId);
+        }
 
         [HttpPost]
         public ActionResult DeleteSparringEntry(long ringId, long sparId)
