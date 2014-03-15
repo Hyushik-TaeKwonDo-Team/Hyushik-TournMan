@@ -127,7 +127,7 @@
      {
          @Html.HiddenFor(model=>model.RingId)
          
-         @Html.DropDownListFor(model=>model.SelectedParticipantId,new SelectList(Model.Participants, "ParticipantId", "Name"))
+         @Html.EditorFor(model=>model.ParticipantSelection)
 
          <hr />
          

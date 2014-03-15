@@ -13,8 +13,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
     public class BreakingViewModel
     {
 
-        public IEnumerable<Participant> Participants { get; set; }
-        public long SelectedParticipantId { get; set; }
+        public ParticipantSelection ParticipantSelection { get; set; }
 
         //default 5
         public List<StationViewModel> Stations { get; set; }

@@ -32,7 +32,7 @@ namespace Hyushik_TournMan_Web.Controllers
                 return null;
             }
 
-             
+
         }
 
         protected WeaponsOrFormsListingViewModel buildWeaponsViewModel(long ringId)

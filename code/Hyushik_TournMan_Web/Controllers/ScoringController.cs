@@ -20,6 +20,23 @@ namespace Hyushik_TournMan_Web.Controllers
 
         private IScoringOrchestrator _orch = new ScoringOrchestrator();
 
+        protected ParticipantSelection MkParticipantSelection(long ringId)
+        {
+
+            var result = _orch.GetParticipantSelectionByRingId(ringId);
+            if (result.WasSuccessful)
+            {
+                return result.ParticipantSelection;
+            }
+            else
+            {
+                //AddErrorNotification(result.Message);
+                return null;
+            }
+
+
+        }
+
         //
         // GET: /Scoring/
 
@@ -109,8 +126,7 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             var vm = new BreakingViewModel();
             vm.RingId = ringId;
-            vm.Participants = _orch.GetParticipantsByRingId(ringId);
-            vm.SelectedParticipantId = -1;
+            vm.ParticipantSelection = MkParticipantSelection(ringId);
             var svm = mkStationViewModel();
             for (int i = StoredValues.MaxBreakingStationCount; i > 0;--i )
             {
@@ -133,7 +149,7 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             var model = new BreakingResult();
             model.Ring = _orch.GetRingById(vm.RingId);
-            model.Participant = _orch.GetParticipantById(vm.SelectedParticipantId);
+            model.Participant = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.ParticipantSelection));
             foreach(var stationVM in vm.Stations){
                 var result = _orch.CreateTechniqueValue(stationVM.BaseTechniques);
                 if(result.WasSuccessful && result.HasTechniqueValue){
