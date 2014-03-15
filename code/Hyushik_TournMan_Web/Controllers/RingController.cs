@@ -18,6 +18,18 @@ namespace Hyushik_TournMan_Web.Controllers
 
         private IRingOrchestrator orch = new RingOrchestrator();
 
+        protected SparringViewModel mkSparringViewModel(long ringId)
+        {
+            var partSelect = MkParticipantSelection(ringId);
+            return new SparringViewModel()
+            {
+                SparringResults = orch.GetSparringResultsByRingId(ringId),
+                Participant1Selection = partSelect,
+                Participant2Selection = partSelect,
+                RingId = ringId
+            };
+        }
+        
         protected ParticipantSelection MkParticipantSelection(long ringId)
         {
 
@@ -77,7 +89,8 @@ namespace Hyushik_TournMan_Web.Controllers
                 Ring = orch.GetRingById(ringId),
                 BreakingScoreListingViewModel = BuildBreakingScoreListingViewModel(ringId),
                 WeaponsListingViewModel = buildWeaponsViewModel(ringId),
-                FormsListingViewModel = buildFormsViewModel(ringId)
+                FormsListingViewModel = buildFormsViewModel(ringId),
+                SparringViewModel = mkSparringViewModel(ringId)
             };
         }
 

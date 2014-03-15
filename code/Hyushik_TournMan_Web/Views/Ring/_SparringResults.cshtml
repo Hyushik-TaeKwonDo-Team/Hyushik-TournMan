@@ -1,0 +1,74 @@
+﻿@model Hyushik_TournMan_Web.Classes.ViewModels.SparringViewModel
+
+<div>
+    <h2>Sparring</h2>
+
+    <div>
+        @if(Model.SparringResults.Count>0){
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            Round
+                        </td>
+                        <td>
+                            Winner
+                        </td>
+                        <td>
+                            Defeated
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var sparResult in Model.SparringResults.OrderByDescending(sr => sr.RoundNumber))
+                    {
+                        <tr>
+                            <td>
+                                <span>@sparResult.RoundNumber</span>
+                            </td>
+                            <td>
+                                <span>@(sparResult.Partipant1IsVictor ? sparResult.Participant1.Name : sparResult.Participant2.Name )</span>
+                            </td>
+                            <td>
+                                <span>@(sparResult.Partipant1IsVictor ? sparResult.Participant2.Name : sparResult.Participant1.Name )</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }else{
+            <span>No sparring results currently.</span>
+        }
+       
+    </div>
+
+    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) {
+        <div>
+            <h3>Record New Sparring Result</h3>
+            @using (Html.BeginForm("SaveSparringResult", "Scoring", FormMethod.Post))
+            {
+                @Html.HiddenFor(m=>m.RingId);
+                <div>
+                    <span>Round Number</span>
+                    @Html.TextBoxFor(m=>m.RoundNumber)
+                </div>
+                <div>
+                    <span>Participant 1</span>
+                    @Html.EditorFor(m=>m.Participant1Selection)
+                </div>
+                <div>
+                    <span>Participant 2</span>
+                    @Html.EditorFor(m=>m.Participant2Selection)
+                </div>
+                <div>
+                    <span>Participant 1 is Victor</span>
+                    @Html.CheckBoxFor(m=>m.Participant1IsVictor)
+                </div>
+                <button type="submit">Submit</button>
+             }
+        </div>
+    }
+
+
+
+</div>

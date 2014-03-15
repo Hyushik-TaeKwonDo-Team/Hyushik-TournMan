@@ -20,6 +20,32 @@ namespace Hyushik_TournMan_Web.Controllers
 
         private IScoringOrchestrator _orch = new ScoringOrchestrator();
 
+        [HttpPost]
+        public ActionResult SaveSparringResult(SparringViewModel vm)
+        {
+            var sparResult = new SparringResult()
+            {
+                Participant1 = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.Participant1Selection)),
+                Participant2 = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.Participant2Selection)),
+                Ring = _orch.GetRingById(vm.RingId),
+                RoundNumber = vm.RoundNumber,
+                Partipant1IsVictor = vm.Participant1IsVictor
+            };
+
+            var result = _orch.SaveSparringResult(sparResult);
+
+            if (result.WasSuccessful)
+            {
+                //AddSucessNotification(result.Message);
+            }
+            else if (!result.WasSuccessful)
+            {
+                AddErrorNotification(result.Message);
+            }
+            return RedirectToRing(vm.RingId);
+        }
+
+
         protected ParticipantSelection MkParticipantSelection(long ringId)
         {
 

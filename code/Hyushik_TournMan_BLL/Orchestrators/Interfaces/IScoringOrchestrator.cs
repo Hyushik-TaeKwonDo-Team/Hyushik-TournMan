@@ -10,6 +10,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 {
     public interface IScoringOrchestrator
     {
+        OperationResult SaveSparringResult(SparringResult sparResult);
         long GetParticipantIdBySelection(ParticipantSelection selection);
         ParticipantSelectionOperationResult GetParticipantSelectionByRingId(long ringId);
         OperationResult UpdateStationAttempts(long stationId, int attempts, bool didNotBreak);

@@ -17,6 +17,28 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         protected UsersContext _usersContext = new UsersContext();
         protected TournManContext _tournManContext = new TournManContext();
 
+        public OperationResult SaveSparringResult(SparringResult sparResult)
+        {
+            var result = new OperationResult() { WasSuccessful = false };
+            try
+            {
+                _tournManContext.SparringResults.Add(sparResult);
+                _tournManContext.SaveChanges();
+                result.WasSuccessful = true;
+                //TODO message
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+            }
+            return result;
+        }
+
+        public List<SparringResult> GetSparringResultsByRingId(long ringId)
+        {
+            return _tournManContext.SparringResults.Where(sr=>sr.Ring.Id==ringId).ToList();
+        }
+
         public long GetParticipantIdBySelection(ParticipantSelection selection)
         {
             if (!selection.CreateNewParticipant)

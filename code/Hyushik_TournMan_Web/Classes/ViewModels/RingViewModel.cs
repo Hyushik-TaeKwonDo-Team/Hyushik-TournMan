@@ -9,8 +9,10 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
     public class RingViewModel
     {
         public Ring Ring { get; set; }
+        
         public BreakingScoreListingViewModel BreakingScoreListingViewModel { get; set; }
         public WeaponsOrFormsListingViewModel WeaponsListingViewModel { get; set; }
         public WeaponsOrFormsListingViewModel FormsListingViewModel { get; set; }
+        public SparringViewModel SparringViewModel { get; set; }
     }
 }

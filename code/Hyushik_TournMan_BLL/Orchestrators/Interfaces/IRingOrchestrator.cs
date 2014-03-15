@@ -10,6 +10,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 {
     public interface IRingOrchestrator
     {
+        List<SparringResult> GetSparringResultsByRingId(long ringId);
         long GetParticipantIdBySelection(ParticipantSelection selection);
         ParticipantSelectionOperationResult GetParticipantSelectionByRingId(long ringId);
         GetJudgeNamesAndScoresOperationResult GetBreakingJudgeOpinions(long entryId);
