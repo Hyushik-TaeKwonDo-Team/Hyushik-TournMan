@@ -1,56 +1,57 @@
 ﻿@model Hyushik_TournMan_Web.Classes.ViewModels.SparringViewModel
+<script>
+    function validateSparring() {
+        if (window.confirm("Are you sure that you want to delete this sparring result?")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+</script>
 
 <div>
     <h2>Sparring</h2>
 
     <div>
         @if(Model.SparringResults.Count>0){
-            <table>
-                <thead>
-                    <tr>
+            
+        <table class="table table-bordered table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>Round</th> 
+                <th>Winner</th>
+                <th>Defeated</th>
+                @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<th>Delete</th>}
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sparResult in Model.SparringResults.OrderByDescending(sr => sr.RoundNumber))
+            {
+                <tr>
+                    <td>
+                        <span>@sparResult.RoundNumber</span>
+                    </td>
+                    <td>
+                        <span>@(sparResult.Partipant1IsVictor ? sparResult.Participant1.Name : sparResult.Participant2.Name )</span>
+                    </td>
+                    <td>
+                        <span>@(sparResult.Partipant1IsVictor ? sparResult.Participant2.Name : sparResult.Participant1.Name )</span>
+                    </td>
+                    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
                         <td>
-                            Round
-                        </td>
-                        <td>
-                            Winner
-                        </td>
-                        <td>
-                            Defeated
-                        </td>
-                        @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
-                            <td>
-                                Delete
-                            </td>
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var sparResult in Model.SparringResults.OrderByDescending(sr => sr.RoundNumber))
-                    {
-                        <tr>
-                            <td>
-                                <span>@sparResult.RoundNumber</span>
-                            </td>
-                            <td>
-                                <span>@(sparResult.Partipant1IsVictor ? sparResult.Participant1.Name : sparResult.Participant2.Name )</span>
-                            </td>
-                            <td>
-                                <span>@(sparResult.Partipant1IsVictor ? sparResult.Participant2.Name : sparResult.Participant1.Name )</span>
-                            </td>
-                            @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
-                                <td>
-                                    @using (Html.BeginForm("DeleteSparringEntry", "Scoring", FormMethod.Post))
-                                    {
-                                        <input name="ringId" type="hidden" value="@sparResult.Ring.Id"/>
-                                        <input name="sparId" type="hidden" value="@sparResult.Id"/>
-                                        <button type="submit" class="btn btn-sm btn-danger glyphicon glyphicon-remove"> </button>
-                                    }
-                                </td>
+                            @using (Html.BeginForm("DeleteSparringEntry", "Scoring", FormMethod.Post))
+                            {
+                                <input name="ringId" type="hidden" value="@sparResult.Ring.Id"/>
+                                <input name="sparId" type="hidden" value="@sparResult.Id"/>
+                                <button type="submit" class="btn btn-sm btn-danger glyphicon glyphicon-remove" onClick="return validateSparring();"> </button>
                             }
-                        </tr>
+                        </td>
                     }
-                </tbody>
-            </table>
+                </tr>
+                }
+            </tbody>
+        </table>
         }else{
             <span>No sparring results currently.</span>
         }
