@@ -112,6 +112,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             _tournManContext.Participants.Add(participant);
             var ring = GetRingById(selection.RingId);
             ring.SelectedParticipants.Add(participant);
+            ring.Tournament.Participants.Add(participant);
             _tournManContext.SaveChanges();
             return participant.ParticipantId;
 
