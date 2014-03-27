@@ -45,99 +45,105 @@
 
 <div>
     <h2>Breaking</h2>
-    <table class="table table-bordered table-hover table-condensed">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Score</th>
-                <th>Stations</th>
-                <th>Attempts</th>
-                @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<th>Add Weight to Score</th>}
-                @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.ADMINISTRATOR_ROLE)){<th>Judge Scores</th>}
-                @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<th>Delete Entry</th>}
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var listing in Model.BreakingScoreListings.OrderByDescending(bsl=>bsl.CurrentScore)){
+    @if(Model.BreakingScoreListings.Count>0){
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
                 <tr>
-                    <td class="toggleParent @listing.BreakingEntryId">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        @listing.ParticipantName
-                    </td>
-                    <td class="toggleParent @listing.BreakingEntryId">@listing.CurrentScore.ToString("F2")</td>
-                    <td>@if (listing.Stations.Count > 0)
-                        {
-                            <span>@listing.Stations.First().Technique.Name</span>
-                        }
-                    </td>
-                    <td>
-                        @if (listing.Stations.Count > 0){
-                            @FormForStations(listing.Stations.First())
-                        }
-                    </td>
-
-                    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
-                        <td>@Html.ActionLink(" Judge", "JudgeBreakingEntry", "Scoring", new { entryId = listing.BreakingEntryId }, new {@class="btn btn-sm btn-primary glyphicon glyphicon-edit glyphicon"})</td>
-                    }
-
-
-                    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.ADMINISTRATOR_ROLE)){
-                        <td>
-                            @if (listing.JudgeIdToScore.Keys.Count<1)
-                            {
-                                <div>No current scores</div>
-                            }
-                            else{
-                                <select class="form-control input-sm">
-                                @foreach(var judgeId in listing.JudgeIdToScore.Keys){//using thius one as it is slightly more likely to not error from bad data
-                                    <option>@listing.JudgeIdToName[judgeId]: @listing.JudgeIdToScore[judgeId].ToString()</option>
-                                }
-                                </select>
-                            }
-                        </td>
-                    }
-                        
-                        
-                    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
-                        <td style="text-align:center">
-                            @using (Html.BeginForm("DeleteBreakingEntry", "Scoring", FormMethod.Post))
-                            {
-                                <input name="ringId" type="hidden" value="@Model.RingId"/>
-                                <input name="entryId" type="hidden" value="@listing.BreakingEntryId"/>
-                                <button type="submit" class="btn btn-sm btn-danger glyphicon glyphicon-remove" onClick="return validate();"> </button>
-                            }
-                        </td>
-                    }
-                    
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Stations</th>
+                    <th>Attempts</th>
+                    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<th>Add Weight to Score</th>}
+                    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.ADMINISTRATOR_ROLE)){<th>Judge Scores</th>}
+                    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<th>Delete Entry</th>}
                 </tr>
-                var NewRowCount = listing.Stations.Count;
-                for(int row=1; row < NewRowCount; row++){
-                    <tr class="@listing.BreakingEntryId-toggleChild" style="display:none">
-                        <td></td>
-                        <td></td>
-                        <td>
-                            @if (listing.Stations.Count > row)
+            </thead>
+            <tbody>
+                @foreach(var listing in Model.BreakingScoreListings.OrderByDescending(bsl=>bsl.CurrentScore)){
+                    <tr>
+                        <td class="toggleParent @listing.BreakingEntryId">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            @listing.ParticipantName
+                        </td>
+                        <td class="toggleParent @listing.BreakingEntryId">@listing.CurrentScore.ToString("F2")</td>
+                        <td>@if (listing.Stations.Count > 0)
                             {
-                                <span>@listing.Stations.ElementAt(row).Technique.Name</span>
+                                <span>@listing.Stations.First().Technique.Name</span>
                             }
                         </td>
                         <td>
-                            @FormForStations(listing.Stations.ElementAt(row))
+                            @if (listing.Stations.Count > 0){
+                                @FormForStations(listing.Stations.First())
+                            }
                         </td>
-                        @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<td></td>}
+
+                        @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
+                            <td>@Html.ActionLink(" Judge", "JudgeBreakingEntry", "Scoring", new { entryId = listing.BreakingEntryId }, new {@class="btn btn-sm btn-primary glyphicon glyphicon-edit glyphicon"})</td>
+                        }
+
+
                         @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.ADMINISTRATOR_ROLE)){
                             <td>
-
+                                @if (listing.JudgeIdToScore.Keys.Count<1)
+                                {
+                                    <div>No current scores</div>
+                                }
+                                else{
+                                    <select class="form-control input-sm">
+                                    @foreach(var judgeId in listing.JudgeIdToScore.Keys){//using thius one as it is slightly more likely to not error from bad data
+                                        <option>@listing.JudgeIdToName[judgeId]: @listing.JudgeIdToScore[judgeId].ToString()</option>
+                                    }
+                                    </select>
+                                }
                             </td>
                         }
-                        @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<td></td>}
-                        <td></td>
+                        
+                        
+                        @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
+                            <td style="text-align:center">
+                                @using (Html.BeginForm("DeleteBreakingEntry", "Scoring", FormMethod.Post))
+                                {
+                                    <input name="ringId" type="hidden" value="@Model.RingId"/>
+                                    <input name="entryId" type="hidden" value="@listing.BreakingEntryId"/>
+                                    <button type="submit" class="btn btn-sm btn-danger glyphicon glyphicon-remove" onClick="return validate();"> </button>
+                                }
+                            </td>
+                        }
+                    
                     </tr>
-                }
-              }
-          </tbody>
-    </table>
-    
+                    var NewRowCount = listing.Stations.Count;
+                    for(int row=1; row < NewRowCount; row++){
+                        <tr class="@listing.BreakingEntryId-toggleChild" style="display:none">
+                            <td></td>
+                            <td></td>
+                            <td>
+                                @if (listing.Stations.Count > row)
+                                {
+                                    <span>@listing.Stations.ElementAt(row).Technique.Name</span>
+                                }
+                            </td>
+                            <td>
+                                @FormForStations(listing.Stations.ElementAt(row))
+                            </td>
+                            @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<td></td>}
+                            @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.ADMINISTRATOR_ROLE)){
+                                <td>
+
+                                </td>
+                            }
+                            @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<td></td>}
+                            <td></td>
+                        </tr>
+                    }
+                  }
+              </tbody>
+        </table>
+    }else{
+        <span>No current breaking results</span>
+    }
+
+
+
     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) {
         <div>
             @Html.ActionLink("Add New", "CreateBreakingEntry", "Scoring", new { ringId = Model.RingId }, new { @class = "btn btn-primary btn-sm" })

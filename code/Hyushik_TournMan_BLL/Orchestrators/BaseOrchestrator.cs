@@ -67,10 +67,10 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             var result = new OperationResult() { WasSuccessful = false };
             try
             {
-                var sparResult = _tournManContext.SparringResults.First(sr=>sr.Id==sparId);
+                var sparResult = _tournManContext.SparringResults.Where(sr=>sr.Id==sparId).ToList().First();
+                result.Message = String.Format(Resources.SparringDeletedMessage, sparResult.Victor.Name, sparResult.Defeated.Name, sparResult.RoundNumber);
                 _tournManContext.SparringResults.Remove(sparResult);
                 _tournManContext.SaveChanges();
-                result.Message = String.Format(Resources.SparringDeletedMessage, sparResult.Victor.Name, sparResult.Defeated.Name, sparResult.RoundNumber);
                 result.WasSuccessful = true;
             }
             catch (Exception ex)

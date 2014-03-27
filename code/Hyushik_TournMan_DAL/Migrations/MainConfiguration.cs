@@ -53,11 +53,11 @@ namespace Hyushik_TournMan_DAL.Migrations
             tourn1.Rings.Add(ring2);
             
 
-            /*context.Tournaments.AddOrUpdate(
+            context.Tournaments.AddOrUpdate(
                 t=> t.Name,
                 tourn1,
                 new Tournament(){Name="Tournament 2"}
-                );*/
+                );
 
             context.Participants.AddOrUpdate(
                 p => p.Name,
