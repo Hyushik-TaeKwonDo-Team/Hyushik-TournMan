@@ -25,7 +25,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                     result.JudgeIdToName.Add(judge.UserId, judge.UserName);
                     result.JudgeIdToScore.Add(judge.UserId, score.SubjectiveScore);
                 }
-                //TODO Message
                 result.WasSuccessful = true;
             }
             catch (Exception ex)

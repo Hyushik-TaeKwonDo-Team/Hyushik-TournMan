@@ -33,10 +33,10 @@
                         <span>@sparResult.RoundNumber</span>
                     </td>
                     <td>
-                        <span>@(sparResult.Partipant1IsVictor ? sparResult.Participant1.Name : sparResult.Participant2.Name )</span>
+                        <span>@sparResult.Victor.Name</span>
                     </td>
                     <td>
-                        <span>@(sparResult.Partipant1IsVictor ? sparResult.Participant2.Name : sparResult.Participant1.Name )</span>
+                        <span>@sparResult.Defeated.Name</span>
                     </td>
                     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
                         <td>

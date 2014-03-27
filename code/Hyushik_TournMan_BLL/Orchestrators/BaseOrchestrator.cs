@@ -30,8 +30,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 fResult.JudgeScores.Clear();
                 _tournManContext.FormResults.Remove(fResult);
                 _tournManContext.SaveChanges();
+                result.Message = String.Format(Resources.FormDeletedMessage, fResult.Participant.Name);
                 result.WasSuccessful = true;
-                //TODO message
             }
             catch (Exception ex)
             {
@@ -52,8 +52,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 wResult.JudgeScores.Clear();
                 _tournManContext.WeaponResults.Remove(wResult);
                 _tournManContext.SaveChanges();
+                result.Message = String.Format(Resources.WeaponDeletedMessage, wResult.Participant.Name);
                 result.WasSuccessful = true;
-                //TODO message
             }
             catch (Exception ex)
             {
@@ -70,8 +70,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 var sparResult = _tournManContext.SparringResults.First(sr=>sr.Id==sparId);
                 _tournManContext.SparringResults.Remove(sparResult);
                 _tournManContext.SaveChanges();
+                result.Message = String.Format(Resources.SparringDeletedMessage, sparResult.Victor.Name, sparResult.Defeated.Name, sparResult.RoundNumber);
                 result.WasSuccessful = true;
-                //TODO message
             }
             catch (Exception ex)
             {
@@ -87,8 +87,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             {
                 _tournManContext.SparringResults.Add(sparResult);
                 _tournManContext.SaveChanges();
+                result.Message = String.Format(Resources.SparringResultCreatedMessage, sparResult.Victor.Name, sparResult.Defeated.Name, sparResult.RoundNumber);
                 result.WasSuccessful = true;
-                //TODO message
             }
             catch (Exception ex)
             {
@@ -131,7 +131,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 selection.TournId = ring.Tournament.Id;
                 result.ParticipantSelection = selection;
                 result.WasSuccessful = true;
-                //TODO message
             }catch(Exception ex){
                 result.Message = ex.Message;
             }
@@ -155,8 +154,9 @@ namespace Hyushik_TournMan_BLL.Orchestrators
 
                 _tournManContext.Rings.Add(ring);
                 _tournManContext.SaveChanges();
+                result.Message = String.Format(Resources.RingCreatedMessage, ring.Name);
                 result.WasSuccessful = true;
-                //TODO MESSAGE
+
             }
             catch (Exception ex)
             {
@@ -184,8 +184,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                
                 _tournManContext.BreakingResults.Remove(entry);
                 _tournManContext.SaveChanges();
+                result.Message = String.Format(Resources.BreakingEntryDeletedMessage, entry.Participant.Name);
                 result.WasSuccessful = true;
-                //TODO MESSAGE
             }
             catch (Exception ex)
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,5 +20,20 @@ namespace Hyushik_TournMan_Common.Models
 
         public int RoundNumber { get; set; }
 
+        [NotMapped]
+        public Participant Victor {
+            get {
+                return Partipant1IsVictor ? Participant1 : Participant2;
+                }
+        }
+
+        [NotMapped]
+        public Participant Defeated
+        {
+            get
+            {
+                return !Partipant1IsVictor ? Participant1 : Participant2;
+            }
+        }
     }
 }

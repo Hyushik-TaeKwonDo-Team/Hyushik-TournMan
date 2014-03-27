@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BreakingEntryDeletedMessage" xml:space="preserve">
+    <value>Breaking Entry for "{0}" has been deleted</value>
+  </data>
   <data name="BreakingJudgeScoreEnteredMessage" xml:space="preserve">
     <value>Breaking score entered for "{0}"</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="FileUnreadableMessage" xml:space="preserve">
     <value>The file was empty or could not be read.</value>
+  </data>
+  <data name="FormDeletedMessage" xml:space="preserve">
+    <value>Form attempt for "{0}" has been deleted.</value>
   </data>
   <data name="FormScoreAddedMessage" xml:space="preserve">
     <value>Form scoring has started for "{0}"</value>
@@ -147,11 +153,26 @@
   <data name="NewTournamentCreatedMessage" xml:space="preserve">
     <value>The tournament "{0}" was successfully created.</value>
   </data>
+  <data name="ParticipantsInRingsHaveBeenUpdatedMessage" xml:space="preserve">
+    <value>Participants In Rings Have Been Updated</value>
+  </data>
   <data name="PossibleBoardDepthsUpdatedMessage" xml:space="preserve">
     <value>Possible board depths have been updated</value>
   </data>
   <data name="PossibleBoardWidthsUpdatedMessage" xml:space="preserve">
     <value>Possible board widths have been updated</value>
+  </data>
+  <data name="RingCreatedMessage" xml:space="preserve">
+    <value>Ring "{0}" has been created.</value>
+  </data>
+  <data name="RingDeletedMessage" xml:space="preserve">
+    <value>Ring "{0}" has been deleted.</value>
+  </data>
+  <data name="SparringDeletedMessage" xml:space="preserve">
+    <value>Sparring result for "{0} vs {1}" in Round {2} has been deleted.</value>
+  </data>
+  <data name="SparringResultCreatedMessage" xml:space="preserve">
+    <value>Sparring result for "{0} vs {1}" in Round {2} has been created</value>
   </data>
   <data name="TechniqueAddedMessage" xml:space="preserve">
     <value>Technique "{0}" was added</value>
@@ -188,6 +209,9 @@
   </data>
   <data name="UserRemovedRoleMessage" xml:space="preserve">
     <value>Role "{1}" has been revoked from user "{0}"</value>
+  </data>
+  <data name="WeaponDeletedMessage" xml:space="preserve">
+    <value>Weapon attempt for "{0}" has been deleted.</value>
   </data>
   <data name="WeaponScoreAddedMessage" xml:space="preserve">
     <value>Weapon scoring has started for "{0}"</value>

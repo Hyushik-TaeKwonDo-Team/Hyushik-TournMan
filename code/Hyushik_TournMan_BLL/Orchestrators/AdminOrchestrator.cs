@@ -42,8 +42,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                     }
                 }
                 _tournManContext.SaveChanges();
+                result.Message = Resources.ParticipantsInRingsHaveBeenUpdatedMessage;
                 result.WasSuccessful = true;
-                //TODO message
             }
             catch (Exception ex)
             {
@@ -436,6 +436,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 ring.SelectedParticipants.Clear();
                 _tournManContext.Rings.Remove(ring);
                 _tournManContext.SaveChanges();
+                result.Message = String.Format(Resources.RingDeletedMessage, ring.Name);
             }
             catch (Exception ex)
             {
@@ -443,7 +444,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 return result;
             }
             result.WasSuccessful = true;
-            //TODO message
             return result;
         }
 
