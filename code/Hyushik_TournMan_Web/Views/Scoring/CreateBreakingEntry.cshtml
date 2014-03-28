@@ -3,177 +3,192 @@
 @model BreakingViewModel
 
 <h2>Breaking Entry</h2>
+@if (Model.Stations.Count > 0 && Model.Stations[0].BaseTechniques.Count>0)
+{
+    <script>
+        window.navToTech = function navToTech(targetId){
+            var target$ = $(".selectedStation #" + targetId);
+            console.log("Target: " + target$);
+            showTech(target$);
+        }
 
-<script>
-    window.navToTech = function navToTech(targetId){
-        var target$ = $(".selectedStation #" + targetId);
-        console.log("Target: " + target$);
-        showTech(target$);
-    }
+        function showTech(tech$){
+            console.log("showing tech: " + tech$);
+            tech$.parents(".techniqueCategory").siblings().hide();
+            tech$.hide();
+            tech$.parent().siblings().hide();
+            tech$.siblings().show();
+            tech$.parents().show();
+            tech$.siblings(".techniqueCategory").children().show();
+            tech$.siblings(".techniqueCategory").children().children("[id^=tech-]").show();
+            tech$.siblings(".techniqueCategory").children().children(".techniqueCategory").hide();
+        }
 
-    function showTech(tech$){
-        console.log("showing tech: " + tech$);
-        tech$.parents(".techniqueCategory").siblings().hide();
-        tech$.hide();
-        tech$.parent().siblings().hide();
-        tech$.siblings().show();
-        tech$.parents().show();
-        tech$.siblings(".techniqueCategory").children().show();
-        tech$.siblings(".techniqueCategory").children().children("[id^=tech-]").show();
-        tech$.siblings(".techniqueCategory").children().children(".techniqueCategory").hide();
-    }
+        function toTop() {
+            //hideTech($(".visibleTech"));
+            $('.station').show();
+            $('.sectionTop').siblings().hide();
+            $('.sectionTop').show();
+            $('.submitBreaking').show();
+            $('.sectionToppish').show();
+            $(".selectedStation").removeClass("selectedStation");
+        }
 
-    function toTop() {
-        //hideTech($(".visibleTech"));
-        $('.station').show();
-        $('.sectionTop').siblings().hide();
-        $('.sectionTop').show();
-        $('.submitBreaking').show();
-        $('.sectionToppish').show();
-        $(".selectedStation").removeClass("selectedStation");
-    }
+        function clearStationTechnique(targetStation$) {
 
-    function clearStationTechnique(targetStation$) {
+            //targetStation$.find('input[type=checkbox]:checked')
+            //.removeAttr('checked');
 
-        //targetStation$.find('input[type=checkbox]:checked')
-        //.removeAttr('checked');
+            //targetStation$.find('[id$=BoardsViewModel_Width]').get(0)
+            targetStation$.find('[id$=BoardsViewModel_Width]').get(0).selectedIndex = 0;
+            targetStation$.find('[id$=BoardsViewModel_Depth]').get(0).selectedIndex = 0;
+            targetStation$.find('[id$=BoardsViewModel_Amount]').val("1"); //fear the magic number
+            setTechniqueName(targetStation$, "Technique");
 
-        //targetStation$.find('[id$=BoardsViewModel_Width]').get(0)
-        targetStation$.find('[id$=BoardsViewModel_Width]').get(0).selectedIndex = 0;
-        targetStation$.find('[id$=BoardsViewModel_Depth]').get(0).selectedIndex = 0;
-        targetStation$.find('[id$=BoardsViewModel_Amount]').val("1"); //fear the magic number
-        setTechniqueName(targetStation$, "Technique");
+            targetStation$.find('.displayBoard').text("Boards");
 
-        targetStation$.find('.displayBoard').text("Boards");
+        }
 
-    }
+        function setTechniqueName(station$, textToSet) {
+            station$.find('.displayTechnique').text(textToSet)
+        }
 
-    function setTechniqueName(station$, textToSet) {
-        station$.find('.displayTechnique').text(textToSet)
-    }
+        $(document).ready(function () {
+            $('.station').children().show();
+            console.log("derp");
 
-    $(document).ready(function () {
-        $('.station').children().show();
-        console.log("derp");
+            $('.sectionTop').click(function () {
+                //DNFW
+                //whoops, FW'd
+                $('.sectionTop').hide();
+                $(this).siblings().show();
+                $('.submitBreaking').hide();
+                $('.sectionToppish').hide();
+            });
 
-        $('.sectionTop').click(function () {
-            //DNFW
-            //whoops, FW'd
-            $('.sectionTop').hide();
-            $(this).siblings().show();
-            $('.submitBreaking').hide();
-            $('.sectionToppish').hide();
-        });
-
-        $('.technique').click(function () {
+            $('.technique').click(function () {
             
-            clearStationTechnique($(this).parents('.station'));
+                clearStationTechnique($(this).parents('.station'));
 
-            $('.station').hide();
-            $(this).parents('.station').show();
-            $(this).parents(".station").addClass(" selectedStation");
-            $(this).siblings(".techniqueCategory").find(".sectionBack").hide();
-            $(this).siblings(".techniqueCategory").find("[id^=tech-]").hide();
-            $(this).siblings(".techniqueCategory").children().show();
-            $(this).siblings(".techniqueCategory").children().children("[id^=tech-]").show();
-            $(this).siblings(".techniqueCategory").children().children(".techniqueCategory").hide();
-        });
+                $('.station').hide();
+                $(this).parents('.station').show();
+                $(this).parents(".station").addClass(" selectedStation");
+                $(this).siblings(".techniqueCategory").find(".sectionBack").hide();
+                $(this).siblings(".techniqueCategory").find("[id^=tech-]").hide();
+                $(this).siblings(".techniqueCategory").children().show();
+                $(this).siblings(".techniqueCategory").children().children("[id^=tech-]").show();
+                $(this).siblings(".techniqueCategory").children().children(".techniqueCategory").hide();
+            });
 
-        $('.sectionBack').click(function () {
-            //DNFW
-            //FW'd with this too, Bro
+            $('.sectionBack').click(function () {
+                //DNFW
+                //FW'd with this too, Bro
             
-            toTop();
-        });
+                toTop();
+            });
 
         
-        $('.BoardsBack').click(function () {
+            $('.BoardsBack').click(function () {
 
-            var station$ = $(this).parents(".station");
+                var station$ = $(this).parents(".station");
 
-            var width$ = station$.find('[id$=BoardsViewModel_Width]').get(0);
-            var Windex = width$.selectedIndex;
-            var width = width$[Windex].value;
+                var width$ = station$.find('[id$=BoardsViewModel_Width]').get(0);
+                var Windex = width$.selectedIndex;
+                var width = width$[Windex].value;
 
-            var depth$ = station$.find('[id$=BoardsViewModel_Depth]').get(0);
-            var Dindex = depth$.selectedIndex;
-            var depth = depth$[Dindex].value;
+                var depth$ = station$.find('[id$=BoardsViewModel_Depth]').get(0);
+                var Dindex = depth$.selectedIndex;
+                var depth = depth$[Dindex].value;
 
-            var num = station$.find('[id$=BoardsViewModel_Amount]').val();
+                var num = station$.find('[id$=BoardsViewModel_Amount]').val();
 
 
             
-            station$.find('.displayBoard').text(num + " X (" + width + "x" + depth + ")");
+                station$.find('.displayBoard').text(num + " X (" + width + "x" + depth + ")");
 
-            toTop();
+                toTop();
+            });
+
+
+            $('.techniqueLeaf').click(function () {
+                setTechniqueName($(this).closest('.station'), $(this).text());
+                toTop();
+            });
+
+            $('.clearTechnique').click(function () {
+                clearStationTechnique($(this).parents(".station"));
+            });
         });
 
 
-        $('.techniqueLeaf').click(function () {
-            setTechniqueName($(this).closest('.station'), $(this).text());
-            toTop();
-        });
+    </script>
 
-        $('.clearTechnique').click(function () {
-            clearStationTechnique($(this).parents(".station"));
-        });
-    });
-
-
-</script>
-
-<div>
-     @using (Html.BeginForm("CreateBreakingEntry", "Scoring", FormMethod.Post))
-     {
-         @Html.HiddenFor(model=>model.RingId)
-         
-         @Html.EditorFor(model=>model.ParticipantSelection)
-
-         <hr />
-         
-         for (int i=0; i<Model.Stations.Count; ++i)
+    <div>
+         @using (Html.BeginForm("CreateBreakingEntry", "Scoring", FormMethod.Post))
          {
-            <div id="station-@i" class="station">
-                <ul>
-                    <li class="stationWrapper"> 
-                        <span class="technique sectionTop"><a class = "displayTechnique">Technique</a></span>
-                        @if(Model.Stations[i].BaseTechniques.Count>0){
-                            <ul class="techniqueCategory">
-                                @foreach (var x in Model.Stations[i].BaseTechniques.Select((tech, index) => new { index, tech }))
-                                {
-                                    string liClass = x.tech.IsLeaf() ? "techniqueLeaf" : "";
-                                    <li class="@liClass">@Html.EditorFor(model=>model.Stations[i].BaseTechniques[x.index])</li>
-                                }
-                                <li class="sectionBack clearTechnique">
-                                    <a class="btn btn-default btn-sm">Cancel</a>
+             @Html.HiddenFor(model=>model.RingId)
+         
+             @Html.EditorFor(model=>model.ParticipantSelection)
+
+             <hr />
+         
+             for (int i=0; i<Model.Stations.Count; ++i)
+             {
+                <div id="station-@i" class="station">
+                    <ul>
+                        <li class="stationWrapper"> 
+                            <span class="technique sectionTop"><a class = "displayTechnique">Technique</a></span>
+                            @if(Model.Stations[i].BaseTechniques.Count>0){
+                                <ul class="techniqueCategory">
+                                    @foreach (var x in Model.Stations[i].BaseTechniques.Select((tech, index) => new { index, tech }))
+                                    {
+                                        string liClass = x.tech.IsLeaf() ? "techniqueLeaf" : "";
+                                        <li class="@liClass">@Html.EditorFor(model=>model.Stations[i].BaseTechniques[x.index])</li>
+                                    }
+                                    <li class="sectionBack clearTechnique">
+                                        <a class="btn btn-default btn-sm">Cancel</a>
+                                    </li>
+                                </ul>
+                            }
+                        </li>
+                        <li> 
+                            <span class="board sectionTop"><a class = "displayBoard">Boards</a></span>
+                            <ul>
+                                <li>(
+                                    @Html.DropDownListFor(model=>model.Stations[i].BoardsViewModel.Width, new SelectList(Model.Stations[i].BoardsViewModel.PossibleBoardWidths)) in x
+                                    @Html.DropDownListFor(model=>model.Stations[i].BoardsViewModel.Depth, new SelectList(Model.Stations[i].BoardsViewModel.PossibleBoardDepths))in, ) X
+                                    @Html.TextBoxFor(model=>model.Stations[i].BoardsViewModel.Amount)num</li>
+                                <li>
+                                    @Html.CheckBoxFor(model=>model.Stations[i].BoardsViewModel.SpeedBreak)Speed Break
+                                </li>
+                                <li>
+                                    @Html.CheckBoxFor(model=>model.Stations[i].BoardsViewModel.Spacers)Spacers
+                                </li>
+                                <li class = "BoardsBack">
+                                    <a>Done</a>
                                 </li>
                             </ul>
-                        }
-                    </li>
-                    <li> 
-                        <span class="board sectionTop"><a class = "displayBoard">Boards</a></span>
-                        <ul>
-                            <li>(
-                                @Html.DropDownListFor(model=>model.Stations[i].BoardsViewModel.Width, new SelectList(Model.Stations[i].BoardsViewModel.PossibleBoardWidths)) in x
-                                @Html.DropDownListFor(model=>model.Stations[i].BoardsViewModel.Depth, new SelectList(Model.Stations[i].BoardsViewModel.PossibleBoardDepths))in, ) X
-                                @Html.TextBoxFor(model=>model.Stations[i].BoardsViewModel.Amount)num</li>
-                            <li>
-                                @Html.CheckBoxFor(model=>model.Stations[i].BoardsViewModel.SpeedBreak)Speed Break
-                            </li>
-                            <li>
-                                @Html.CheckBoxFor(model=>model.Stations[i].BoardsViewModel.Spacers)Spacers
-                            </li>
-                            <li class = "BoardsBack">
-                                <a>Done</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <button type="button" class="clearTechnique sectionToppish">Clear Technique</button>
-                    </li>
-                </ul>
-            </div>
+                        </li>
+                        <li>
+                            <button type="button" class="clearTechnique sectionToppish">Clear Technique</button>
+                        </li>
+                    </ul>
+                </div>
+             }
+            <input type="submit" value="Submit" class="btn btn-primary btn-sm submitBreaking" />
          }
-        <input type="submit" value="Submit" class="btn btn-primary btn-sm submitBreaking" />
-     }
-</div>
+    </div>
+}else{
+    <div>
+        @if(Model.Stations.Count<1)
+        {
+            <span>The minimum number of stations is less than 1.  Please contact an admin.</span>
+        }
+        else if (Model.Stations[0].BaseTechniques.Count < 1)
+        {
+            <span>No techniques have been configured.  Please contact an admin.</span>
+        }
+        @Html.ActionLink("Click here to return to ring.", "Index", "Ring", new {ringId=Model.RingId})
+    </div>
+    
+}
