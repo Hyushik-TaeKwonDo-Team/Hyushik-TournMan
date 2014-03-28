@@ -9,20 +9,21 @@
 
     <span id="tech-@Model.Id" class="CollapsibleList tech-@Model.Id">
         <span class="btn-group col-xs-4 col-sm-2" data-toggle="buttons">
-        @if (Model.IsLeaf())
-        {
-            <label class="btn btn-primary">
-                @Model.Name
-                @Html.CheckBoxFor(model=>model.Selected)
+            @if (Model.IsLeaf())
+            {
+                <label class="btn btn-primary techBtn">
+                    @Model.Name
                 
-            </label>
-        }
-        else {
-            <label class="btn btn-primary" onclick="navToTech('tech-@Model.Id')">
-                @Html.CheckBoxFor(model=>model.Selected)
-                @Model.Name
-            </label>
-         }  
+                </label>
+            }
+            else {
+                <label class="btn btn-primary techBtn" onclick="navToTech('tech-@Model.Id')">
+                    @Model.Name
+                </label>
+             }
+             <span class = "selectWrapper">
+                 @Html.CheckBoxFor(model => model.Selected, new {@class="hidden" })
+             </span>
          </span>   
     </span>
     

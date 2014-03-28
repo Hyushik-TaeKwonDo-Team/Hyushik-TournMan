@@ -12,6 +12,15 @@
             showTech(target$);
         }
 
+        function toggleTechBtn(techBtn$) {
+            var chkbx = techBtn$.siblings(".selectWrapper").children('input[type=checkbox]');
+            if (chkbx.prop("checked")) {
+                chkbx.prop("checked", false);
+            } else {
+                chkbx.prop("checked", true);
+            }
+        }
+
         function showTech(tech$){
             console.log("showing tech: " + tech$);
             tech$.parents(".techniqueCategory").siblings().hide();
@@ -36,17 +45,18 @@
 
         function clearStationTechnique(targetStation$) {
 
-            //targetStation$.find('input[type=checkbox]:checked')
-            //.removeAttr('checked');
+            targetStation$.find('input[type=checkbox]:checked').prop('checked', false);
+            setTechniqueName(targetStation$, "Technique");
 
-            //targetStation$.find('[id$=BoardsViewModel_Width]').get(0)
+            
+
+        }
+
+        function clearStationBoards(targetStation$) {
             targetStation$.find('[id$=BoardsViewModel_Width]').get(0).selectedIndex = 0;
             targetStation$.find('[id$=BoardsViewModel_Depth]').get(0).selectedIndex = 0;
             targetStation$.find('[id$=BoardsViewModel_Amount]').val("1"); //fear the magic number
-            setTechniqueName(targetStation$, "Technique");
-
             targetStation$.find('.displayBoard').text("Boards");
-
         }
 
         function setTechniqueName(station$, textToSet) {
@@ -109,6 +119,10 @@
                 toTop();
             });
 
+            $('.techBtn').click(function () {
+                toggleTechBtn($(this));
+            });
+            
 
             $('.techniqueLeaf').click(function () {
                 setTechniqueName($(this).closest('.station'), $(this).text());
@@ -117,6 +131,7 @@
 
             $('.clearTechnique').click(function () {
                 clearStationTechnique($(this).parents(".station"));
+                clearStationBoards(targetStation$);
             });
         });
 
