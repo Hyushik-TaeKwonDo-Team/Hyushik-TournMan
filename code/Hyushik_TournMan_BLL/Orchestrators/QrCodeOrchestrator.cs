@@ -7,12 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hyushik_TournMan_BLL.Orchestrators
 {
-    public class HomeOrchestrator: BaseOrchestrator, IHomeOrchestrator
+    class QrCodeOrchestrator : BaseOrchestrator, IQrCodeOrchestrator
     {
-        public string getQrcode(long partId)
-        {
-            var gen = new QrCheckin.QrGen();
-            return gen.getQrCodeFromLong(partId);
-        }
     }
 }

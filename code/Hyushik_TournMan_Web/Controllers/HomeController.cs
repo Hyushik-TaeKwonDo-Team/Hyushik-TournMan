@@ -17,10 +17,10 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             return new HomeViewModel
             {
-                ActivatedTournamentsViewModel = BuildActivatedTournamentsViewModel()
+                ActivatedTournamentsViewModel = BuildActivatedTournamentsViewModel(), QrViewModel= BuildQrCodeViewModel()
             };
         }
-
+        
         protected ActivatedTournamentsViewModel BuildActivatedTournamentsViewModel()
         {
             return new ActivatedTournamentsViewModel()
@@ -28,6 +28,16 @@ namespace Hyushik_TournMan_Web.Controllers
                 ActiveTournaments = orch.GetActiveTournaments()
             };
         }
+
+
+        protected QrViewModel BuildQrCodeViewModel()
+        {
+            return new QrViewModel()
+            {
+                Base64Qr = orch.getQrcode(1L)
+            };
+        }
+
 
 
         [AllowAnonymous]

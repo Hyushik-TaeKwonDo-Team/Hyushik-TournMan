@@ -10,5 +10,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
     public interface IHomeOrchestrator
     {
         IList<Tournament> GetActiveTournaments();
+        string getQrcode(long partId);
     }
 }

@@ -188,6 +188,7 @@
     <Compile Include="Classes\ViewModels\BreakingScoreListingViewModel.cs" />
     <Compile Include="Classes\ViewModels\BreakingViewModels.cs" />
     <Compile Include="Classes\ViewModels\HomeViewModels.cs" />
+    <Compile Include="Classes\ViewModels\QrViewModel.cs" />
     <Compile Include="Classes\ViewModels\RingParticipantSelectionViewModel.cs" />
     <Compile Include="Classes\ViewModels\RingViewModel.cs" />
     <Compile Include="Classes\ViewModels\SparringViewModel.cs" />
@@ -286,6 +287,7 @@
     <Content Include="Views\Admin\AddParticipantsToRings.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ParticipantSelection.cshtml" />
     <Content Include="Views\Ring\_SparringResults.cshtml" />
+    <Content Include="Views\Home\_QrCode.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>
