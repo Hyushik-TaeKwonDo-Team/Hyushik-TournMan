@@ -25,5 +25,10 @@
                  <span>No Rings Currently created.  Please ask an admin to do so.</span>
              }
         </div>
+        @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
+            <div>
+                @Html.ActionLink("Check In Participants", "RingCheckIn", new { tournId=Model.Id})
+            </div>
+        }
     </div>
 </div>

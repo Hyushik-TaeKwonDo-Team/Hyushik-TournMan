@@ -288,6 +288,7 @@
     <Content Include="Views\Shared\EditorTemplates\ParticipantSelection.cshtml" />
     <Content Include="Views\Ring\_SparringResults.cshtml" />
     <Content Include="Views\Home\_QrCode.cshtml" />
+    <Content Include="Views\ActiveTournament\RingCheckIn.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>

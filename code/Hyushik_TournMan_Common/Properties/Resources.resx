@@ -153,6 +153,9 @@
   <data name="NewTournamentCreatedMessage" xml:space="preserve">
     <value>The tournament "{0}" was successfully created.</value>
   </data>
+  <data name="ParticipantCheckedInToRingMessage" xml:space="preserve">
+    <value>"{0}" was checked into ring "{1}"</value>
+  </data>
   <data name="ParticipantsInRingsHaveBeenUpdatedMessage" xml:space="preserve">
     <value>Participants In Rings Have Been Updated</value>
   </data>

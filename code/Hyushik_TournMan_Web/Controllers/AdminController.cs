@@ -14,7 +14,7 @@ using Hyushik_TournMan_Web.Filters;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = Constants.Roles.ADMINISTRATOR_ROLE)]
     [InitializeSimpleMembership]
     public class AdminController : BaseController
     {
@@ -33,8 +33,6 @@ namespace Hyushik_TournMan_Web.Controllers
             var vm = new RingParticipantSelectionViewModel(tourn, tourn.Rings, tourn.Participants);
             return vm;
         }
-
-
 
         private BreakingStoredValuesViewModel _breakingStoredValuesViewModel()
         {
