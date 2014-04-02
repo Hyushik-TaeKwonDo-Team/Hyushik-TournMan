@@ -44,5 +44,28 @@ namespace Hyushik_TournMan_BLL.QrCheckin
         }
 
 
+
+
+        public Result getInfoFromImage( Bitmap img)
+        {
+            var hints = new Dictionary<DecodeHintType, Object>();
+            var vector = new List<BarcodeFormat>
+                {
+		            BarcodeFormat.QR_CODE
+	            };
+            hints[DecodeHintType.POSSIBLE_FORMATS] = vector;
+            hints[DecodeHintType.TRY_HARDER] = true;
+
+            using (img)
+            {
+                LuminanceSource source;
+                source = new BitmapLuminanceSource(img);
+                BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+                Result result = new MultiFormatReader().decode(bitmap, hints);
+                return result;
+            }
+        }
+
+
     }
 }
