@@ -44,7 +44,7 @@ namespace Hyushik_TournMan_Web.Controllers
                 AddErrorNotification("There was a problem reading the QR Code");
                 return RedirectToAction("RingCheckIn", new { tournId=tournId});
             }
-            var result = _orch.CheckInParticipantToRing(partId, ringId);
+            var result = _orch.CheckInParticipantToRing(partId, tournId, ringId);
             if (result.WasSuccessful)
             {
                 AddSucessNotification(result.Message);

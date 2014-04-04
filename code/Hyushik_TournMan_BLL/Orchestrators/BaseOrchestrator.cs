@@ -18,21 +18,24 @@ namespace Hyushik_TournMan_BLL.Orchestrators
         protected TournManContext _tournManContext = new TournManContext();
 
 
-        public OperationResult CheckInParticipantToRing(long partId, long ringId)
+        public OperationResult CheckInParticipantToRing(long partId, long tournId, long ringId)
         {
             var result = new OperationResult() { WasSuccessful = false };
             try
             {
                 var part = GetParticipantById(partId);
-                var ringsIn = _tournManContext.Rings.Where(r=> r.SelectedParticipants.Exists(p=>p.ParticipantId==part.ParticipantId) );
+                var tournIn = _tournManContext.Tournaments.First(t=>t.Id==tournId);
                 var ringToAddTo = GetRingById(ringId);
 
-                foreach (var ring in ringsIn.ToList())
+                foreach (var ring in tournIn.Rings.ToList())
                 {
-                    ring.SelectedParticipants.Remove(part);
+                    if (ring.SelectedParticipants.Exists(p => p.ParticipantId == part.ParticipantId))
+                    {
+                        ring.SelectedParticipants.Remove(part);
+                    }
                 }
                 if (!ringToAddTo.SelectedParticipants.Contains(part)) ringToAddTo.SelectedParticipants.Add(part);
-
+                _tournManContext.SaveChanges();
                 result.Message = String.Format(Resources.ParticipantCheckedInToRingMessage, part.Name, ringToAddTo.Name);
                 result.WasSuccessful = true;
             }

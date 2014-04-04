@@ -14,6 +14,6 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         long GetParticipantIdFromImage(Stream stream);
         long GetParticipantIdFromBitmap(System.Drawing.Bitmap img);
         Tournament GetTournamentById(long id);
-        OperationResult CheckInParticipantToRing(long partId, long ringId);
+        OperationResult CheckInParticipantToRing(long partId, long tournId, long ringId);
     }
 }
