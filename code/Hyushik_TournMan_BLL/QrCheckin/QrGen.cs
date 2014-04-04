@@ -10,7 +10,7 @@ using System.Drawing.Imaging;
 
 namespace Hyushik_TournMan_BLL.QrCheckin
 {
-    class QrGen
+    public class QrGen
     {
         BarcodeWriter codeWriter;
         private string BASE_64_HEADER = "data:image/png;base64,";
@@ -46,7 +46,7 @@ namespace Hyushik_TournMan_BLL.QrCheckin
 
 
 
-        public Result getInfoFromImage( Bitmap img)
+        public string getInfoFromImage( Bitmap img)
         {
             var hints = new Dictionary<DecodeHintType, Object>();
             var vector = new List<BarcodeFormat>
@@ -62,7 +62,12 @@ namespace Hyushik_TournMan_BLL.QrCheckin
                 source = new BitmapLuminanceSource(img);
                 BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
                 Result result = new MultiFormatReader().decode(bitmap, hints);
-                return result;
+
+                if (result != null)
+                {
+                    return result.Text;
+                }
+                return null;
             }
         }
 
