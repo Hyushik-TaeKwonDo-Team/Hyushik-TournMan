@@ -9,7 +9,6 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
     public class HomeViewModel
     {
         public ActivatedTournamentsViewModel ActivatedTournamentsViewModel { get; set; }
-        public QrViewModel QrViewModel { get; set; }
     }
 
     public class ActivatedTournamentsViewModel
