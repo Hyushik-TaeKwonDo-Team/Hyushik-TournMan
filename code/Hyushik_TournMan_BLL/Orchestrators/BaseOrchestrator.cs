@@ -24,10 +24,11 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             try
             {
                 var part = GetParticipantById(partId);
-                var ringsIn = _tournManContext.Rings.Where(r=>r.SelectedParticipants.Contains(part)).ToList();
+                var ringsIn = _tournManContext.Rings.Where(r=> r.SelectedParticipants.Exists(p=>p.ParticipantId==part.ParticipantId) );
                 var ringToAddTo = GetRingById(ringId);
-                
-                foreach(var ring in ringsIn){
+
+                foreach (var ring in ringsIn.ToList())
+                {
                     ring.SelectedParticipants.Remove(part);
                 }
                 if (!ringToAddTo.SelectedParticipants.Contains(part)) ringToAddTo.SelectedParticipants.Add(part);

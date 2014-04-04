@@ -71,8 +71,6 @@
   <ItemGroup>
     <Compile Include="Orchestrators\ActiveTournamentOrchestrator.cs" />
     <Compile Include="Orchestrators\Interfaces\IActiveTournamentOrchestrator.cs" />
-    <Compile Include="Orchestrators\Interfaces\IQrCodeOrchestrator.cs" />
-    <Compile Include="Orchestrators\QrCodeOrchestrator.cs" />
     <Compile Include="QrCheckin\QrGen.cs" />
     <Compile Include="Scoring\BreakingAlgorithim.cs" />
     <Compile Include="Orchestrators\AdminOrchestrator.cs" />

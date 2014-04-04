@@ -3,13 +3,14 @@
     <h2>Ring Check In</h2>
 
     <div>
-        @using (Html.BeginForm("RingCheckIn", "Scoring", FormMethod.Post)) 
+        @using (Html.BeginForm("RingCheckIn", "ActiveTournament", FormMethod.Post, new { EncType = "multipart/form-data" })) 
         { 
             <input name="tournId" type="hidden" value="@Model.Id">
             <span>Ring:</span>
             @Html.DropDownList("ringId", new SelectList(Model.Rings,"Id", "Name"));
             <span>Participant QR Code:</span>
-            <!--put code loader here-->
+            <input id="file" name="file" type="file" accept="image/*" capture="camera" />
+            <button>Add to Ring</button>
         }
     </div>
 

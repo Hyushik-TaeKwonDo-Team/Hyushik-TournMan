@@ -31,8 +31,19 @@ namespace Hyushik_TournMan_Web.Controllers
 
         [Authorize(Roles = Constants.Roles.JUDGE_ROLE)]
         [HttpPost]
-        public ActionResult RingCheckIn(long partId, long ringId, long tournId)
+        public ActionResult RingCheckIn(long ringId, long tournId, HttpPostedFileBase file)
         {
+            if (null == file)
+            {
+                AddErrorNotification("No QR Code was uploaded");
+                return RedirectToAction("RingCheckIn", new { tournId = tournId });
+            }
+
+            var partId = _orch.GetParticipantIdFromImage(file.InputStream);
+            if(-1==partId){
+                AddErrorNotification("There was a problem reading the QR Code");
+                return RedirectToAction("RingCheckIn", new { tournId=tournId});
+            }
             var result = _orch.CheckInParticipantToRing(partId, ringId);
             if (result.WasSuccessful)
             {
