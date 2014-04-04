@@ -3,7 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyushik_TournMan_Test", "Hyushik_TournMan_Test\Hyushik_TournMan_Test.csproj", "{EC14B2F4-6953-4A09-9E7F-319E74A6D65F}"
 	ProjectSection(ProjectDependencies) = postProject
-		{5DFB2F54-6C15-4981-9932-28BDC4CA720C} = {5DFB2F54-6C15-4981-9932-28BDC4CA720C}
 		{524774B8-7F01-4CCE-B162-3FCD068DB626} = {524774B8-7F01-4CCE-B162-3FCD068DB626}
 	EndProjectSection
 EndProject
