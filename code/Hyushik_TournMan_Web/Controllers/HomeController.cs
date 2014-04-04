@@ -17,7 +17,7 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             return new HomeViewModel
             {
-                ActivatedTournamentsViewModel = BuildActivatedTournamentsViewModel(), QrViewModel= BuildQrCodeViewModel()
+                ActivatedTournamentsViewModel = BuildActivatedTournamentsViewModel()
             };
         }
         
