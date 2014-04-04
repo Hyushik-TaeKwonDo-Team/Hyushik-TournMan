@@ -55,7 +55,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 fResult.JudgeScores.Clear();
                 _tournManContext.FormResults.Remove(fResult);
                 _tournManContext.SaveChanges();
-                result.Message = String.Format(Resources.FormDeletedMessage, fResult.Participant.Name);
+                //result.Message = String.Format(Resources.FormDeletedMessage, fResult.Participant.Name);
                 result.WasSuccessful = true;
             }
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                 wResult.JudgeScores.Clear();
                 _tournManContext.WeaponResults.Remove(wResult);
                 _tournManContext.SaveChanges();
-                result.Message = String.Format(Resources.WeaponDeletedMessage, wResult.Participant.Name);
+                //result.Message = String.Format(Resources.WeaponDeletedMessage, wResult.Participant.Name);
                 result.WasSuccessful = true;
             }
             catch (Exception ex)
@@ -93,7 +93,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             try
             {
                 var sparResult = _tournManContext.SparringResults.Where(sr=>sr.Id==sparId).ToList().First();
-                result.Message = String.Format(Resources.SparringDeletedMessage, sparResult.Victor.Name, sparResult.Defeated.Name, sparResult.RoundNumber);
+                //result.Message = String.Format(Resources.SparringDeletedMessage, sparResult.Victor.Name, sparResult.Defeated.Name, sparResult.RoundNumber);
                 _tournManContext.SparringResults.Remove(sparResult);
                 _tournManContext.SaveChanges();
                 result.WasSuccessful = true;
@@ -209,7 +209,7 @@ namespace Hyushik_TournMan_BLL.Orchestrators
                
                 _tournManContext.BreakingResults.Remove(entry);
                 _tournManContext.SaveChanges();
-                result.Message = String.Format(Resources.BreakingEntryDeletedMessage, entry.Participant.Name);
+                //result.Message = String.Format(Resources.BreakingEntryDeletedMessage, entry.Participant.Name);
                 result.WasSuccessful = true;
             }
             catch (Exception ex)
