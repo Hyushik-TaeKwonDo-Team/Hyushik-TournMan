@@ -8,7 +8,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
 {
     public class WeaponsOrFormsListingViewModel
     {
-        public long RingId { get; set; }
+        public Ring Ring { get; set; }
         public List<WeaponsOrFormsListing> WeaponsOrFormsListings { get; set; }
         public bool IsWeapons { get; set; }
         public ParticipantSelection ParticipantSelection { get; set; }

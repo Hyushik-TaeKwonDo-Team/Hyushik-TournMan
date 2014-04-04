@@ -1,15 +1,39 @@
 ﻿@model Hyushik_TournMan_Web.Classes.ViewModels.WeaponsOrFormsListingViewModel
 
 @{string prefix = string.Empty;}
+@{var UserCanSeeNonPublic = Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)
+        || Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.ADMINISTRATOR_ROLE);}
+
+
+@{var IsPublic = (Model.IsWeapons && Model.Ring.WeaponResultsPublic) || (!Model.IsWeapons && Model.Ring.FormResultsPublic);}
 
 <div>
-    
     @if(Model.IsWeapons){
         <h2>Weapons</h2>
     }else{
         <h2>Forms</h2>
     }
-    @if(Model.WeaponsOrFormsListings.Count>0){
+     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE))
+    {
+         using (Html.BeginForm(Model.IsWeapons ? "SetWeaponsPublic": "SetFormsPublic", "Ring", FormMethod.Post))
+        {
+            <input name="ringId" type="hidden" value="@Model.Ring.Id"/>
+            if (Model.IsWeapons ? Model.Ring.WeaponResultsPublic : Model.Ring.FormResultsPublic)
+            {
+                <input name="status" type="hidden" value="false"/>
+                <button>Make Private</button>
+            }
+             else
+             {
+                <input name="status" type="hidden" value="true"/>
+                <button>Make Public</button>
+             }
+
+        }
+    }
+    
+    @if (Model.WeaponsOrFormsListings.Count > 0 && (IsPublic || UserCanSeeNonPublic))
+    {
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
@@ -30,7 +54,7 @@
                     <td>
                         @using (Html.BeginForm("UpdateWeaponOrFormScoring", "Scoring", FormMethod.Post)) { 
                             <input type="number" name="judgeScore" min="0" max="10" pattern="\d+"/>
-                            <input type="hidden" name="ringId" value="@Model.RingId"/>
+                            <input type="hidden" name="ringId" value="@Model.Ring.Id"/>
                             <input type="hidden" name="entryId" value="@listing.WeaponsOrFormsResultId"/>
                             <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
                             <button type="submit" class="btn btn-default btn-sm">Add Score</button>
@@ -39,7 +63,7 @@
                     <td>
                         @using (Html.BeginForm(Model.IsWeapons ? "DeleteWeaponResult" : "DeleteFormResult", "Scoring", FormMethod.Post))
                         {
-                            <input name="ringId" type="hidden" value="@Model.RingId"/>
+                            <input name="ringId" type="hidden" value="@Model.Ring.Id"/>
                             <input name="worfId" type="hidden" value="@listing.WeaponsOrFormsResultId"/>
                             <button type="submit" class="btn btn-sm btn-danger glyphicon glyphicon-remove"> </button>
                         }
@@ -74,7 +98,7 @@
                       </div>
                       <div class="modal-body">
 
-                      <input type="hidden" name="ringId" value="@Model.RingId"/> 
+                      <input type="hidden" name="ringId" value="@Model.Ring.Id"/> 
                       @Html.EditorFor(m=>m.ParticipantSelection)
                       <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
 

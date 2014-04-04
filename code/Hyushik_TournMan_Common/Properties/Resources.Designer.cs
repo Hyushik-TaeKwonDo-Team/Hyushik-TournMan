@@ -223,6 +223,78 @@ namespace Hyushik_TournMan_Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Breaking Results have been hidden for ring &quot;{0}&quot;.
+        /// </summary>
+        public static string SetBreakingResultsPrivateMessage {
+            get {
+                return ResourceManager.GetString("SetBreakingResultsPrivateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Breaking Results have been made public for ring &quot;{0}&quot;.
+        /// </summary>
+        public static string SetBreakingResultsPublicMessage {
+            get {
+                return ResourceManager.GetString("SetBreakingResultsPublicMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Form Results have been hidden for ring &quot;{0}&quot;.
+        /// </summary>
+        public static string SetFormResultsPrivateMessage {
+            get {
+                return ResourceManager.GetString("SetFormResultsPrivateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Form Results have been made public for ring &quot;{0}&quot;.
+        /// </summary>
+        public static string SetFormResultsPublicMessage {
+            get {
+                return ResourceManager.GetString("SetFormResultsPublicMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sparring Results have been hidden for ring &quot;{0}&quot;.
+        /// </summary>
+        public static string SetSparringResultsPrivateMessage {
+            get {
+                return ResourceManager.GetString("SetSparringResultsPrivateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sparring Results have been made public for ring &quot;{0}&quot;.
+        /// </summary>
+        public static string SetSparringResultsPublicMessage {
+            get {
+                return ResourceManager.GetString("SetSparringResultsPublicMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weapon Results have been hidden for ring &quot;{0}&quot;.
+        /// </summary>
+        public static string SetWeaponResultsPrivateMessage {
+            get {
+                return ResourceManager.GetString("SetWeaponResultsPrivateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weapon Results have been made public for ring &quot;{0}&quot;.
+        /// </summary>
+        public static string SetWeaponResultsPublicMessage {
+            get {
+                return ResourceManager.GetString("SetWeaponResultsPublicMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sparring result for &quot;{0} vs {1}&quot; in Round {2} has been deleted..
         /// </summary>
         public static string SparringDeletedMessage {

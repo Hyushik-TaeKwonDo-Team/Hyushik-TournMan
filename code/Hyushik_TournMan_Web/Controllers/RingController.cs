@@ -26,7 +26,7 @@ namespace Hyushik_TournMan_Web.Controllers
                 SparringResults = orch.GetSparringResultsByRingId(ringId),
                 Participant1Selection = partSelect,
                 Participant2Selection = partSelect,
-                RingId = ringId
+                Ring = orch.GetRingById(ringId)
             };
         }
         
@@ -53,7 +53,7 @@ namespace Hyushik_TournMan_Web.Controllers
             var vm = new WeaponsOrFormsListingViewModel()
             {
                 IsWeapons = true,
-                RingId = ringId,
+                Ring = orch.GetRingById(ringId),
                 ParticipantSelection = MkParticipantSelection(ringId)
             };
             foreach (var result in orch.GetWeaponResultsByRingId(ringId))
@@ -71,7 +71,7 @@ namespace Hyushik_TournMan_Web.Controllers
             var vm = new WeaponsOrFormsListingViewModel()
             {
                 IsWeapons = false,
-                RingId = ringId,
+                Ring = orch.GetRingById(ringId),
                 ParticipantSelection = MkParticipantSelection(ringId)
             };
             foreach (var result in orch.GetFormResultsByRingId(ringId))
@@ -98,7 +98,7 @@ namespace Hyushik_TournMan_Web.Controllers
         {
             var vm = new BreakingScoreListingViewModel
             {
-                RingId = ringId
+                Ring = orch.GetRingById(ringId)
             };
             foreach (var entry in orch.GetBreakingResultByRingId(ringId))
             {
@@ -127,6 +127,70 @@ namespace Hyushik_TournMan_Web.Controllers
         public ActionResult Index(long ringId)
         {
             return View(BuildRingViewModel(ringId));
+        }
+
+        [HttpPost]
+        public ActionResult SetBreakingPublic(long ringId, bool status)
+        {
+            var result = orch.SetRingBreakingResultsPublicStatus(ringId, status);
+            if (result.WasSuccessful)
+            {
+                AddSucessNotification(result.Message);
+            }
+            else
+            {
+                AddErrorNotification(result.Message);
+            }
+            
+            return RedirectToAction("Index",new {ringId=ringId});
+        }
+
+        [HttpPost]
+        public ActionResult SetWeaponsPublic(long ringId, bool status)
+        {
+            var result = orch.SetRingWeaponResultsPublicStatus(ringId, status);
+            if (result.WasSuccessful)
+            {
+                AddSucessNotification(result.Message);
+            }
+            else
+            {
+                AddErrorNotification(result.Message);
+            }
+
+            return RedirectToAction("Index", new { ringId = ringId });
+        }
+
+        [HttpPost]
+        public ActionResult SetFormsPublic(long ringId, bool status)
+        {
+            var result = orch.SetRingFormResultsPublicStatus(ringId, status);
+            if (result.WasSuccessful)
+            {
+                AddSucessNotification(result.Message);
+            }
+            else
+            {
+                AddErrorNotification(result.Message);
+            }
+
+            return RedirectToAction("Index", new { ringId = ringId });
+        }
+
+        [HttpPost]
+        public ActionResult SetSparringPublic(long ringId, bool status)
+        {
+            var result = orch.SetRingSparringResultsPublicStatus(ringId, status);
+            if (result.WasSuccessful)
+            {
+                AddSucessNotification(result.Message);
+            }
+            else
+            {
+                AddErrorNotification(result.Message);
+            }
+
+            return RedirectToAction("Index", new { ringId = ringId });
         }
 
     }

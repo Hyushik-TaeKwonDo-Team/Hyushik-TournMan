@@ -78,7 +78,7 @@ namespace Hyushik_TournMan_Web.Controllers
             {
                 Participant1 = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.Participant1Selection)),
                 Participant2 = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.Participant2Selection)),
-                Ring = _orch.GetRingById(vm.RingId),
+                Ring = _orch.GetRingById(vm.Ring.Id),
                 RoundNumber = vm.RoundNumber,
                 Partipant1IsVictor = vm.Participant1IsVictor
             };
@@ -93,7 +93,7 @@ namespace Hyushik_TournMan_Web.Controllers
             {
                 AddErrorNotification(result.Message);
             }
-            return RedirectToRing(vm.RingId);
+            return RedirectToRing(vm.Ring.Id);
         }
 
 

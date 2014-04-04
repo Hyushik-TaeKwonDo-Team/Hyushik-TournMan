@@ -8,7 +8,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
 {
     public class BreakingScoreListingViewModel
     {
-        public long RingId { get; set; }
+        public Ring Ring { get; set; }
 
         public List<BreakingScoreListing> BreakingScoreListings { get; set; }
 

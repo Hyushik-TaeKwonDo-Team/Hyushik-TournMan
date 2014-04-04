@@ -14,7 +14,7 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         public ParticipantSelection Participant2Selection { get; set; }
         public bool Participant1IsVictor {get; set;}
 
-        public long RingId { get; set; }
+        public Ring Ring { get; set; }
         public int RoundNumber { get; set; }
 
         public SparringViewModel()

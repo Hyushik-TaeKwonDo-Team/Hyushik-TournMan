@@ -34,6 +34,10 @@ namespace Hyushik_TournMan_Web.Controllers
                 (IDictionary<string,string>) TempData[WebConstants.Parameters.NOTIFICATIONS] ?? new Dictionary<string, string>();
  
             foreach( var notification in notificationsToAdd.Keys ){
+                if (String.IsNullOrWhiteSpace(notification))
+                {
+                    continue;
+                }
                 currentNotifications[notification] = notificationsToAdd[notification];
             }
 
@@ -42,6 +46,9 @@ namespace Hyushik_TournMan_Web.Controllers
 
         protected void AddSingleNotification(string message, string cssClass)
         {
+            if(String.IsNullOrWhiteSpace(message)){
+                return;
+            }
             IDictionary<string, string> currentNotifications =
                 (IDictionary<string, string>)TempData[WebConstants.Parameters.NOTIFICATIONS] ?? new Dictionary<string, string>();
             currentNotifications[message] = cssClass;

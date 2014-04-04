@@ -10,6 +10,11 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
 {
     public interface IRingOrchestrator
     {
+        OperationResult SetRingBreakingResultsPublicStatus(long ringId, bool status);
+        OperationResult SetRingWeaponResultsPublicStatus(long ringId, bool status);
+        OperationResult SetRingFormResultsPublicStatus(long ringId, bool status);
+        OperationResult SetRingSparringResultsPublicStatus(long ringId, bool status);
+
         List<SparringResult> GetSparringResultsByRingId(long ringId);
         long GetParticipantIdBySelection(ParticipantSelection selection);
         ParticipantSelectionOperationResult GetParticipantSelectionByRingId(long ringId);

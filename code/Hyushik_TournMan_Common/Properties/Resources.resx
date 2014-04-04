@@ -171,6 +171,30 @@
   <data name="RingDeletedMessage" xml:space="preserve">
     <value>Ring "{0}" has been deleted.</value>
   </data>
+  <data name="SetBreakingResultsPrivateMessage" xml:space="preserve">
+    <value>Breaking Results have been hidden for ring "{0}"</value>
+  </data>
+  <data name="SetBreakingResultsPublicMessage" xml:space="preserve">
+    <value>Breaking Results have been made public for ring "{0}"</value>
+  </data>
+  <data name="SetFormResultsPrivateMessage" xml:space="preserve">
+    <value>Form Results have been hidden for ring "{0}"</value>
+  </data>
+  <data name="SetFormResultsPublicMessage" xml:space="preserve">
+    <value>Form Results have been made public for ring "{0}"</value>
+  </data>
+  <data name="SetSparringResultsPrivateMessage" xml:space="preserve">
+    <value>Sparring Results have been hidden for ring "{0}"</value>
+  </data>
+  <data name="SetSparringResultsPublicMessage" xml:space="preserve">
+    <value>Sparring Results have been made public for ring "{0}"</value>
+  </data>
+  <data name="SetWeaponResultsPrivateMessage" xml:space="preserve">
+    <value>Weapon Results have been hidden for ring "{0}"</value>
+  </data>
+  <data name="SetWeaponResultsPublicMessage" xml:space="preserve">
+    <value>Weapon Results have been made public for ring "{0}"</value>
+  </data>
   <data name="SparringDeletedMessage" xml:space="preserve">
     <value>Sparring result for "{0} vs {1}" in Round {2} has been deleted.</value>
   </data>

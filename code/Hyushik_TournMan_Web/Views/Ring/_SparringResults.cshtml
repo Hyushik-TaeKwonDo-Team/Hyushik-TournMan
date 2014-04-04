@@ -10,48 +10,71 @@
     }
 </script>
 
+@{var UserCanSeeNonPublic = Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)
+        || Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.ADMINISTRATOR_ROLE);}
+
 <div>
     <h2>Sparring</h2>
+    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE))
+    {
+        using (Html.BeginForm("SetSparringPublic", "Ring", FormMethod.Post))
+        {
+            <input name="ringId" type="hidden" value="@Model.Ring.Id"/>
+             if (Model.Ring.SparringResultsPublic)
+            {
+                <input name="status" type="hidden" value="false"/>
+                <button>Make Private</button>
+            }
+             else
+             {
+                <input name="status" type="hidden" value="true"/>
+                <button>Make Public</button>
+             }
+
+        }
+    }
+
 
     <div>
-        @if(Model.SparringResults.Count>0){
+        @if (Model.SparringResults.Count > 0 && (Model.Ring.SparringResultsPublic || UserCanSeeNonPublic))
+        {
             
-        <table class="table table-bordered table-hover table-condensed">
-        <thead>
-            <tr>
-                <th>Round</th> 
-                <th>Winner</th>
-                <th>Defeated</th>
-                @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<th>Delete</th>}
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var sparResult in Model.SparringResults.OrderByDescending(sr => sr.RoundNumber))
-            {
+            <table class="table table-bordered table-hover table-condensed">
+            <thead>
                 <tr>
-                    <td>
-                        <span>@sparResult.RoundNumber</span>
-                    </td>
-                    <td>
-                        <span>@sparResult.Victor.Name</span>
-                    </td>
-                    <td>
-                        <span>@sparResult.Defeated.Name</span>
-                    </td>
-                    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
-                        <td>
-                            @using (Html.BeginForm("DeleteSparringEntry", "Scoring", FormMethod.Post))
-                            {
-                                <input name="ringId" type="hidden" value="@sparResult.Ring.Id"/>
-                                <input name="sparId" type="hidden" value="@sparResult.Id"/>
-                                <button type="submit" class="btn btn-sm btn-danger glyphicon glyphicon-remove" onClick="return validateSparring();"> </button>
-                            }
-                        </td>
-                    }
+                    <th>Round</th> 
+                    <th>Winner</th>
+                    <th>Defeated</th>
+                    @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){<th>Delete</th>}
                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var sparResult in Model.SparringResults.OrderByDescending(sr => sr.RoundNumber))
+                {
+                    <tr>
+                        <td>
+                            <span>@sparResult.RoundNumber</span>
+                        </td>
+                        <td>
+                            <span>@sparResult.Victor.Name</span>
+                        </td>
+                        <td>
+                            <span>@sparResult.Defeated.Name</span>
+                        </td>
+                        @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
+                            <td>
+                                @using (Html.BeginForm("DeleteSparringEntry", "Scoring", FormMethod.Post))
+                                {
+                                    <input name="ringId" type="hidden" value="@sparResult.Ring.Id"/>
+                                    <input name="sparId" type="hidden" value="@sparResult.Id"/>
+                                    <button type="submit" class="btn btn-sm btn-danger glyphicon glyphicon-remove" onClick="return validateSparring();"> </button>
+                                }
+                            </td>
+                        }
+                    </tr>
                 }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
         }else{
             <span>No sparring results currently.</span>
         }
@@ -63,7 +86,7 @@
             <h3>Record New Sparring Result</h3>
             @using (Html.BeginForm("SaveSparringResult", "Scoring", FormMethod.Post))
             {
-                @Html.HiddenFor(m=>m.RingId);
+                @Html.HiddenFor(m=>m.Ring.Id);
                 <div>
                     <span>Round Number</span>
                     @Html.TextBoxFor(m=>m.RoundNumber)
