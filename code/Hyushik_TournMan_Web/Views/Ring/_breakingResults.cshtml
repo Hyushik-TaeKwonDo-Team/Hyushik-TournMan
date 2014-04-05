@@ -87,9 +87,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var listing in Model.BreakingScoreListings.OrderByDescending(bsl => bsl.CurrentScore).ThenByDescending(
-                    bsl=>bsl.JudgeIdToScore.Values.Average()
-                    ))
+                @foreach (var listing in Model.BreakingScoreListings.OrderByDescending(bsl => bsl.CurrentScore))
                 {
                     <tr>
                         <td class="toggleParent @listing.BreakingEntryId">
