@@ -11,8 +11,14 @@ namespace Hyushik_TournMan_Common.Constants
 
         public static class AppSettingsKeys
         {
-            public const string StationFalloffProportion = "stationFalloffProportion";
-            public const string MaxBreakingStationCount = "maxBreakingStationCount";
+            public const string BreakingBoardExponent = "breakingBoardExponent";
+            public const string BreakingMaxStationCount = "breakingMaxStationCount";
+            public const string BreakingMaximumBoards = "breakingMaximumBoards";
+            public const string BreakingMaximumAttempts = "breakingMaximumAttempts";
+            public const string BreakingAttemptDecayRate = "breakingAttemptDecayRate";
+            public const string BreakingSpacerPenalty = "breakingSpacerPenalty";
+            public const string BreakingPowerHoldPenalty = "breakingPowerHoldPenalty";
+
             public const string PossibleBoardWidths = "possibleBoardWidths";
             public const string PossibleBoardDepths = "possibleBoardDepths";
         }

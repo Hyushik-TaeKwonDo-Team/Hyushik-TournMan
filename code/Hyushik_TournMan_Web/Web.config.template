@@ -21,10 +21,17 @@
     <add key="enableSimpleMembership" value="true" />
 
     <!--specific to this app-->
-    <add key="stationFalloffProportion" value="0.2" />
-    <add key="maxBreakingStationCount" value="5" />
+    <add key="breakingBoardExponent" value="0.15" />
+    <add key="breakingMaxStationCount" value=".15" />
+    <add key="breakingMaximumBoards" value="15" />
+    <add key="breakingMaximumAttempts" value="5" />
+    <add key="breakingAttemptDecayRate" value=".2" />
+    <add key="breakingSpacerPenalty" value=".05" />
+    <add key="breakingPowerHoldPenalty" value=".1" />
+    
+    
     <add key="possibleBoardWidths" value="4,6,8,10" />
-    <add key="possibleBoardDepths" value="0.25,0.33,0.5,1.0" />
+    <add key="possibleBoardDepths" value=".75,0.25,0.5,1.0" />
   </appSettings>
   <system.web>
     <compilation debug="true" targetFramework="4.5" />

@@ -10,31 +10,90 @@ namespace Hyushik_TournMan_DAL.StoredValues
 {
     public static class StoredValues
     {
-
-        public static double StationFalloffProportion
+        public static double BreakingBoardExponent
         {
             get
             {
-                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.StationFalloffProportion]);
+                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingBoardExponent]);
             }
             set
             {
-                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.StationFalloffProportion] = value.ToString();
+                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingBoardExponent] = value.ToString();
             }
         }
 
-        public static int MaxBreakingStationCount
+        public static double BreakingMaxStationCount
         {
             get
             {
-
-                return Int32.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.MaxBreakingStationCount]);
+                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaxStationCount]);
             }
             set
             {
-                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.MaxBreakingStationCount] = value.ToString();
+                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaxStationCount] = value.ToString();
             }
         }
+
+        public static double BreakingMaximumBoards
+        {
+            get
+            {
+                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaximumBoards]);
+            }
+            set
+            {
+                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaximumBoards] = value.ToString();
+            }
+        }
+
+        public static double BreakingMaximumAttempts
+        {
+            get
+            {
+                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaximumAttempts]);
+            }
+            set
+            {
+                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaximumAttempts] = value.ToString();
+            }
+        }
+
+        public static double BreakingAttemptDecayRate
+        {
+            get
+            {
+                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingAttemptDecayRate]);
+            }
+            set
+            {
+                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingAttemptDecayRate] = value.ToString();
+            }
+        }
+
+        public static double BreakingSpacerPenalty
+        {
+            get
+            {
+                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingSpacerPenalty]);
+            }
+            set
+            {
+                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingSpacerPenalty] = value.ToString();
+            }
+        }
+
+        public static double BreakingPowerHoldPenalty
+        {
+            get
+            {
+                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingPowerHoldPenalty]);
+            }
+            set
+            {
+                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingPowerHoldPenalty] = value.ToString();
+            }
+        }
+
 
         public static List<double> PossibleBoardDepths
         {
