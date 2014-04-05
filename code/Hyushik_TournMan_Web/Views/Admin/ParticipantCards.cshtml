@@ -1,0 +1,5 @@
+﻿@model List<Hyushik_TournMan_Web.Classes.ViewModels.ParticipantCardViewModel>
+
+@foreach(var vm in Model){
+    @Html.Partial("ParticipantCard", vm)
+}

@@ -1,205 +1,205 @@
 ﻿@model Hyushik_TournMan_Web.Classes.ViewModels.TournamentViewModel
 @{
-    ViewBag.Title = "Tournament View";
+	ViewBag.Title = "Tournament View";
 }
 <hgroup class="title">
-    <h1>@Model.Tournament.Name Information</h1>
+	<h1>@Model.Tournament.Name Information</h1>
 </hgroup>
 
 <div>
-    @if(Model.Tournament!=null){
-        
-        <div>
-            <h3>Rings</h3>
-            <div>
-                 @if (Model.Tournament.Rings.Count > 0)
-                 {
-                    <table class="table table-striped table-bordered table-hover">
-                        <tr>
-                            <th>Name</th>
-                            <th>Number of Participants</th>
-                            <th>Delete</th>
-                        </tr>
-                        @foreach (var ring in Model.Tournament.Rings)
-                        {
-                            <tr>
-                                <td>@ring.Name</td>
-                                <td>@ring.SelectedParticipants.Count</td>
-                                <td>
-                                    @using (Html.BeginForm("DeleteRing", "Admin", FormMethod.Post)) {
-                                        @Html.Hidden("ringId", ring.Id)
-                                        @Html.Hidden("tournId", ring.Tournament.Id)
-                                        <button>Delete</button>
-                                    }
-                                </td>
-                            </tr>
-                        }
-                    </table>
-                 }else{
-                     <span>No Rings Found</span>
-                 }
-            </div>
-            <div>
-                <span>Ring Name: </span>
-                @using (Html.BeginForm("CreateRing", "Admin", FormMethod.Post)) {
-                    @Html.TextBox("ringName", "")
-                    @Html.Hidden("tournId", Model.Tournament.Id)
-                    <button>New Ring</button>
-                }
-            </div>
-            <div>
-                @Html.ActionLink("Update Participants in Rings", "AddParticipantsToRings", "Admin", new {tournId=Model.Tournament.Id }, new { })
-            </div>
-        </div>
+	@if(Model.Tournament!=null){
+		
+		<div>
+			<h3>Rings</h3>
+			<div>
+				 @if (Model.Tournament.Rings.Count > 0)
+				 {
+					<table class="table table-striped table-bordered table-hover">
+						<tr>
+							<th>Name</th>
+							<th>Number of Participants</th>
+							<th>Delete</th>
+						</tr>
+						@foreach (var ring in Model.Tournament.Rings)
+						{
+							<tr>
+								<td>@ring.Name</td>
+								<td>@ring.SelectedParticipants.Count</td>
+								<td>
+									@using (Html.BeginForm("DeleteRing", "Admin", FormMethod.Post)) {
+										@Html.Hidden("ringId", ring.Id)
+										@Html.Hidden("tournId", ring.Tournament.Id)
+										<button>Delete</button>
+									}
+								</td>
+							</tr>
+						}
+					</table>
+				 }else{
+					 <span>No Rings Found</span>
+				 }
+			</div>
+			<div>
+				<span>Ring Name: </span>
+				@using (Html.BeginForm("CreateRing", "Admin", FormMethod.Post)) {
+					@Html.TextBox("ringName", "")
+					@Html.Hidden("tournId", Model.Tournament.Id)
+					<button>New Ring</button>
+				}
+			</div>
+			<div>
+				@Html.ActionLink("Update Participants in Rings", "AddParticipantsToRings", "Admin", new {tournId=Model.Tournament.Id }, new { })
+			</div>
+		</div>
 
-        <h3>Participants</h3>
-        <hr />
-        <div>
-            @if (Model.Tournament.Participants.Count > 0)
-            {
-                <div class="panel panel-default table-responsive">
-                <table class="table table-striped table-bordered table-hover table-condensed">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Gender</th>
-                            <th>Rank</th>
-                            <th>Age</th>
-                            <th>Weapons</th>
-                            <th>Breaking</th>
-                            <th>Forms</th>
-                            <th>Sparring (Point)</th>
-                            <th>Sparring (Olympic)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var participant in Model.Tournament.Participants.OrderBy(bls=>bls.Name))
-                        {
-                            <tr>
-                                <td>@Html.ActionLink(participant.Name, "Participant", "Admin", new { id=participant.ParticipantId }, new { @class = "list-group-item" })</td>
-                                <td>@participant.Gender</td>
-                                <td>@participant.Rank</td>
-                                <td>@participant.Age</td>
-                                <td>@participant.Weapons</td>
-                                <td>@participant.Breaking</td>
-                                <td>@participant.Forms</td>
-                                <td>@participant.PointSparring</td>
-                                <td>@participant.OlympicSparring</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-                </div>
-                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addParticipant">Add New Participant</button>
-                <h3>Boards Needed</h3>
-                <hr />
-                if (Model.TotalBoardCounts!= null && Model.TotalBoardCounts.Count > 0)
-                {
-                    <div class="col-md-4 col-sm-6 col-xs-12 panel panel-default">
-                        <table class="table table-condensed table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <td>Board Type</td>
-                                    <td>Amount Needed</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var boardSizeCount in Model.TotalBoardCounts)
-                                {
-                                    <tr>
-                                        <td>@boardSizeCount.BoardSize</td>
-                                        <td>@boardSizeCount.Count</td>
-                                    </tr>
-                                }
-                            </tbody>
-                            
-                        </table>
-                    </div>
-                }else{
-                    <span>No Boards were Ordered</span> 
-                }
-                
-            }
-            else { 
-                <span>No Participants Found</span>
-                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addParticipant">Add New Participant</button>
-            }
-        </div>
-    }else{
-        <div>
-            Tournament was not found
-        </div>
-    }
-     @using (Html.BeginForm("AddIndividualParticipant", "Admin", FormMethod.Post))
-     {
-                <!-- Modal -->
-                <div class="modal fade" id="addParticipant" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Add a Participant</h4>
-                      </div>
-                      <div class="modal-body">
+		<h3>Participants</h3>@Html.ActionLink("See Cards for All Participants", "ParticipantCards", new {tournId = Model.Tournament.Id }, null)
+		<hr />
+		<div>
+			@if (Model.Tournament.Participants.Count > 0)
+			{
+				<div class="panel panel-default table-responsive">
+				<table class="table table-striped table-bordered table-hover table-condensed">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Gender</th>
+							<th>Rank</th>
+							<th>Age</th>
+							<th>Weapons</th>
+							<th>Breaking</th>
+							<th>Forms</th>
+							<th>Sparring (Point)</th>
+							<th>Sparring (Olympic)</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var participant in Model.Tournament.Participants.OrderBy(bls=>bls.Name))
+						{
+							<tr>
+								<td>@Html.ActionLink(participant.Name, "Participant", "Admin", new { id=participant.ParticipantId }, new { @class = "list-group-item" })</td>
+								<td>@participant.Gender</td>
+								<td>@participant.Rank</td>
+								<td>@participant.Age</td>
+								<td>@participant.Weapons</td>
+								<td>@participant.Breaking</td>
+								<td>@participant.Forms</td>
+								<td>@participant.PointSparring</td>
+								<td>@participant.OlympicSparring</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+				</div>
+				<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addParticipant">Add New Participant</button>
+				<h3>Boards Needed</h3>
+				<hr />
+				if (Model.TotalBoardCounts!= null && Model.TotalBoardCounts.Count > 0)
+				{
+					<div class="col-md-4 col-sm-6 col-xs-12 panel panel-default">
+						<table class="table table-condensed table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<td>Board Type</td>
+									<td>Amount Needed</td>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var boardSizeCount in Model.TotalBoardCounts)
+								{
+									<tr>
+										<td>@boardSizeCount.BoardSize</td>
+										<td>@boardSizeCount.Count</td>
+									</tr>
+								}
+							</tbody>
+							
+						</table>
+					</div>
+				}else{
+					<span>No Boards were Ordered</span> 
+				}
+				
+			}
+			else { 
+				<span>No Participants Found</span>
+				<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addParticipant">Add New Participant</button>
+			}
+		</div>
+	}else{
+		<div>
+			Tournament was not found
+		</div>
+	}
+	 @using (Html.BeginForm("AddIndividualParticipant", "Admin", FormMethod.Post))
+	 {
+				<!-- Modal -->
+				<div class="modal fade" id="addParticipant" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Add a Participant</h4>
+					  </div>
+					  <div class="modal-body">
 
-                          <div class="form-group form-group-small">
-                              <input type="text" class="form-control" id="firstLastName" name="firstLastName" placeholder="Name">
-                          </div>
+						  <div class="form-group form-group-small">
+							  <input type="text" class="form-control" id="firstLastName" name="firstLastName" placeholder="Name">
+						  </div>
 
-                          <div class="form-group form-group-none">
-                            <div class="radio-inline">
-                              <label>
-                                <input type="radio" name="optionsRadios" id="radioMale" value="male" checked>
-                                Male
-                              </label>
-                            </div>
-                            <div class="radio-inline">
-                              <label>
-                                <input type="radio" name="optionsRadios" id="radioFemale" value="female">
-                                Female
-                              </label>
-                            </div>
-                          </div>
+						  <div class="form-group form-group-none">
+							<div class="radio-inline">
+							  <label>
+								<input type="radio" name="optionsRadios" id="radioMale" value="male" checked>
+								Male
+							  </label>
+							</div>
+							<div class="radio-inline">
+							  <label>
+								<input type="radio" name="optionsRadios" id="radioFemale" value="female">
+								Female
+							  </label>
+							</div>
+						  </div>
 
-                          <div class="form-group form-group-small">
-                            <label>Age:<input type="number" class="form-control" id="age" name="age"></label>
-                          </div>
+						  <div class="form-group form-group-small">
+							<label>Age:<input type="number" class="form-control" id="age" name="age"></label>
+						  </div>
 
-                          <div class="form-group form-group-small">
-                          <label for="rank">Rank:</label>
-			              <select id="rank" name="rank" class="form-control">
-			                <option value="White">White</option>
-			                <option value="Yellow/Orange">Yellow/Orange</option>
-			                <option value="Green">Green</option>
-			                <option value="Blue">Blue</option>
-			                <option value="Brown/Red">Brown/Red</option>
-			                <option value="Black">Black</option>
-			              </select>
-                          </div>
-                          <div class="form-group form-group-none">
-                            <label class="checkbox">
-                              <input type="checkbox" id="checkbox1" value="Weapons" name="weapons"> Weapons
-                            </label>
-                            <label class="checkbox">
-                              <input type="checkbox" id="checkbox2" value="Breaking" name="breaking"> Breaking
-                            </label>
-                            <label class="checkbox">
-                              <input type="checkbox" id="checkbox3" value="Forms" name="forms"> Forms
-                            </label>
-                            <label class="checkbox">
-                              <input type="checkbox" id="checkbox4" value="Point" name="point"> Sparring (Point)
-                            </label>
-                            <label class="checkbox">
-                              <input type="checkbox" id="checkbox5" value="Olympic" name="olympic"> Sparring (Olympic)
-                            </label>
-                          </div>
-                          <input type="hidden" name="tournId" value="@Model.Tournament.Id"/>
-                      </div>
-                      <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">Add</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-     }
+						  <div class="form-group form-group-small">
+						  <label for="rank">Rank:</label>
+						  <select id="rank" name="rank" class="form-control">
+							<option value="White">White</option>
+							<option value="Yellow/Orange">Yellow/Orange</option>
+							<option value="Green">Green</option>
+							<option value="Blue">Blue</option>
+							<option value="Brown/Red">Brown/Red</option>
+							<option value="Black">Black</option>
+						  </select>
+						  </div>
+						  <div class="form-group form-group-none">
+							<label class="checkbox">
+							  <input type="checkbox" id="checkbox1" value="Weapons" name="weapons"> Weapons
+							</label>
+							<label class="checkbox">
+							  <input type="checkbox" id="checkbox2" value="Breaking" name="breaking"> Breaking
+							</label>
+							<label class="checkbox">
+							  <input type="checkbox" id="checkbox3" value="Forms" name="forms"> Forms
+							</label>
+							<label class="checkbox">
+							  <input type="checkbox" id="checkbox4" value="Point" name="point"> Sparring (Point)
+							</label>
+							<label class="checkbox">
+							  <input type="checkbox" id="checkbox5" value="Olympic" name="olympic"> Sparring (Olympic)
+							</label>
+						  </div>
+						  <input type="hidden" name="tournId" value="@Model.Tournament.Id"/>
+					  </div>
+					  <div class="modal-footer">
+						<button class="btn btn-primary" type="submit">Add</button>
+					  </div>
+					</div>
+				  </div>
+				</div>
+	 }
 </div>

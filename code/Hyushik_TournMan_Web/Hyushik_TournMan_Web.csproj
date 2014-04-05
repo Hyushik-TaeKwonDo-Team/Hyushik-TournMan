@@ -188,6 +188,7 @@
     <Compile Include="Classes\ViewModels\BreakingScoreListingViewModel.cs" />
     <Compile Include="Classes\ViewModels\BreakingViewModels.cs" />
     <Compile Include="Classes\ViewModels\HomeViewModels.cs" />
+    <Compile Include="Classes\ViewModels\ParticipantCardViewModel.cs" />
     <Compile Include="Classes\ViewModels\QrViewModel.cs" />
     <Compile Include="Classes\ViewModels\RingParticipantSelectionViewModel.cs" />
     <Compile Include="Classes\ViewModels\RingViewModel.cs" />
@@ -287,8 +288,9 @@
     <Content Include="Views\Admin\AddParticipantsToRings.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ParticipantSelection.cshtml" />
     <Content Include="Views\Ring\_SparringResults.cshtml" />
-    <Content Include="Views\Home\_QrCode.cshtml" />
     <Content Include="Views\ActiveTournament\RingCheckIn.cshtml" />
+    <Content Include="Views\Admin\ParticipantCard.cshtml" />
+    <Content Include="Views\Admin\ParticipantCards.cshtml" />
     <None Include="Web.config.template">
       <SubType>Designer</SubType>
     </None>

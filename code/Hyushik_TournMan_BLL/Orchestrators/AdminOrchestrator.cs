@@ -14,11 +14,17 @@ using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Web.Security;
 using Hyushik_TournMan_Common.Properties;
+using Hyushik_TournMan_BLL.QrCheckin;
 
 namespace Hyushik_TournMan_BLL.Orchestrators
 {
     public class AdminOrchestrator : BaseOrchestrator, IAdminOrchestrator
     {
+        public String GetQRCodeBase64StringFromLong(long val){
+            var qrGen = new QrGen();
+            return qrGen.getQrCodeFromLong(val);
+        }
+
         //everything needs to be 0 indexed the same
         public OperationResult AddParticipantsToRings(List<long> ringIds, List<long> participantIds, List<List<bool>> RingsVsParticipants)
         {

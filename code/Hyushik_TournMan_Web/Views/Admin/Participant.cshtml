@@ -1,9 +1,6 @@
 ﻿@model Hyushik_TournMan_Web.Classes.ViewModels.ParticipantViewModel
-@{
-    ViewBag.Title = "Participant View";
-}
 
-<h2>Participant</h2>
+<h2>Participant</h2>@Html.ActionLink("See Card", "ParticipantCard", new {partId = Model.Participant.ParticipantId }, null)
 
     <div class="panel panel-default table-responsive">
         <table class="table table-striped table-bordered table-hover">

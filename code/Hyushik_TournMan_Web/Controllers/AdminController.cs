@@ -27,6 +27,40 @@ namespace Hyushik_TournMan_Web.Controllers
             return View(_buildAdminVM());
         }
 
+        public ActionResult ParticipantCard(long partId)
+        {
+            return View(_buildParticipantCardViewModel(partId));
+        }
+
+        public ActionResult ParticipantCards(long tournId)
+        {
+            return View(_buildParticipantCardViewModelList(tournId));
+        }
+
+        private ParticipantCardViewModel _buildParticipantCardViewModel(long partId)
+        {
+            return new ParticipantCardViewModel()
+            {
+                Participant = orch.GetParticipantById(partId),
+                QRCodeBase64Img = orch.GetQRCodeBase64StringFromLong(partId)
+            };
+        }
+
+        private List<ParticipantCardViewModel> _buildParticipantCardViewModelList(long tournId)
+        {
+            var tourn = orch.GetTournamentById(tournId);
+            var vmList = new List<ParticipantCardViewModel>();
+
+            foreach (var partId in tourn.Participants.Select(p=>p.ParticipantId)){
+                vmList.Add(_buildParticipantCardViewModel(partId));
+            }
+
+            return vmList;
+
+        }
+
+
+
         private RingParticipantSelectionViewModel _buildRingParticipantSelectionViewModel(long tournId)
         {
             var tourn = orch.GetTournamentById(tournId);
