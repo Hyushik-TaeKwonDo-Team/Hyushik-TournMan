@@ -39,5 +39,19 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
         public List<Station> Stations { get; set; }
         public Dictionary<long, string> JudgeIdToName { get; set; }
         public Dictionary<long, int> JudgeIdToScore { get; set; }
+
+        public double JudgeScoreTieBreaker()
+        {
+            if (JudgeIdToScore.Values.Count<1)
+            {
+                return 0;
+            }
+            return JudgeIdToScore.Values.Average();
+        }
+
+        public double StationCountTiebreaker()
+        {
+            return Stations.Count;
+        }
     }
 }

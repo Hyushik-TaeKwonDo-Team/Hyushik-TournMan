@@ -87,7 +87,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var listing in Model.BreakingScoreListings.OrderByDescending(bsl => bsl.CurrentScore))
+                @foreach (var listing in Model.BreakingScoreListings.OrderByDescending(
+                    bsl => bsl.CurrentScore
+                    ).ThenByDescending(
+                    bsl => bsl.JudgeScoreTieBreaker()).ThenByDescending(
+                    bsl => bsl.StationCountTiebreaker()))
                 {
                     <tr>
                         <td class="toggleParent @listing.BreakingEntryId">
