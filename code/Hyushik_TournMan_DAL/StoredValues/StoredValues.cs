@@ -22,11 +22,11 @@ namespace Hyushik_TournMan_DAL.StoredValues
             }
         }
 
-        public static double BreakingMaxStationCount
+        public static int BreakingMaxStationCount
         {
             get
             {
-                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaxStationCount]);
+                return Int32.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaxStationCount]);
             }
             set
             {
@@ -34,11 +34,11 @@ namespace Hyushik_TournMan_DAL.StoredValues
             }
         }
 
-        public static double BreakingMaximumBoards
+        public static int BreakingMaximumBoards
         {
             get
             {
-                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaximumBoards]);
+                return Int32.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaximumBoards]);
             }
             set
             {
@@ -46,11 +46,11 @@ namespace Hyushik_TournMan_DAL.StoredValues
             }
         }
 
-        public static double BreakingMaximumAttempts
+        public static int BreakingMaximumAttempts
         {
             get
             {
-                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaximumAttempts]);
+                return Int32.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaximumAttempts]);
             }
             set
             {
@@ -94,6 +94,29 @@ namespace Hyushik_TournMan_DAL.StoredValues
             }
         }
 
+        public static double BreakingJudgeWeight
+        {
+            get
+            {
+                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingJudgeWeight]);
+            }
+            set
+            {
+                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingJudgeWeight] = value.ToString();
+            }
+        }
+
+        public static double BreakingMaxScore
+        {
+            get
+            {
+                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaxScore]);
+            }
+            set
+            {
+                ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaxScore] = value.ToString();
+            }
+        }
 
         public static List<double> PossibleBoardDepths
         {

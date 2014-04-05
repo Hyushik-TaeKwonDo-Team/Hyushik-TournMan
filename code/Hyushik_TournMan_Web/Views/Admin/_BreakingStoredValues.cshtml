@@ -7,13 +7,43 @@
     @using (Html.BeginForm("SetBreakingStoredValues", "Admin", FormMethod.Post))
     {
         <div class="row">
-            <abbr title="The percentage of the total each subsequent station is worth" >Station Falloff Proportion</abbr>
-            @Html.TextBoxFor(model=>model.StationFalloffProportion, new { @class = "form-control", @type="number", @min="1",  @max="100"})
+            <abbr>Max Station Count</abbr>
+            @Html.TextBoxFor(model=>model.BreakingMaxStationCount, new { @class = "form-control"})
         </div>
         <div class="row">
-            <span>Maximum Number of Stations</span>
-            @Html.TextBoxFor(model=>model.MaxBreakingStationCount, new { @class = "form-control", @type="number", @min="1",  @max="10"})
+            <abbr>Board Exponent</abbr>
+            @Html.TextBoxFor(model=>model.BreakingBoardExponent, new { @class = "form-control"})
         </div>
+        <div class="row">
+            <abbr>Maximum Boards</abbr>
+            @Html.TextBoxFor(model=>model.BreakingMaximumBoards, new { @class = "form-control"})
+        </div>
+        <div class="row">
+            <abbr>Maximum Attempts</abbr>
+            @Html.TextBoxFor(model=>model.BreakingMaximumAttempts, new { @class = "form-control"})
+        </div>
+        <div class="row">
+            <abbr>Attempt Decay Rate</abbr>
+            @Html.TextBoxFor(model=>model.BreakingAttemptDecayRate, new { @class = "form-control"})
+        </div>
+        <div class="row">
+            <abbr>Spacer Penalty</abbr>
+            @Html.TextBoxFor(model=>model.BreakingSpacerPenalty, new { @class = "form-control"})
+        </div>
+        <div class="row">
+            <abbr>Power Hold Penalty</abbr>
+            @Html.TextBoxFor(model=>model.BreakingPowerHoldPenalty, new { @class = "form-control"})
+        </div>
+        
+        <div class="row">
+            <abbr>Judge Weight</abbr>
+            @Html.TextBoxFor(model=>model.BreakingJudgeWeight, new { @class = "form-control"})
+        </div>
+        <div class="row">
+            <abbr>Max Score</abbr>
+            @Html.TextBoxFor(model=>model.BreakingMaxScore, new { @class = "form-control"})
+        </div>
+        
         <div class="row">
             <abbr title="Please use comma separated values">Possible Board Widths</abbr>
             @Html.TextBoxFor(model=>model.PossibleBoardWidths, new { @class = "form-control"})

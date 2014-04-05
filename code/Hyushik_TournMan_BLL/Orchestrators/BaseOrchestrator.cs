@@ -411,24 +411,96 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             return _tournManContext.BreakingResults.FirstOrDefault(br => br.Id == id);
         }
 
-        public double GetStationFalloffProportion()
+
+
+        public double GetBreakingBoardExponent()
         {
-            return StoredValues.StationFalloffProportion;
+            return StoredValues.BreakingBoardExponent;
         }
 
-        public void SetStationFalloffProportion(double value)
+        public void SetBreakingBoardExponent(double value)
         {
-            StoredValues.StationFalloffProportion=value;
+            StoredValues.BreakingBoardExponent = value;
         }
 
-        public int GetMaxBreakingStationCount()
+        public int GetBreakingMaxStationCount()
         {
-            return StoredValues.MaxBreakingStationCount;
+            return StoredValues.BreakingMaxStationCount;
         }
 
-        public void SetStationMaxBreakingStationCount(int value)
+        public void SetBreakingMaxStationCount(int value)
         {
-            StoredValues.MaxBreakingStationCount = value;
+            StoredValues.BreakingMaxStationCount = value;
+        }
+
+        public int GetBreakingMaximumBoards()
+        {
+            return StoredValues.BreakingMaximumBoards;
+        }
+
+        public void SetBreakingMaximumBoards(int value)
+        {
+            StoredValues.BreakingMaximumBoards = value;
+        }
+
+        public int GetBreakingMaximumAttempts()
+        {
+            return StoredValues.BreakingMaximumAttempts;
+        }
+
+        public void SetBreakingMaximumAttempts(int value)
+        {
+            StoredValues.BreakingMaximumAttempts = value;
+        }
+
+        public double GetBreakingAttemptDecayRate()
+        {
+            return StoredValues.BreakingAttemptDecayRate;
+        }
+
+        public void SetBreakingAttemptDecayRate(double value)
+        {
+            StoredValues.BreakingAttemptDecayRate = value;
+        }
+
+        public double GetBreakingSpacerPenalty()
+        {
+            return StoredValues.BreakingSpacerPenalty;
+        }
+
+        public void SetBreakingSpacerPenalty(double value)
+        {
+            StoredValues.BreakingSpacerPenalty = value;
+        }
+
+        public double GetBreakingPowerHoldPenalty()
+        {
+            return StoredValues.BreakingPowerHoldPenalty;
+        }
+
+        public void SetBreakingPowerHoldPenalty(double value)
+        {
+            StoredValues.BreakingPowerHoldPenalty = value;
+        }
+
+        public double GetBreakingJudgeWeight()
+        {
+            return StoredValues.BreakingJudgeWeight;
+        }
+
+        public void SetBreakingJudgeWeight(double value)
+        {
+            StoredValues.BreakingJudgeWeight = value;
+        }
+
+        public double GetBreakingMaxScore()
+        {
+            return StoredValues.BreakingMaxScore;
+        }
+
+        public void SetBreakingMaxScore(double value)
+        {
+            StoredValues.BreakingMaxScore = value;
         }
 
     }

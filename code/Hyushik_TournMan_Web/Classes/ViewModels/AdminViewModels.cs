@@ -72,12 +72,19 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
 
     public class BreakingStoredValuesViewModel
     {
-        [Range(minimum: 1, maximum: 100, ErrorMessage = "Percentage must be between 1 and 100.")]
-        public int StationFalloffProportion { get; set; }
         [Range(minimum: 1, maximum: 20, ErrorMessage = "Count must be between 1 and 20.")]
-        public int MaxBreakingStationCount { get; set; }
+        public int BreakingMaxStationCount { get; set; }
         public string PossibleBoardWidths { get; set; }
         public string PossibleBoardDepths { get; set; }
+
+        public double BreakingBoardExponent { get; set; }
+        public int BreakingMaximumBoards { get; set; }
+        public int BreakingMaximumAttempts { get; set; }
+        public double BreakingAttemptDecayRate { get; set; }
+        public double BreakingSpacerPenalty { get; set; }
+        public double BreakingPowerHoldPenalty { get; set; }
+        public double BreakingJudgeWeight { get; set; }
+        public double BreakingMaxScore { get; set; }
     }
     public class ParticipantViewModel
     {

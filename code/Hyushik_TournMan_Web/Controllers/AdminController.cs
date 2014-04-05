@@ -73,10 +73,18 @@ namespace Hyushik_TournMan_Web.Controllers
             var vm = new BreakingStoredValuesViewModel()
             {
                 //convert from double
-                StationFalloffProportion = (int)(orch.GetStationFalloffProportion()*100),
-                MaxBreakingStationCount = orch.GetMaxBreakingStationCount(),
                 PossibleBoardWidths = orch.GetPossibleBoardWidthsAsString(),
-                PossibleBoardDepths = orch.GetPossibleBoardDepthsAsString()
+                PossibleBoardDepths = orch.GetPossibleBoardDepthsAsString(),
+                BreakingBoardExponent = orch.GetBreakingBoardExponent(),
+                BreakingMaxStationCount = orch.GetBreakingMaxStationCount(),
+                BreakingMaximumBoards = orch.GetBreakingMaximumBoards(),
+                BreakingMaximumAttempts = orch.GetBreakingMaximumAttempts(),
+                BreakingAttemptDecayRate = orch.GetBreakingAttemptDecayRate(),
+                BreakingSpacerPenalty = orch.GetBreakingSpacerPenalty(),
+                BreakingPowerHoldPenalty = orch.GetBreakingPowerHoldPenalty(),
+                BreakingJudgeWeight = orch.GetBreakingJudgeWeight(),
+                BreakingMaxScore = orch.GetBreakingMaxScore()
+
             };
             return vm;
         }
@@ -284,9 +292,18 @@ namespace Hyushik_TournMan_Web.Controllers
         public ActionResult SetBreakingStoredValues(BreakingStoredValuesViewModel vm)
         {
             var results = new List<OperationResult>();
-            //d is for double, that's good enough for me
-            orch.SetStationFalloffProportion(vm.StationFalloffProportion / 100d);
-            orch.SetStationMaxBreakingStationCount(vm.MaxBreakingStationCount);
+            
+
+                orch.SetBreakingBoardExponent(vm.BreakingBoardExponent);
+                orch.SetBreakingMaxStationCount(vm.BreakingMaxStationCount);
+                orch.SetBreakingMaximumBoards(vm.BreakingMaximumBoards);
+                orch.SetBreakingMaximumAttempts(vm.BreakingMaximumAttempts);
+                orch.SetBreakingAttemptDecayRate(vm.BreakingAttemptDecayRate);
+                orch.SetBreakingSpacerPenalty(vm.BreakingSpacerPenalty);
+                orch.SetBreakingPowerHoldPenalty(vm.BreakingPowerHoldPenalty);
+                orch.SetBreakingJudgeWeight(vm.BreakingJudgeWeight);
+                orch.SetBreakingMaxScore(vm.BreakingMaxScore);
+
             results.Add(orch.SetPossibleBoardWidths(vm.PossibleBoardWidths));
             results.Add(orch.SetPossibleBoardDepths(vm.PossibleBoardDepths));
 

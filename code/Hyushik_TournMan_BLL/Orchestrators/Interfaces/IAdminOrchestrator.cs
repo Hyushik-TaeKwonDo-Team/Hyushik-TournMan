@@ -32,11 +32,26 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         OperationResult UpdateTechnique(long techId, string techName, int techWeight);
         OperationResult AddTechnique(long parentId, string techName, int techWeight);
         OperationResult DeleteTechnique(long techId);
-        double GetStationFalloffProportion();
-        void SetStationFalloffProportion(double value);
-        int GetMaxBreakingStationCount();
-        void SetStationMaxBreakingStationCount(int value);
         void AddIndividualParticipant(long targetTournamentId, String[] info, Boolean[] events);
+
+        double GetBreakingBoardExponent();
+        void SetBreakingBoardExponent(double value);
+        int GetBreakingMaxStationCount();
+        void SetBreakingMaxStationCount(int value);
+        int GetBreakingMaximumBoards();
+        void SetBreakingMaximumBoards(int value);
+        int GetBreakingMaximumAttempts();
+        void SetBreakingMaximumAttempts(int value);
+        double GetBreakingAttemptDecayRate();
+        void SetBreakingAttemptDecayRate(double value);
+        double GetBreakingSpacerPenalty();
+        void SetBreakingSpacerPenalty(double value);
+        double GetBreakingPowerHoldPenalty();
+        void SetBreakingPowerHoldPenalty(double value);
+        double GetBreakingJudgeWeight();
+        void SetBreakingJudgeWeight(double value);
+        double GetBreakingMaxScore();
+        void SetBreakingMaxScore(double value);
 
         string GetPossibleBoardWidthsAsString();
         string GetPossibleBoardDepthsAsString();

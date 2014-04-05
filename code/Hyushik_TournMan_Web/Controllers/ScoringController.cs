@@ -205,7 +205,7 @@ namespace Hyushik_TournMan_Web.Controllers
             vm.RingId = ringId;
             vm.ParticipantSelection = MkParticipantSelection(ringId);
             var svm = mkStationViewModel();
-            for (int i = StoredValues.MaxBreakingStationCount; i > 0;--i )
+            for (int i = StoredValues.BreakingMaxStationCount; i > 0;--i )
             {
                 //tried to limit this with a deepcopy, it didn't work . . .
                 vm.Stations.Add( mkStationViewModel() );

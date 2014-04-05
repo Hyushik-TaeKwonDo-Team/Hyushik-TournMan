@@ -18,6 +18,8 @@ namespace Hyushik_TournMan_Common.Constants
             public const string BreakingAttemptDecayRate = "breakingAttemptDecayRate";
             public const string BreakingSpacerPenalty = "breakingSpacerPenalty";
             public const string BreakingPowerHoldPenalty = "breakingPowerHoldPenalty";
+            public const string BreakingJudgeWeight = "breakingJudgeWeight";
+            public const string BreakingMaxScore = "breakingMaxScore";
 
             public const string PossibleBoardWidths = "possibleBoardWidths";
             public const string PossibleBoardDepths = "possibleBoardDepths";

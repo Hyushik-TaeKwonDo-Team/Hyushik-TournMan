@@ -10,19 +10,16 @@ namespace Hyushik_TournMan_BLL.Scoring
 {
     public class BreakingAlgorithim
     {
-        private double boardExp = 0.15;
-        private int maxBoards = 15;
-        private int maxAttempts = 5;
-        private double attempt_decay_rate = 0.2;
-        
-        private  double SPACER_PENALTY = 0.05;
-        private double POWER_HOLD_PENALTY = 0.1; // we value a spead techneque over not having spacers
+        private double boardExp = StoredValues.BreakingBoardExponent;
+        private int maxBoards = StoredValues.BreakingMaximumBoards;
+        private int maxAttempts = StoredValues.BreakingMaximumAttempts;
+        private double attempt_decay_rate = StoredValues.BreakingAttemptDecayRate;
 
-        private double judgeworth = 3;
-        private double maxScore = 10;
+        private double SPACER_PENALTY = StoredValues.BreakingSpacerPenalty;
+        private double POWER_HOLD_PENALTY = StoredValues.BreakingPowerHoldPenalty; // we value a spead techneque over not having spacers
 
-
-
+        private double judgeworth = StoredValues.BreakingJudgeWeight;
+        private double maxScore = StoredValues.BreakingMaxScore;
 
         public double ScoreAll(BreakingResult BreakingResult)
         {
@@ -64,7 +61,7 @@ namespace Hyushik_TournMan_BLL.Scoring
 
 
 
-            var NormalScoreVal = (maxScore - judgeworth) * (beforeJudgeIntervention / (maxScore * (1 + (0.1 * (StoredValues.MaxBreakingStationCount - 1)))));
+            var NormalScoreVal = (maxScore - judgeworth) * (beforeJudgeIntervention / (maxScore * (1 + (0.1 * (StoredValues.BreakingMaxStationCount - 1)))));
 
 
 
