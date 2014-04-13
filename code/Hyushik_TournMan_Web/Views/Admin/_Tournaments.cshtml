@@ -47,7 +47,7 @@
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="input-group">
                         @Html.DisplayFor(m => m.NewTournamentName)
-                        @Html.TextBoxFor(m => m.NewTournamentName, new { @class="form-control input-sm", @placeholder="New Tournament Name"})
+                        @Html.TextBoxFor(m => m.NewTournamentName, new { @class="form-control input-sm", @placeholder="New Tournament Name", @required="true"})
                         <span class="input-group-btn">
                             <button class="btn btn-primary btn-sm" value="Add" type="submit">Add</button>
                         </span>

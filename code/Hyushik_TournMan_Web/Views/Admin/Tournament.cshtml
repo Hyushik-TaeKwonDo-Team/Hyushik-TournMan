@@ -42,7 +42,7 @@
 			<div>
 				<span>Ring Name: </span>
 				@using (Html.BeginForm("CreateRing", "Admin", FormMethod.Post)) {
-					@Html.TextBox("ringName", "")
+					@Html.TextBox("ringName", "", new { @required="true"})
 					@Html.Hidden("tournId", Model.Tournament.Id)
 					<button>New Ring</button>
 				}
