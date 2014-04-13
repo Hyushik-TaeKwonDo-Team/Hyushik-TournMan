@@ -53,7 +53,7 @@
                 @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) { 
                     <td>
                         @using (Html.BeginForm("UpdateWeaponOrFormScoring", "Scoring", FormMethod.Post)) { 
-                            <input type="number" name="judgeScore" min="0" max="10" pattern="\d+"/>
+                            <input type="number" name="judgeScore" min="0" max="10" step="1" pattern="\d+" required/>
                             <input type="hidden" name="ringId" value="@Model.Ring.Id"/>
                             <input type="hidden" name="entryId" value="@listing.WeaponsOrFormsResultId"/>
                             <input type="hidden" name="isWeapon" value="@Model.IsWeapons.ToString()"/>
