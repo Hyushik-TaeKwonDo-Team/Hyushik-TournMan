@@ -143,7 +143,7 @@
 					  <div class="modal-body">
 
 						  <div class="form-group form-group-small">
-							  <input type="text" class="form-control" id="firstLastName" name="firstLastName" placeholder="Name">
+							  <input type="text" class="form-control" id="firstLastName" name="firstLastName" placeholder="Name" title="Required" required>
 						  </div>
 
 						  <div class="form-group form-group-none">
@@ -162,7 +162,7 @@
 						  </div>
 
 						  <div class="form-group form-group-small">
-							<label>Age:<input type="number" class="form-control" id="age" name="age" value="16"/></label>
+							<label>Age:<input type="number" class="form-control" id="age" name="age" step="1" title="Please enter an integer" pattern="\d+" required/></label>
 						  </div>
 
 						  <div class="form-group form-group-small">
