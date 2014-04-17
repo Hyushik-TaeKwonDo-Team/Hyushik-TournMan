@@ -56,17 +56,16 @@
             if (Model.Ring.BreakingResultsPublic)
             {
                 <input name="status" type="hidden" value="false"/>
-                <button>Make Private</button>
+                <button class="btn btn-default btn-xs">Make Private</button>
             }
             else
             {
                 <input name="status" type="hidden" value="true"/>
-                <button>Make Public</button>
+                <button class="btn btn-default btn-xs">Make Public</button>
             }
 
         }
     }
-
     
 
     @if (Model.BreakingScoreListings.Count > 0 && (Model.Ring.BreakingResultsPublic || UserCanSeeNonPublic))

@@ -141,9 +141,11 @@
     <div>
          @using (Html.BeginForm("CreateBreakingEntry", "Scoring", FormMethod.Post))
          {
-             @Html.HiddenFor(model=>model.RingId)
+             <div class="row"><div class="col-sm-6 col-md-4">
+                 @Html.HiddenFor(model=>model.RingId)
          
-             @Html.EditorFor(model=>model.ParticipantSelection)
+                 @Html.EditorFor(model=>model.ParticipantSelection)
+             </div></div>
 
              <hr />
          
