@@ -8,15 +8,15 @@
         <span>Participant Selection</span> 
         @Html.DropDownListFor(m => m.ParticipantId, 
             new SelectList(Model.Participants.OrderBy(p=>p.Name), "ParticipantId", "Name"), 
-            "", new { @class="form-control" })
+            "", new { @class="form-control p-name-dropdown" })
+    </div>
+    <div class="checkbox">
+        <label>Create New Participant
+            @Html.CheckBoxFor(m=>m.CreateNewParticipant, new { @class="p-name-checkbox", @onClick="$(this).parent().parent().parent().find('.p-name-tex-box').toggle();"})
+        </label> 
     </div>
     <div>
-        <span>Create New Participant:</span> 
-        @Html.CheckBoxFor(m=>m.CreateNewParticipant)
-    </div>
-    <div>
-        <span>Name:</span> 
-        @Html.TextBoxFor(m=>m.NewParticipantName)
+        @Html.TextBoxFor(m=>m.NewParticipantName, new { @class = "form-control p-name-tex-box", @placeholder="Name", @style="display: none;"})
     </div>
 
 </div>

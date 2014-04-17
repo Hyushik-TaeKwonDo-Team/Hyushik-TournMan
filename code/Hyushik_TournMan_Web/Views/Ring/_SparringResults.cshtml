@@ -82,30 +82,35 @@
     </div>
 
     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)) {
-        <div>
-            <h3>Record New Sparring Result</h3>
-            @using (Html.BeginForm("SaveSparringResult", "Scoring", FormMethod.Post))
-            {
-                @Html.HiddenFor(m=>m.Ring.Id);
-                <div>
-                    <span>Round Number</span>
-                    @Html.TextBoxFor(m=>m.RoundNumber)
+        <h3>Record New Sparring Result</h3>
+        using (Html.BeginForm("SaveSparringResult", "Scoring", FormMethod.Post))
+        {
+            <div class="row">
+                @Html.HiddenFor(m=>m.Ring.Id)
+                <div class="col-sm-2">
+                    <h4>Round Number</h4>
+                    @Html.TextBoxFor(m => m.RoundNumber, new { @type = "number", @min = "1", @max = "10", step = "1" })
                 </div>
-                <div>
-                    <span>Participant 1</span>
+                <div class="col-sm-5">
+                    <h4>Participant 1</h4>
                     @Html.EditorFor(m=>m.Participant1Selection)
                 </div>
-                <div>
-                    <span>Participant 2</span>
+                <div class="col-sm-5">
+                    <h4>Participant 2</h4>
                     @Html.EditorFor(m=>m.Participant2Selection)
                 </div>
-                <div>
-                    <span>Participant 1 is Victor</span>
-                    @Html.CheckBoxFor(m=>m.Participant1IsVictor)
+            </div>
+            <div class="row" style="padding-bottom:20px">
+                <div class="col-sm-12">
+                    <div class="checkbox">
+                        <label>Participant 1 is Victor
+                            @Html.CheckBoxFor(m=>m.Participant1IsVictor)
+                        </label> 
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                 </div>
-                <button type="submit">Submit</button>
-             }
-        </div>
+            </div>
+            }
     }
 
 
