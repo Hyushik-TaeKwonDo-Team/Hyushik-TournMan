@@ -6,15 +6,20 @@
         {
             using (Html.BeginForm("UpdateStationAttempts", "Scoring", FormMethod.Post))
             {
-                @Html.Hidden("stationId", station.Id)
-                @Html.Hidden("ringId", Model.Ring.Id)
-                @Html.TextBox("attempts", station.Attempts, new {@type="number", @min="1", @max="10", step="1", @pattern="\\d+", @required="true"})
-                
-                <label>
-                    <span>Successful break:</span>
-                    @Html.CheckBox("broke", !station.DidNotBreak)
-                </label>                
-                <button type="submit" class="btn btn-default btn-sm">Update</button>
+                <div class="col-md-3">
+                    @Html.Hidden("stationId", station.Id)
+                    @Html.Hidden("ringId", Model.Ring.Id)
+                    @Html.TextBox("attempts", station.Attempts, new {@type="number", @min="1", @max="10", step="1", @pattern="\\d+", @required="true"})
+                </div>
+                <div class="checkbox col-md-6">
+                    <label>
+                        @Html.CheckBox("broke", !station.DidNotBreak)
+                        Successful break
+                    </label>
+                </div>
+                <div class="col-md-3">          
+                    <button type="submit" class="btn btn-default btn-sm">Update</button>
+                </div>
             }
         }
         else { 
