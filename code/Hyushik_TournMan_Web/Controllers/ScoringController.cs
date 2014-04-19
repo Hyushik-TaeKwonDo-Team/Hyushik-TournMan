@@ -10,6 +10,7 @@ using Hyushik_TournMan_Common.Models;
 using Hyushik_TournMan_Web.Filters;
 using Hyushik_TournMan_DAL.StoredValues;
 using Hyushik_TournMan_Common.Results;
+using Hyushik_TournMan_Common.Properties;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
@@ -74,25 +75,37 @@ namespace Hyushik_TournMan_Web.Controllers
         [HttpPost]
         public ActionResult SaveSparringResult(SparringViewModel vm)
         {
-            var sparResult = new SparringResult()
+            try
             {
-                Participant1 = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.Participant1Selection)),
-                Participant2 = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.Participant2Selection)),
-                Ring = _orch.GetRingById(vm.Ring.Id),
-                RoundNumber = vm.RoundNumber,
-                Partipant1IsVictor = vm.Participant1IsVictor
-            };
+                var sparResult = new SparringResult()
+                {
+                    Participant1 = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.Participant1Selection)),
+                    Participant2 = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.Participant2Selection)),
+                    Ring = _orch.GetRingById(vm.Ring.Id),
+                    RoundNumber = vm.RoundNumber,
+                    Partipant1IsVictor = vm.Participant1IsVictor
+                };
+                var result = _orch.SaveSparringResult(sparResult);
 
-            var result = _orch.SaveSparringResult(sparResult);
-
-            if (result.WasSuccessful)
-            {
-                //AddSucessNotification(result.Message);
+                if (result.WasSuccessful)
+                {
+                    //AddSucessNotification(result.Message);
+                }
+                else if (!result.WasSuccessful)
+                {
+                    AddErrorNotification(result.Message);
+                }
             }
-            else if (!result.WasSuccessful)
+            catch (InvalidOperationException ex)
             {
-                AddErrorNotification(result.Message);
+                var exMess = ex.Message;
+                AddErrorNotification(Resources.ParticipantNotSelectedMessage);
             }
+            catch (Exception ex)
+            {
+                AddErrorNotification(ex.Message);
+            }
+            
             return RedirectToRing(vm.Ring.Id);
         }
 
@@ -162,22 +175,35 @@ namespace Hyushik_TournMan_Web.Controllers
         public ActionResult NewWeaponOrFormScoring(ParticipantSelection participantSelection, long ringId, bool isWeapon)
         {
             OperationResult result;
-
-            var partId = _orch.GetParticipantIdBySelection(participantSelection);
-
-            if(isWeapon){
-                result = _orch.NewWeaponEntry(ringId, partId);
-            }else{
-                result = _orch.NewFormEntry(ringId, partId);
-            }
-            
-            if (result.WasSuccessful)
+            try
             {
-                AddSucessNotification(result.Message);
+                var partId = _orch.GetParticipantIdBySelection(participantSelection);
+
+                if (isWeapon)
+                {
+                    result = _orch.NewWeaponEntry(ringId, partId);
+                }
+                else
+                {
+                    result = _orch.NewFormEntry(ringId, partId);
+                }
+
+                if (result.WasSuccessful)
+                {
+                    AddSucessNotification(result.Message);
+                }
+                else if (!result.WasSuccessful)
+                {
+                    AddErrorNotification(result.Message);
+                }
             }
-            else if (!result.WasSuccessful)
+            catch (InvalidOperationException ex)
             {
-                AddErrorNotification(result.Message);
+                var exMess = ex.Message;
+                AddErrorNotification(Resources.ParticipantNotSelectedMessage);
+            }
+            catch (Exception ex) {
+                AddErrorNotification(ex.Message);
             }
             return RedirectToRing(ringId);
         }
@@ -224,31 +250,52 @@ namespace Hyushik_TournMan_Web.Controllers
         [HttpPost]
         public ActionResult CreateBreakingEntry(BreakingViewModel vm)
         {
-            var model = new BreakingResult();
-            model.Ring = _orch.GetRingById(vm.RingId);
-            model.Participant = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.ParticipantSelection));
-            foreach(var stationVM in vm.Stations){
-                var result = _orch.CreateTechniqueValue(stationVM.BaseTechniques);
-                if(result.WasSuccessful && result.HasTechniqueValue){
-                    model.Stations.Add(new Station()
+            try
+            {
+                var model = new BreakingResult();
+                model.Ring = _orch.GetRingById(vm.RingId);
+                model.Participant = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.ParticipantSelection));
+
+                var atLeastOneStation = false;
+                foreach (var stationVM in vm.Stations)
+                {
+                    var result = _orch.CreateTechniqueValue(stationVM.BaseTechniques);
+                    if (result.WasSuccessful && result.HasTechniqueValue)
                     {
-                        Attempts = stationVM.Attempts,
-                        BoardCount = stationVM.BoardsViewModel.Amount,
-                        BoardWidth = stationVM.BoardsViewModel.Width,
-                        BoardDepth = stationVM.BoardsViewModel.Depth,
-                        BoardSpacers = stationVM.BoardsViewModel.Spacers,
-                        Technique = result.TechniqueValue
-                    });
+                        atLeastOneStation = true;
+                        model.Stations.Add(new Station()
+                        {
+                            Attempts = stationVM.Attempts,
+                            BoardCount = stationVM.BoardsViewModel.Amount,
+                            BoardWidth = stationVM.BoardsViewModel.Width,
+                            BoardDepth = stationVM.BoardsViewModel.Depth,
+                            BoardSpacers = stationVM.BoardsViewModel.Spacers,
+                            Technique = result.TechniqueValue
+                        });
+                    }
+                }
+                if(!atLeastOneStation){
+                    AddErrorNotification(Hyushik_TournMan_Common.Properties.Resources.BreakingTechniqueNotEnteredMessage);
+                    return RedirectToRing(vm.RingId);
+                }
+
+                var saveResult = _orch.SaveBreakingResult(model);
+                if (saveResult.WasSuccessful)
+                {
+                    AddSucessNotification(saveResult.Message);
+                }
+                else if (!saveResult.WasSuccessful)
+                {
+                    AddErrorNotification(saveResult.Message);
                 }
             }
-            var saveResult = _orch.SaveBreakingResult(model);
-            if (saveResult.WasSuccessful)
+            catch (InvalidOperationException ex)
             {
-                AddSucessNotification(saveResult.Message);
+                var exMess = ex.Message;
+                AddErrorNotification(Resources.ParticipantNotSelectedMessage);
             }
-            else if (!saveResult.WasSuccessful)
-            {
-                AddErrorNotification(saveResult.Message);
+            catch (Exception ex) {
+                AddErrorNotification(ex.Message);
             }
 
             return RedirectToRing(vm.RingId);
@@ -299,6 +346,7 @@ namespace Hyushik_TournMan_Web.Controllers
 
             return RedirectToRing(ringId);
         }
+
 
     }
 }
