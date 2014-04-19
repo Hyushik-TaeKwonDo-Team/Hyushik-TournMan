@@ -126,6 +126,9 @@
   <data name="BreakingResultCreatedMessage" xml:space="preserve">
     <value>Breaking Result recorded for "{0}"</value>
   </data>
+  <data name="BreakingTechniqueNotEnteredMessage" xml:space="preserve">
+    <value>Please select at least one technique</value>
+  </data>
   <data name="CsvFileReadSuccessfullyMessage" xml:space="preserve">
     <value>The file was loaded sucessfully!</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="ParticipantCheckedInToRingMessage" xml:space="preserve">
     <value>"{0}" was checked into ring "{1}"</value>
+  </data>
+  <data name="ParticipantNotSelectedMessage" xml:space="preserve">
+    <value>Please select a Participant</value>
   </data>
   <data name="ParticipantsInRingsHaveBeenUpdatedMessage" xml:space="preserve">
     <value>Participants In Rings Have Been Updated</value>

@@ -10,6 +10,7 @@ using Hyushik_TournMan_Common.Models;
 using Hyushik_TournMan_Web.Filters;
 using Hyushik_TournMan_DAL.StoredValues;
 using Hyushik_TournMan_Common.Results;
+using Hyushik_TournMan_Common.Properties;
 
 namespace Hyushik_TournMan_Web.Controllers
 {
@@ -94,6 +95,11 @@ namespace Hyushik_TournMan_Web.Controllers
                 {
                     AddErrorNotification(result.Message);
                 }
+            }
+            catch (InvalidOperationException ex)
+            {
+                var exMess = ex.Message;
+                AddErrorNotification(Resources.ParticipantNotSelectedMessage);
             }
             catch (Exception ex)
             {
@@ -190,7 +196,13 @@ namespace Hyushik_TournMan_Web.Controllers
                 {
                     AddErrorNotification(result.Message);
                 }
-            }catch(Exception ex){
+            }
+            catch (InvalidOperationException ex)
+            {
+                var exMess = ex.Message;
+                AddErrorNotification(Resources.ParticipantNotSelectedMessage);
+            }
+            catch (Exception ex) {
                 AddErrorNotification(ex.Message);
             }
             return RedirectToRing(ringId);
@@ -243,11 +255,14 @@ namespace Hyushik_TournMan_Web.Controllers
                 var model = new BreakingResult();
                 model.Ring = _orch.GetRingById(vm.RingId);
                 model.Participant = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.ParticipantSelection));
+
+                var atLeastOneStation = false;
                 foreach (var stationVM in vm.Stations)
                 {
                     var result = _orch.CreateTechniqueValue(stationVM.BaseTechniques);
                     if (result.WasSuccessful && result.HasTechniqueValue)
                     {
+                        atLeastOneStation = true;
                         model.Stations.Add(new Station()
                         {
                             Attempts = stationVM.Attempts,
@@ -259,6 +274,11 @@ namespace Hyushik_TournMan_Web.Controllers
                         });
                     }
                 }
+                if(!atLeastOneStation){
+                    AddErrorNotification(Hyushik_TournMan_Common.Properties.Resources.BreakingTechniqueNotEnteredMessage);
+                    return RedirectToRing(vm.RingId);
+                }
+
                 var saveResult = _orch.SaveBreakingResult(model);
                 if (saveResult.WasSuccessful)
                 {
@@ -268,7 +288,13 @@ namespace Hyushik_TournMan_Web.Controllers
                 {
                     AddErrorNotification(saveResult.Message);
                 }
-            }catch(Exception ex){
+            }
+            catch (InvalidOperationException ex)
+            {
+                var exMess = ex.Message;
+                AddErrorNotification(Resources.ParticipantNotSelectedMessage);
+            }
+            catch (Exception ex) {
                 AddErrorNotification(ex.Message);
             }
 
@@ -320,6 +346,7 @@ namespace Hyushik_TournMan_Web.Controllers
 
             return RedirectToRing(ringId);
         }
+
 
     }
 }
