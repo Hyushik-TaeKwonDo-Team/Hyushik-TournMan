@@ -53,7 +53,10 @@
                 <tr>
                     <th>Name</th>
                     <th>Score</th>
-                    <th>Station Details</th>
+                    <th>
+                        Station Details <br/>
+                        <span>Station Name</span><span>Attempts</span>
+                    </th>
                     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE))
                     {<th>Add Weight to Score</th>}
                     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.ADMINISTRATOR_ROLE))
@@ -61,6 +64,7 @@
                     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE))
                     {<th>Delete Entry</th>}
                 </tr>
+               
             </thead>
             <tbody>
                 @foreach (var listing in Model.BreakingScoreListings.OrderByDescending(
@@ -87,21 +91,14 @@
                                         @Html.Hidden("ringId", Model.Ring.Id)
                                         <table>
                                             <thead>
-                                                <tr>
-                                                    <td>
-                                                        Station Name
-                                                    </td>
-                                                    <td>
-                                                        Attempts
-                                                    </td>
-                                                </tr>
+                                                
                                             </thead>
                                             <tbody>
                                                 @foreach (var station in listing.Stations) {
                                                     <tr>
                                                         <td>
                                                             @station.Technique.Name
-                                                            @Html.Hidden("stationId", station.Id)
+                                                            @Html.Hidden("stationIds", station.Id)
                                                         </td>
                                                         <td>
                                                             
