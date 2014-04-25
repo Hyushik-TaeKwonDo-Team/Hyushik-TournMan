@@ -149,17 +149,17 @@ namespace Hyushik_TournMan_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateWeaponOrFormScoring(long entryId, int judgeScore, bool isWeapon, long ringId)
+        public ActionResult UpdateWeaponOrFormScoring(long entryId, double judgeScore, bool isWeapon, long ringId)
         {
             OperationResult result;
 
             if (isWeapon)
             {
-                result = _orch.ScoreWeaponEntry(entryId, judgeScore, User.Identity.Name);
+                result = _orch.ScoreWeaponEntry(entryId, Convert.ToInt32(judgeScore), User.Identity.Name);
             }
             else
             {
-                result = _orch.ScoreFormEntry(entryId, judgeScore, User.Identity.Name);
+                result = _orch.ScoreFormEntry(entryId, Convert.ToInt32(judgeScore), User.Identity.Name);
             }
 
             if (result.WasSuccessful)
