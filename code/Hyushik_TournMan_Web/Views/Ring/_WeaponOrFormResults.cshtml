@@ -52,7 +52,7 @@
                     <th>Score</th>
                     @if (Roles.IsUserInRole(Hyushik_TournMan_Common.Constants.Constants.Roles.JUDGE_ROLE)){
                         <th>Add Weight to Score</th>
-                        <th>Delete Entry</th>
+                        <th style="text-align:center">Delete Entry</th>
                     }
                 </tr>
             </thead>
@@ -76,7 +76,7 @@
                             </div>
                         }
                     </td>
-                    <td>
+                    <td style="text-align:center">
                         @using (Html.BeginForm(Model.IsWeapons ? "DeleteWeaponResult" : "DeleteFormResult", "Scoring", FormMethod.Post))
                         {
                             <input name="ringId" type="hidden" value="@Model.Ring.Id"/>
