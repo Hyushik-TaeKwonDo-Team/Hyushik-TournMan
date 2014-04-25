@@ -131,17 +131,19 @@ namespace Hyushik_TournMan_Web.Controllers
         // GET: /Scoring/
 
         [HttpPost]
-        public ActionResult UpdateStationAttempts(long stationId, long ringId, int attempts, bool broke)
+        public ActionResult UpdateStationAttempts( List<long> stationIds, long ringId, List<int> attempts, List<bool> broke)
         {
-            var result = _orch.UpdateStationAttempts(stationId, attempts, !broke);
-            
-            if (result.WasSuccessful)
-            {
-                //AddSucessNotification(result.Message);
+
+            //this is what is known as a "cheap hack" as the code freeze is in five days
+            var results = new List<OperationResult>();
+            for (int i = 0; i<stationIds.Count(); ++i){
+                var result = _orch.UpdateStationAttempts(stationIds[i], attempts[i], !(broke[i]));
+                results.Add(result);
             }
-            else if (!result.WasSuccessful)
+
+            if (results.Exists(r=>!r.WasSuccessful))
             {
-                AddErrorNotification(result.Message);
+                AddErrorNotification(results.First(r => !r.WasSuccessful).Message);
             }
             return RedirectToRing(ringId);
         }
