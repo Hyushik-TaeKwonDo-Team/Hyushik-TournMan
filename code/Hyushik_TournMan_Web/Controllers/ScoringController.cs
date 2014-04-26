@@ -83,7 +83,7 @@ namespace Hyushik_TournMan_Web.Controllers
                     Participant2 = _orch.GetParticipantById(_orch.GetParticipantIdBySelection(vm.Participant2Selection)),
                     Ring = _orch.GetRingById(vm.Ring.Id),
                     RoundNumber = vm.RoundNumber,
-                    Partipant1IsVictor = vm.Participant1IsVictor
+                    Partipant1IsVictor = true
                 };
                 var result = _orch.SaveSparringResult(sparResult);
 

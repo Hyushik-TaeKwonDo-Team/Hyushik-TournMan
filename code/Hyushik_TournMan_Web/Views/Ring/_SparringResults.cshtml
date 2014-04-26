@@ -92,21 +92,16 @@
                     @Html.TextBoxFor(m => m.RoundNumber, new { @type = "number", @min = "1", @max = "10", step = "1" })
                 </div>
                 <div class="col-sm-5">
-                    <h4>Participant 1</h4>
+                    <h4>Winner</h4>
                     @Html.EditorFor(m=>m.Participant1Selection)
                 </div>
                 <div class="col-sm-5">
-                    <h4>Participant 2</h4>
+                    <h4>Defeated</h4>
                     @Html.EditorFor(m=>m.Participant2Selection)
                 </div>
             </div>
             <div class="row" style="padding-bottom:20px">
                 <div class="col-sm-12">
-                    <div class="checkbox">
-                        <label>Participant 1 is Victor
-                            @Html.CheckBoxFor(m=>m.Participant1IsVictor)
-                        </label> 
-                    </div>
                     <button type="submit" class="btn btn-primary btn-sm">Submit</button>
                 </div>
             </div>
