@@ -13,12 +13,12 @@
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
             <abbr>Board Exponent</abbr>
-            @Html.TextBoxFor(model=>model.BreakingBoardExponent, new { @class = "form-control", type="number"})
+            @Html.TextBoxFor(model=>model.BreakingBoardExponent, new { @class = "form-control", required="required"})
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
             <abbr>Maximum Boards</abbr>
             @Html.TextBoxFor(model=>model.BreakingMaximumBoards, 
-                new { @class = "form-control", min=1, step=1, title="Please enter a positive integer", type="number", required="required"})
+                new { @class = "form-control", type="number", min=1, step=1, title="Please enter a positive integer", required="required"})
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
             <abbr>Maximum Attempts</abbr>
@@ -27,21 +27,21 @@
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
             <abbr>Attempt Decay Rate</abbr>
-            @Html.TextBoxFor(model=>model.BreakingAttemptDecayRate, new { @class = "form-control", type="number" })
+            @Html.TextBoxFor(model=>model.BreakingAttemptDecayRate, new { @class = "form-control", required="required"})
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
             <abbr>Spacer Penalty</abbr>
-            @Html.TextBoxFor(model=>model.BreakingSpacerPenalty, new { @class = "form-control", type="number"})
+            @Html.TextBoxFor(model=>model.BreakingSpacerPenalty, new { @class = "form-control", required="required" })
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
             <abbr>Power Hold Penalty</abbr>
-            @Html.TextBoxFor(model=>model.BreakingPowerHoldPenalty, new { @class = "form-control", type="number"})
+            @Html.TextBoxFor(model=>model.BreakingPowerHoldPenalty, new { @class = "form-control", required="required"})
         </div>
         
         <div class="col-md-4 col-sm-6 col-xs-12">
             <abbr>Judge Weight (out of 10)</abbr>
             @Html.TextBoxFor(model=>model.BreakingJudgeWeight, 
-                new { @class = "form-control", type="number", min=0, max=10, title="Please enter a positive value", pattern="\\d+", required="required"})
+                new { @class = "form-control", min=0, max=10, title="Please enter a positive value", required="required"})
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
             <abbr>Max Score</abbr>
