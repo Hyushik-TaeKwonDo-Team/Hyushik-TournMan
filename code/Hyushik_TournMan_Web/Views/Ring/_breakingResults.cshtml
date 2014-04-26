@@ -46,7 +46,7 @@
     }
     
 
-    @if (Model.BreakingScoreListings.Count > 0 && (Model.Ring.BreakingResultsPublic || UserCanSeeNonPublic))
+    @if(Model.BreakingScoreListings.Count > 0 && (Model.Ring.BreakingResultsPublic || UserCanSeeNonPublic))
     {
         <table class="table table-bordered table-hover table-condensed">
             <thead>
@@ -89,29 +89,33 @@
                                     using (Html.BeginForm("UpdateStationAttempts", "Scoring", FormMethod.Post))
                                     {
                                         @Html.Hidden("ringId", Model.Ring.Id)
-                                        <table>
-                                            <thead>
-                                                
-                                            </thead>
+                                        <table style="width:100%">
+                                            @{ bool firstItem = true; }
                                             <tbody>
                                                 @foreach (var station in listing.Stations) {
-                                                    <tr>
-                                                        <td>
-                                                            @station.Technique.Name
-                                                            @Html.Hidden("stationIds", station.Id)
-                                                        </td>
-                                                        <td>
-                                                            
-                                                            <div class="col-md-3">
-                                                               @Html.TextBox("attempts", station.Attempts, new { @type = "number", @min = "1", step = "1", @pattern = "\\d+", @required = "true" })
+                                                    <tr 
+                                                   @if(firstItem){
+                                                        @:class="@listing.BreakingEntryId"
+                                                        firstItem = false;
+                                                    }else{
+                                                        @:class="@listing.BreakingEntryId-toggleChild" style="display:none"
+                                                    } >
+                                                    <td>
+                                                            <div class="checkbox col-md-5">
+                                                                @station.Technique.Name
+                                                                @Html.Hidden("stationIds", station.Id)
                                                             </div>
-                                                            <div class="checkbox col-md-6">
+                                                            
+                                                            <div class="col-md-2">
+                                                               @Html.TextBox("attempts", station.Attempts, new { @type = "number", @min = "1", @max = "10", step = "1", @pattern = "\\d+", @required = "true" })
+                                                            </div>
+                                                            <div class="checkbox col-md-5">
                                                                 <label>
                                                                     @Html.CheckBox("broke", !station.DidNotBreak)
                                                                     Successful break
                                                                 </label>
                                                             </div>
-                                                        <td>
+                                                        </td>
                                                     </tr>
                                                 }
                                                 <tr>
@@ -199,6 +203,7 @@
               </tbody>
         </table>
     }
+    
     else
     {
         <span>No current breaking results</span>
