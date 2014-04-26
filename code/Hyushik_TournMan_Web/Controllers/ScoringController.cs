@@ -131,13 +131,13 @@ namespace Hyushik_TournMan_Web.Controllers
         // GET: /Scoring/
 
         [HttpPost]
-        public ActionResult UpdateStationAttempts( List<long> stationIds, long ringId, List<int> attempts, List<bool> broke)
+        public ActionResult UpdateStationAttempts( List<long> stationIds, long ringId, List<double> attempts, List<bool> broke)
         {
 
             //this is what is known as a "cheap hack" as the code freeze is in five days
             var results = new List<OperationResult>();
             for (int i = 0; i<stationIds.Count(); ++i){
-                var result = _orch.UpdateStationAttempts(stationIds[i], attempts[i], !(broke[i]));
+                var result = _orch.UpdateStationAttempts(stationIds[i], Convert.ToInt32(attempts[i]), !(broke[i]));
                 results.Add(result);
             }
 

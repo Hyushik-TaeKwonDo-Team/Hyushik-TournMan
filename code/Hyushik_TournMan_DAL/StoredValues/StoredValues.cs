@@ -106,11 +106,11 @@ namespace Hyushik_TournMan_DAL.StoredValues
             }
         }
 
-        public static double BreakingMaxScore
+        public static int BreakingMaxScore
         {
             get
             {
-                return Double.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaxScore]);
+                return Int32.Parse(ConfigurationManager.AppSettings[Constants.AppSettingsKeys.BreakingMaxScore]);
             }
             set
             {

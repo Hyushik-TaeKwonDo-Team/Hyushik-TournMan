@@ -295,14 +295,14 @@ namespace Hyushik_TournMan_Web.Controllers
             
 
                 orch.SetBreakingBoardExponent(vm.BreakingBoardExponent);
-                orch.SetBreakingMaxStationCount(vm.BreakingMaxStationCount);
-                orch.SetBreakingMaximumBoards(vm.BreakingMaximumBoards);
-                orch.SetBreakingMaximumAttempts(vm.BreakingMaximumAttempts);
+                orch.SetBreakingMaxStationCount(Convert.ToInt32(vm.BreakingMaxStationCount));
+                orch.SetBreakingMaximumBoards(Convert.ToInt32(vm.BreakingMaximumBoards));
+                orch.SetBreakingMaximumAttempts(Convert.ToInt32(vm.BreakingMaximumAttempts));
                 orch.SetBreakingAttemptDecayRate(vm.BreakingAttemptDecayRate);
                 orch.SetBreakingSpacerPenalty(vm.BreakingSpacerPenalty);
                 orch.SetBreakingPowerHoldPenalty(vm.BreakingPowerHoldPenalty);
                 orch.SetBreakingJudgeWeight(vm.BreakingJudgeWeight);
-                orch.SetBreakingMaxScore(vm.BreakingMaxScore);
+                orch.SetBreakingMaxScore(Convert.ToInt32(vm.BreakingMaxScore));
 
             results.Add(orch.SetPossibleBoardWidths(vm.PossibleBoardWidths));
             results.Add(orch.SetPossibleBoardDepths(vm.PossibleBoardDepths));

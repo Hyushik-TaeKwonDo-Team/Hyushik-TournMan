@@ -50,8 +50,8 @@ namespace Hyushik_TournMan_BLL.Orchestrators.Interfaces
         void SetBreakingPowerHoldPenalty(double value);
         double GetBreakingJudgeWeight();
         void SetBreakingJudgeWeight(double value);
-        double GetBreakingMaxScore();
-        void SetBreakingMaxScore(double value);
+        int GetBreakingMaxScore();
+        void SetBreakingMaxScore(int value);
 
         string GetPossibleBoardWidthsAsString();
         string GetPossibleBoardDepthsAsString();

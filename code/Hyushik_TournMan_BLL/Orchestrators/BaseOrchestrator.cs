@@ -493,12 +493,12 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             StoredValues.BreakingJudgeWeight = value;
         }
 
-        public double GetBreakingMaxScore()
+        public int GetBreakingMaxScore()
         {
             return StoredValues.BreakingMaxScore;
         }
 
-        public void SetBreakingMaxScore(double value)
+        public void SetBreakingMaxScore(int value)
         {
             StoredValues.BreakingMaxScore = value;
         }
