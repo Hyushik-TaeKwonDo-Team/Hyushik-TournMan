@@ -107,7 +107,7 @@
                                                             </div>
                                                             
                                                             <div class="col-md-2">
-                                                               @Html.TextBox("attempts", station.Attempts, new { @type = "number", @min = "1", @max = "10", step = "1", @pattern = "\\d+", @required = "true" })
+                                                               @Html.TextBox("attempts", station.Attempts, new { @type = "number", @min = "1", @max = "10", step = "1", @pattern = "\\d+", @required = "true", @inputmode="numeric" })
                                                             </div>
                                                             <div class="checkbox col-md-5">
                                                                 <label>

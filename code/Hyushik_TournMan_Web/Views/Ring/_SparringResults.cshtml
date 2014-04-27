@@ -89,7 +89,7 @@
                 @Html.HiddenFor(m=>m.Ring.Id)
                 <div class="col-sm-2">
                     <h4>Round Number</h4>
-                    @Html.TextBoxFor(m => m.RoundNumber, new { @type = "number", @min = "1", @max = "10", step = "1" })
+                    @Html.TextBoxFor(m => m.RoundNumber, new { @type = "number", @min = "1", @max = "10", step = "1", @inputmode="numeric" })
                 </div>
                 <div class="col-sm-5">
                     <h4>Winner</h4>
