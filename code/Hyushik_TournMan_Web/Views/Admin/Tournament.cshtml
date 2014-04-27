@@ -29,7 +29,7 @@
 									@using (Html.BeginForm("DeleteRing", "Admin", FormMethod.Post)) {
 										@Html.Hidden("ringId", ring.Id)
 										@Html.Hidden("tournId", ring.Tournament.Id)
-										<button>Delete</button>
+										<button class="btn btn-sm btn-danger glyphicon glyphicon-remove" > </button>
 									}
 								</td>
 							</tr>
