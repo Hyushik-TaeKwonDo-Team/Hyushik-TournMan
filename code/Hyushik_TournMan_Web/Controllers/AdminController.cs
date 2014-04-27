@@ -339,10 +339,10 @@ namespace Hyushik_TournMan_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddIndividualParticipant(long tournId, string firstLastName, string optionsRadios, int age, string rank, string weapons, string breaking, string forms, string point, string olympic)
+        public ActionResult AddIndividualParticipant(long tournId, string firstLastName, string optionsRadios, double age, string rank, string weapons, string breaking, string forms, string point, string olympic)
         {
             AddSucessNotification("Added " + firstLastName + " to the tournament.");
-            String[] participantInfo = {firstLastName, optionsRadios, age.ToString(), rank};
+            String[] participantInfo = {firstLastName, optionsRadios, Convert.ToInt32(age).ToString(), rank};
             bool[] events = {false, false, false, false, false};
             if (weapons != null)
                 events[0] = true;
