@@ -12,7 +12,7 @@
     </div>
     <div class="checkbox">
         <label>Create New Participant
-            @Html.CheckBoxFor(m=>m.CreateNewParticipant, new { @class="p-name-checkbox", @onClick="$(this).parent().parent().parent().find('.p-name-tex-box').toggle();"})
+            @Html.CheckBoxFor(m=>m.CreateNewParticipant, new { @class="p-name-checkbox", @onClick="toggleParticipantInputs(this);"})
         </label> 
     </div>
     <div>

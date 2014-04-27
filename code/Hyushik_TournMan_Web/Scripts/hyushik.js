@@ -15,3 +15,9 @@ $(function () {
     }
 });
 
+function toggleParticipantInputs(obj) {
+    console.log("Hello");
+    $(obj).parent().parent().parent().find('.p-name-tex-box').toggle();
+    $(obj).parent().parent().parent().find('select').attr('disabled', function (idx, oldAttr) { return !oldAttr; });
+}
+
