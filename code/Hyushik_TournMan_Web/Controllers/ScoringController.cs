@@ -312,7 +312,7 @@ namespace Hyushik_TournMan_Web.Controllers
         public ActionResult JudgeBreakingEntry(JudgeBreakingScoringViewModel vm)
         {
             var score = new BreakingJudgeScore();
-            score.SubjectiveScore=vm.SubjectiveScore;
+            score.SubjectiveScore=Convert.ToInt32(vm.SubjectiveScore);
             score.Judge_UserId = _orch.GetUserByName(User.Identity.Name).UserId;
 
             var result = _orch.EnterBreakingJudgeScore(score, vm.EntryId);

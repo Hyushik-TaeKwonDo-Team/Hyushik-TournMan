@@ -58,6 +58,6 @@ namespace Hyushik_TournMan_Web.Classes.ViewModels
     {
         public long EntryId { get; set; }
         [Range(minimum: -5, maximum: 5, ErrorMessage = "Subjective score must be between -5 and 5.")]
-        public int SubjectiveScore { get; set; }
+        public double SubjectiveScore { get; set; }
     }
 }
