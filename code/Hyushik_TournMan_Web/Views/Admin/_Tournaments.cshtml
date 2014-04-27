@@ -13,7 +13,7 @@
                         @foreach (var tournament in Model.Tournaments)
                         {
                             <a href="@Url.Action("Tournament", "Admin", new { id=tournament.Id})" class="list-group-item">
-                            @using (Html.BeginForm("SetTournamentActiveStatus", "Admin", FormMethod.Post))
+                            @using (Html.BeginForm("SetTournamentActiveStatus", "Admin", FormMethod.Post, new {@id="active_form"}))
                             {
                                 @tournament.Name
                                 <input type="hidden" name="tournId" value="@tournament.Id" />
@@ -21,13 +21,13 @@
                                 {
                                     
                                     <input type="hidden" name="tournActive" value="true" />
-                                    <input type="submit" value="Activate" class="btn btn-primary btn-xs" style="float:right" />
+                                    <input type="submit" value="Activate" class="btn btn-primary btn-xs" style="float:right;" onclick="document.getElementById('active_form').submit(); return false;" />
                                 }
                                 else
                                 {
                                     
                                     <input type="hidden" name="tournActive" value="false" />
-                                    <input type="submit" value="Deactivate" class="btn btn-primary btn-xs"style="float:right" />
+                                    <input type="submit" value="Deactivate" class="btn btn-primary btn-xs"style="float:right;" onclick="document.getElementById('active_form').submit(); return false;" />
                                 }
                             }
                             </a>
