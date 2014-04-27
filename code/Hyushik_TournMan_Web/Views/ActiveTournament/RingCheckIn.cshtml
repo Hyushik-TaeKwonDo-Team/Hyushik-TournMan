@@ -7,10 +7,14 @@
         { 
             <input name="tournId" type="hidden" value="@Model.Id">
             <span>Ring:</span>
-            @Html.DropDownList("ringId", new SelectList(Model.Rings,"Id", "Name"));
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    @Html.DropDownList("ringId", new SelectList(Model.Rings,"Id", "Name"),  new { @class="form-control input-sm" })
+                </div>
+            </div>
             <span>Participant QR Code:</span>
             <input id="file" name="file" type="file" accept="image/*" capture="camera" />
-            <button>Add to Ring</button>
+            <button class="btn btn-primary btn-sm">Add to Ring</button>
         }
     </div>
 
