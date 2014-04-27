@@ -136,8 +136,10 @@ namespace Hyushik_TournMan_Web.Controllers
 
             //this is what is known as a "cheap hack" as the code freeze is in five days
             var results = new List<OperationResult>();
+            var chkbxIndex = 0;
             for (int i = 0; i<stationIds.Count(); ++i){
-                var result = _orch.UpdateStationAttempts(stationIds[i], Convert.ToInt32(attempts[i]), !(broke[i]));
+                var result = _orch.UpdateStationAttempts(stationIds[i], Convert.ToInt32(attempts[i]), !(broke[chkbxIndex]));
+                chkbxIndex = broke[chkbxIndex] ? chkbxIndex + 2 : chkbxIndex + 1;  //fix for mvc checkboxes
                 results.Add(result);
             }
 
