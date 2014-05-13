@@ -440,6 +440,22 @@ namespace Hyushik_TournMan_BLL.Orchestrators
             {
                 var ring = _tournManContext.Rings.FirstOrDefault(t => t.Id == ringId);
                 ring.SelectedParticipants.Clear();
+                foreach (var brr in _tournManContext.BreakingResults.Where(br=>br.Ring.Id==ring.Id).ToList())
+                {
+                    DeleteBreakingEntry(brr.Id);
+                }
+                foreach (var x in _tournManContext.WeaponResults.Where(x => x.Ring.Id == ring.Id).ToList())
+                {
+                    DeleteWeaponsResult(x.Id);
+                }
+                foreach (var x in _tournManContext.FormResults.Where(x => x.Ring.Id == ring.Id).ToList())
+                {
+                    DeleteFormsResult(x.Id);
+                }
+                foreach (var x in _tournManContext.SparringResults.Where(x => x.Ring.Id == ring.Id).ToList())
+                {
+                    DeleteSparringResult(x.Id);
+                }
                 _tournManContext.Rings.Remove(ring);
                 _tournManContext.SaveChanges();
                 result.Message = String.Format(Resources.RingDeletedMessage, ring.Name);
